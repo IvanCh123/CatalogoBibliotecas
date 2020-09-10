@@ -57,8 +57,10 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 | CNQ-10   |       [Ubicación de bibliotecas](http://10.1.4.22:8080/secure/RapidBoard.jspa?rapidView=36&projectKey=CNQ&view=planning&selectedIssue=CNQ-10)        |
 | CNQ-7    |            [Limpiar Búsqueda](http://10.1.4.22:8080/secure/RapidBoard.jspa?rapidView=36&projectKey=CNQ&view=planning&selectedIssue=CNQ-7)            |
  
+* **Requerimientos no funcionales que debe cumplir toda la aplicación web**
 
 * **Posibles interacciones con sistemas externos (bases de datos, APIs, servicios)**
+Interacción con base de datos Sqlite para consultas sobre material de las bibliotecas e interacción con la API de Google Maps para ubicación de las distintas bibliotecas.
 
 ## Prototipos de la aplicación
 ![Pantalla principal](https://i.imgur.com/zNuWqpp.png =500x600) 
