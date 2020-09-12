@@ -57,13 +57,16 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 | CNQ-10   |       [Ubicación de bibliotecas](http://10.1.4.22:8080/secure/RapidBoard.jspa?rapidView=36&projectKey=CNQ&view=planning&selectedIssue=CNQ-10)        |
 | CNQ-7    |            [Limpiar Búsqueda](http://10.1.4.22:8080/secure/RapidBoard.jspa?rapidView=36&projectKey=CNQ&view=planning&selectedIssue=CNQ-7)            |
  
-* **Requerimientos no funcionales que debe cumplir toda la aplicación web**
 
+* **Requerimientos no funcionales que debe cumplir toda la aplicación web**
+    * Api de Google Maps
+    * Base de datos (Completar esto cuando decidamos)
 * **Posibles interacciones con sistemas externos (bases de datos, APIs, servicios)**
-Interacción con base de datos Sqlite para consultas sobre material de las bibliotecas e interacción con la API de Google Maps para ubicación de las distintas bibliotecas.
+Interacción con base de datos para consultas sobre material de las bibliotecas e interacción con la API de Google Maps para ubicación de las distintas bibliotecas.
 
 ## Prototipos de la aplicación
-![Pantalla principal](https://i.imgur.com/zNuWqpp.png =500x600) 
+![Pagina Principal](https://i.imgur.com/c6li8hb.png)
+
 ![Resultado de búsqueda](https://i.imgur.com/vxXqktH.png =500x600)
 ![Información adicional de un resultado](https://i.imgur.com/cVSHpze.png =500x600)
 ![Listado de bibliotecas](https://i.imgur.com/IZYWg4p.png =500x600)
@@ -74,16 +77,30 @@ Interacción con base de datos Sqlite para consultas sobre material de las bibli
 ## Artefactos de bases de datos
 * Esquema conceptual de la base de datos
 
+![](https://i.imgur.com/F1Qj8bt.png)
+
+
 * Cualquier otro artefacto de la base de datos que consideren necesario
+
+![](https://i.imgur.com/OzsxAUe.png)
+
 
 ## Decisiones Técnicas
 * **Metodologías utilizadas y procesos definidos (metodología ágil, reuniones, medios de comunicación, etc)**
+    * Metodología Utilizada: SCRUM
+    * Técnica para estimación: Planning Poker con escala Fibonacci.
+    * Reuniones: Lunes y Jueves después de la clase de Móviles y el sábado en la tarde.
+    * Medios de comunicación: Discord y Whatsapp.
 * **Artefactos utilizados (listar solamente)**
+    * API de Google
+    * Base de datos
 * **Tecnologías con sus respectivas versiones (Android Studio, version del SDK, etc)**
     * Entorno de desarrollo: Android Studio.
     * Versión del SDK: API 21 Android 5.0 Lollipop.
 * **Repositorio de código y estrategia de branches**
     * Link al Repositorio: https://bitbucket.org/lyonv/ecci_ci0161_ii2020_g01_t03.git/src
-    * Estrategia de branches: La estrategia que se va a utilizar es la de trabajar por módulos y funcionalidades, donde habría una rama de módulo que representa como un subgrupo grande de la aplicación, que para nuestro caso va a representar una épica, y a su vez este módulo generaría más ramas, las cuales representan funcionalidades ya más específicas que se van a desarrollar y que pueden ser desarrolladas por un solo desarrollador usualmente.
-    * 
+    * Estrategia de branches: La estrategia que se va a utilizar es la de trabajar por módulos y funcionalidades, donde habría una rama de módulo que representa un subgrupo grande de la aplicación, que para nuestro caso va a representar una épica, y a su vez este módulo generaría más ramas, las cuales representan funcionalidades ya más específicas que se van a desarrollar y que pueden ser desarrolladas por un solo desarrollador usualmente. Además se utilizaría la rama master para solo tener versiones estables del proyecto.
+    * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
+
 * **Definición de listo**
+    * Al ingresar a la aplicación el usuario puede ingresar palabras para buscar material. Al darle click en el botón de buscar se va a desplegar una lista con los resultados para una búsqueda específica. En el menú inferior de navegación  el usuario puede clickear la opción de ubicación para que se desplieguen las distintas ubicaciones de las bibliotecas de la universidad.
