@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/nav_busqueda">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/nav_busqueda"
         android:name="cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment"
         android:label="@string/title_busqueda"
         tools:layout="@layout/fragment_busqueda" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/nav_ubicacion"
         android:name="cr.ac.ucr.ecci.eseg.catbi.ui.Ubicacion.UbicacionFragment"
         android:label="@string/title_ubicacion"
         tools:layout="@layout/fragment_ubicacion" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/nav_preguntas"
         android:name="cr.ac.ucr.ecci.eseg.catbi.ui.Preguntas.PreguntasFragment"
         android:label="@string/title_preguntas"
         tools:layout="@layout/fragment_preguntas" />

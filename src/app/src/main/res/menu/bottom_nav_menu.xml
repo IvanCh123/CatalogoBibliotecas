@@ -2,17 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/busqueda"
+        android:id="@+id/nav_busqueda"
         android:icon="@drawable/ic_baseline_search_24"
         android:title="@string/title_busqueda" />
 
     <item
-        android:id="@+id/ubicacion"
+        android:id="@+id/nav_ubicacion"
         android:icon="@drawable/ic_baseline_place_24"
         android:title="@string/title_ubicacion" />
 
     <item
-        android:id="@+id/preguntas"
+        android:id="@+id/nav_preguntas"
         android:icon="@drawable/ic_baseline_contact_support_24"
         android:title="@string/title_preguntas" />
 
