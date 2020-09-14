@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi.ui.dashboard;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import cr.ac.ucr.ecci.eseg.catbi.R;
 
-public class DashboardFragment extends Fragment {
+public class BusquedaFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private BusquedaViewModel homeViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        homeViewModel =
+                ViewModelProviders.of(this).get(BusquedaViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_busqueda, container, false);
+        final TextView textView = root.findViewById(R.id.text_home);
+        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

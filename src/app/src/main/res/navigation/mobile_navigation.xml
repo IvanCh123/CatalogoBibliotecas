@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="cr.ac.ucr.ecci.eseg.catbi.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:name="cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment"
+        android:label="@string/title_busqueda"
+        tools:layout="@layout/fragment_busqueda" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="cr.ac.ucr.ecci.eseg.catbi.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="cr.ac.ucr.ecci.eseg.catbi.ui.Ubicacion.UbicacionFragment"
+        android:label="@string/title_ubicacion"
+        tools:layout="@layout/fragment_ubicacion" />
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="cr.ac.ucr.ecci.eseg.catbi.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:name="cr.ac.ucr.ecci.eseg.catbi.ui.Preguntas.PreguntasFragment"
+        android:label="@string/title_preguntas"
+        tools:layout="@layout/fragment_preguntas" />
 </navigation>

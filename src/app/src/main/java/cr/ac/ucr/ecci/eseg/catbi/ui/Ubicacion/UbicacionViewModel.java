@@ -1,16 +1,16 @@
-package cr.ac.ucr.ecci.eseg.catbi.ui.home;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Ubicacion;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class UbicacionViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public UbicacionViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("Fragmento de ubicacion");
     }
 
     public LiveData<String> getText() {
