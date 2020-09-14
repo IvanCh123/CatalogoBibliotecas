@@ -32,7 +32,7 @@
         app:layout_constraintVertical_bias="0.175" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/editTextTituloFrase"
         android:layout_width="255dp"
         android:layout_height="43dp"
         android:ems="10"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.289" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnBuscar"
         android:layout_width="278dp"
         android:layout_height="50dp"
         android:shadowColor="#FFFFFF"
