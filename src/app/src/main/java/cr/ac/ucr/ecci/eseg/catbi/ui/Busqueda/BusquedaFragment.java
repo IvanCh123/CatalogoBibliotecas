@@ -16,20 +16,20 @@ import cr.ac.ucr.ecci.eseg.catbi.R;
 
 public class BusquedaFragment extends Fragment {
 
-    private BusquedaViewModel homeViewModel;
+    private BusquedaViewModel busquedaViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
+        busquedaViewModel =
                 ViewModelProviders.of(this).get(BusquedaViewModel.class);
         View root = inflater.inflate(R.layout.fragment_busqueda, container, false);
-        final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        /*final TextView textView = root.findViewById(R.id.text_home);
+        busquedaViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
             }
-        });
+        });*/
         return root;
     }
 }
