@@ -3,4 +3,9 @@
     <string name="title_busqueda">Búsqueda</string>
     <string name="title_ubicacion">Ubicación</string>
     <string name="title_preguntas">Preguntas Frecuentes</string>
+    <string name="title_busqueda_basica">Busqueda Básica</string>
+    <string name="texto_busqueda">Escriba una palabra o frase</string>
+    <string name="texto_boton">Buscar</string>
+    <string name="hint_edit_text">Don Quijote</string>
+
 </resources>

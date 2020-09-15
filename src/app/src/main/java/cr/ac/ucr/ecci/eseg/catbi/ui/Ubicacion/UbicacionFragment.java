@@ -16,15 +16,15 @@ import cr.ac.ucr.ecci.eseg.catbi.R;
 
 public class UbicacionFragment extends Fragment {
 
-    private UbicacionViewModel dashboardViewModel;
+    private UbicacionViewModel ubicacionViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
+        ubicacionViewModel =
                 ViewModelProviders.of(this).get(UbicacionViewModel.class);
         View root = inflater.inflate(R.layout.fragment_ubicacion, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        ubicacionViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
