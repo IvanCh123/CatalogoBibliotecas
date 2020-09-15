@@ -31,7 +31,7 @@ public class BusquedaFragment extends Fragment {
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String palabra = editTextTituloFrase.getText().toString();
+                String palabra = editTextTituloFrase.getText().toString(); // Se captura lo que hay en el edit text
                 realizarBusqueda(palabra,view);
             }
         });
@@ -40,6 +40,7 @@ public class BusquedaFragment extends Fragment {
     }
 
     public void realizarBusqueda(String palabra, View view){
+        // Por ahora solo se muestra en un toast
         if (palabra.isEmpty()){
             Toast.makeText(view.getContext(),"Digite lo que desea buscar por favor",Toast.LENGTH_SHORT).show();
         }else{
