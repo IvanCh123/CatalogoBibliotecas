@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "681036121151",
+    "firebase_url": "https://catalogo-bibliotecas.firebaseio.com",
+    "project_id": "catalogo-bibliotecas",
+    "storage_bucket": "catalogo-bibliotecas.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681036121151:android:b35742c3ccbf08c6c8648a",
+        "android_client_info": {
+          "package_name": "cr.ac.ucr.ecci.eseg.catbi"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "681036121151-qkoap5askrq96n7fslvl2dd8ld7s40od.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVKwIiKLK5JPBRe1LTWkignnfKBqnjm9U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "681036121151-qkoap5askrq96n7fslvl2dd8ld7s40od.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
