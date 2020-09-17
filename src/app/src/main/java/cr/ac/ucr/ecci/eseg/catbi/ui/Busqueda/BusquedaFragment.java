@@ -1,5 +1,6 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.ContextWrapper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,10 +18,12 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import cr.ac.ucr.ecci.eseg.catbi.R;
+import cr.ac.ucr.ecci.eseg.catbi.ResultadosBusqueda;
 
 public class BusquedaFragment extends Fragment {
 
     private BusquedaViewModel busquedaViewModel;
+    public final static String MESSAGE_KEY ="ganeshannt.senddata.message_key";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -39,14 +43,23 @@ public class BusquedaFragment extends Fragment {
         return root;
     }
 
+    //  Historia CNQ - 4
+    // Tarea ID CNQ -15
+    // Gerald Bermúdez y Sebastián Otárola.
     public void realizarBusqueda(String palabra, View view){
         // Por ahora solo se muestra en un toast
+
         if (palabra.isEmpty()){
             Toast.makeText(view.getContext(),"Digite lo que desea buscar por favor",Toast.LENGTH_SHORT).show();
         }else{
-            Toast.makeText(view.getContext(),palabra,Toast.LENGTH_SHORT).show();
-        }
+            //Toast.makeText(view.getContext(),palabra,Toast.LENGTH_SHORT).show();
+            Intent intent= new Intent(getContext(), ResultadosBusqueda.class);
 
+            intent.putExtra(MESSAGE_KEY,palabra);
+
+            startActivity(intent);
+
+        }
 
     }
 }
