@@ -11,20 +11,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaViewModel;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Ubicacion.UbicacionFragment;
 
 public class RecycleViewBibliotecaConfig {
     private Context contexto;
     private  bibliotecaAdapter biblioAdapter;
 
-    public void setConfig(RecyclerView recyclerView, BusquedaViewModel context, List<ListarBibliotecas> listaBiblio, List<String>keys){
-        contexto= BusquedaFragment.getContext();
+    public void setConfig(RecyclerView recyclerView, Context context, List<ListarBibliotecas> listaBiblio, List<String>keys){
+        contexto = context;
         biblioAdapter=new bibliotecaAdapter(listaBiblio,keys);
         recyclerView.setLayoutManager(new LinearLayoutManager(contexto));
         recyclerView.setAdapter(biblioAdapter);
-
     }
 
 
