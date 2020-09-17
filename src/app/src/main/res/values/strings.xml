@@ -3,4 +3,5 @@
     <string name="title_busqueda">Búsqueda</string>
     <string name="title_ubicacion">Ubicación</string>
     <string name="title_preguntas">Preguntas Frecuentes</string>
+    <string name="title_activity_biblioteca_ubicacion">Mapa de ubicacion</string>
 </resources>
