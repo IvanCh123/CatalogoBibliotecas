@@ -2,6 +2,7 @@ package cr.ac.ucr.ecci.eseg.catbi;
 
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -29,13 +30,16 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-public class BibliotecaUbicacion extends FragmentActivity implements OnMapReadyCallback {
+public class BibliotecaUbicacion extends AppCompatActivity  implements
+        OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {
 
     private GoogleMap mMap;
     private Boolean controlsEnabled = false;
     private static final int LOCATION_REQUEST_CODE = 101;
     private FusedLocationProviderClient fusedLocationClient;
-
+    private String nombre;
+    private double l1;
+    private double l2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,10 @@ public class BibliotecaUbicacion extends FragmentActivity implements OnMapReadyC
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
+        Intent intent=getIntent();
+        nombre=intent.getStringExtra("name");
+        l1=intent.getDoubleExtra("L1",90);
+        l2=intent.getDoubleExtra("L2",90);
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
@@ -121,7 +129,7 @@ public class BibliotecaUbicacion extends FragmentActivity implements OnMapReadyC
         return super.onOptionsItemSelected(item);
     }
     public void marcadorBiblioteca() {
-        LatLng biblioteca = new LatLng(9.936119, -84.05265);
+        LatLng biblioteca = new LatLng(l1, l2);
         mMap.addMarker(new MarkerOptions().position(biblioteca).title("Biblioteca Tinoco"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(biblioteca));
     }
@@ -171,5 +179,21 @@ public class BibliotecaUbicacion extends FragmentActivity implements OnMapReadyC
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onMapClick(LatLng latLng) {
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+        Toast.makeText(getApplicationContext(), latLng.toString(),
+                Toast.LENGTH_LONG).show();
+    }
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        mMap.addMarker(new MarkerOptions()
+                .position(latLng)
+                .title(latLng.toString())
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+        Toast.makeText(getApplicationContext(),
+                "Nuevo marcador: " + latLng.toString(), Toast.LENGTH_LONG).show();
     }
 }
