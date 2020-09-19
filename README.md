@@ -60,7 +60,7 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 
 * **Requerimientos no funcionales que debe cumplir toda la aplicación web**
     * Api de Google Maps
-    * Base de datos (Completar esto cuando decidamos)
+    * Firebase
 * **Posibles interacciones con sistemas externos (bases de datos, APIs, servicios)**
 Interacción con base de datos para consultas sobre material de las bibliotecas e interacción con la API de Google Maps para ubicación de las distintas bibliotecas.
 
@@ -93,7 +93,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
     * Medios de comunicación: Discord y Whatsapp.
 * **Artefactos utilizados (listar solamente)**
     * API de Google
-    * Base de datos
+    * Firebase para base de datos en tiempo real
 * **Tecnologías con sus respectivas versiones (Android Studio, version del SDK, etc)**
     * Entorno de desarrollo: Android Studio.
     * Versión del SDK: API 21 Android 5.0 Lollipop.
