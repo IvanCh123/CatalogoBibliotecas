@@ -23,7 +23,7 @@ import cr.ac.ucr.ecci.eseg.catbi.ResultadosBusqueda;
 public class BusquedaFragment extends Fragment {
 
     private BusquedaViewModel busquedaViewModel;
-    public final static String MESSAGE_KEY ="ganeshannt.senddata.message_key";
+    public final static String MESSAGE_KEY ="palabraKey";
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -47,13 +47,10 @@ public class BusquedaFragment extends Fragment {
     // Tarea ID CNQ -15
     // Gerald Bermúdez y Sebastián Otárola.
     public void realizarBusqueda(String palabra, View view){
-        // Por ahora solo se muestra en un toast
-
         if (palabra.isEmpty()){
-            Toast.makeText(view.getContext(),"Digite lo que desea buscar por favor",Toast.LENGTH_SHORT).show();
+            Toast.makeText(view.getContext(),"Digite una palabra o frase",Toast.LENGTH_SHORT).show();
         }else{
-            //Toast.makeText(view.getContext(),palabra,Toast.LENGTH_SHORT).show();
-            Intent intent= new Intent(getContext(), ResultadosBusqueda.class);
+            Intent intent= new Intent(getContext(), ResultadosBusqueda.class); // Envío la palabra a buscar a la actividad de Iván.
 
             intent.putExtra(MESSAGE_KEY,palabra);
 
