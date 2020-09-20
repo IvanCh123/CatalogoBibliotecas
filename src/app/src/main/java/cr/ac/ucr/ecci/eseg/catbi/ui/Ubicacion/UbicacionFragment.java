@@ -1,5 +1,6 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Ubicacion;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,13 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.ListarBibliotecas;
+import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
+import cr.ac.ucr.ecci.eseg.catbi.RecycleViewBibliotecaConfig;
 
 public class UbicacionFragment extends Fragment {
 
@@ -21,8 +28,30 @@ public class UbicacionFragment extends Fragment {
     private RecyclerView BibliotecaConfig;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_ubicacion,container,false);
+        final Context contexto=getActivity();
 
         BibliotecaConfig = v.findViewById(R.id.recycler_bibliotecas);
+        new FireBaseDataBaseBiblitecaHelper().readBibliotecas(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
+            @Override
+            public void dataLoaded(List<ListarBibliotecas> ListaBibliotecas, List<String> keys) {
+                new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto,ListaBibliotecas,keys);
+            }
+
+            @Override
+            public void dataInserted() {
+
+            }
+
+            @Override
+            public void dataDeleted() {
+
+            }
+
+            @Override
+            public void dataUpdated() {
+
+            }
+        });
 
         dashboardViewModel = ViewModelProviders.of(this).get(UbicacionViewModel.class);
         View root = inflater.inflate(R.layout.fragment_ubicacion, container, false);
