@@ -35,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
    // @Override
     public void goToAnActivity(View view) {
         String name="ALGO";
-        double L1=0;
-        double L2=0;
+        double L1=9.912440;
+        double L2=-84.073091;
         switch (view.getId()){
             case R.id.Prueba:
                 Intent intent1 = new Intent(this,BibliotecaUbicacion.class);

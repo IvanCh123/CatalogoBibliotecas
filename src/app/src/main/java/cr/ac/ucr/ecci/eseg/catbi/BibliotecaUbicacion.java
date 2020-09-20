@@ -65,6 +65,8 @@ public class BibliotecaUbicacion extends AppCompatActivity  implements
         } else {
             solicitarPermiso(Manifest.permission.ACCESS_FINE_LOCATION, LOCATION_REQUEST_CODE);
         }
+        marcadorBiblioteca();
+        posicionCamaraZoom();
 
     }
     protected void solicitarPermiso(String permissionType, int requestCode) {
@@ -78,7 +80,6 @@ public class BibliotecaUbicacion extends AppCompatActivity  implements
             case LOCATION_REQUEST_CODE: {
                 if (grantResults.length > 0 && grantResults[0] ==
                         PackageManager.PERMISSION_GRANTED) {
-// Se otorga
                     if (ActivityCompat.checkSelfPermission(this,
                             Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                         return;
@@ -143,9 +144,9 @@ public class BibliotecaUbicacion extends AppCompatActivity  implements
 
 
     public void posicionCamaraZoom() {
-        LatLng sodaOdontologia = new LatLng(9.938035, -84.051509);
+        LatLng biblioteca = new LatLng(l1, l2);
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(sodaOdontologia)
+                .target(biblioteca)
                 .zoom(20) // zoom level
                 .bearing(70) // bearing // direccion de la camara
                 .tilt(25) // tilt angle // inclinacion
