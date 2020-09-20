@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import cr.ac.ucr.ecci.eseg.catbi.R;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusqueda;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
 
 public class BusquedaFragment extends Fragment {
 
@@ -46,7 +46,7 @@ public class BusquedaFragment extends Fragment {
         if (palabra.isEmpty()){
             Toast.makeText(view.getContext(),"Digite una palabra o frase",Toast.LENGTH_SHORT).show();
         }else{
-            Intent intent= new Intent(getContext(), ResultadosBusqueda.class); // Envío la palabra a buscar a la actividad de Iván.
+            Intent intent= new Intent(getContext(), ResultadosBusquedaActivity.class); // Envío la palabra a buscar a la actividad de Iván.
 
             intent.putExtra(MESSAGE_KEY,palabra);
 
