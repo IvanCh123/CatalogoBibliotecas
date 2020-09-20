@@ -1,6 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -56,21 +57,25 @@ public class RecycleViewBibliotecaConfig {
         public bibliotecaAdapter(List<ListarBibliotecas> listaBiblioteca, List<String> key) {
             this.listaBiblioteca = listaBiblioteca;
             this.key = key;
+            Log.d("T1",listaBiblioteca.get(1).getHorario());
         }
 
         @NonNull
         @Override
         public BibliotecaItem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            Log.d("T2","2");
             return new BibliotecaItem(parent);
         }
 
         @Override
         public void onBindViewHolder(@NonNull BibliotecaItem holder, int position) {
+            Log.d("T3","3");
             holder.bind(listaBiblioteca.get(position),key.get(position));
         }
 
         @Override
         public int getItemCount() {
+            Log.d("T4","4");
             return listaBiblioteca.size();
         }
     }

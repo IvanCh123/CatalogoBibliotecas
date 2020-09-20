@@ -9,8 +9,8 @@ public class UbicacionViewModel extends ViewModel {
     private MutableLiveData<String> mText;
 
     public UbicacionViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("Fragmento de ubicacion");
+       // mText = new MutableLiveData<>();
+        //mText.setValue("Fragmento de ubicacion");
     }
 
     public LiveData<String> getText() {

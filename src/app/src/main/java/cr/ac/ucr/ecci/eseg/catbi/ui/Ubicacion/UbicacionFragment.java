@@ -2,6 +2,7 @@ package cr.ac.ucr.ecci.eseg.catbi.ui.Ubicacion;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,18 +24,27 @@ import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.RecycleViewBibliotecaConfig;
 
 public class UbicacionFragment extends Fragment {
+    View v;
+    Context contexto;
 
     private UbicacionViewModel dashboardViewModel;
     private RecyclerView BibliotecaConfig;
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_ubicacion,container,false);
-        final Context contexto=getActivity();
+         v = inflater.inflate(R.layout.fragment_ubicacion,container,false);
+        contexto=getActivity();
+
+
+
+        dashboardViewModel = ViewModelProviders.of(this).get(UbicacionViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_ubicacion, container, false);
 
         BibliotecaConfig = v.findViewById(R.id.recycler_bibliotecas);
+        Log.d("Tq", String.valueOf(BibliotecaConfig));
         new FireBaseDataBaseBiblitecaHelper().readBibliotecas(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
             @Override
-            public void dataLoaded(List<ListarBibliotecas> ListaBibliotecas, List<String> keys) {
-                new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto,ListaBibliotecas,keys);
+            public void dataLoaded(List<ListarBibliotecas> listaBibliotecas, List<String> keys) {
+                Log.d("Tq", String.valueOf(listaBibliotecas.size()));
+                new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto,listaBibliotecas,keys);
             }
 
             @Override
@@ -53,15 +63,39 @@ public class UbicacionFragment extends Fragment {
             }
         });
 
-        dashboardViewModel = ViewModelProviders.of(this).get(UbicacionViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_ubicacion, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        BibliotecaConfig = v.findViewById(R.id.recycler_bibliotecas);
+        Log.d("Tq", String.valueOf(BibliotecaConfig));
+        new FireBaseDataBaseBiblitecaHelper().readBibliotecas(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void dataLoaded(List<ListarBibliotecas> listaBibliotecas, List<String> keys) {
+                Log.d("Tq", String.valueOf(listaBibliotecas.size()));
+                new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto,listaBibliotecas,keys);
+            }
+
+            @Override
+            public void dataInserted() {
+
+            }
+
+            @Override
+            public void dataDeleted() {
+
+            }
+
+            @Override
+            public void dataUpdated() {
+
             }
         });
-        return root;
+
     }
+
 }
