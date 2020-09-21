@@ -103,4 +103,9 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
     * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
 
 * **Definición de listo**
-    * Al ingresar a la aplicación el usuario puede ingresar palabras para buscar material. Al darle click en el botón de buscar se va a desplegar una lista con los resultados para una búsqueda específica. En el menú inferior de navegación  el usuario puede clickear la opción de ubicación para que se desplieguen las distintas ubicaciones de las bibliotecas de la universidad.
+    Para que una historia se considere como lista, esta tiene que estar en master, ser validada por los miembros del equipo y tiene que cumplir los siguientes criterios de aceptación respectivos:
+    * CNQ-4 Búsqueda por palabra: Como usuario quiero realizar una búsqueda por palabra o frase con el fin obtener todo el material referente a ese palabra o frase.
+    * CNQ-7 Limpiar Búsqueda: Como usuario quiero limpiar los campos de búsqueda con el fin de realizar una nueva búsqueda.
+    * CNQ-8 Resultados de búsqueda: Como usuario quiero que se muestren los resultados de mi búsqueda de forma adecuada con el fin de observar todos los resultados
+    * CNQ-9 Selección de resultados de la búsqueda: Como usuario quiero seleccionar los resultados de mi búsqueda con el fin de obtener la mayor información posible sobre ese resultado.
+    * CNQ-10 Ubicación de bibliotecas: Como cliente quiero al clickear una biblioteca obtener su localización en el mapa e información básica. Con el fin de tener conocimiento del lugar en donde está el material.
