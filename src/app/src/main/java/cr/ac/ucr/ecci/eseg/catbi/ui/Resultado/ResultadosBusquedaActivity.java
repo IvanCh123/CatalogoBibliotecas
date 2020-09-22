@@ -43,10 +43,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity {
 //        String message = intent.getStringExtra(MESSAGE_KEY);
 //        TextView textView = new TextView(this);
 //        textView.setTextSize(45);
-//        textView.setText(message);
+//        textView.setText("Mostrando resultados para:" +message);
 //        setContentView(textView);
-
-
-
     }
 }
