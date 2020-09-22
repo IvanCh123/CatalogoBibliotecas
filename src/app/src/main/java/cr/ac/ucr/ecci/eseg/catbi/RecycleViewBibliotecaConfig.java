@@ -3,6 +3,7 @@ package cr.ac.ucr.ecci.eseg.catbi;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -68,9 +69,17 @@ public class RecycleViewBibliotecaConfig {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull BibliotecaItem holder, int position) {
+        public void onBindViewHolder(@NonNull BibliotecaItem holder, final int position) {
             Log.d("T3","3");
             holder.bind(listaBiblioteca.get(position),key.get(position));
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("Coordenada",String.valueOf(listaBiblioteca.get(position).getLatitud()));
+                    Log.d("Coordenada",String.valueOf(listaBiblioteca.get(position).getLongitud()));
+                }
+            });
         }
 
         @Override
