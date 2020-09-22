@@ -8,5 +8,6 @@
     <string name="texto_boton">Buscar</string>
     <string name="hint_edit_text">Don Quijote</string>
     <string name="txt_limpiar">Limpiar Búsqueda</string>
+    <string name="txt_sugerencias">Sugerencias de Búsqueda</string>
 
 </resources>
