@@ -26,13 +26,22 @@ public class BusquedaFragment extends Fragment {
         busquedaViewModel =
                 ViewModelProviders.of(this).get(BusquedaViewModel.class);
         View root = inflater.inflate(R.layout.fragment_busqueda, container, false);
+
         final EditText editTextTituloFrase =  (EditText) root.findViewById(R.id.editTextTituloFrase);
         final Button btnBuscar =  (Button) root.findViewById(R.id.btnBuscar);
+        final Button btnLimpiar =  (Button) root.findViewById(R.id.btnLimpiar);
+
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String palabra = editTextTituloFrase.getText().toString(); // Se captura lo que hay en el edit text
                 realizarBusqueda(palabra,view);
+            }
+        });
+        btnLimpiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                limpiarBusqueda(editTextTituloFrase);
             }
         });
 
@@ -53,6 +62,11 @@ public class BusquedaFragment extends Fragment {
             startActivity(intent);
 
         }
+
+    }
+
+    public void limpiarBusqueda(EditText campoBusqueda){
+        campoBusqueda.setText(""); // Limpio el campo de búsqueda
 
     }
 }
