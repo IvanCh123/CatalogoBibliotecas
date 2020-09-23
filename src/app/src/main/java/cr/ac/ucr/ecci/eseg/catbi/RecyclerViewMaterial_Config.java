@@ -19,14 +19,14 @@ public class RecyclerViewMaterial_Config {
     private Context mContext;
     private MaterialAdapter mMaterialAdapter;
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<Material> materiales, List<String> keys){
+    public void setConfig(RecyclerView recyclerView, Context context, List<Material> materiales, List<String> keys, OnNoteListener onNoteListener){
         mContext = context;
-        mMaterialAdapter = new MaterialAdapter(materiales, keys);
+        mMaterialAdapter = new MaterialAdapter(materiales, keys, onNoteListener);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(mMaterialAdapter);
     }
 
-    class MaterialItemView extends RecyclerView.ViewHolder{
+    class MaterialItemView extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTitulo;
         private TextView mAutor;
         private TextView mFormato;
@@ -34,7 +34,9 @@ public class RecyclerViewMaterial_Config {
 
         private String key;
 
-        public MaterialItemView(ViewGroup parent){
+        OnNoteListener onNoteListener;
+
+        public MaterialItemView(ViewGroup parent, OnNoteListener onNoteListener ){
             super(LayoutInflater.from(mContext).
                     inflate(R.layout.material_list_item, parent, false));
 
@@ -42,6 +44,10 @@ public class RecyclerViewMaterial_Config {
             mAutor = (TextView) itemView.findViewById(R.id.autor_textView);
             mFormato = (TextView) itemView.findViewById(R.id.formato_textView);
             //mBiblioteca = (TextView) itemView.findViewById(R.id.biblioteca_textView);
+
+            this.onNoteListener = onNoteListener;
+
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Material material, String key){
@@ -50,21 +56,33 @@ public class RecyclerViewMaterial_Config {
             mFormato.setText(material.getFormato());
             this.key = key;
         }
+
+
+        @Override
+        public void onClick(View view) {
+            onNoteListener.onNoteClick(getAdapterPosition());
+        }
+    }
+
+    public interface OnNoteListener{
+        void onNoteClick(int position);
     }
 
     class MaterialAdapter extends RecyclerView.Adapter<MaterialItemView>{
         private List<Material> mListaMaterial;
         private List<String> mKeys;
+        private OnNoteListener mOnNoteListener;
 
-        public MaterialAdapter(List<Material> mListaMaterial, List<String> mKeys) {
+        public MaterialAdapter(List<Material> mListaMaterial, List<String> mKeys, OnNoteListener onNoteListener) {
             this.mListaMaterial = mListaMaterial;
             this.mKeys = mKeys;
+            this.mOnNoteListener = onNoteListener;
         }
 
         @NonNull
         @Override
         public MaterialItemView onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            return new MaterialItemView(parent);
+            return new MaterialItemView(parent, mOnNoteListener);
         }
 
         @Override

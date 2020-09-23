@@ -21,6 +21,10 @@ public class FireBaseDataBaseBiblitecaHelper {
     private List<ListarBibliotecas> listaBibliotecas= new ArrayList<>();
     private List<Material> listaMaterial = new ArrayList<>();
 
+    public List<Material> getListaMaterial() {
+        return listaMaterial;
+    }
+
     public interface DataStatus{
         void dataLoaded(List<ListarBibliotecas>ListaBibliotecas,List<String>keys);
         void dataInserted();
