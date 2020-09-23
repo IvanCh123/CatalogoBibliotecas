@@ -12,6 +12,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,12 +29,10 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-
     }
 
    // @Override
-    public void goToAnActivity(View view) {
+   /* public void goToAnActivity(View view) {
         String name="ALGO";
         double L1=9.912440;
         double L2=-84.073091;
@@ -48,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
            /* case R.id.button2:
                 Intent intent2 = new Intent(this, AnotherActivity.class);
                 startActivity(intent2);
-                break;*/
+                break;
             default:
                 break;
         }
