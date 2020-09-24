@@ -30,7 +30,7 @@ public class RecyclerViewMaterial_Config {
         private TextView mTitulo;
         private TextView mAutor;
         private TextView mFormato;
-        //private TextView mBiblioteca;
+        private TextView mBiblioteca;
 
         private String key;
 
@@ -43,7 +43,7 @@ public class RecyclerViewMaterial_Config {
             mTitulo = (TextView) itemView.findViewById(R.id.titulo_textView);
             mAutor = (TextView) itemView.findViewById(R.id.autor_textView);
             mFormato = (TextView) itemView.findViewById(R.id.formato_textView);
-            //mBiblioteca = (TextView) itemView.findViewById(R.id.biblioteca_textView);
+            mBiblioteca = (TextView) itemView.findViewById(R.id.biblioteca_textView);
 
             this.onNoteListener = onNoteListener;
 
@@ -54,6 +54,7 @@ public class RecyclerViewMaterial_Config {
             mTitulo.setText(material.getTitulo());
             mAutor.setText(material.getAutor());
             mFormato.setText(material.getFormato());
+            mBiblioteca.setText(material.getBiblioteca());
             this.key = key;
         }
 

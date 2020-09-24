@@ -15,7 +15,7 @@ public class Material implements Serializable {
 
     public Material() {}
 
-    public Material(String autor, String año, String cantidad, String coleccion, String formato, String titulo, String idioma) {
+    public Material(String autor, String año, String cantidad, String coleccion, String formato, String titulo, String idioma, String biblioteca) {
         this.autor = autor;
         this.año = año;
         this.cantidad = cantidad;
@@ -23,6 +23,7 @@ public class Material implements Serializable {
         this.formato = formato;
         this.titulo = titulo;
         this.idioma = idioma;
+        this.biblioteca = biblioteca;
     }
 
     public String getAutor() {
