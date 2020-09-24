@@ -1,6 +1,8 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Resultado;
 
-public class Material {
+import java.io.Serializable;
+
+public class Material implements Serializable {
     private String autor;
     private String año;
     private String cantidad;

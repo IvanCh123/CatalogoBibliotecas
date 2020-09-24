@@ -59,12 +59,10 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
     @SuppressLint("LongLogTag")
     @Override
     public void onNoteClick(int position) {
-        //Y un get position para obtener el objeto en el arreglo que debo, que seria algo como:
-        //mFireBaseDataBaseBibliotecaHelper.getListaMaterial().get(position);
         Log.d(TAG, "onNoteClick: clicked." + position);
-        //Aqui iria el intent
-        //Intent intent = new Intent(this, InformacionDetalladaMaterial.class);
-        //intent.putExtra();
-        //startActivity(intent);
+        Intent intent = new Intent(getApplicationContext(), InformacionDetalladaMaterial.class);
+        Material materialClickeado = mFireBaseDataBaseBibliotecaHelper.getListaMaterial().get(position);
+        intent.putExtra("materialClickeado", materialClickeado);
+        startActivity(intent);
     }
 }
