@@ -17,6 +17,8 @@ public class FireBaseDataBaseBiblitecaHelper {
     private FirebaseDatabase database;
     private DatabaseReference referenciaBiblioteca;
     private DatabaseReference referenciaMaterial;
+
+    private String filtro;
     private List<ListarBibliotecas> listaBibliotecas= new ArrayList<>();
     private List<Material> listaMaterial = new ArrayList<>();
 
@@ -39,6 +41,7 @@ public class FireBaseDataBaseBiblitecaHelper {
         database=FirebaseDatabase.getInstance();
         //referenciaBiblioteca= database.getReference("Bibliotecas");
         referenciaMaterial= database.getReference("Material");
+        filtro = "";
     }
 
     public void readBibliotecas(final DataStatus dataStatus){
@@ -62,7 +65,8 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
-    public void readMaterial(final MaterialDataStatus materialDataStatus){
+    public void readMaterial(final MaterialDataStatus materialDataStatus, final String filtro){
+        this.filtro = filtro;
         referenciaMaterial.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -72,7 +76,10 @@ public class FireBaseDataBaseBiblitecaHelper {
                     keys.add(keyNode.getKey());
                     Material material = keyNode.getValue(Material.class);
                     material.setID(keyNode.getKey());
-                    listaMaterial.add(material);
+
+                    if(material.getTitulo().contains(filtro)){
+                        listaMaterial.add(material);
+                    }
                 }
                 materialDataStatus.DataIsLoaded(listaMaterial,keys);
             }
