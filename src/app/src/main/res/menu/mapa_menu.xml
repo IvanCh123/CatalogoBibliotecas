@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group_1" >
+        <item
+            android:id="@+id/action_1"
+            android:title="Marcador de Biblioteca"
+            android:visible="true"/>
+        <item
+            android:id="@+id/action_2"
+            android:title="Activar el Zoom, Compás y Loc."
+            android:visible="true"/>
+        <item
+            android:id="@+id/action_3"
+            android:title="Zoom a Biblioteca"
+            android:visible="true"/>
+    </group>
+    <group android:id="@+id/group_2">
+        <item
+            android:id="@+id/action_4"
+            android:title="Mapa Satélite"
+            android:visible="true"/>
+        <item
+            android:id="@+id/action_5"
+            android:title="Mapa Híbrido"
+            android:visible="true"/>
+        <item
+            android:id="@+id/action_6"
+            android:title="Mapa Ninguno"
+            android:visible="true"/>
+        <item
+            android:id="@+id/action_7"
+            android:title="Mapa Normal"
+            android:visible="true"/>
+        <item
+            android:id="@+id/action_8"
+            android:title="Mapa Tierra"
+            android:visible="true"/>
+    </group>
+    <group android:id="@+id/group_3" >
+        <item
+            android:id="@+id/action_9"
+            android:title="Localizacion actual"
+            android:visible="true"/>
+    </group>
+</menu>
