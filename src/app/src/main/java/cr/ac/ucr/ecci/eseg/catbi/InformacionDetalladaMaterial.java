@@ -31,11 +31,11 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         TextView textViewContentBiblioteca = findViewById(R.id.textViewContentBiblioteca);
 
         textViewNombreMaterial.setText(materialRecibido.getTitulo());
-        //textViewContentID.setText(materialRecibido.getID());
+        textViewContentID.setText(materialRecibido.getID());
         textViewContentTitulo.setText(materialRecibido.getTitulo());
         textViewContentAutor.setText(materialRecibido.getAutor());
         textViewContentColeccion.setText(materialRecibido.getColeccion());
-        //textViewContentIdioma.setText(materialRecibido.getIdioma());
+        textViewContentIdioma.setText(materialRecibido.getIdioma());
         textViewContentTipo.setText(materialRecibido.getFormato());
         //textViewContentBiblioteca.setText(materialRecibido.getBiblioteca());
     }

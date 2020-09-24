@@ -8,7 +8,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,15 +71,14 @@ public class FireBaseDataBaseBiblitecaHelper {
                 for(DataSnapshot keyNode : dataSnapshot.getChildren()){
                     keys.add(keyNode.getKey());
                     Material material = keyNode.getValue(Material.class);
+                    material.setID(keyNode.getKey());
                     listaMaterial.add(material);
                 }
                 materialDataStatus.DataIsLoaded(listaMaterial,keys);
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
     }
 }
