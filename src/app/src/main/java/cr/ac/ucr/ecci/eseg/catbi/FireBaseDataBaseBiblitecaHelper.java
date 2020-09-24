@@ -77,7 +77,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                     Material material = keyNode.getValue(Material.class);
                     material.setID(keyNode.getKey());
 
-                    if(material.getTitulo().contains(filtro)){
+                    if(material.getTitulo().toLowerCase().contains(filtro.toLowerCase())){
                         listaMaterial.add(material);
                     }
                 }
