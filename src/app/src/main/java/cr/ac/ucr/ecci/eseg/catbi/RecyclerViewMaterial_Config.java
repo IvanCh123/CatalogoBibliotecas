@@ -74,7 +74,7 @@ public class RecyclerViewMaterial_Config {
         private List<String> mKeys;
         private OnNoteListener mOnNoteListener;
 
-        private final int limit  = 5;
+        private final int limit  = 10;
 
         public MaterialAdapter(List<Material> mListaMaterial, List<String> mKeys, OnNoteListener onNoteListener) {
             this.mListaMaterial = mListaMaterial;
@@ -95,7 +95,7 @@ public class RecyclerViewMaterial_Config {
 
         @Override
         public int getItemCount() {
-            if(mListaMaterial.size() > 5){
+            if(mListaMaterial.size() > limit){
                 return limit;
             }else{
                 return mListaMaterial.size();
