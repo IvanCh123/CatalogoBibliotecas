@@ -11,6 +11,7 @@ public class Material implements Serializable {
     private String formato;
     private String titulo;
     private String idioma;
+    private String biblioteca;
 
     public Material() {}
 
@@ -86,5 +87,13 @@ public class Material implements Serializable {
 
     public void setID(String id) {
         this.id = id;
+    }
+
+    public String getBiblioteca() {
+        return biblioteca;
+    }
+
+    public void setBiblioteca(String biblioteca) {
+        this.biblioteca = biblioteca;
     }
 }
