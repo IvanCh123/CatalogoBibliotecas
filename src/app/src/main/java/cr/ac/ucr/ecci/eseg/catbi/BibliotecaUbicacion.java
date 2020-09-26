@@ -131,7 +131,7 @@ public class BibliotecaUbicacion extends AppCompatActivity  implements
     }
     public void marcadorBiblioteca() {
         LatLng biblioteca = new LatLng(l1, l2);
-        mMap.addMarker(new MarkerOptions().position(biblioteca).title("Biblioteca Tinoco"));
+        mMap.addMarker(new MarkerOptions().position(biblioteca).title(nombre));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(biblioteca));
     }
     public void mostrarZoom() {
