@@ -4,6 +4,8 @@
 
 ## Catálogo de Bibliotecas UCR (CATBI)
 
+## Versión 1.0
+
 
 ---
 
@@ -15,10 +17,11 @@ Además se especifican aspectos técnicos como el diseño de la base de datos, f
 
 ## Listado de Equipos y miembros de Equipos
 Equipo Nesquick:
-* Josué Valverde Sánchez
-* Iván Chavarría Vega
-* Gerald Bermúdez Ramírez
-* Sebastián Otárola Sánchez
+
+* Josué Valverde Sánchez B16802
+* Iván Chavarría Vega B72097
+* Gerald Bermúdez Ramírez B71078
+* Sebastián Otárola Sánchez B75612
 
 
 
@@ -45,7 +48,7 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
     * **Epic 5: Reservación Material.** Se permitirá que usuarios puedan seleccionar un materíal y reservarlo en la biblioteca que corresponda para que luego pueda pasar a retirarlo sin el problema de que alguien más lo haya hecho.
     
     
-* **Requerimientos funcionales (Backlog del producto, solo indicando la referencia al proyecto en Jira)**
+* **Requerimientos funcionales**
 
 
 | Sprint 1 |   |
@@ -77,33 +80,44 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 ## Artefactos de bases de datos
 * Esquema conceptual de la base de datos
 
-![](https://i.imgur.com/F1Qj8bt.png)
-
+![](https://i.imgur.com/iWEpoLQ.png)
 
 * Cualquier otro artefacto de la base de datos que consideren necesario
 
-![](https://i.imgur.com/OzsxAUe.png)
+![](https://i.imgur.com/yJAoEif.png)
+* Estado actual de la base de datos 
+![](https://i.imgur.com/hZ0lmTn.png)
+
 
 
 ## Decisiones Técnicas
-* **Metodologías utilizadas y procesos definidos (metodología ágil, reuniones, medios de comunicación, etc)**
+* **Metodologías utilizadas y procesos definidos**
     * Metodología Utilizada: SCRUM
     * Técnica para estimación: Planning Poker con escala Fibonacci.
     * Reuniones: Lunes y Jueves después de la clase de Móviles y el sábado en la tarde.
     * Medios de comunicación: Discord y Whatsapp.
-* **Artefactos utilizados (listar solamente)**
+* **Artefactos utilizados**
     * API de Google
     * Firebase para base de datos en tiempo real
-* **Tecnologías con sus respectivas versiones (Android Studio, version del SDK, etc)**
+* **Tecnologías con sus respectivas versiones**
     * Entorno de desarrollo: Android Studio.
     * Versión del SDK: API 21 Android 5.0 Lollipop.
 * **Repositorio de código y estrategia de branches**
     * Link al Repositorio: https://bitbucket.org/lyonv/ecci_ci0161_ii2020_g01_t03.git/src
     * Estrategia de branches: La estrategia que se va a utilizar es la de trabajar por módulos y funcionalidades, donde habría una rama de módulo que representa un subgrupo grande de la aplicación, que para nuestro caso va a representar una épica, y a su vez este módulo generaría más ramas, las cuales representan funcionalidades ya más específicas que se van a desarrollar y que pueden ser desarrolladas por un solo desarrollador usualmente. Además se utilizaría la rama master para solo tener versiones estables del proyecto.
+    * Para esta iteración las ramas módulo son:
+         * buscador-basico 
+         * Ubicación-bibliotecas 
+    * Las de funcionalidad son:
+         * funcionalidad-busqueda-por-palabra
+         * seleccion-resultados-busqueda
+         * Ubicación-de-bibliotecas-mapa
+         * resultados-busqueda
+         * Lista-de-bibliotecas
     * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
 
 * **Definición de listo**
-    Para que una historia se considere como lista, esta tiene que estar en master, ser validada por los miembros del equipo y tiene que cumplir los siguientes criterios de aceptación respectivos:
+    Para que una historia se considere como lista tiene que estar en master, ser validada por los miembros del equipo y cumplir con los siguientes criterios de aceptación correspondientes a cada una de las historias de usuario:
     * CNQ-4 Búsqueda por palabra: Como usuario quiero realizar una búsqueda por palabra o frase con el fin obtener todo el material referente a ese palabra o frase.
     * CNQ-7 Limpiar Búsqueda: Como usuario quiero limpiar los campos de búsqueda con el fin de realizar una nueva búsqueda.
     * CNQ-8 Resultados de búsqueda: Como usuario quiero que se muestren los resultados de mi búsqueda de forma adecuada con el fin de observar todos los resultados
