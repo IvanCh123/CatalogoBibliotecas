@@ -37,6 +37,6 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         textViewContentColeccion.setText(materialRecibido.getColeccion());
         textViewContentIdioma.setText(materialRecibido.getIdioma());
         textViewContentTipo.setText(materialRecibido.getFormato());
-        //textViewContentBiblioteca.setText(materialRecibido.getBiblioteca());
+        textViewContentBiblioteca.setText(materialRecibido.getBiblioteca());
     }
 }
