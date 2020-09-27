@@ -115,7 +115,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
          * resultados-busqueda
          * Lista-de-bibliotecas
     * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
-
+    * Clonar el proyeto: Al clonar el proyecto, la carpeta que contiene el código es la carpeta src. En android studio hay que abrir esa carpeta para ejecutar la app.
 * **Definición de listo**
     Para que una historia se considere como lista tiene que estar en master, ser validada por los miembros del equipo y cumplir con los siguientes criterios de aceptación correspondientes a cada una de las historias de usuario:
     * CNQ-4 Búsqueda por palabra: Como usuario quiero realizar una búsqueda por palabra o frase con el fin obtener todo el material referente a ese palabra o frase.
