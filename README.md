@@ -97,13 +97,16 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
     * Reuniones: Lunes y Jueves después de la clase de Móviles y el sábado en la tarde.
     * Medios de comunicación: Discord y Whatsapp.
 * **Artefactos utilizados**
-    * API de Google
-    * Firebase para base de datos en tiempo real
+    * Backlog que está en JIRA.
+    * Documento de Conceptualización.
 * **Tecnologías con sus respectivas versiones**
     * Entorno de desarrollo: Android Studio.
     * Versión del SDK: API 21 Android 5.0 Lollipop.
+    * API de Google versión 17.0.
+    * Firebase para base de datos en tiempo real. Versión utilizada en android 17.0.
 * **Repositorio de código y estrategia de branches**
     * Link al Repositorio: https://bitbucket.org/lyonv/ecci_ci0161_ii2020_g01_t03.git/src
+    * Al clonar el proyecto para correrlo se debe abrir la carpeta src.
     * Estrategia de branches: La estrategia que se va a utilizar es la de trabajar por módulos y funcionalidades, donde habría una rama de módulo que representa un subgrupo grande de la aplicación, que para nuestro caso va a representar una épica, y a su vez este módulo generaría más ramas, las cuales representan funcionalidades ya más específicas que se van a desarrollar y que pueden ser desarrolladas por un solo desarrollador usualmente. Además se utilizaría la rama master para solo tener versiones estables del proyecto.
     * Para esta iteración las ramas módulo son:
          * buscador-basico 
@@ -115,7 +118,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
          * resultados-busqueda
          * Lista-de-bibliotecas
     * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
-    * Clonar el proyeto: Al clonar el proyecto, la carpeta que contiene el código es la carpeta src. En android studio hay que abrir esa carpeta para ejecutar la app.
+
 * **Definición de listo**
     Para que una historia se considere como lista tiene que estar en master, ser validada por los miembros del equipo y cumplir con los siguientes criterios de aceptación correspondientes a cada una de las historias de usuario:
     * CNQ-4 Búsqueda por palabra: Como usuario quiero realizar una búsqueda por palabra o frase con el fin obtener todo el material referente a ese palabra o frase.
