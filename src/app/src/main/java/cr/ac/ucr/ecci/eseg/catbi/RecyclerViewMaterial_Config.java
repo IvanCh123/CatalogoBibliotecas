@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,16 +15,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
 
 public class RecyclerViewMaterial_Config {
     private Context mContext;
     private MaterialAdapter mMaterialAdapter;
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<Material> materiales, List<String> keys, OnNoteListener onNoteListener){
+    public void setConfig(RecyclerView recyclerView, Context context, List<Material> materiales, List<String> keys, OnNoteListener onNoteListener, String filtro){
         mContext = context;
         mMaterialAdapter = new MaterialAdapter(materiales, keys, onNoteListener);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(mMaterialAdapter);
+
+        if(mMaterialAdapter.mListaMaterial.size() != 0){
+            Toast.makeText(mContext,"Mostrando resultados para: "+filtro+".", Toast.LENGTH_LONG).show();
+            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+            recyclerView.setAdapter(mMaterialAdapter);
+        }else{
+            Toast.makeText(mContext,"No se encontraron resultados.", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     class MaterialItemView extends RecyclerView.ViewHolder implements View.OnClickListener{
