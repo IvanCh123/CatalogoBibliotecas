@@ -40,24 +40,17 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         setContentView(R.layout.activity_resultados_busqueda);
 
         Intent intent = getIntent();
-        String filtro = intent.getStringExtra(MESSAGE_KEY);
+        final String filtro = intent.getStringExtra(MESSAGE_KEY);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_material);
         mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBiblitecaHelper();
         mFireBaseDataBaseBibliotecaHelper.readMaterial(new FireBaseDataBaseBiblitecaHelper.MaterialDataStatus(){
             @Override
             public void DataIsLoaded(List<Material> material, List<String> keys) {
-                new RecyclerViewMaterial_Config().setConfig(mRecyclerView, ResultadosBusquedaActivity.this,material,keys,ResultadosBusquedaActivity.this);
+                new RecyclerViewMaterial_Config().setConfig(mRecyclerView, ResultadosBusquedaActivity.this,material,keys,ResultadosBusquedaActivity.this, filtro);
             }
         }, filtro);
 
-        /*Con esto se obtiene la palabra escrita en el buscador*/
-//        Intent intent = getIntent();
-//        String message = intent.getStringExtra(MESSAGE_KEY);
-//        TextView textView = new TextView(this);
-//        textView.setTextSize(45);
-//        textView.setText("Mostrando resultados para:" +message);
-//        setContentView(textView);
     }
 
     @SuppressLint("LongLogTag")
