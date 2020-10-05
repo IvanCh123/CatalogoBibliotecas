@@ -10,5 +10,9 @@
     <string name="hint_edit_text">Don Quijote</string>
     <string name="txt_limpiar">Limpiar Búsqueda</string>
     <string name="txt_sugerencias">Sugerencias de Búsqueda</string>
-
+    <string name="txt_reserva_exi">Su reserva a sido exitosa</string>
+    <string name="txt_title_reser">Se reserva de: </string>
+    <string name="txt_ubic_reser">Ubicada en:</string>
+    <string name="txt_durac_reser">Ha sido reservada por:</string>
+    <string name="txt_button_reser_accep">Aceptar</string>
 </resources>
