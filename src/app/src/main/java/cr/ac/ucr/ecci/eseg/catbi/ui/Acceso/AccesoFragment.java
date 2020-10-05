@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,20 +29,26 @@ public class AccesoFragment extends Fragment {
 
     private AccesoViewModel accesoViewModel;
     private FirebaseAuth mAuth;
-
+    private ProgressBar barraProgreso;
+    private EditText correoUsuario;
+    private EditText contrasenaUsuario;
+    private Button btnInicioSesion;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         accesoViewModel =
                 ViewModelProviders.of(this).get(AccesoViewModel.class);
         View root = inflater.inflate(R.layout.fragment_acceso, container, false);
-        final EditText correoUsuario = root.findViewById(R.id.editTextCorreo);
-        final EditText contrasenaUsuario = root.findViewById(R.id.editTextContrasena);
-        final Button btnInicioSesion = root.findViewById(R.id.btnInicioSesion);
+        correoUsuario = root.findViewById(R.id.editTextCorreo);
+        contrasenaUsuario = root.findViewById(R.id.editTextContrasena);
+        btnInicioSesion = root.findViewById(R.id.btnInicioSesion);
+        barraProgreso = root.findViewById(R.id.progressBar);
+        barraProgreso.setVisibility(View.INVISIBLE);
         mAuth = FirebaseAuth.getInstance();
 
         btnInicioSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                barraProgreso.setVisibility(View.VISIBLE);
                 String correo = correoUsuario.getText().toString();
                 String password = contrasenaUsuario.getText().toString();
                 autenticarUsuarios(correo,password,view);
@@ -58,6 +65,7 @@ public class AccesoFragment extends Fragment {
             mAuth.signInWithEmailAndPassword(correo,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    barraProgreso.setVisibility(View.GONE);
                     if(task.isSuccessful()){
                         startActivity(new Intent(getContext(), Perfil.class));
                     }else {
