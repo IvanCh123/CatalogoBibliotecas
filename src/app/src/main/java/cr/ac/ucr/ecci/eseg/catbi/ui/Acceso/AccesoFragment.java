@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi.ui.Preguntas;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Acceso;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,20 +14,20 @@ import androidx.lifecycle.ViewModelProviders;
 
 import cr.ac.ucr.ecci.eseg.catbi.R;
 
-public class PreguntasFragment extends Fragment {
+public class AccesoFragment extends Fragment {
 
-    private PreguntasViewModel preguntasViewModel;
+    private AccesoViewModel accesoViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        preguntasViewModel =
-                ViewModelProviders.of(this).get(PreguntasViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_preguntas, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        preguntasViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        accesoViewModel =
+                ViewModelProviders.of(this).get(AccesoViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_acceso, container, false);
+        //final TextView textView = root.findViewById(R.id.text_notifications);
+        accesoViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
-                textView.setText(s);
+                //textView.setText(s);
             }
         });
         return root;

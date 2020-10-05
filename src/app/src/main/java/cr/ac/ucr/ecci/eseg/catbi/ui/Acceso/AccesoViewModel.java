@@ -1,14 +1,14 @@
-package cr.ac.ucr.ecci.eseg.catbi.ui.Preguntas;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Acceso;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class PreguntasViewModel extends ViewModel {
+public class AccesoViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public PreguntasViewModel() {
+    public AccesoViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Fragmento de preguntas");
     }
