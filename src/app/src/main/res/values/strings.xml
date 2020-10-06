@@ -2,7 +2,7 @@
     <string name="app_name">CATBI</string>
     <string name="title_busqueda">Búsqueda</string>
     <string name="title_ubicacion">Ubicación</string>
-    <string name="title_inicioSesion">Acceso</string>
+    <string name="title_Perfil">Perfil</string>
     <string name="title_activity_biblioteca_ubicacion">Mapa de ubicacion</string>
     <string name="title_busqueda_basica">Busqueda Básica</string>
     <string name="texto_busqueda">Escriba una palabra o frase</string>
