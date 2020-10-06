@@ -18,6 +18,7 @@ public class Perfil extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
+        
         correoUsuario =  (TextView) findViewById(R.id.txtNombre);
         mAuth = FirebaseAuth.getInstance();
         usuarioActual = mAuth.getCurrentUser();
