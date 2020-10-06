@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/nav_preguntas"
-        android:name="cr.ac.ucr.ecci.eseg.catbi.ui.Acceso.AccesoFragment"
+        android:name="cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.PerfilFragment"
         android:label="@string/title_Perfil"
-        tools:layout="@layout/fragment_acceso" />
+        tools:layout="@layout/fragment_perfil" />
 </navigation>
