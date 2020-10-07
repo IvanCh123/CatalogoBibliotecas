@@ -6,15 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/nombre_biblioteca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textResUbi"
-        app:layout_constraintTop_toTopOf="@+id/textResUbi" />
-
     <Button
         android:id="@+id/buttonAccpReser"
         android:layout_width="143dp"
@@ -26,53 +17,42 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@string/txt_button_reser_accep" />
 
+
     <TextView
-        android:id="@+id/text_reserva_existosa"
-        android:layout_width="176dp"
-        android:layout_height="121dp"
-        android:text="@string/txt_reserva_exi"
+        android:id="@+id/txt_reserva_no_exi"
+        android:layout_width="208dp"
+        android:layout_height="84dp"
+        android:text="@string/txt_reserva_no_exi"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/textResTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.481" />
-
-    <TextView
-        android:id="@+id/textResDuc"
-        android:layout_width="121dp"
-        android:layout_height="49dp"
-        android:layout_marginBottom="88dp"
-        android:text="@string/txt_durac_reser"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/buttonAccpReser"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintVertical_bias="0.629" />
 
     <TextView
         android:id="@+id/textResTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="100dp"
         android:text="@string/txt_title_reser"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textResUbi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintHorizontal_bias="0.127"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textResUbi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="120dp"
         android:text="@string/txt_ubic_reser"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/textResDuc"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAccpReser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.147"
+        app:layout_constraintHorizontal_bias="0.119"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -85,12 +65,13 @@
         app:layout_constraintTop_toTopOf="@+id/textResTitle" />
 
     <TextView
-        android:id="@+id/duracion_reserva"
+        android:id="@+id/nombre_biblioteca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textResDuc"
-        app:layout_constraintTop_toTopOf="@+id/textResDuc" />
+        app:layout_constraintStart_toEndOf="@+id/textResUbi"
+        app:layout_constraintTop_toTopOf="@+id/textResUbi" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
