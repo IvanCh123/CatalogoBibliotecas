@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda;
+package cr.ac.ucr.ecci.eseg.catbi;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
