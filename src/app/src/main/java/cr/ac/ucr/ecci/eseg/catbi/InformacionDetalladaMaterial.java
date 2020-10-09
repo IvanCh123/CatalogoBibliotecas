@@ -58,6 +58,12 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
 
     public void confirmarReserva(String id,String biblioteca,String titulo,String user){
         ConfirmarReservaDialogAlert confirmarReservaDialogAlert=new ConfirmarReservaDialogAlert();
+        Bundle bundle = new Bundle();
+        bundle.putString("id",id);
+        bundle.putString("biblio",biblioteca); // set msg here
+        bundle.putString("titulo",titulo);
+        bundle.putString("user",user);
+        confirmarReservaDialogAlert.setArguments(bundle);
         confirmarReservaDialogAlert.show(getSupportFragmentManager(),"Confirmar");
     }
 }
