@@ -21,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText correoUsuario;
     private EditText contrasenaUsuario;
     private Button btnInicioSesion;
+    private ProgressBar barraProgreso;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +31,15 @@ public class LoginActivity extends AppCompatActivity {
         correoUsuario = findViewById(R.id.editTextCorreo);
         contrasenaUsuario = findViewById(R.id.editTextContrasena);
         btnInicioSesion = findViewById(R.id.btnInicioSesion);
+        barraProgreso = findViewById(R.id.progressBar);
+        barraProgreso.setVisibility(View.INVISIBLE);
+
         btnInicioSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String correo = correoUsuario.getText().toString();
                 String password = contrasenaUsuario.getText().toString();
+                barraProgreso.setVisibility(View.VISIBLE);
                 autenticarUsuarios(correo,password,view);
 
             }
