@@ -33,9 +33,10 @@ public class PerfilFragment extends Fragment {
         correoUsuario = (TextView) root.findViewById(R.id.txtCorreo);
         mAuth = FirebaseAuth.getInstance();
         usuarioActual = mAuth.getCurrentUser();
+        String correo = usuarioActual.getEmail();
 
-        nombreUsuario.setText(separarNombreUsuario(usuarioActual.getEmail()));
-        correoUsuario.setText(usuarioActual.getEmail());
+        nombreUsuario.setText(separarNombreUsuario(correo));
+        correoUsuario.setText(correo);
 
         return root;
     }
