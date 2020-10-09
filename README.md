@@ -71,14 +71,17 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 Interacción con base de datos para consultas sobre material de las bibliotecas e interacción con la API de Google Maps para ubicación de las distintas bibliotecas.
 
 ## Prototipos de la aplicación
-![Pagina Principal](https://i.imgur.com/c6li8hb.png)
+![Acceso a Usuarios](https://i.imgur.com/nsg4wmi.png)
 
-![Resultado de búsqueda](https://i.imgur.com/vxXqktH.png =500x600)
-![Información adicional de un resultado](https://i.imgur.com/cVSHpze.png =500x600)
-![Listado de bibliotecas](https://i.imgur.com/IZYWg4p.png =500x600)
-![Vista de la biblioteca desde Google Maps](https://i.imgur.com/n0h9fl0.png =500x600)
+![Perfil de Usuarios](https://i.imgur.com/DKl39G5.png)
+![Pantalla Principal](https://i.imgur.com/AioRO1Q.png)
+![Resultados Búsqueda](https://i.imgur.com/KMoyZ2m.png)
+![Información adicional de un resultado y reserva](https://i.imgur.com/klaUz01.png)
+![Confirmación Reserva](https://i.imgur.com/bbIoaZG.png)
+![Reserva no válida](https://i.imgur.com/d1WPFyu.png)
 
-
+![Listado de bibliotecas](https://i.imgur.com/mqCecA9.png)
+![Vista de la biblioteca desde Google Maps](https://i.imgur.com/NxlSSwW.png)
 
 ## Artefactos de bases de datos
 * Esquema conceptual de la base de datos
