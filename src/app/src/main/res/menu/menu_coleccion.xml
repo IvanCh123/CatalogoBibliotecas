@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/general"
-        android:title="General" />
-    <item android:id="@+id/literaria"
-        android:title="Literaria" />
-    <item android:id="@+id/audiovisual"
-        android:title="Audiovisual" />
-    <item android:id="@+id/educativa"
-        android:title="Educativa" />
+    <group android:id="@+id/collecion">
+        <item android:id="@+id/general"
+            android:title="General" />
+        <item android:id="@+id/literaria"
+            android:title="Literaria" />
+        <item android:id="@+id/audiovisual"
+            android:title="Audiovisual" />
+        <item android:id="@+id/educativa"
+            android:title="Educativa" />
+    </group>
 </menu>

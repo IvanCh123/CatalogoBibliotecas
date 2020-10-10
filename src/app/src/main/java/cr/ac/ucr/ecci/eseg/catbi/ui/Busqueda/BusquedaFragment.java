@@ -3,6 +3,7 @@ package cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
     private BusquedaViewModel busquedaViewModel;
     public final static String MESSAGE_KEY ="palabraKey";
     public final static String CAMPO_KEY ="campoBusquedaKey";
+    public final static String COLECCION_KEY ="coleccionKey";
     private View root = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -44,8 +46,9 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
             public void onClick(View view) {
                 String palabra = editTextTituloFrase.getText().toString(); // Se captura lo que hay en el edit text
                 String campo = txtCampoBusqueda.getText().toString();
+                String coleccion = txtColeccion.getText().toString();
 
-                realizarBusqueda(palabra,campo,view);
+                realizarBusqueda(palabra,campo,coleccion,view);
             }
         });
         btnLimpiar.setOnClickListener(new View.OnClickListener() {
@@ -82,10 +85,21 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
     public boolean onMenuItemClick(MenuItem item) {
         Toast.makeText(getContext(), "Campo de búsqueda seleccionado: " +item.getTitle(), Toast.LENGTH_SHORT).show();
 
-        TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
-        TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
 
-        txtCampoBusqueda.setText(item.getTitle());
+        TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
+        txtColeccion.setText(item.getTitle());
+
+//        int id = item.getGroupId();
+//        String asd = (String) item.getTitle();
+//        int idGroup = R.menu.campo_busqueda;
+//        if(id == idGroup){
+//            TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
+//            txtCampoBusqueda.setText(item.getTitle());
+//
+//        }else if(id == R.menu.menu_coleccion){
+//            TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
+//            txtColeccion.setText(item.getTitle());
+//        }
 
         return false;
     }//
@@ -93,13 +107,14 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
     //  Historia CNQ - 4
     // Tarea ID CNQ -15
     // Gerald Bermúdez y Sebastián Otárola.
-    public void realizarBusqueda(String palabra,String campo, View view){
+    public void realizarBusqueda(String palabra,String campo, String coleccion, View view){
         if (palabra.isEmpty()){
             Toast.makeText(view.getContext(),"Digite una palabra o frase",Toast.LENGTH_SHORT).show();
         }else{
             Intent intent= new Intent(getContext(), ResultadosBusquedaActivity.class); // Envío la palabra a buscar a la actividad de Iván.
             intent.putExtra(CAMPO_KEY,campo);
             intent.putExtra(MESSAGE_KEY,palabra);
+            intent.putExtra(COLECCION_KEY,coleccion);
 
             startActivity(intent);
         }

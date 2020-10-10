@@ -34,6 +34,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
 
     public final static String MESSAGE_KEY ="palabraKey";
     public final static String CAMPO_KEY ="campoBusquedaKey";
+    public final static String COLECCION_KEY ="coleccionKey";
 
     private static final String TAG = "ResultadosBusquedaActivity";
 
@@ -53,23 +54,23 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
                 new RecyclerViewMaterial_Config().setConfig(mRecyclerView, ResultadosBusquedaActivity.this,material,keys,ResultadosBusquedaActivity.this, filtro);
             }
         }, filtro);
-
     }
 
     private String[] getFiltro() {
         Intent intent = getIntent();
-        String palabraClave = intent.getStringExtra(MESSAGE_KEY);
+        String palabraClave = intent.getStringExtra(MESSAGE_KEY).toLowerCase();
         String campoBusqueda = intent.getStringExtra(CAMPO_KEY).toLowerCase();
+        String coleccion = intent.getStringExtra(COLECCION_KEY).toLowerCase();
 
-        palabraClave = StringUtils.stripAccents(palabraClave).toLowerCase();
+        if(campoBusqueda.isEmpty())
+            campoBusqueda = "todo";
+        if(coleccion.isEmpty())
+            coleccion = "general";
 
-        String[] filtro = {};
-        if(!campoBusqueda.isEmpty()){
-            filtro = new String[]{palabraClave, campoBusqueda};
-        }else{
-            filtro = new String[]{palabraClave,"todo"};
-        }
-        return filtro;
+        palabraClave = StringUtils.stripAccents(palabraClave);
+        coleccion = StringUtils.stripAccents(coleccion);
+
+        return new String[]{palabraClave,campoBusqueda,coleccion};
     }
 
     @SuppressLint("LongLogTag")
