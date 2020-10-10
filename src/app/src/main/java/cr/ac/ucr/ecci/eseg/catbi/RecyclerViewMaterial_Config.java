@@ -21,12 +21,12 @@ public class RecyclerViewMaterial_Config {
     private Context mContext;
     private MaterialAdapter mMaterialAdapter;
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<Material> materiales, List<String> keys, OnNoteListener onNoteListener, String filtro){
+    public void setConfig(RecyclerView recyclerView, Context context, List<Material> materiales, List<String> keys, OnNoteListener onNoteListener, String[] filtro){
         mContext = context;
         mMaterialAdapter = new MaterialAdapter(materiales, keys, onNoteListener);
 
         if(mMaterialAdapter.mListaMaterial.size() != 0){
-            Toast.makeText(mContext,"Mostrando resultados para: "+filtro+".", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext,"Mostrando resultados para: "+filtro[0]+".", Toast.LENGTH_LONG).show();
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(mMaterialAdapter);
         }else{
