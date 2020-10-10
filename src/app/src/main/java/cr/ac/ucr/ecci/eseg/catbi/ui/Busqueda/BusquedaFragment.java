@@ -24,12 +24,14 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
 
     private BusquedaViewModel busquedaViewModel;
     public final static String MESSAGE_KEY ="palabraKey";
+    public final static String CAMPO_KEY ="campoBusquedaKey";
+    private View root = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         busquedaViewModel =
                 ViewModelProviders.of(this).get(BusquedaViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_busqueda, container, false);
+        root = inflater.inflate(R.layout.fragment_busqueda, container, false);
 
         final EditText editTextTituloFrase =  (EditText) root.findViewById(R.id.editTextTituloFrase);
         final Button btnBuscar =  (Button) root.findViewById(R.id.btnBuscar);
@@ -66,6 +68,12 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         Toast.makeText(getContext(), "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+
+        TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
+        txtCampoBusqueda.setText(item.getTitle());
+
+        Intent intent= new Intent(getContext(), ResultadosBusquedaActivity.class); // Envío la palabra a buscar a la actividad de Iván.
+        intent.putExtra(CAMPO_KEY,item.getTitle());
         return false;
     }//
 

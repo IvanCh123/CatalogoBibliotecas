@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/mail"
+    <item android:id="@+id/todo"
+        android:title="Todo" />
+    <item android:id="@+id/autor"
         android:title="autor" />
-    <item android:id="@+id/upload"
+    <item android:id="@+id/idioma"
         android:title="idioma"
         app:showAsAction="ifRoom" />
-    <item android:id="@+id/share"
+    <item android:id="@+id/titulo"
         android:title="titulo" />
 </menu>
