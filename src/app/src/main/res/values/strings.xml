@@ -16,4 +16,6 @@
     <string name="txt_ubic_reser">Ubicada en:</string>
     <string name="txt_durac_reser">Ha sido reservada por:</string>
     <string name="txt_button_reser_accep">Aceptar</string>
+    <string name="texto_reserva">Reservar Libro</string>
+
 </resources>
