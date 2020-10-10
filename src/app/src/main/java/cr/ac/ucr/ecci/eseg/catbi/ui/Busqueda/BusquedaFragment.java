@@ -34,6 +34,7 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
         root = inflater.inflate(R.layout.fragment_busqueda, container, false);
 
         final EditText editTextTituloFrase =  (EditText) root.findViewById(R.id.editTextTituloFrase);
+        final TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
         final Button btnBuscar =  (Button) root.findViewById(R.id.btnBuscar);
         final Button btnLimpiar =  (Button) root.findViewById(R.id.btnLimpiar);
 
@@ -41,7 +42,9 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
             @Override
             public void onClick(View view) {
                 String palabra = editTextTituloFrase.getText().toString(); // Se captura lo que hay en el edit text
-                realizarBusqueda(palabra,view);
+                String campo = txtCampoBusqueda.getText().toString();
+
+                realizarBusqueda(palabra,campo,view);
             }
         });
         btnLimpiar.setOnClickListener(new View.OnClickListener() {
@@ -51,7 +54,6 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
             }
         });
 
-        TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
         txtCampoBusqueda.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -68,34 +70,28 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         Toast.makeText(getContext(), "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
-
         TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
         txtCampoBusqueda.setText(item.getTitle());
 
-        Intent intent= new Intent(getContext(), ResultadosBusquedaActivity.class); // Envío la palabra a buscar a la actividad de Iván.
-        intent.putExtra(CAMPO_KEY,item.getTitle());
         return false;
     }//
 
     //  Historia CNQ - 4
     // Tarea ID CNQ -15
     // Gerald Bermúdez y Sebastián Otárola.
-    public void realizarBusqueda(String palabra, View view){
+    public void realizarBusqueda(String palabra,String campo, View view){
         if (palabra.isEmpty()){
             Toast.makeText(view.getContext(),"Digite una palabra o frase",Toast.LENGTH_SHORT).show();
         }else{
             Intent intent= new Intent(getContext(), ResultadosBusquedaActivity.class); // Envío la palabra a buscar a la actividad de Iván.
-
+            intent.putExtra(CAMPO_KEY,campo);
             intent.putExtra(MESSAGE_KEY,palabra);
 
             startActivity(intent);
-
         }
-
     }
 
     public void limpiarBusqueda(EditText campoBusqueda){
         campoBusqueda.setText(""); // Limpio el campo de búsqueda
-
     }
 }
