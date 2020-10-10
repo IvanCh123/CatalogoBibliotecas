@@ -3,6 +3,8 @@ package cr.ac.ucr.ecci.eseg.catbi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -50,7 +52,7 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
             String user=" ";
             @Override
             public void onClick(View v) {
-                Log.v("button","1");
+                //Log.v("button","1");
                 confirmarReserva(id,biblioteca,titulo,user);
             }
         });
@@ -65,5 +67,12 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         bundle.putString("user",user);
         confirmarReservaDialogAlert.setArguments(bundle);
         confirmarReservaDialogAlert.show(getSupportFragmentManager(),"Confirmar");
+       // Context c=getContext();
+        /*Intent intent1 = new Intent(this,RevervaLibros.class);
+        intent1.putExtra("biblio",biblioteca);
+        intent1.putExtra("id",id);
+        intent1.putExtra("titulo",titulo);
+        intent1.putExtra("user",user);
+        this.startActivities(new Intent[]{intent1});*/
     }
 }
