@@ -79,7 +79,11 @@ public class FireBaseDataBaseBiblitecaHelper {
                     Material material = keyNode.getValue(Material.class);
                     material.setID(keyNode.getKey());
 
-                    realizarFiltrado(material, filtro, listaMaterial);
+                    if(filtro[2].equalsIgnoreCase("general")){
+                        realizarFiltradoSinColeccion(material, filtro, listaMaterial);
+                    }else{
+                        realizarFiltradoConColeccion(material, filtro, listaMaterial);
+                    }
                 }
                 materialDataStatus.DataIsLoaded(listaMaterial,keys);
             }
@@ -89,29 +93,67 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
-    private void realizarFiltrado(Material material, String[] filtro, List<Material> listaMaterial) {
+    private void realizarFiltradoConColeccion(Material material, String[] filtro, List<Material> listaMaterial) {
         String titulo = StringUtils.stripAccents(material.getTitulo()).toLowerCase();
         String autor = StringUtils.stripAccents(material.getAutor()).toLowerCase();
         String idioma = StringUtils.stripAccents(material.getIdioma()).toLowerCase();
 
-        switch (filtro[1]){
+        String palabraClave = filtro[0];
+        String campoBusqueda = filtro[1];
+
+        String colecionFiltro = filtro[2];
+        String colecionRecuperada = StringUtils.stripAccents(material.getColeccion()).toLowerCase();
+
+        switch (campoBusqueda){
             case "titulo":
-                if(titulo.contains(filtro[0])){
+                if(titulo.contains(palabraClave) && colecionFiltro.equalsIgnoreCase(colecionRecuperada)){
                     listaMaterial.add(material);
                 }
                 break;
             case "autor":
-                if(autor.contains(filtro[0])){
+                if(autor.contains(palabraClave) && colecionFiltro.equalsIgnoreCase(colecionRecuperada)){
                     listaMaterial.add(material);
                 }
                 break;
             case "idioma":
-                if(idioma.contains(filtro[0])){
+                if(idioma.contains(palabraClave) && colecionFiltro.equalsIgnoreCase(colecionRecuperada)){
                     listaMaterial.add(material);
                 }
                 break;
             case "todo":
-                if(titulo.contains(filtro[0]) || autor.contains(filtro[0]) || idioma.contains(filtro[0])){
+                if((titulo.contains(palabraClave) || autor.contains(palabraClave) || idioma.contains(palabraClave)) && colecionFiltro.equalsIgnoreCase(colecionRecuperada) ){
+                    listaMaterial.add(material);
+                }
+                break;
+        }
+    }
+
+    private void realizarFiltradoSinColeccion(Material material, String[] filtro, List<Material> listaMaterial) {
+        String titulo = StringUtils.stripAccents(material.getTitulo()).toLowerCase();
+        String autor = StringUtils.stripAccents(material.getAutor()).toLowerCase();
+        String idioma = StringUtils.stripAccents(material.getIdioma()).toLowerCase();
+
+        String palabraClave = filtro[0];
+        String campoBusqueda = filtro[1];
+
+        switch (campoBusqueda){
+            case "titulo":
+                if(titulo.contains(palabraClave)){
+                    listaMaterial.add(material);
+                }
+                break;
+            case "autor":
+                if(autor.contains(palabraClave)){
+                    listaMaterial.add(material);
+                }
+                break;
+            case "idioma":
+                if(idioma.contains(palabraClave)){
+                    listaMaterial.add(material);
+                }
+                break;
+            case "todo":
+                if(titulo.contains(palabraClave) || autor.contains(palabraClave) || idioma.contains(palabraClave)){
                     listaMaterial.add(material);
                 }
                 break;
