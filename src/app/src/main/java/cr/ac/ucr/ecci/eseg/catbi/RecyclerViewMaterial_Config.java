@@ -26,7 +26,7 @@ public class RecyclerViewMaterial_Config {
         mMaterialAdapter = new MaterialAdapter(materiales, keys, onNoteListener);
 
         if(mMaterialAdapter.mListaMaterial.size() != 0){
-            Toast.makeText(mContext,"Mostrando resultados para: "+filtro[0]+".", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext,"Mostrando resultados para: "+filtro[0]+".\n Buscando en: "+filtro[1], Toast.LENGTH_LONG).show();
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(mMaterialAdapter);
         }else{

@@ -69,7 +69,7 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
-        Toast.makeText(getContext(), "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Campo de búsqueda seleccionado: " +item.getTitle(), Toast.LENGTH_SHORT).show();
         TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
         txtCampoBusqueda.setText(item.getTitle());
 
