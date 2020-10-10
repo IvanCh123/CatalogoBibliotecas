@@ -35,6 +35,7 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
 
         final EditText editTextTituloFrase =  (EditText) root.findViewById(R.id.editTextTituloFrase);
         final TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
+        final TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
         final Button btnBuscar =  (Button) root.findViewById(R.id.btnBuscar);
         final Button btnLimpiar =  (Button) root.findViewById(R.id.btnLimpiar);
 
@@ -64,13 +65,26 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
             }
         });
 
+        txtColeccion.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(getContext(), v);
+                popupMenu.setOnMenuItemClickListener(BusquedaFragment.this);
+                popupMenu.inflate(R.menu.menu_coleccion);
+                popupMenu.show();
+            }
+        });
+
         return root;
     }
 
     @Override
     public boolean onMenuItemClick(MenuItem item) {
         Toast.makeText(getContext(), "Campo de búsqueda seleccionado: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+
         TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
+        TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
+
         txtCampoBusqueda.setText(item.getTitle());
 
         return false;
