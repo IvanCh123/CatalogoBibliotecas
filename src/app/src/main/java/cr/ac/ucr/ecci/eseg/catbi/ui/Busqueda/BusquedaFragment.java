@@ -3,20 +3,24 @@ package cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
 
-public class BusquedaFragment extends Fragment {
+public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
 
     private BusquedaViewModel busquedaViewModel;
     public final static String MESSAGE_KEY ="palabraKey";
@@ -45,8 +49,25 @@ public class BusquedaFragment extends Fragment {
             }
         });
 
+        TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
+        txtCampoBusqueda.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                PopupMenu popupMenu = new PopupMenu(getContext(), v);
+                popupMenu.setOnMenuItemClickListener(BusquedaFragment.this);
+                popupMenu.inflate(R.menu.campo_busqueda);
+                popupMenu.show();
+            }
+        });
+
         return root;
     }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        Toast.makeText(getContext(), "Selected Item: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+        return false;
+    }//
 
     //  Historia CNQ - 4
     // Tarea ID CNQ -15
