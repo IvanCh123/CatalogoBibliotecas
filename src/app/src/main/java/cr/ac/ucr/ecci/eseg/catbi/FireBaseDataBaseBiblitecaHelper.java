@@ -49,7 +49,7 @@ public class FireBaseDataBaseBiblitecaHelper {
         database=FirebaseDatabase.getInstance();
         referenciaBiblioteca= database.getReference("Bibliotecas");
         referenciaMaterial= database.getReference("Material");
-        referenciaReservacion=database.getReference("Reservacion");
+        referenciaReservacion=database.getReference("Usuario_Material");
         filtro = "";
     }
 
@@ -119,7 +119,7 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
-    public void addReserva(ReservaMaterial reserva,final ReservaDataStatus ReservadataStatus){
+    /*public void addReserva(ReservaMaterial reserva,final ReservaDataStatus ReservadataStatus){
         String key= referenciaReservacion.push().getKey();
         referenciaReservacion.child(key).setValue(reserva)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -130,5 +130,9 @@ public class FireBaseDataBaseBiblitecaHelper {
                 }
         );
 
+    }*/
+
+    public void addReserva(ReservaMaterial r){
+        referenciaReservacion.child("2").setValue(r);
     }
 }

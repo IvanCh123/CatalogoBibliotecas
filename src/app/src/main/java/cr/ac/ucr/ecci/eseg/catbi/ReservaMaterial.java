@@ -3,41 +3,40 @@ package cr.ac.ucr.ecci.eseg.catbi;
 import java.util.Date;
 
 public class ReservaMaterial {
-    private String tituloMaterial;
-    private int idMaterial;
-    private Date fechaReserva;
-
+   private int diasLimite;
+    private int usuario;
+    private int materialId;
 
     public ReservaMaterial() {
     }
 
-    public ReservaMaterial(String tituloMaterial, int idMaterial, Date fechaReserva) {
-        this.tituloMaterial = tituloMaterial;
-        this.idMaterial = idMaterial;
-        this.fechaReserva = fechaReserva;
+    public ReservaMaterial(int diasLimite, int usuario, int materialId) {
+        this.diasLimite = diasLimite;
+        this.usuario = usuario;
+        this.materialId = materialId;
     }
 
-    public String getTituloMaterial() {
-        return tituloMaterial;
+    public int getDiasLimite() {
+        return diasLimite;
     }
 
-    public void setTituloMaterial(String tituloMaterial) {
-        this.tituloMaterial = tituloMaterial;
+    public void setDiasLimite(int diasLimite) {
+        this.diasLimite = diasLimite;
     }
 
-    public int getIdMaterial() {
-        return idMaterial;
+    public int getUsuario() {
+        return usuario;
     }
 
-    public void setIdMaterial(int idMaterial) {
-        this.idMaterial = idMaterial;
+    public void setUsuario(int usuario) {
+        this.usuario = usuario;
     }
 
-    public Date getFechaReserva() {
-        return fechaReserva;
+    public int getMaterialId() {
+        return materialId;
     }
 
-    public void setFechaReserva(Date fechaReserva) {
-        this.fechaReserva = fechaReserva;
+    public void setMaterialId(int materialId) {
+        this.materialId = materialId;
     }
 }

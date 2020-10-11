@@ -2,11 +2,14 @@ package cr.ac.ucr.ecci.eseg.catbi;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.List;
 
 public class RevervaLibros extends AppCompatActivity {
     private String biblio;
@@ -43,7 +46,7 @@ public class RevervaLibros extends AppCompatActivity {
             btnReserva.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                     agregarReserva();
                 }
             });
         }else{
@@ -78,4 +81,31 @@ public class RevervaLibros extends AppCompatActivity {
         return valido;
     }
 
+
+    private void agregarReserva(){
+        ReservaMaterial reservaMaterial=new ReservaMaterial(1,2,3);
+        new FireBaseDataBaseBiblitecaHelper().addReserva(reservaMaterial);
+        /*new FireBaseDataBaseBiblitecaHelper().readReserva(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
+            @Override
+            public void dataLoaded() {
+                //Log.d("Tq", String.valueOf(listaBibliotecas.size()));
+                new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto,listaBibliotecas,keys);
+            }
+
+            @Override
+            public void dataInserted() {
+
+            }
+
+            @Override
+            public void dataDeleted() {
+
+            }
+
+            @Override
+            public void dataUpdated() {
+
+            }
+        });*/
+    }
 }
