@@ -51,24 +51,8 @@ public class PerfilFragment extends Fragment {
         usuarioActual = mAuth.getCurrentUser();
         String correo = usuarioActual.getEmail();
         String userID = usuarioActual.getUid();
-        /*mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBiblitecaHelper();
-        mFireBaseDataBaseBibliotecaHelper.readUsuarios(new FireBaseDataBaseBiblitecaHelper.UsuariosDataStatus(){
-            @Override
-            public void DataIsLoaded(Usuarios usuario) {
-                fillText(usuario);
-            }
-        },correo);*/
-        readUsuarios(userID);
+        readUsuarios(correo);
         return root;
-    }
-
-    public String separarNombreUsuario(String correo){
-        String nombreUsuario = "";
-        if (correo != null) {
-            int posArroba = correo.indexOf("@");
-            nombreUsuario = correo.substring(0, posArroba);
-        }
-        return nombreUsuario;
     }
 
     public void fillText(Usuarios usuarioP){
@@ -76,19 +60,18 @@ public class PerfilFragment extends Fragment {
         correoUsuario.setText(usuarioP.getCorreo());
     }
 
-    public void readUsuarios(final String userIdP){
+    public void readUsuarios(final String correoP){
         database=FirebaseDatabase.getInstance();
         referenciaUsuarios= database.getReference("Usuarios");
-        Query query = referenciaUsuarios.orderByChild("userId").equalTo(userIdP);
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
+        referenciaUsuarios.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    String nombreFromDB = dataSnapshot.child(userIdP).child("nombre").getValue(String.class);
-                    String correoFromDB = dataSnapshot.child(userIdP).child("correo").getValue(String.class);
-                    usuario = new Usuarios(correoFromDB,nombreFromDB);
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    if(ds.child("correo").getValue().equals(correoP)){
+                        nombreUsuario.setText(ds.child("nombre").getValue(String.class));
+                        correoUsuario.setText(ds.child("correo").getValue(String.class));
+                    }
                 }
-                fillText(usuario);
             }
 
             @Override
