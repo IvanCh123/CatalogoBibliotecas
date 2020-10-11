@@ -97,26 +97,19 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
-    public void readUsuarios(final UsuariosDataStatus dataStatus, final String correo){
-        Query query = referenciaUsuarios.orderByChild("correo").equalTo(correo);
+    public void readUsuarios(final UsuariosDataStatus userDataStatus, final String correoP){
         referenciaUsuarios.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    String nombreFromDB = dataSnapshot.child(correo).child("nombre").getValue(String.class);
-                    String correoFromDB = dataSnapshot.child(correo).child("correo").getValue(String.class);
-                    usuario = new Usuarios(correoFromDB,nombreFromDB);
-                }
-                /*
-                usuario = null;
-                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
-                    Usuarios usuarioBase= keyNode.getValue(Usuarios.class);
-                    if(usuarioBase.getCorreo().equals(correo)){
-                        usuario = usuarioBase;
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    if(ds.child("correo").getValue().equals(correoP)){
+                        String nombreUsuarioFromDB = ds.child("nombre").getValue(String.class);
+                        String correoFromDB = ds.child("correo").getValue(String.class);
+                        usuario = new Usuarios(correoFromDB, nombreUsuarioFromDB);
+                        userDataStatus.DataIsLoaded(usuario);
                         break;
                     }
-                }*/
-                dataStatus.DataIsLoaded(usuario);
+                }
             }
 
             @Override
@@ -126,7 +119,4 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
-    public Usuarios getUsuario() {
-        return usuario;
-    }
 }

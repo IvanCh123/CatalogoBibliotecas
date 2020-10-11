@@ -35,9 +35,6 @@ public class PerfilFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseUser usuarioActual;
     private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBibliotecaHelper;
-    private FirebaseDatabase database;
-    private DatabaseReference referenciaUsuarios;
-    private Usuarios usuario;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -51,34 +48,19 @@ public class PerfilFragment extends Fragment {
         usuarioActual = mAuth.getCurrentUser();
         String correo = usuarioActual.getEmail();
         String userID = usuarioActual.getUid();
-        readUsuarios(correo);
+        mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBiblitecaHelper();
+        mFireBaseDataBaseBibliotecaHelper.readUsuarios(new FireBaseDataBaseBiblitecaHelper.UsuariosDataStatus(){
+            @Override
+            public void DataIsLoaded(Usuarios usuarioP) {
+                fillText(usuarioP);
+            }
+        },correo);
         return root;
     }
 
     public void fillText(Usuarios usuarioP){
         nombreUsuario.setText(usuarioP.getNombre());
         correoUsuario.setText(usuarioP.getCorreo());
-    }
-
-    public void readUsuarios(final String correoP){
-        database=FirebaseDatabase.getInstance();
-        referenciaUsuarios= database.getReference("Usuarios");
-        referenciaUsuarios.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    if(ds.child("correo").getValue().equals(correoP)){
-                        nombreUsuario.setText(ds.child("nombre").getValue(String.class));
-                        correoUsuario.setText(ds.child("correo").getValue(String.class));
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
     }
 
 }
