@@ -39,14 +39,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String correo = correoUsuario.getText().toString();
                 String password = contrasenaUsuario.getText().toString();
-                barraProgreso.setVisibility(View.VISIBLE);
                 autenticarUsuarios(correo,password,view);
 
             }
         });
     }
 
-    public void autenticarUsuarios (String correo, String password, View view){
+    public void autenticarUsuarios (String correo, String password, final View view){
         if (correo.isEmpty() || password.isEmpty()){
             Toast.makeText(LoginActivity.this,"Por favor digite un correo y una contraseña",Toast.LENGTH_SHORT).show();
         } else {
@@ -55,6 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        barraProgreso.setVisibility(view.VISIBLE);
                     }else {
                         Toast.makeText(LoginActivity.this,"Credenciales inválidas",Toast.LENGTH_SHORT).show();
                     }
