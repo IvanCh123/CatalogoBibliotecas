@@ -50,21 +50,25 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
             String biblioteca=materialRecibido.getBiblioteca();
             String titulo=materialRecibido.getTitulo();
             String user=" ";
+            String cant=materialRecibido.getCantidad();
+
+
             @Override
             public void onClick(View v) {
                 //Log.v("button","1");
-                confirmarReserva(id,biblioteca,titulo,user);
+                confirmarReserva(id,biblioteca,titulo,user,cant);
             }
         });
     }
 
-    public void confirmarReserva(String id,String biblioteca,String titulo,String user){
+    public void confirmarReserva(String id,String biblioteca,String titulo,String user,String cant){
         ConfirmarReservaDialogAlert confirmarReservaDialogAlert=new ConfirmarReservaDialogAlert();
         Bundle bundle = new Bundle();
         bundle.putString("id",id);
         bundle.putString("biblio",biblioteca); // set msg here
         bundle.putString("titulo",titulo);
         bundle.putString("user",user);
+        bundle.putString("cant",cant);
         confirmarReservaDialogAlert.setArguments(bundle);
         confirmarReservaDialogAlert.show(getSupportFragmentManager(),"Confirmar");
        // Context c=getContext();

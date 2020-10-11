@@ -13,6 +13,8 @@ public class RevervaLibros extends AppCompatActivity {
     private String titulo;
     private String id;
     private String user;
+    private String cant;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,24 +27,55 @@ public class RevervaLibros extends AppCompatActivity {
         titulo=intent.getStringExtra("titulo");
         id=intent.getStringExtra("id");
         user=intent.getStringExtra("user");
+        cant=intent.getStringExtra("cant");
 
-        setContentView(R.layout.reserva_posible);
+        boolean v=validadorPrestamo(cant);
+        if(v){
+            setContentView(R.layout.reserva_posible);
+            TextView textViewNombreLibro=findViewById(R.id.nombre_libro);
+            TextView textViewNombreBiblio=findViewById(R.id.nombre_biblioteca);
+            TextView textViewNombreDuracion=findViewById(R.id.duracion_reserva);
+            textViewNombreLibro.setText(titulo);
+            textViewNombreBiblio.setText(biblio);
+            textViewNombreDuracion.setText("15 dias");
 
-        TextView textViewNombreLibro=findViewById(R.id.nombre_libro);
-        TextView textViewNombreBiblio=findViewById(R.id.nombre_biblioteca);
-        TextView textViewNombreDuracion=findViewById(R.id.duracion_reserva);
-        textViewNombreLibro.setText(titulo);
-        textViewNombreBiblio.setText(biblio);
-        textViewNombreDuracion.setText("15 dias");
+            final Button btnReserva= (Button) findViewById(R.id.buttonAccpReser);
+            btnReserva.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        final Button btnReserva= (Button) findViewById(R.id.buttonAccpReser);
-        btnReserva.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                }
+            });
+        }else{
+            setContentView(R.layout.reserva_no_posible);
+            TextView textViewNombreLibro=findViewById(R.id.nombre_libro);
+            TextView textViewNombreBiblio=findViewById(R.id.nombre_biblioteca);
+            textViewNombreLibro.setText(titulo);
+            textViewNombreBiblio.setText(biblio);
+            final Button btnReserva= (Button) findViewById(R.id.buttonAccpReser);
+            btnReserva.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
+                }
+            });
+        }
+
+
+    }
+
+    private boolean validadorPrestamo(String cant){
+        boolean valido;
+        try{
+            if(Integer.parseInt(cant)>0){
+                valido=true;
+            }else{
+                valido=false;
             }
-        });
-
+        }catch(NumberFormatException n){
+            valido=false;
+        }
+        return valido;
     }
 
 }

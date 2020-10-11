@@ -23,6 +23,7 @@ public class ConfirmarReservaDialogAlert extends AppCompatDialogFragment {
         final String id= getArguments().getString("id");
         final String titu= getArguments().getString("titulo");
         final String user= getArguments().getString("user");
+        final String cant= getArguments().getString("cant");
         //final String finalB =bilio+" " +titu ;
         alterReserva.setTitle("¿Desea reservar este libro?")
                 .setMessage("Presione si para continuar el proceso de reserva")
@@ -37,6 +38,7 @@ public class ConfirmarReservaDialogAlert extends AppCompatDialogFragment {
                         intent1.putExtra("id",id);
                         intent1.putExtra("titulo",titu);
                         intent1.putExtra("user",user);
+                        intent1.putExtra("cant",cant);
                         c.startActivity(intent1);
                         //Toast.makeText(getActivity(), finalB,Toast.LENGTH_SHORT).show();
                     }

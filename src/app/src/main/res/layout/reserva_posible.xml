@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,6 +11,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toEndOf="@+id/textResUbi"
         app:layout_constraintTop_toTopOf="@+id/textResUbi" />
 
@@ -22,22 +22,22 @@
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="@string/txt_button_reser_accep" />
 
     <TextView
         android:id="@+id/text_reserva_existosa"
-        android:layout_width="176dp"
-        android:layout_height="121dp"
+        android:layout_width="150dp"
+        android:layout_height="53dp"
         android:text="@string/txt_reserva_exi"
-        android:textSize="30sp"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textResTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.481" />
+        app:layout_constraintVertical_bias="0.861" />
 
     <TextView
         android:id="@+id/textResDuc"
@@ -48,26 +48,26 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/buttonAccpReser"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.203"
+        app:layout_constraintHorizontal_bias="0.162"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textResTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="84dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/txt_title_reser"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textResUbi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textResUbi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
+        android:layout_marginBottom="56dp"
         android:text="@string/txt_ubic_reser"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textResDuc"
@@ -81,6 +81,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.396"
         app:layout_constraintStart_toEndOf="@+id/textResTitle"
         app:layout_constraintTop_toTopOf="@+id/textResTitle" />
 
@@ -90,6 +91,7 @@
         android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toEndOf="@+id/textResDuc"
         app:layout_constraintTop_toTopOf="@+id/textResDuc" />
 
