@@ -3,6 +3,8 @@ package cr.ac.ucr.ecci.eseg.catbi;
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -19,6 +21,9 @@ public class FireBaseDataBaseBiblitecaHelper {
     private DatabaseReference referenciaBiblioteca;
     private DatabaseReference referenciaMaterial;
     private DatabaseReference referenciaReservacion;
+    private FirebaseAuth mAuth;
+    FirebaseUser user;
+
 
     private String filtro;
     private List<ListarBibliotecas> listaBibliotecas= new ArrayList<>();
@@ -51,6 +56,8 @@ public class FireBaseDataBaseBiblitecaHelper {
         referenciaMaterial= database.getReference("Material");
         referenciaReservacion=database.getReference("Usuario_Material");
         filtro = "";
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
     }
 
     public void readBibliotecas(final DataStatus dataStatus){
@@ -133,6 +140,28 @@ public class FireBaseDataBaseBiblitecaHelper {
     }*/
 
     public void addReserva(ReservaMaterial r){
-        referenciaReservacion.child("2").setValue(r);
+        final int[] cant = new int[1];
+        int cant2;
+        referenciaReservacion.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                cant[0] = (int) dataSnapshot.getChildrenCount();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        cant2=cant[0];
+        
+
+        try{
+            r.setCorreoUsuario(user.getEmail());
+        }catch (Exception e){
+            r.setCorreoUsuario("DESCONOCIDO");
+        }
+
+        referenciaReservacion.child(String.valueOf(cant2)).setValue(r);
     }
 }
