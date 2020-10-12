@@ -71,30 +71,30 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 Interacción con base de datos para consultas sobre material de las bibliotecas e interacción con la API de Google Maps para ubicación de las distintas bibliotecas.
 
 ## Prototipos de la aplicación
-![Acceso a Usuarios](https://i.imgur.com/nsg4wmi.png)
+![Acceso a Usuarios](./img/Prototipos/AccesoUsuarios.PNG)
 
-![Perfil de Usuarios](https://i.imgur.com/DKl39G5.png)
-![Pantalla Principal](https://i.imgur.com/AioRO1Q.png)
-![Resultados Búsqueda](https://i.imgur.com/KMoyZ2m.png)
-![Información adicional de un resultado y reserva](https://i.imgur.com/klaUz01.png)
-![Confirmación Reserva](https://i.imgur.com/bbIoaZG.png)
-![Reserva no válida](https://i.imgur.com/d1WPFyu.png)
+![Perfil de Usuarios](./img/Prototipos/PerfilUsuarios.PNG)
+![Pantalla Principal](./img/Prototipos/PantallaPrincipal.png)
+![Resultados Búsqueda](./img/Prototipos/ResultadosBusqueda.png)
+![Información adicional de un resultado y reserva](./img/Prototipos/DetallesAdicionalesYReserva.PNG)
+![Confirmación Reserva](./img/Prototipos/ConfimacionReserva.PNG)
+![Reserva no válida](./img/Prototipos/ReservaNoValida.PNG)
 
-![Listado de bibliotecas](https://i.imgur.com/mqCecA9.png)
-![Vista de la biblioteca desde Google Maps](https://i.imgur.com/NxlSSwW.png)
+![Listado de bibliotecas](./img/Prototipos/UbicacionBibliotecas.PNG)
+![Vista de la biblioteca desde Google Maps](./img/Prototipos/MapaBiblioteca.png)
 
 ## Artefactos de bases de datos
 * Esquema conceptual de la base de datos
 
-![](https://i.imgur.com/38cmeFh.png)
+![](./img/ArtefactosBasesDatos/DiagramaERSprint2.png)
 
 
 * Cualquier otro artefacto de la base de datos que consideren necesario
 * Mapeo de la base de datos
-![](https://i.imgur.com/ZLhoKk4.png)
+![](./img/ArtefactosBasesDatos/MapeoERSprint2.png)
 
 * Estado actual de la base de datos
-![](https://i.imgur.com/p2VLEg9.png)
+![](./img/ArtefactosBasesDatos/BDActual.PNG)
  
 
 
@@ -131,9 +131,9 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 
 * **Definición de listo**
     Para que una historia se considere como lista tiene que estar en master, ser validada por los miembros del equipo y cumplir con los siguientes criterios de aceptación correspondientes a cada una de las historias de usuario:
-    * CNQ-35 Acceso a Usuarios: Como usuario quiero acceder a mi cuenta de la aplicación con el fin de aprovechar mis privilegios dentro de esta.
-    * CNQ-34 Perfil de usuarios: Como usuario quiero tener un perfil en donde tengo información personal y mis reservaciones con el fin de tener conocimiento sobre las mismas.
-    * CNQ-36 Reservación de material: Como usuario quiero reservar el material encontrado con el fin de  asegurar el material.
-    * CNQ-37 Confirmación de reservación de material: Como usuario quiero tener una confirmación del material que estoy reservando con el fin de tener seguridad de la presencia de un material.
-    * CNQ-6 Búsqueda por colección: Como usuario quiero definir la colección en donde quiero realizar la búsqueda con el fin de obtener solamente resultados de una colección específica.
-    * CNQ-5 Campo de búsqueda limitado: Como usuario quiero definir un campo específico de búsqueda con el fin de limitar el área de búsqueda.
+    * CNQ-35 Acceso a Usuarios: El usuario ingresa a la aplicación con el correo institucional y la contraseña de la UCR.
+    * CNQ-34 Perfil de usuarios: El usuario puede ver su información personal nombre y correo. Además de información de las reservaciones hechas.
+    * CNQ-36 Reservación de material: Si el usuario consulta un material puede reservarlo.
+    * CNQ-37 Confirmación de reservación de material: Al reservar un material el usuario tiene retroalimentación de que ha sido reservado.
+    * CNQ-6 Búsqueda por colección: El usuario tiene la opción de definir colecciones de búsqueda. Estas son colección literaria, audiovisual, educativa y general.
+    * CNQ-5 Campo de búsqueda limitado: El usuario puede limitar el área de búsqueda por titulo, autor, idioma o todo los campos.
