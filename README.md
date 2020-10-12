@@ -86,13 +86,17 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 ## Artefactos de bases de datos
 * Esquema conceptual de la base de datos
 
-![](https://i.imgur.com/iWEpoLQ.png)
+![](https://i.imgur.com/38cmeFh.png)
+
 
 * Cualquier otro artefacto de la base de datos que consideren necesario
+* Mapeo de la base de datos
+![](https://i.imgur.com/ZLhoKk4.png)
 
-![](https://i.imgur.com/yJAoEif.png)
-* Estado actual de la base de datos 
-![](https://i.imgur.com/hZ0lmTn.png)
+* Estado actual de la base de datos
+![](https://i.imgur.com/p2VLEg9.png)
+ 
+
 
 
 
