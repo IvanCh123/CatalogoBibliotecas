@@ -44,6 +44,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onResume(){
+        super.onResume();
+        barraProgreso.setVisibility(View.INVISIBLE);
+    }
+
 
     public void autenticarUsuarios (String correo, String password, final View view){
         if (correo.isEmpty() || password.isEmpty()){
