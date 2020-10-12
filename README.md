@@ -73,28 +73,28 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 ## Prototipos de la aplicación
 ![Acceso a Usuarios](./img/Prototipos/AccesoUsuarios.PNG)
 
-![Perfil de Usuarios](https://i.imgur.com/DKl39G5.png)
-![Pantalla Principal](https://i.imgur.com/AioRO1Q.png)
-![Resultados Búsqueda](https://i.imgur.com/KMoyZ2m.png)
-![Información adicional de un resultado y reserva](https://i.imgur.com/klaUz01.png)
-![Confirmación Reserva](https://i.imgur.com/bbIoaZG.png)
-![Reserva no válida](https://i.imgur.com/d1WPFyu.png)
+![Perfil de Usuarios](./img/Prototipos/PerfilUsuarios.PNG)
+![Pantalla Principal](./img/Prototipos/PantallaPrincipal.png)
+![Resultados Búsqueda](./img/Prototipos/ResultadosBusqueda.png)
+![Información adicional de un resultado y reserva](./img/Prototipos/DetallesAdicionalesYReserva.PNG)
+![Confirmación Reserva](./img/Prototipos/ConfimacionReserva.PNG)
+![Reserva no válida](./img/Prototipos/ReservaNoValida.PNG)
 
-![Listado de bibliotecas](https://i.imgur.com/mqCecA9.png)
-![Vista de la biblioteca desde Google Maps](https://i.imgur.com/NxlSSwW.png)
+![Listado de bibliotecas](./img/Prototipos/UbicacionBibliotecas.PNG)
+![Vista de la biblioteca desde Google Maps](./img/Prototipos/MapaBiblioteca.png)
 
 ## Artefactos de bases de datos
 * Esquema conceptual de la base de datos
 
-![](https://i.imgur.com/38cmeFh.png)
+![](./img/ArtefactosBasesDatos/DiagramaERSprint2.png)
 
 
 * Cualquier otro artefacto de la base de datos que consideren necesario
 * Mapeo de la base de datos
-![](https://i.imgur.com/ZLhoKk4.png)
+![](./img/ArtefactosBasesDatos/MapeoERSprint2.png)
 
 * Estado actual de la base de datos
-![](https://i.imgur.com/p2VLEg9.png)
+![](./img/ArtefactosBasesDatos/BDActual.PNG)
  
 
 
