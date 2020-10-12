@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <group android:id="@+id/collecion">
+    <group android:id="@+id/coleccion">
         <item android:id="@+id/general"
             android:title="General" />
         <item android:id="@+id/literaria"

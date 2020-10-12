@@ -21,8 +21,10 @@ import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
 
-public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemClickListener {
+public class BusquedaFragment extends Fragment{
 
+    private CampoBusquedaOnClick campoBusquedaOnClick;
+    private ColeccionOnClick coleccionOnClick;
     private BusquedaViewModel busquedaViewModel;
     public final static String MESSAGE_KEY ="palabraKey";
     public final static String CAMPO_KEY ="campoBusquedaKey";
@@ -40,6 +42,9 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
         final TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
         final Button btnBuscar =  (Button) root.findViewById(R.id.btnBuscar);
         final Button btnLimpiar =  (Button) root.findViewById(R.id.btnLimpiar);
+
+        campoBusquedaOnClick = new CampoBusquedaOnClick();
+        coleccionOnClick = new ColeccionOnClick();
 
         btnBuscar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,7 +67,7 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(getContext(), v);
-                popupMenu.setOnMenuItemClickListener(BusquedaFragment.this);
+                popupMenu.setOnMenuItemClickListener(campoBusquedaOnClick);
                 popupMenu.inflate(R.menu.campo_busqueda);
                 popupMenu.show();
             }
@@ -72,7 +77,7 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(getContext(), v);
-                popupMenu.setOnMenuItemClickListener(BusquedaFragment.this);
+                popupMenu.setOnMenuItemClickListener(coleccionOnClick);
                 popupMenu.inflate(R.menu.menu_coleccion);
                 popupMenu.show();
             }
@@ -81,28 +86,29 @@ public class BusquedaFragment extends Fragment implements PopupMenu.OnMenuItemCl
         return root;
     }
 
-    @Override
-    public boolean onMenuItemClick(MenuItem item) {
-        Toast.makeText(getContext(), "Campo de búsqueda seleccionado: " +item.getTitle(), Toast.LENGTH_SHORT).show();
+    private class  CampoBusquedaOnClick implements PopupMenu.OnMenuItemClickListener{
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            Toast.makeText(getContext(), "Campo de búsqueda seleccionado: " +item.getTitle(), Toast.LENGTH_SHORT).show();
 
+            TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
+            txtCampoBusqueda.setText(item.getTitle());
 
-        TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
-        txtColeccion.setText(item.getTitle());
+            return false;
+        }
+    }
 
-//        int id = item.getGroupId();
-//        String asd = (String) item.getTitle();
-//        int idGroup = R.menu.campo_busqueda;
-//        if(id == idGroup){
-//            TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
-//            txtCampoBusqueda.setText(item.getTitle());
-//
-//        }else if(id == R.menu.menu_coleccion){
-//            TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
-//            txtColeccion.setText(item.getTitle());
-//        }
+    private class  ColeccionOnClick implements PopupMenu.OnMenuItemClickListener{
+        @Override
+        public boolean onMenuItemClick(MenuItem item) {
+            Toast.makeText(getContext(), "Colección seleccionada: " +item.getTitle(), Toast.LENGTH_SHORT).show();
 
-        return false;
-    }//
+            TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
+            txtColeccion.setText(item.getTitle());
+
+            return false;
+        }
+    }
 
     //  Historia CNQ - 4
     // Tarea ID CNQ -15
