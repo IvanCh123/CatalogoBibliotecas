@@ -1,10 +1,10 @@
 # Universidad de Costa Rica
 
-## Conceptualización Sprint 1
+## Conceptualización Sprint 2
 
 ## Catálogo de Bibliotecas UCR (CATBI)
 
-## Versión 1.0
+## Versión 1.1
 
 
 ---
@@ -51,14 +51,17 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 * **Requerimientos funcionales**
 
 
-| Sprint 1 |   |
+| Sprint 2 |   |
 | -------- |----------------|
 | Codigo   |   Nombre  |
-| CNQ-4    |          [Búsqueda por palabra](http://10.1.4.22:8080/secure/RapidBoard.jspa?rapidView=36&projectKey=CNQ&view=planning&selectedIssue=CNQ-4)          |
-| CNQ-8    |         [Resultados de búsqueda](http://10.1.4.22:8080/secure/RapidBoard.jspa?rapidView=36&projectKey=CNQ&view=planning&selectedIssue=CNQ-8)         |
-| CNQ-9    | [Selección de resultados de la búsqueda](http://10.1.4.22:8080/secure/RapidBoard.jspa?rapidView=36&projectKey=CNQ&view=planning&selectedIssue=CNQ-9) |
-| CNQ-10   |       [Ubicación de bibliotecas](http://10.1.4.22:8080/secure/RapidBoard.jspa?rapidView=36&projectKey=CNQ&view=planning&selectedIssue=CNQ-10)        |
-| CNQ-7    |            [Limpiar Búsqueda](http://10.1.4.22:8080/secure/RapidBoard.jspa?rapidView=36&projectKey=CNQ&view=planning&selectedIssue=CNQ-7)            |
+| CNQ-35    |            [Acceso a usuarios](http://10.1.4.22:8080/browse/CNQ-35)|
+| CNQ-34    |          [Perfil de usuarios](http://10.1.4.22:8080/browse/CNQ-34)          |
+| CNQ-36    |         [Reservación de material](http://10.1.4.22:8080/browse/CNQ-36)         |
+| CNQ-37    |            [Confirmación de reserva de material](http://10.1.4.22:8080/browse/CNQ-37) |
+| CNQ-6    | [Búsqueda por colección](http://10.1.4.22:8080/browse/CNQ-6) |
+| CNQ- 5  |       [Campo de búsqueda limitado](http://10.1.4.22:8080/browse/CNQ-5)        |
+
+
  
 
 * **Requerimientos no funcionales que debe cumplir toda la aplicación web**
@@ -68,25 +71,32 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 Interacción con base de datos para consultas sobre material de las bibliotecas e interacción con la API de Google Maps para ubicación de las distintas bibliotecas.
 
 ## Prototipos de la aplicación
-![Pagina Principal](https://i.imgur.com/c6li8hb.png)
+![Acceso a Usuarios](./img/Prototipos/AccesoUsuarios.PNG)
 
-![Resultado de búsqueda](https://i.imgur.com/vxXqktH.png =500x600)
-![Información adicional de un resultado](https://i.imgur.com/cVSHpze.png =500x600)
-![Listado de bibliotecas](https://i.imgur.com/IZYWg4p.png =500x600)
-![Vista de la biblioteca desde Google Maps](https://i.imgur.com/n0h9fl0.png =500x600)
+![Perfil de Usuarios](./img/Prototipos/PerfilUsuarios.PNG)
+![Pantalla Principal](./img/Prototipos/PantallaPrincipal.png)
+![Resultados Búsqueda](./img/Prototipos/ResultadosBusqueda.png)
+![Información adicional de un resultado y reserva](./img/Prototipos/DetallesAdicionalesYReserva.PNG)
+![Confirmación Reserva](./img/Prototipos/ConfimacionReserva.PNG)
+![Reserva no válida](./img/Prototipos/ReservaNoValida.PNG)
 
-
+![Listado de bibliotecas](./img/Prototipos/UbicacionBibliotecas.PNG)
+![Vista de la biblioteca desde Google Maps](./img/Prototipos/MapaBiblioteca.png)
 
 ## Artefactos de bases de datos
 * Esquema conceptual de la base de datos
 
-![](https://i.imgur.com/iWEpoLQ.png)
+![](./img/ArtefactosBasesDatos/DiagramaERSprint2.png)
+
 
 * Cualquier otro artefacto de la base de datos que consideren necesario
+* Mapeo de la base de datos
+![](./img/ArtefactosBasesDatos/MapeoERSprint2.png)
 
-![](https://i.imgur.com/yJAoEif.png)
-* Estado actual de la base de datos 
-![](https://i.imgur.com/hZ0lmTn.png)
+* Estado actual de la base de datos
+![](./img/ArtefactosBasesDatos/BDActual.PNG)
+ 
+
 
 
 
@@ -109,20 +119,21 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
     * Al clonar el proyecto para correrlo se debe abrir la carpeta src.
     * Estrategia de branches: La estrategia que se va a utilizar es la de trabajar por módulos y funcionalidades, donde habría una rama de módulo que representa un subgrupo grande de la aplicación, que para nuestro caso va a representar una épica, y a su vez este módulo generaría más ramas, las cuales representan funcionalidades ya más específicas que se van a desarrollar y que pueden ser desarrolladas por un solo desarrollador usualmente. Además se utilizaría la rama master para solo tener versiones estables del proyecto.
     * Para esta iteración las ramas módulo son:
+         * reservacion-material 
          * buscador-basico 
-         * Ubicación-bibliotecas 
     * Las de funcionalidad son:
-         * funcionalidad-busqueda-por-palabra
-         * seleccion-resultados-busqueda
-         * Ubicación-de-bibliotecas-mapa
-         * resultados-busqueda
-         * Lista-de-bibliotecas
+         * acceso-usuarios
+         * perfil-de-usuarios
+         * busqueda-por-coleccion
+         * confirmacion-de-reserva-de-material
+         * Reservacion-material
     * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
 
 * **Definición de listo**
     Para que una historia se considere como lista tiene que estar en master, ser validada por los miembros del equipo y cumplir con los siguientes criterios de aceptación correspondientes a cada una de las historias de usuario:
-    * CNQ-4 Búsqueda por palabra: Como usuario quiero realizar una búsqueda por palabra o frase con el fin obtener todo el material referente a ese palabra o frase.
-    * CNQ-7 Limpiar Búsqueda: Como usuario quiero limpiar los campos de búsqueda con el fin de realizar una nueva búsqueda.
-    * CNQ-8 Resultados de búsqueda: Como usuario quiero que se muestren los resultados de mi búsqueda de forma adecuada con el fin de observar todos los resultados
-    * CNQ-9 Selección de resultados de la búsqueda: Como usuario quiero seleccionar los resultados de mi búsqueda con el fin de obtener la mayor información posible sobre ese resultado.
-    * CNQ-10 Ubicación de bibliotecas: Como cliente quiero al clickear una biblioteca obtener su localización en el mapa e información básica. Con el fin de tener conocimiento del lugar en donde está el material.
+    * CNQ-35 Acceso a Usuarios: El usuario ingresa a la aplicación con el correo institucional y la contraseña de la UCR.
+    * CNQ-34 Perfil de usuarios: El usuario puede ver su información personal nombre y correo. Además de información de las reservaciones hechas.
+    * CNQ-36 Reservación de material: Si el usuario consulta un material puede reservarlo.
+    * CNQ-37 Confirmación de reservación de material: Al reservar un material el usuario tiene retroalimentación de que ha sido reservado.
+    * CNQ-6 Búsqueda por colección: El usuario tiene la opción de definir colecciones de búsqueda. Estas son colección literaria, audiovisual, educativa y general.
+    * CNQ-5 Campo de búsqueda limitado: El usuario puede limitar el área de búsqueda por titulo, autor, idioma o todo los campos.

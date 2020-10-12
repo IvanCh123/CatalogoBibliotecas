@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
@@ -31,6 +33,8 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
     private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBibliotecaHelper;
 
     public final static String MESSAGE_KEY ="palabraKey";
+    public final static String CAMPO_KEY ="campoBusquedaKey";
+    public final static String COLECCION_KEY ="coleccionKey";
 
     private static final String TAG = "ResultadosBusquedaActivity";
 
@@ -39,8 +43,8 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados_busqueda);
 
-        Intent intent = getIntent();
-        final String filtro = intent.getStringExtra(MESSAGE_KEY);
+        final String[] filtro = getFiltro();
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_material);
         mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBiblitecaHelper();
@@ -50,7 +54,23 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
                 new RecyclerViewMaterial_Config().setConfig(mRecyclerView, ResultadosBusquedaActivity.this,material,keys,ResultadosBusquedaActivity.this, filtro);
             }
         }, filtro);
+    }
 
+    private String[] getFiltro() {
+        Intent intent = getIntent();
+        String palabraClave = intent.getStringExtra(MESSAGE_KEY).toLowerCase();
+        String campoBusqueda = intent.getStringExtra(CAMPO_KEY).toLowerCase();
+        String coleccion = intent.getStringExtra(COLECCION_KEY).toLowerCase();
+
+        if(campoBusqueda.isEmpty())
+            campoBusqueda = "todo";
+        if(coleccion.isEmpty())
+            coleccion = "general";
+
+        palabraClave = StringUtils.stripAccents(palabraClave);
+        coleccion = StringUtils.stripAccents(coleccion);
+
+        return new String[]{palabraClave,campoBusqueda,coleccion};
     }
 
     @SuppressLint("LongLogTag")
