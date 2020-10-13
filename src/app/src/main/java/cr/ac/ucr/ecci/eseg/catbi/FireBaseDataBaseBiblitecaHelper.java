@@ -12,6 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Usuarios;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
@@ -20,11 +21,13 @@ public class FireBaseDataBaseBiblitecaHelper {
     private DatabaseReference referenciaBiblioteca;
     private DatabaseReference referenciaMaterial;
     private DatabaseReference referenciaUsuarios;
+    private DatabaseReference referenciaReserva;
 
     private String filtro;
     private List<ListarBibliotecas> listaBibliotecas= new ArrayList<>();
     private List<Material> listaMaterial = new ArrayList<>();
     private Usuarios usuario;
+    private List<Reservacion> listaReservaciones = new ArrayList<>();
     public List<Material> getListaMaterial() {
         return listaMaterial;
     }
@@ -44,11 +47,16 @@ public class FireBaseDataBaseBiblitecaHelper {
         void DataIsLoaded(Usuarios usuario);
     }
 
+    public interface ReservaDataStatus{
+        void DataIsLoaded(List<Reservacion> reservacion, List<String> keys);
+    }
+
     public FireBaseDataBaseBiblitecaHelper() {
         database=FirebaseDatabase.getInstance();
         referenciaBiblioteca= database.getReference("Bibliotecas");
         referenciaMaterial= database.getReference("Material");
         referenciaUsuarios= database.getReference("Usuarios");
+        referenciaReserva = database.getReference("Usuario_Material");
         filtro = "";
     }
 
@@ -110,6 +118,32 @@ public class FireBaseDataBaseBiblitecaHelper {
                         break;
                     }
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void readReservas(final ReservaDataStatus reservaDataStatus, final String correoP){
+        referenciaReserva.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaReservaciones.clear();
+                List<String> keys = new ArrayList<>();
+                for(DataSnapshot ds: dataSnapshot.getChildren()){
+                    if(ds.child("correo").getValue().equals(correoP)){
+                        //String tituloMaterialFromDB = ds.child("tituloMaterial").getValue(String.class);
+                        //String fechaLimiteFromDB = ds.child("fechaLimite").getValue(String.class);
+                        //Reservacion reserva = new Reservacion(tituloMaterialFromDB,fechaLimiteFromDB);
+                        keys.add(ds.getKey());
+                        Reservacion reserva = ds.getValue(Reservacion.class);
+                        listaReservaciones.add(reserva);
+                    }
+                }
+                reservaDataStatus.DataIsLoaded(listaReservaciones, keys);
             }
 
             @Override
