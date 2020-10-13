@@ -11,7 +11,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
@@ -154,7 +157,9 @@ public class FireBaseDataBaseBiblitecaHelper {
             }
         });
         cant2=cant[0];
-        
+
+        DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");
+        String date = df.format(Calendar.getInstance().getTime());
 
         try{
             r.setCorreoUsuario(user.getEmail());
@@ -162,6 +167,6 @@ public class FireBaseDataBaseBiblitecaHelper {
             r.setCorreoUsuario("DESCONOCIDO");
         }
 
-        referenciaReservacion.child(String.valueOf(cant2)).setValue(r);
+        referenciaReservacion.child(String.valueOf(date)).setValue(r);
     }
 }
