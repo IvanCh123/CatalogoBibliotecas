@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -20,12 +21,15 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.RecyclerViewMaterial_Config;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
+import android.content.Context;
 
 public class PerfilFragment extends Fragment {
 
@@ -35,12 +39,21 @@ public class PerfilFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseUser usuarioActual;
     private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBibliotecaHelper;
+    private RecyclerView mRecyclerView;
+    private Context mContext;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
+    }
+
+    @Override
+    public View onCreateView(@NonNull final LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         perfilViewModel =
                 ViewModelProviders.of(this).get(PerfilViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_perfil, container, false);
+        final View root = inflater.inflate(R.layout.fragment_perfil, container, false);
 
         nombreUsuario =  (TextView) root.findViewById(R.id.txtNombre);
         correoUsuario = (TextView) root.findViewById(R.id.txtCorreo);
@@ -55,6 +68,13 @@ public class PerfilFragment extends Fragment {
                 fillText(usuarioP);
             }
         },correo);
+       /* mRecyclerView = (RecyclerView) root.findViewById(R.id.reservacionesRecyclerView);
+        new FireBaseDataBaseBiblitecaHelper().readReservas(new FireBaseDataBaseBiblitecaHelper.ReservaDataStatus(){
+            @Override
+            public void DataIsLoaded(List<Reservacion> reservacion, List<String> keys){
+                new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, mContext, reservacion, keys);
+            }
+        }, correo);*/
         return root;
     }
 
