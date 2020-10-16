@@ -4,13 +4,13 @@ public class Reservacion {
     private String correoUsuario;
     private String tituloMaterial;
     private String fechaLimite;
-    private int materialID;
-    private int usuarioID;
+    private String materialID;
+    private String usuarioID;
 
     public Reservacion() {
     }
 
-    public Reservacion(String correoUsuario, String tituloMaterial, String fechaLimite, int materialID, int usuarioID) {
+    public Reservacion(String correoUsuario, String tituloMaterial, String fechaLimite, String materialID, String usuarioID) {
         this.correoUsuario = correoUsuario;
         this.tituloMaterial = tituloMaterial;
         this.fechaLimite = fechaLimite;
@@ -42,19 +42,19 @@ public class Reservacion {
         this.fechaLimite = fechaLimite;
     }
 
-    public int getMaterialID() {
+    public String getMaterialID() {
         return materialID;
     }
 
-    public void setMaterialID(int materialID) {
+    public void setMaterialID(String materialID) {
         this.materialID = materialID;
     }
 
-    public int getUsuarioID() {
+    public String getUsuarioID() {
         return usuarioID;
     }
 
-    public void setUsuarioID(int usuarioID) {
+    public void setUsuarioID(String usuarioID) {
         this.usuarioID = usuarioID;
     }
 }
