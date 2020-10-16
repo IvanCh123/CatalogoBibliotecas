@@ -44,7 +44,7 @@ public class RecyclerViewReservaciones_Config {
             mTitulo.setText(reservacion.getTituloMaterial());
             String fechaLimReserva = reservacion.getFechaLimite();
             int diasRestantes = getDiasRestantes(fechaLimReserva);
-            mDiasRestantes.setText(Integer.toString(diasRestantes));
+            mDiasRestantes.setText(Integer.toString(diasRestantes)+" días restantes");
             this.key = key;
         }
 
