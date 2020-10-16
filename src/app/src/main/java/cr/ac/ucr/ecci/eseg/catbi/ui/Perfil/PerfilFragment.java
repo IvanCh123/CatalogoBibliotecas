@@ -68,13 +68,13 @@ public class PerfilFragment extends Fragment {
                 fillText(usuarioP);
             }
         },correo);
-       /* mRecyclerView = (RecyclerView) root.findViewById(R.id.reservacionesRecyclerView);
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.reservacionesRecyclerView);
         new FireBaseDataBaseBiblitecaHelper().readReservas(new FireBaseDataBaseBiblitecaHelper.ReservaDataStatus(){
             @Override
             public void DataIsLoaded(List<Reservacion> reservacion, List<String> keys){
-                new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, mContext, reservacion, keys);
+                new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, getContext(), reservacion, keys);
             }
-        }, correo);*/
+        }, correo);
         return root;
     }
 

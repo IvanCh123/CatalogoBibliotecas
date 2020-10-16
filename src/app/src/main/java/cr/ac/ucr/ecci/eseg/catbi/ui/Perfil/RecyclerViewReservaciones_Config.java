@@ -39,7 +39,7 @@ public class RecyclerViewReservaciones_Config {
 
         public void bind(Reservacion reservacion, String key){
             mTitulo.setText(reservacion.getTituloMaterial());
-            mDiasRestantes.setText(reservacion.getFechaLimite());
+            mDiasRestantes.setText(Integer.toString(reservacion.getFechaLimite()));
             this.key = key;
         }
     }

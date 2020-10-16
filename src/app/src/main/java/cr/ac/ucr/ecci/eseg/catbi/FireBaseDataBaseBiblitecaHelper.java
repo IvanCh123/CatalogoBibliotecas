@@ -134,7 +134,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                 listaReservaciones.clear();
                 List<String> keys = new ArrayList<>();
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    if(ds.child("correo").getValue().equals(correoP)){
+                    if(ds.child("correoUsuario").getValue().equals(correoP)){
                         //String tituloMaterialFromDB = ds.child("tituloMaterial").getValue(String.class);
                         //String fechaLimiteFromDB = ds.child("fechaLimite").getValue(String.class);
                         //Reservacion reserva = new Reservacion(tituloMaterialFromDB,fechaLimiteFromDB);

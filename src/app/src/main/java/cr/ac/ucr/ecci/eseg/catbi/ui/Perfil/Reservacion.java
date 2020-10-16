@@ -3,14 +3,14 @@ package cr.ac.ucr.ecci.eseg.catbi.ui.Perfil;
 public class Reservacion {
     private String correoUsuario;
     private String tituloMaterial;
-    private String fechaLimite;
-    private String materialID;
-    private String usuarioID;
+    private int fechaLimite;
+    private int materialID;
+    private int usuarioID;
 
     public Reservacion() {
     }
 
-    public Reservacion(String correoUsuario, String tituloMaterial, String diasReserva, String materialID, String usuarioID) {
+    public Reservacion(String correoUsuario, String tituloMaterial, int diasReserva, int materialID, int usuarioID) {
         this.correoUsuario = correoUsuario;
         this.tituloMaterial = tituloMaterial;
         this.fechaLimite = diasReserva;
@@ -34,27 +34,27 @@ public class Reservacion {
         this.tituloMaterial = tituloMaterial;
     }
 
-    public String getFechaLimite() {
+    public int getFechaLimite() {
         return fechaLimite;
     }
 
-    public void setFechaLimite(String fechaLimite) {
+    public void setFechaLimite(int fechaLimite) {
         this.fechaLimite = fechaLimite;
     }
 
-    public String getMaterialID() {
+    public int getMaterialID() {
         return materialID;
     }
 
-    public void setMaterialID(String materialID) {
+    public void setMaterialID(int materialID) {
         this.materialID = materialID;
     }
 
-    public String getUsuarioID() {
+    public int getUsuarioID() {
         return usuarioID;
     }
 
-    public void setUsuarioID(String usuarioID) {
+    public void setUsuarioID(int usuarioID) {
         this.usuarioID = usuarioID;
     }
 }
