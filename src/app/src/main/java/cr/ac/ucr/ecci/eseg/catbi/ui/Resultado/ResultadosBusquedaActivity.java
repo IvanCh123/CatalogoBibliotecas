@@ -47,6 +47,23 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         }, filtro);
     }
 
+    private String[] getFiltro() {
+        Intent intent = getIntent();
+        String palabraClave = intent.getStringExtra(MESSAGE_KEY).toLowerCase();
+        String campoBusqueda = intent.getStringExtra(CAMPO_KEY).toLowerCase();
+        String coleccion = intent.getStringExtra(COLECCION_KEY).toLowerCase();
+
+        if(campoBusqueda.isEmpty())
+            campoBusqueda = "todo";
+        if(coleccion.isEmpty())
+            coleccion = "general";
+
+        palabraClave = StringUtils.stripAccents(palabraClave);
+        coleccion = StringUtils.stripAccents(coleccion);
+
+        return new String[]{palabraClave,campoBusqueda,coleccion};
+    }
+
     @SuppressLint("LongLogTag")
     @Override
     public void onNoteClick(int position) {
