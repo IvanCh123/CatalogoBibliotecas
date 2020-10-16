@@ -1,14 +1,14 @@
-package cr.ac.ucr.ecci.eseg.catbi.ui.Preguntas;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Perfil;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class PreguntasViewModel extends ViewModel {
+public class PerfilViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public PreguntasViewModel() {
+    public PerfilViewModel() {
         mText = new MutableLiveData<>();
         mText.setValue("Fragmento de preguntas");
     }

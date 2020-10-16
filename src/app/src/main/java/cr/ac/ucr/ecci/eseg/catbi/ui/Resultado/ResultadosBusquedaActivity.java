@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
@@ -22,6 +24,8 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
     private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBibliotecaHelper;
 
     public final static String MESSAGE_KEY ="palabraKey";
+    public final static String CAMPO_KEY ="campoBusquedaKey";
+    public final static String COLECCION_KEY ="coleccionKey";
 
     private static final String TAG = "ResultadosBusquedaActivity";
 
@@ -30,8 +34,8 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados_busqueda);
 
-        Intent intent = getIntent();
-        final String filtro = intent.getStringExtra(MESSAGE_KEY);
+        final String[] filtro = getFiltro();
+
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_material);
         mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBiblitecaHelper();
