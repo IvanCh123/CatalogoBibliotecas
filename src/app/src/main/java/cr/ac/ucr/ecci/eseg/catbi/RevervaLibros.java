@@ -46,7 +46,7 @@ public class RevervaLibros extends AppCompatActivity {
             btnReserva.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                     agregarReserva(15,id,titulo);
+                     agregarReserva("15",id,titulo);
                 }
             });
         }else{
@@ -82,8 +82,8 @@ public class RevervaLibros extends AppCompatActivity {
     }
 
 
-    private void agregarReserva(int dias, String id,String titulo){
-        ReservaMaterial reservaMaterial=new ReservaMaterial("",dias,id,titulo,0);
+    private void agregarReserva(String dias, String id,String titulo){
+        ReservaMaterial reservaMaterial=new ReservaMaterial("",dias,id,titulo,"0");
         new FireBaseDataBaseBiblitecaHelper().addReserva(reservaMaterial);
         /*new FireBaseDataBaseBiblitecaHelper().readReserva(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
             @Override

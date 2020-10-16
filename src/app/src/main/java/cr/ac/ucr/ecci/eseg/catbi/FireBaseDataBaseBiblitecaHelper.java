@@ -167,6 +167,12 @@ public class FireBaseDataBaseBiblitecaHelper {
             r.setCorreoUsuario("DESCONOCIDO");
         }
 
+        int dias= Integer.parseInt(r.getFechaLimite());
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE,dias);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        String fechaLimite = sdf.format(calendar.getTime());
+        r.setFechaLimite(fechaLimite);
         referenciaReservacion.child(String.valueOf(date)).setValue(r);
     }
 }

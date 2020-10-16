@@ -4,15 +4,15 @@ import java.util.Date;
 
 public class ReservaMaterial {
     private String correoUsuario;
-    private int fechaLimite;
+    private String fechaLimite;
     private String materialID;
     private String tituloMaterial;
-    private int usuarioID;
+    private String usuarioID;
 
     public ReservaMaterial() {
     }
 
-    public ReservaMaterial(String correoUsuario, int fechaLimite, String materialID, String tituloMaterial, int usuarioID) {
+    public ReservaMaterial(String correoUsuario, String fechaLimite, String materialID, String tituloMaterial, String usuarioID) {
         this.correoUsuario = correoUsuario;
         this.fechaLimite = fechaLimite;
         this.materialID = materialID;
@@ -28,13 +28,6 @@ public class ReservaMaterial {
         this.correoUsuario = correoUsuario;
     }
 
-    public int getFechaLimite() {
-        return fechaLimite;
-    }
-
-    public void setFechaLimite(int fechaLimite) {
-        this.fechaLimite = fechaLimite;
-    }
 
     public String getMaterialID() {
         return materialID;
@@ -52,11 +45,19 @@ public class ReservaMaterial {
         this.tituloMaterial = tituloMaterial;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
+    public void setFechaLimite(String fechaLimite) {
+        this.fechaLimite = fechaLimite;
     }
 
-    public void setUsuarioID(int usuarioID) {
+    public void setUsuarioID(String usuarioID) {
         this.usuarioID = usuarioID;
+    }
+
+    public String getFechaLimite() {
+        return fechaLimite;
+    }
+
+    public String getUsuarioID() {
+        return usuarioID;
     }
 }
