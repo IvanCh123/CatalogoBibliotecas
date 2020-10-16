@@ -9,6 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.R;
@@ -39,8 +42,26 @@ public class RecyclerViewReservaciones_Config {
 
         public void bind(Reservacion reservacion, String key){
             mTitulo.setText(reservacion.getTituloMaterial());
-            mDiasRestantes.setText(Integer.toString(reservacion.getFechaLimite()));
+            String fechaLimReserva = reservacion.getFechaLimite();
+            int diasRestantes = getDiasRestantes(fechaLimReserva);
+            mDiasRestantes.setText(Integer.toString(diasRestantes));
             this.key = key;
+        }
+
+        public int getDiasRestantes(String fecha){
+            int daysLeft = 0;
+            String inputDateString = fecha;
+            Calendar calCurr = Calendar.getInstance();
+            Calendar day = Calendar.getInstance();
+            try {
+                day.setTime(new SimpleDateFormat("MM/dd/yyyy").parse(inputDateString));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            if(day.after(calCurr)){
+                daysLeft = (day.get(Calendar.DAY_OF_MONTH) -(calCurr.get(Calendar.DAY_OF_MONTH)));
+            }
+            return daysLeft;
         }
     }
 
