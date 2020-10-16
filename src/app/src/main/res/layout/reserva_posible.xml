@@ -17,14 +17,16 @@
 
     <Button
         android:id="@+id/buttonAccpReser"
-        android:layout_width="143dp"
-        android:layout_height="81dp"
-        android:layout_marginBottom="100dp"
+        android:layout_width="297dp"
+        android:layout_height="116dp"
+        android:textColor="#000000"
+        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/txt_button_reser_accep" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824"
+        tools:text="Aceptar" />
 
     <TextView
         android:id="@+id/text_reserva_existosa"

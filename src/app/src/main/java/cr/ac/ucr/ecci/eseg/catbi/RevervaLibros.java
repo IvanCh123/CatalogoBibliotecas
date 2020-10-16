@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,14 +24,12 @@ public class RevervaLibros extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent=getIntent();
-        //nombre=intent.getStringExtra("name");
-       // l1=intent.getDoubleExtra("L1",90);
-       // l2=intent.getDoubleExtra("L2",90);
         biblio=intent.getStringExtra("biblio");
         titulo=intent.getStringExtra("titulo");
         id=intent.getStringExtra("id");
         user=intent.getStringExtra("user");
         cant=intent.getStringExtra("cant");
+        final boolean[] reserva = new boolean[1];
 
         boolean v=validadorPrestamo(cant);
         if(v){
@@ -43,10 +42,17 @@ public class RevervaLibros extends AppCompatActivity {
             textViewNombreDuracion.setText("15 dias");
 
             final Button btnReserva= (Button) findViewById(R.id.buttonAccpReser);
+
             btnReserva.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                     agregarReserva("15",id,titulo);
+                     reserva[0] = agregarReserva("15",id,titulo);
+                     if(reserva[0]){
+                         Toast.makeText(getApplicationContext(), "Reserva se ha realizado exitosamente" , Toast.LENGTH_SHORT).show();
+                     }else {
+                         Toast.makeText(getApplicationContext(), "Ha habido una falla en la reserva" , Toast.LENGTH_SHORT).show();
+                     }
+                    retornar();
                 }
             });
         }else{
@@ -59,7 +65,7 @@ public class RevervaLibros extends AppCompatActivity {
             btnReserva.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    retornar();
                 }
             });
         }
@@ -82,30 +88,14 @@ public class RevervaLibros extends AppCompatActivity {
     }
 
 
-    private void agregarReserva(String dias, String id,String titulo){
+    private boolean agregarReserva(String dias, String id,String titulo){
         ReservaMaterial reservaMaterial=new ReservaMaterial("",dias,id,titulo,"0");
-        new FireBaseDataBaseBiblitecaHelper().addReserva(reservaMaterial);
-        /*new FireBaseDataBaseBiblitecaHelper().readReserva(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
-            @Override
-            public void dataLoaded() {
-                //Log.d("Tq", String.valueOf(listaBibliotecas.size()));
-                new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto,listaBibliotecas,keys);
-            }
+        boolean b= new FireBaseDataBaseBiblitecaHelper().addReserva(reservaMaterial,cant);
 
-            @Override
-            public void dataInserted() {
+        return b;
+    }
 
-            }
-
-            @Override
-            public void dataDeleted() {
-
-            }
-
-            @Override
-            public void dataUpdated() {
-
-            }
-        });*/
+    private void retornar(){
+        startActivity(new Intent(RevervaLibros.this, MainActivity.class));
     }
 }

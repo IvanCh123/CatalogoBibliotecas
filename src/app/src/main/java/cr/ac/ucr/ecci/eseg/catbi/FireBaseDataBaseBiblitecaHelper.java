@@ -214,8 +214,8 @@ public class FireBaseDataBaseBiblitecaHelper {
 
     }*/
 
-    public void addReserva(ReservaMaterial r){
-        final int[] cant = new int[1];
+    public boolean addReserva(ReservaMaterial r,String c ){
+        /*final int[] cant = new int[1];
         int cant2;
         referenciaReservacion.addValueEventListener(new ValueEventListener() {
             @Override
@@ -228,8 +228,9 @@ public class FireBaseDataBaseBiblitecaHelper {
 
             }
         });
-        cant2=cant[0];
+        cant2=cant[0];*/
 
+        actualizaCantMaterial(c,r.getMaterialID());
         DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");
         String date = df.format(Calendar.getInstance().getTime());
 
@@ -245,6 +246,19 @@ public class FireBaseDataBaseBiblitecaHelper {
         SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
         String fechaLimite = sdf.format(calendar.getTime());
         r.setFechaLimite(fechaLimite);
-        referenciaReservacion.child(String.valueOf(date)).setValue(r);
+        boolean resultado;
+        try{
+            referenciaReservacion.child(String.valueOf(date)).setValue(r);
+            resultado=true;
+        }catch (Exception e){
+            resultado=false;
+        }
+        return resultado;
+
+    }
+
+    private void actualizaCantMaterial(String  cant, String id){
+        int c=Integer.parseInt(cant)-1;
+        referenciaMaterial.child(id).child("cantidad").setValue(String.valueOf(c));
     }
 }
