@@ -240,56 +240,9 @@ public class FireBaseDataBaseBiblitecaHelper {
         }
     }
 
-    public void readReserva(final ReservaDataStatus ReservadataStatus){
-        referenciaReservacion.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                listaReserva.clear();
-                List<String>keys= new ArrayList<>();
-                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
-                    keys.add(keyNode.getKey());
-                    ReservaMaterial reservaMaterial= keyNode.getValue(ReservaMaterial.class);
-                    listaReserva.add(reservaMaterial);
-                }
-                ReservadataStatus.dataLoaded(listaReserva,keys);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    /*public void addReserva(ReservaMaterial reserva,final ReservaDataStatus ReservadataStatus){
-        String key= referenciaReservacion.push().getKey();
-        referenciaReservacion.child(key).setValue(reserva)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        ReservadataStatus.dataInsert();
-                    }
-                }
-        );
-
-    }*/
 
     public boolean addReserva(ReservaMaterial r,String c ){
-        /*final int[] cant = new int[1];
-        int cant2;
-        referenciaReservacion.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                cant[0] = (int) dataSnapshot.getChildrenCount();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-        cant2=cant[0];*/
-
         actualizaCantMaterial(c,r.getMaterialID());
         DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");
         String date = df.format(Calendar.getInstance().getTime());

@@ -25,7 +25,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="@string/txt_button_reser_accep" />
+        android:text="@string/txt_button_reser_accep"
+        />
 
     <TextView
         android:id="@+id/text_reserva_no_existosa"
