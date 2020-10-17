@@ -1,16 +1,22 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Perfil;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.List;
 
@@ -40,6 +46,7 @@ public class RecyclerViewReservaciones_Config {
             mDiasRestantes = (TextView) itemView.findViewById(R.id.diasRestTextView);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public void bind(Reservacion reservacion, String key){
             mTitulo.setText(reservacion.getTituloMaterial());
             String fechaLimReserva = reservacion.getFechaLimite();
@@ -48,20 +55,14 @@ public class RecyclerViewReservaciones_Config {
             this.key = key;
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         public int getDiasRestantes(String fecha){
-            int daysLeft = 0;
-            String inputDateString = fecha;
-            Calendar calCurr = Calendar.getInstance();
-            Calendar day = Calendar.getInstance();
-            try {
-                day.setTime(new SimpleDateFormat("MM/dd/yyyy").parse(inputDateString));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            if(day.after(calCurr)){
-                daysLeft = (day.get(Calendar.DAY_OF_MONTH) -(calCurr.get(Calendar.DAY_OF_MONTH)));
-            }
-            return daysLeft;
+            LocalDate fechaActual = LocalDate.now();
+            fechaActual.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+            LocalDate fechaLimite = LocalDate.parse(fecha,DateTimeFormatter.ofPattern("MM/dd/yyyy"));
+            long noOfDaysBetween = ChronoUnit.DAYS.between(fechaActual, fechaLimite);
+
+            return (int) noOfDaysBetween;
         }
     }
 
@@ -80,6 +81,7 @@ public class RecyclerViewReservaciones_Config {
             return new ReservacionItemView(parent);
         }
 
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onBindViewHolder(@NonNull ReservacionItemView holder, int position) {
             holder.bind(mListaReservaciones.get(position), mKeys.get(position));
