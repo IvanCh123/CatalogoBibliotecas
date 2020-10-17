@@ -1,21 +1,12 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Resultado;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
-import android.widget.TextView;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -82,4 +73,6 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         intent.putExtra("materialClickeado", materialClickeado);
         startActivity(intent);
     }
+
+
 }

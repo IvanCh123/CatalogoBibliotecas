@@ -24,17 +24,14 @@
         android:layout_marginStart="4dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
         android:singleLine="true"
         android:text="TextView"
         android:textSize="18sp"
         android:textStyle="italic"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/biblioteca_textView"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo_textView"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/titulo_textView" />
 
     <TextView
         android:id="@+id/formato_textView"
@@ -59,5 +56,7 @@
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/formato_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/formato_textView"
+        app:layout_constraintVertical_bias="0.144" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

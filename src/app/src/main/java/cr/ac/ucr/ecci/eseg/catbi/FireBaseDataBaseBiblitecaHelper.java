@@ -2,6 +2,9 @@ package cr.ac.ucr.ecci.eseg.catbi;
 
 import androidx.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -10,7 +13,10 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import org.apache.commons.lang3.StringUtils;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
@@ -23,9 +29,14 @@ public class FireBaseDataBaseBiblitecaHelper {
     private DatabaseReference referenciaMaterial;
     private DatabaseReference referenciaUsuarios;
     private DatabaseReference referenciaReserva;
+    private DatabaseReference referenciaReservacion;
+    private FirebaseAuth mAuth;
+    FirebaseUser user;
+
 
     private String[] filtro;
     private List<ListarBibliotecas> listaBibliotecas= new ArrayList<>();
+    private List<ReservaMaterial> listaReserva=new ArrayList<>();
     private List<Material> listaMaterial = new ArrayList<>();
     private Usuarios usuario;
     private List<Reservacion> listaReservaciones = new ArrayList<>();
@@ -56,6 +67,10 @@ public class FireBaseDataBaseBiblitecaHelper {
         database=FirebaseDatabase.getInstance();
         referenciaBiblioteca= database.getReference("Bibliotecas");
         referenciaMaterial= database.getReference("Material");
+        referenciaReservacion=database.getReference("Usuario_Material");
+        //filtro = "";
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
         filtro = null;
         referenciaUsuarios= database.getReference("Usuarios");
         referenciaReserva = database.getReference("Usuario_Material");
@@ -223,5 +238,87 @@ public class FireBaseDataBaseBiblitecaHelper {
                 }
                 break;
         }
+    }
+
+    public void readReserva(final ReservaDataStatus ReservadataStatus){
+        referenciaReservacion.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaReserva.clear();
+                List<String>keys= new ArrayList<>();
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    keys.add(keyNode.getKey());
+                    ReservaMaterial reservaMaterial= keyNode.getValue(ReservaMaterial.class);
+                    listaReserva.add(reservaMaterial);
+                }
+                ReservadataStatus.dataLoaded(listaReserva,keys);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    /*public void addReserva(ReservaMaterial reserva,final ReservaDataStatus ReservadataStatus){
+        String key= referenciaReservacion.push().getKey();
+        referenciaReservacion.child(key).setValue(reserva)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        ReservadataStatus.dataInsert();
+                    }
+                }
+        );
+
+    }*/
+
+    public boolean addReserva(ReservaMaterial r,String c ){
+        /*final int[] cant = new int[1];
+        int cant2;
+        referenciaReservacion.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                cant[0] = (int) dataSnapshot.getChildrenCount();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        cant2=cant[0];*/
+
+        actualizaCantMaterial(c,r.getMaterialID());
+        DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");
+        String date = df.format(Calendar.getInstance().getTime());
+
+        try{
+            r.setCorreoUsuario(user.getEmail());
+        }catch (Exception e){
+            r.setCorreoUsuario("DESCONOCIDO");
+        }
+
+        int dias= Integer.parseInt(r.getFechaLimite());
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE,dias);
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        String fechaLimite = sdf.format(calendar.getTime());
+        r.setFechaLimite(fechaLimite);
+        boolean resultado;
+        try{
+            referenciaReservacion.child(String.valueOf(date)).setValue(r);
+            resultado=true;
+        }catch (Exception e){
+            resultado=false;
+        }
+        return resultado;
+
+    }
+
+    private void actualizaCantMaterial(String  cant, String id){
+        int c=Integer.parseInt(cant)-1;
+        referenciaMaterial.child(id).child("cantidad").setValue(String.valueOf(c));
     }
 }
