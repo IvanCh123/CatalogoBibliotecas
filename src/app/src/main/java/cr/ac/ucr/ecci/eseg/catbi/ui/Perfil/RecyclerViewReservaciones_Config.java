@@ -1,6 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Perfil;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
@@ -51,7 +52,12 @@ public class RecyclerViewReservaciones_Config {
             mTitulo.setText(reservacion.getTituloMaterial());
             String fechaLimReserva = reservacion.getFechaLimite();
             int diasRestantes = getDiasRestantes(fechaLimReserva);
-            mDiasRestantes.setText(Integer.toString(diasRestantes)+" días restantes");
+            if(diasRestantes>=0) {
+                mDiasRestantes.setText(Integer.toString(diasRestantes) + " días restantes");
+            }else{
+                mDiasRestantes.setText(Integer.toString(Math.abs(diasRestantes)) + " días de retraso");
+                mDiasRestantes.setTextColor(Color.parseColor("#FF0000"));
+            }
             this.key = key;
         }
 
