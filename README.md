@@ -1,10 +1,10 @@
 # Universidad de Costa Rica
 
-## Conceptualización Sprint 2
+## Conceptualización Sprint 3
 
 ## Catálogo de Bibliotecas UCR (CATBI)
 
-## Versión 1.1
+## Versión 1.2
 
 
 ---
@@ -54,12 +54,12 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 | Sprint 2 |   |
 | -------- |----------------|
 | Codigo   |   Nombre  |
-| CNQ-35    |            [Acceso a usuarios](http://10.1.4.22:8080/browse/CNQ-35)|
-| CNQ-34    |          [Perfil de usuarios](http://10.1.4.22:8080/browse/CNQ-34)          |
-| CNQ-36    |         [Reservación de material](http://10.1.4.22:8080/browse/CNQ-36)         |
-| CNQ-37    |            [Confirmación de reserva de material](http://10.1.4.22:8080/browse/CNQ-37) |
-| CNQ-6    | [Búsqueda por colección](http://10.1.4.22:8080/browse/CNQ-6) |
-| CNQ- 5  |       [Campo de búsqueda limitado](http://10.1.4.22:8080/browse/CNQ-5)        |
+| CNQ-71    |            [Agregar material](http://10.1.4.22:8080/browse/CNQ-71)|
+| CNQ-72    |          [Modificación de material](http://10.1.4.22:8080/browse/CNQ-72)          |
+| CNQ-73    |         [Eliminación de material](http://10.1.4.22:8080/browse/CNQ-73)         |
+| CNQ-79    |            [Notificación límite de reserva](http://10.1.4.22:8080/browse/CNQ-79) |
+| CNQ-80    | [Corrección pantalla de reservas](http://10.1.4.22:8080/browse/CNQ-80) |
+
 
 
  
@@ -76,7 +76,10 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 ![Perfil de Usuarios](./img/Prototipos/PerfilUsuarios.PNG)
 ![Pantalla Principal](./img/Prototipos/PantallaPrincipal.png)
 ![Resultados Búsqueda](./img/Prototipos/ResultadosBusqueda.png)
+![Agregar Material](./img/Prototipos/AgregarMaterial.PNG)
 ![Información adicional de un resultado y reserva](./img/Prototipos/DetallesAdicionalesYReserva.PNG)
+![Menú de eliminar y editar material](./img/Prototipos/EliminarYEditar.PNG)
+![Editar Material](./img/Prototipos/EditarMaterial.PNG)
 ![Confirmación Reserva](./img/Prototipos/ConfimacionReserva.PNG)
 ![Reserva no válida](./img/Prototipos/ReservaNoValida.PNG)
 
@@ -119,21 +122,18 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
     * Al clonar el proyecto para correrlo se debe abrir la carpeta src.
     * Estrategia de branches: La estrategia que se va a utilizar es la de trabajar por módulos y funcionalidades, donde habría una rama de módulo que representa un subgrupo grande de la aplicación, que para nuestro caso va a representar una épica, y a su vez este módulo generaría más ramas, las cuales representan funcionalidades ya más específicas que se van a desarrollar y que pueden ser desarrolladas por un solo desarrollador usualmente. Además se utilizaría la rama master para solo tener versiones estables del proyecto.
     * Para esta iteración las ramas módulo son:
-         * reservacion-material 
-         * buscador-basico 
+         * TBD 
+         * TBD 
     * Las de funcionalidad son:
-         * acceso-usuarios
-         * perfil-de-usuarios
-         * busqueda-por-coleccion
-         * confirmacion-de-reserva-de-material
-         * Reservacion-material
+         * TBD
+         * TBD
+         * TBD
     * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
 
 * **Definición de listo**
     Para que una historia se considere como lista tiene que estar en master, ser validada por los miembros del equipo y cumplir con los siguientes criterios de aceptación correspondientes a cada una de las historias de usuario:
-    * CNQ-35 Acceso a Usuarios: El usuario ingresa a la aplicación con el correo institucional y la contraseña de la UCR.
-    * CNQ-34 Perfil de usuarios: El usuario puede ver su información personal nombre y correo. Además de información de las reservaciones hechas.
-    * CNQ-36 Reservación de material: Si el usuario consulta un material puede reservarlo.
-    * CNQ-37 Confirmación de reservación de material: Al reservar un material el usuario tiene retroalimentación de que ha sido reservado.
-    * CNQ-6 Búsqueda por colección: El usuario tiene la opción de definir colecciones de búsqueda. Estas son colección literaria, audiovisual, educativa y general.
-    * CNQ-5 Campo de búsqueda limitado: El usuario puede limitar el área de búsqueda por titulo, autor, idioma o todo los campos.
+    * CNQ-71 Agregar material: 
+    * CNQ-72 Modificación de material: 
+    * CNQ-73 Eliminación de material: 
+    * CNQ-79 Notificación límite de reserva: 
+    * CNQ-80 Corrección pantalla de reservas:
