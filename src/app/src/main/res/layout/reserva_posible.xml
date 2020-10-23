@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.45"
         app:layout_constraintStart_toEndOf="@+id/textResUbi"
@@ -17,30 +18,31 @@
 
     <Button
         android:id="@+id/buttonAccpReser"
-        android:layout_width="297dp"
-        android:layout_height="116dp"
-        android:textColor="#000000"
-        android:textSize="30sp"
+        android:layout_width="348dp"
+        android:layout_height="54dp"
         android:text="@string/txt_button_reser_accep"
+        android:textColor="#000000"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824"
-         />
+        app:layout_constraintVertical_bias="0.803" />
 
     <TextView
         android:id="@+id/text_reserva_existosa"
-        android:layout_width="150dp"
-        android:layout_height="53dp"
+        android:layout_width="250dp"
+        android:layout_height="59dp"
         android:text="@string/txt_reserva_exi"
-        android:textSize="18sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/textResTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.861" />
+        app:layout_constraintVertical_bias="0.485" />
 
     <TextView
         android:id="@+id/textResDuc"
@@ -58,7 +60,7 @@
         android:id="@+id/textResTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_marginBottom="64dp"
         android:text="@string/txt_title_reser"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/textResUbi"
@@ -83,6 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.396"
         app:layout_constraintStart_toEndOf="@+id/textResTitle"
@@ -93,6 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toEndOf="@+id/textResDuc"
