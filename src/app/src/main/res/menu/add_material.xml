@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/formulario_agregar"
+        android:title="Agregar Material"
+        android:visible="true"/>
+    <item
+        android:id="@+id/action_2"
+        android:title="Posibles futuras acciones"
+        android:visible="true"/>
+</menu>

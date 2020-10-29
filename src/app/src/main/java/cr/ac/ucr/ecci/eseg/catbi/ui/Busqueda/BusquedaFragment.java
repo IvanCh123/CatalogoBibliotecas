@@ -2,8 +2,10 @@ package cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,14 +16,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.AgregarMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
 
-public class BusquedaFragment extends Fragment{
+public class BusquedaFragment extends Fragment {
 
     private CampoBusquedaOnClick campoBusquedaOnClick;
     private ColeccionOnClick coleccionOnClick;
@@ -36,6 +41,9 @@ public class BusquedaFragment extends Fragment{
         busquedaViewModel =
                 ViewModelProviders.of(this).get(BusquedaViewModel.class);
         root = inflater.inflate(R.layout.fragment_busqueda, container, false);
+
+        setHasOptionsMenu(true);
+
 
         final EditText editTextTituloFrase =  (EditText) root.findViewById(R.id.editTextTituloFrase);
         final TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
@@ -86,7 +94,31 @@ public class BusquedaFragment extends Fragment{
         return root;
     }
 
-    private class  CampoBusquedaOnClick implements PopupMenu.OnMenuItemClickListener{
+    @Override
+    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
+        inflater.inflate(R.menu.add_material, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.formulario_agregar) {
+            irActAgregarMat();
+            return true;
+        }else{
+            Log.v("g","y");
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void irActAgregarMat(){
+        Intent intent= new Intent(getActivity(), AgregarMaterial.class);
+        startActivity(intent);
+    }
+
+        private class  CampoBusquedaOnClick implements PopupMenu.OnMenuItemClickListener{
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             Toast.makeText(getContext(), "Campo de búsqueda seleccionado: " +item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -129,4 +161,6 @@ public class BusquedaFragment extends Fragment{
     public void limpiarBusqueda(EditText campoBusqueda){
         campoBusqueda.setText(""); // Limpio el campo de búsqueda
     }
+
+
 }
