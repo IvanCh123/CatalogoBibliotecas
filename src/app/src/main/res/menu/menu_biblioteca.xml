@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/coleccion">
+        <item android:id="@+id/carMon"
+            android:title="Carlos Monge" />
+        <item android:id="@+id/tic"
+            android:title="Tinoco" />
+        <item android:id="@+id/cieSal"
+            android:title="Ciencias de la Salud" />
+        <item android:id="@+id/cieAgr"
+            android:title="Ciencias Agroalimentarias" />
+        <item android:id="@+id/eugFonTor"
+            android:title="Eugenio Fonseca Tortós" />
+        <item android:id="@+id/facDer"
+            android:title="Facultad de Derecho" />
+    </group>
+</menu>
