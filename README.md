@@ -127,7 +127,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |   1  |      Iniciar sesión en la aplicación       |                Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)    |
 |   2  |        Dirigirse al ícono de agregar material (+) y presionarlo.     |        Se redirige a la actividad de agregar material. En donde se despliega un formulario.            |
 |   3  |       Rellenar el campo de título escribiendo Drácula, rellenar el campo de autores escribiendo Bram Stoker, seleccionar la opción literaria en el campo de coleccion, en el campo de tipo de material escribir pdf y en el campo de biblioteca seleccionar Monge.      |                 Se muestran los campos del formulario con la información ingresada.|
-|    4 |           Presionar el botón de agregar material  |             Se muestra una ventana emergente indicando que se ha agregado el material exitosamente y se guarda en la base de datos       |
+|    4 |           Presionar el botón de agregar material  |             Se muestra una ventana emergente indicando que se ha agregado el material exitosamente y se guarda en la base de datos |
 
 
 
@@ -144,8 +144,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |Tipo|Caja Negra|
 |Pre-requisitos|<ul><li>Tener una cuenta institucional</li><li>El usuario ha iniciado sesión en la aplicación.</li><li>El material debe de existir en la aplicación.</li></ul>|
 |Datos de prueba|<ul><li>Búsqueda: Don Quijote</li><li>Modificación de la colección literaria a General.</li></ul>|
-|Escenario esperado|Aparece una ventana emergente indicando que el material se ha modificado exitosamente y se redirige a la actividad principal.
-|
+|Escenario esperado|Aparece una ventana emergente indicando que el material se ha modificado exitosamente y se redirige a la actividad principal.|
 #### Escenario esperado
 |#|Instrucción|Resultado esperado|
 |--------|-----|---|
