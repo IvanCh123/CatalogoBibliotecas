@@ -145,7 +145,9 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |Pre-requisitos|<ul><li>Tener una cuenta institucional</li><li>El usuario ha iniciado sesión en la aplicación.</li><li>El material debe de existir en la aplicación.</li></ul>|
 |Datos de prueba|<ul><li>Búsqueda: Don Quijote</li><li>Modificación de la colección literaria a General.</li></ul>|
 |Escenario esperado|Aparece una ventana emergente indicando que el material se ha modificado exitosamente y se redirige a la actividad principal.|
+
 #### Escenario esperado
+
 |#|Instrucción|Resultado esperado|
 |--------|-----|---|
 |1|Iniciar sesión en la aplicación|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)|
