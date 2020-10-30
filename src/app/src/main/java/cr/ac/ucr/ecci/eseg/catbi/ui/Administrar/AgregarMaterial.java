@@ -1,6 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Administrar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.util.Log;
@@ -19,7 +20,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
+import cr.ac.ucr.ecci.eseg.catbi.RevervaLibros;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
@@ -75,14 +78,61 @@ public class AgregarMaterial extends AppCompatActivity {
                 String biblioteca = txtBiblioteca.getText().toString();
                 String year=editTextAñotMaterial.getText().toString();
                 boolean creado= crearMaterial(titulo,autor,idioma,tipo,cantidad,coleccion,biblioteca,year);
+                if(creado){
+                    retornar();
+                }
             }
         });
     }
 
     private boolean crearMaterial(String titulo,String autor,String idioma,String tipo, String cant, String col, String biblio,String year){
-        Material newMaterial= new Material(autor,year,cant,col,tipo,titulo,idioma,biblio);
-        new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+        boolean matValido=true;
+        boolean valido[];
+        valido= new boolean[8];
+        valido[0]=validarNumero(year,"Año");
+        valido[1]=validarNumero(cant,"Cantidad");
+        valido[2]=validarTexto(titulo,"Titulo");
+        valido[3]=validarTexto(autor,"Autor");
+        valido[4]=validarTexto(idioma,"Idioma");
+        valido[5]=validarTexto(tipo,"Tipo");
+        valido[6]=validarTexto(col,"Coleccion");
+        valido[7]=validarTexto(biblio,"Biblioteca");
+        for(int i=0;i<8;i++){
+            if(false==valido[i]){
+                matValido=false;
+            }
+        }
+        if(matValido){
+            Material newMaterial= new Material(autor,year,cant,col,tipo,titulo,idioma,biblio);
+            new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+        }
+
         return true;
+    }
+
+
+    private boolean validarTexto(String s, String tipo){
+        boolean result=true;
+        if (s.isEmpty()){
+            Toast.makeText(getApplication(),tipo+" es invalido",Toast.LENGTH_SHORT).show();
+            result =false;
+        }
+        return result;
+    }
+    private boolean validarNumero(String n,String tipo){
+        boolean result;
+        try {
+            Integer.parseInt(n);
+            result=true;
+        }catch (Exception e){
+            Toast.makeText(getApplication(), tipo+" es invalida", Toast.LENGTH_SHORT).show();
+            result=false;
+        }
+        return result;
+    }
+
+    private void retornar(){
+        startActivity(new Intent(AgregarMaterial.this, MainActivity.class));
     }
 
     private class  ColeccionOnClick implements PopupMenu.OnMenuItemClickListener{
