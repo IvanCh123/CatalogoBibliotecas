@@ -14,13 +14,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaViewModel;
-
 public class RecycleViewBibliotecaConfig {
     private Context contexto;
     private  bibliotecaAdapter biblioAdapter;
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<ListarBibliotecas> listaBiblio, List<String>keys){
+    public void setConfig(RecyclerView recyclerView, Context context, List<Biblioteca> listaBiblio, List<String>keys){
         contexto = context;
         biblioAdapter=new bibliotecaAdapter(listaBiblio,keys);
         recyclerView.setLayoutManager(new LinearLayoutManager(contexto));
@@ -43,7 +41,7 @@ public class RecycleViewBibliotecaConfig {
             biblioteca_telefono=(TextView) itemView.findViewById(R.id.biblioteca_telefono);
         }
 
-        public void bind(ListarBibliotecas bibliotecas, String key){
+        public void bind(Biblioteca bibliotecas, String key){
             biblioteca_horario.setText(bibliotecas.getHorario());
             biblioteca_nombre.setText(bibliotecas.getNombre());
             biblioteca_telefono.setText(bibliotecas.getTelefono());
@@ -53,10 +51,10 @@ public class RecycleViewBibliotecaConfig {
     }
 
     class bibliotecaAdapter extends RecyclerView.Adapter<BibliotecaItem>{
-        private List<ListarBibliotecas> listaBiblioteca;
+        private List<Biblioteca> listaBiblioteca;
         private List<String> key;
 
-        public bibliotecaAdapter(List<ListarBibliotecas> listaBiblioteca, List<String> key) {
+        public bibliotecaAdapter(List<Biblioteca> listaBiblioteca, List<String> key) {
             this.listaBiblioteca = listaBiblioteca;
             this.key = key;
             Log.d("T1",listaBiblioteca.get(1).getHorario());

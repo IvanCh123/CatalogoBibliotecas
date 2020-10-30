@@ -2,14 +2,12 @@ package cr.ac.ucr.ecci.eseg.catbi;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import org.apache.commons.lang3.StringUtils;
 
@@ -35,7 +33,7 @@ public class FireBaseDataBaseBiblitecaHelper {
 
 
     private String[] filtro;
-    private List<ListarBibliotecas> listaBibliotecas= new ArrayList<>();
+    private List<Biblioteca> listaBibliotecas= new ArrayList<>();
     private List<ReservaMaterial> listaReserva=new ArrayList<>();
     private List<Material> listaMaterial = new ArrayList<>();
     private Usuarios usuario;
@@ -45,7 +43,7 @@ public class FireBaseDataBaseBiblitecaHelper {
     }
 
     public interface DataStatus{
-        void dataLoaded(List<ListarBibliotecas>ListaBibliotecas,List<String>keys);
+        void dataLoaded(List<Biblioteca>ListaBibliotecas, List<String>keys);
         void dataInserted();
         void dataDeleted();
         void dataUpdated();
@@ -84,7 +82,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                 List<String>keys= new ArrayList<>();
                 for(DataSnapshot keyNode: dataSnapshot.getChildren()){
                     keys.add(keyNode.getKey());
-                    ListarBibliotecas listaBiblioteca= keyNode.getValue(ListarBibliotecas.class);
+                    Biblioteca listaBiblioteca= keyNode.getValue(Biblioteca.class);
                     listaBibliotecas.add(listaBiblioteca);
                 }
                 dataStatus.dataLoaded(listaBibliotecas,keys);
