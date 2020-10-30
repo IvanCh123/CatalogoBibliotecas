@@ -1,12 +1,13 @@
-package cr.ac.ucr.ecci.eseg.catbi.ui.Perfil;
+package cr.ac.ucr.ecci.eseg.catbi;
 
-public class Usuarios {
+public class Usuario {
     private String correo;
     private String nombre;
+    // Conversar si es necesario tener password para almacenarlo en room
 
-    public Usuarios() {}
+    public Usuario() {}
 
-    public Usuarios(String correo, String nombre) {
+    public Usuario(String correo, String nombre) {
         this.correo = correo;
         this.nombre = nombre;
     }

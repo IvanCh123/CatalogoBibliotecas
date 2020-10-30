@@ -9,5 +9,5 @@ public abstract class AppDataBase extends RoomDatabase {
     // public abstract MaterialDAO materialDAO();
     // public abstract UsuarioDAO  usuarioDAO();
     // ....
-    
+
 }

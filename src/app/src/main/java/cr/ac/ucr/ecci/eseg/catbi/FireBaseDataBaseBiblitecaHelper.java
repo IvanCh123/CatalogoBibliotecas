@@ -18,7 +18,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Usuarios;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
 public class FireBaseDataBaseBiblitecaHelper {
@@ -36,7 +35,7 @@ public class FireBaseDataBaseBiblitecaHelper {
     private List<Biblioteca> listaBibliotecas= new ArrayList<>();
     private List<ReservaMaterial> listaReserva=new ArrayList<>();
     private List<Material> listaMaterial = new ArrayList<>();
-    private Usuarios usuario;
+    private Usuario usuario;
     private List<Reservacion> listaReservaciones = new ArrayList<>();
     public List<Material> getListaMaterial() {
         return listaMaterial;
@@ -54,7 +53,7 @@ public class FireBaseDataBaseBiblitecaHelper {
     }
 
     public interface UsuariosDataStatus{
-        void DataIsLoaded(Usuarios usuario);
+        void DataIsLoaded(Usuario usuario);
     }
 
     public interface ReservaDataStatus{
@@ -130,7 +129,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                     if(ds.child("correo").getValue().equals(correoP)){
                         String nombreUsuarioFromDB = ds.child("nombre").getValue(String.class);
                         String correoFromDB = ds.child("correo").getValue(String.class);
-                        usuario = new Usuarios(correoFromDB, nombreUsuarioFromDB);
+                        usuario = new Usuario(correoFromDB, nombreUsuarioFromDB);
                         userDataStatus.DataIsLoaded(usuario);
                         break;
                     }
