@@ -10,7 +10,7 @@
         android:id="@+id/title_agregar_material"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="28dp"
         android:text="@string/title_add_mat"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -23,8 +23,8 @@
         android:id="@+id/text_add_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
         android:text="@string/titulo"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title_agregar_material" />
@@ -33,12 +33,12 @@
         android:id="@+id/add_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="28dp"
         android:ems="8"
         android:hint="Titulo del material"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toEndOf="@+id/text_add_titulo"
         app:layout_constraintTop_toBottomOf="@+id/title_agregar_material" />
 
@@ -46,10 +46,10 @@
         android:id="@+id/text_add_autores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:text="@string/autor"
         app:layout_constraintEnd_toStartOf="@+id/add_autores"
-        app:layout_constraintHorizontal_bias="0.423"
+        app:layout_constraintHorizontal_bias="0.295"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_add_titulo" />
 
@@ -57,42 +57,66 @@
         android:id="@+id/add_autores"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="40dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="88dp"
         android:ems="8"
         android:hint="Nombre del autor"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_titulo" />
 
+    <EditText
+        android:id="@+id/add_cantidad"
+        android:layout_width="93dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="228dp"
+        android:ems="8"
+        android:hint="Cantidad"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_autores" />
+
+    <EditText
+        android:id="@+id/add_año"
+        android:layout_width="101dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="60dp"
+        android:ems="8"
+        android:hint="Año"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_autores" />
+
     <TextView
         android:id="@+id/text_add_coleccion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="40dp"
         android:text="@string/coleccion"
         app:layout_constraintEnd_toStartOf="@+id/add_coleccion"
-        app:layout_constraintHorizontal_bias="0.395"
+        app:layout_constraintHorizontal_bias="0.371"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_add_autores" />
+        app:layout_constraintTop_toBottomOf="@+id/text_add_cant" />
 
     <TextView
         android:id="@+id/add_coleccion"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="120dp"
+        android:layout_width="177dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="96dp"
         android:hint="@string/hint_campo_text"
-        android:text="TextView"
+        android:text="General"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_autores" />
+        app:layout_constraintTop_toBottomOf="@+id/add_año" />
 
     <TextView
         android:id="@+id/text_add_idioma"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
         android:text="@string/idioma"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_add_coleccion" />
@@ -101,8 +125,8 @@
         android:id="@+id/text_add_tipo_mat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/tipo_mat"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_add_idioma" />
@@ -111,60 +135,82 @@
         android:id="@+id/text_add_biblioteca"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="72dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="36dp"
         android:text="@string/biblioteca"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_add_tipo_mat" />
 
     <EditText
         android:id="@+id/add_idioma"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_width="177dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
         android:ems="8"
         android:hint="Idioma"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.46"
+        app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintStart_toEndOf="@+id/text_add_idioma"
         app:layout_constraintTop_toBottomOf="@+id/add_coleccion" />
 
     <EditText
         android:id="@+id/add_tipo_mat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_width="174dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="12dp"
         android:ems="8"
         android:hint="Tipo de material"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toEndOf="@+id/text_add_tipo_mat"
         app:layout_constraintTop_toBottomOf="@+id/add_idioma" />
 
     <TextView
         android:id="@+id/add_biblioteca"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_width="152dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="12dp"
         android:hint="@string/hint_campo_text"
-        android:text="TextView"
+        android:text="Carlos Monge"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintHorizontal_bias="0.326"
         app:layout_constraintStart_toEndOf="@+id/text_add_biblioteca"
         app:layout_constraintTop_toBottomOf="@+id/add_tipo_mat" />
 
     <Button
         android:id="@+id/btn_add_material"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="215dp"
+        android:layout_height="37dp"
         android:text="@string/btn_agregar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.304"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/add_biblioteca"
-        app:layout_constraintVertical_bias="0.587" />
+        app:layout_constraintVertical_bias="0.105" />
+
+    <TextView
+        android:id="@+id/text_add_cant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/cant"
+        app:layout_constraintEnd_toStartOf="@+id/add_cantidad"
+        app:layout_constraintHorizontal_bias="0.217"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_add_autores" />
+
+    <TextView
+        android:id="@+id/text_add_año"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Año"
+        app:layout_constraintEnd_toStartOf="@+id/add_año"
+        app:layout_constraintHorizontal_bias="0.623"
+        app:layout_constraintStart_toEndOf="@+id/add_cantidad"
+        app:layout_constraintTop_toBottomOf="@+id/add_autores" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

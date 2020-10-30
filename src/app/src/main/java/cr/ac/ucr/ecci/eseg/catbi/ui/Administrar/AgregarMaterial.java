@@ -18,8 +18,10 @@ import androidx.annotation.Nullable;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
 public class AgregarMaterial extends AppCompatActivity {
     View v;
@@ -31,6 +33,8 @@ public class AgregarMaterial extends AppCompatActivity {
         setContentView(R.layout.activity_agregar_material);
         final EditText editTextTituloMaterial =  (EditText) findViewById(R.id.add_titulo);
         final EditText editTextAutorMaterial =  (EditText) findViewById(R.id.add_autores);
+        final EditText editTextCantMaterial =  (EditText) findViewById(R.id.add_cantidad);
+        final EditText editTextAñotMaterial =  (EditText) findViewById(R.id.add_año);
         final EditText editTextIdiomaMaterial =  (EditText) findViewById(R.id.add_idioma);
         final EditText editTextTipoMaterial =  (EditText) findViewById(R.id.add_tipo_mat);
         final TextView txtColeccion = (TextView) findViewById(R.id.add_coleccion);
@@ -66,15 +70,19 @@ public class AgregarMaterial extends AppCompatActivity {
                 String autor = editTextAutorMaterial.getText().toString();
                 String idioma = editTextIdiomaMaterial.getText().toString();
                 String tipo = editTextTipoMaterial.getText().toString();
-                //String titulo = editTextTituloMaterial.getText().toString();
+                String cantidad = editTextCantMaterial.getText().toString();
                 String coleccion = txtColeccion.getText().toString();
                 String biblioteca = txtBiblioteca.getText().toString();
+                String year=editTextAñotMaterial.getText().toString();
+                boolean creado= crearMaterial(titulo,autor,idioma,tipo,cantidad,coleccion,biblioteca,year);
             }
         });
+    }
 
-
-
-
+    private boolean crearMaterial(String titulo,String autor,String idioma,String tipo, String cant, String col, String biblio,String year){
+        Material newMaterial= new Material(autor,year,cant,col,tipo,titulo,idioma,biblio);
+        new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+        return true;
     }
 
     private class  ColeccionOnClick implements PopupMenu.OnMenuItemClickListener{

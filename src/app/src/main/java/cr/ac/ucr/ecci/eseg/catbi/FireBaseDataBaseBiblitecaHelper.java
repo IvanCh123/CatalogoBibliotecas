@@ -274,4 +274,9 @@ public class FireBaseDataBaseBiblitecaHelper {
         int c=Integer.parseInt(cant)-1;
         referenciaMaterial.child(id).child("cantidad").setValue(String.valueOf(c));
     }
+
+    public boolean addMaterial(Material m){
+        referenciaMaterial.child("10").setValue(m);
+        return true;
+    }
 }

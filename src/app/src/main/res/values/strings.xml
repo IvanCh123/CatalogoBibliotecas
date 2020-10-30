@@ -25,6 +25,7 @@
     <string name="coleccion">Colección</string>
     <string name="tipo_mat">Tipo de material</string>
     <string name="idioma">Idioma</string>
+    <string name="cant">Cantidad</string>
     <string name="biblioteca">Biblioteca</string>
     <string name="btn_agregar">Agregar material</string>
 
