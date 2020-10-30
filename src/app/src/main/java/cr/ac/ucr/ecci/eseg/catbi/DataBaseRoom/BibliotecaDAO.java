@@ -1,10 +1,11 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Update;
 import androidx.room.Query;
 import java.util.List;
+
 @Dao
 public interface BibliotecaDAO {
     // Me traigo todas las bibliotecas que hay en la BD

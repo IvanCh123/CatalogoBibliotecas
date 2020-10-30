@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
+
 public class RecycleViewBibliotecaConfig {
     private Context contexto;
     private  bibliotecaAdapter biblioAdapter;

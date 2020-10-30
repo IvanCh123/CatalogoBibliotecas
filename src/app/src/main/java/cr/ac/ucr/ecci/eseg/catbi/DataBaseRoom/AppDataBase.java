@@ -1,7 +1,7 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
 import androidx.room.Database;
-import androidx.room.TypeConverters;
 import androidx.room.RoomDatabase;
+
 // Aca tenemos que definir Biblioteca, Material, Usuario....
 @Database(entities = {Biblioteca.class}, version = 1)
 public abstract class AppDataBase extends RoomDatabase {

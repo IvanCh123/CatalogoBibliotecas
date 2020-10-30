@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;

@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
