@@ -14,7 +14,7 @@ public interface BibliotecaDAO {
 
     // Consulto una biblioteca a partir de su ID
     @Query("SELECT * FROM Biblioteca WHERE bibliotecaID LIKE :bibliotecaID LIMIT 1")
-    Biblioteca leer(String bibliotecaID);
+    Biblioteca leerPorID(String bibliotecaID);
 
     // Inserto biblioteca
     @Insert

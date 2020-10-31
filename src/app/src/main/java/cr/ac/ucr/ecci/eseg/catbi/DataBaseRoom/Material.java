@@ -1,9 +1,12 @@
 package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
 
 import java.io.Serializable;
-
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+@Entity
 public class Material implements Serializable {
-
+    @PrimaryKey (autoGenerate = true) @NonNull
     private String materialID;
     private String autor;
     private String año;
