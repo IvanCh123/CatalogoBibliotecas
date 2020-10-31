@@ -42,21 +42,6 @@ public class UbicacionFragment extends Fragment {
                 Log.d("Tq", String.valueOf(listaBibliotecas.size()));
                 new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto,listaBibliotecas,keys);
             }
-
-            @Override
-            public void dataInserted() {
-
-            }
-
-            @Override
-            public void dataDeleted() {
-
-            }
-
-            @Override
-            public void dataUpdated() {
-
-            }
         });
 
 
@@ -75,21 +60,7 @@ public class UbicacionFragment extends Fragment {
                 Log.d("Tq", String.valueOf(listaBibliotecas.size()));
                 new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto,listaBibliotecas,keys);
             }
-
-            @Override
-            public void dataInserted() {
-
-            }
-
-            @Override
-            public void dataDeleted() {
-
-            }
-
-            @Override
-            public void dataUpdated() {
-
-            }
+            
         });
 
     }
