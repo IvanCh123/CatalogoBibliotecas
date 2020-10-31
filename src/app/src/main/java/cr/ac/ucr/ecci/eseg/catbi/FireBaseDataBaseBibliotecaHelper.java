@@ -28,15 +28,14 @@ public class FireBaseDataBaseBibliotecaHelper {
     private DatabaseReference referenciaMaterial;
     private DatabaseReference referenciaUsuarios;
     private DatabaseReference referenciaReserva;
-    private DatabaseReference referenciaReservacion;
     private FirebaseAuth mAuth;
     FirebaseUser user;
 
 
     private String[] filtro;
     private List<Biblioteca> listaBibliotecas= new ArrayList<>();
-    private List<Reservacion> listaReserva=new ArrayList<>();
     private List<Material> listaMaterial = new ArrayList<>();
+    private List<Usuario> listaUsuarios = new ArrayList<>();
     private Usuario usuario;
     private List<Reservacion> listaReservaciones = new ArrayList<>();
     public List<Material> getListaMaterial() {
@@ -58,6 +57,10 @@ public class FireBaseDataBaseBibliotecaHelper {
         void DataIsLoaded(Usuario usuario);
     }
 
+    public interface UsuariosDataStatusList{
+        void DataIsLoaded(List<Usuario> usuarios, List<String> keys);
+    }
+
     public interface ReservaDataStatus{
         void DataIsLoaded(List<Reservacion> reservacion, List<String> keys);
     }
@@ -66,7 +69,6 @@ public class FireBaseDataBaseBibliotecaHelper {
         database=FirebaseDatabase.getInstance();
         referenciaBiblioteca= database.getReference("Bibliotecas");
         referenciaMaterial= database.getReference("Material");
-        referenciaReservacion=database.getReference("Usuario_Material");
         //filtro = "";
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -75,6 +77,7 @@ public class FireBaseDataBaseBibliotecaHelper {
         referenciaReserva = database.getReference("Usuario_Material");
     }
 
+    // Método que recupera todas las bibliotecas que hay en la base de datos de firebase
     public void readBibliotecas(final DataStatus dataStatus){
         referenciaBiblioteca.addValueEventListener(new ValueEventListener() {
             @Override
@@ -84,6 +87,7 @@ public class FireBaseDataBaseBibliotecaHelper {
                 for(DataSnapshot keyNode: dataSnapshot.getChildren()){
                     keys.add(keyNode.getKey());
                     Biblioteca listaBiblioteca= keyNode.getValue(Biblioteca.class);
+                    listaBiblioteca.setBibliotecaID(keyNode.getKey());
                     listaBibliotecas.add(listaBiblioteca);
                 }
                 dataStatus.dataLoaded(listaBibliotecas,keys);
@@ -95,6 +99,77 @@ public class FireBaseDataBaseBibliotecaHelper {
             }
         });
     }
+
+    // Método que recupera todos los materiales de la base de datos de firebase
+    public void readAllMateriales(final MaterialDataStatus dataStatus){
+        referenciaMaterial.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaMaterial.clear();
+                List<String>keys= new ArrayList<>();
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    keys.add(keyNode.getKey());
+                    Material material= keyNode.getValue(Material.class);
+                    material.setMaterialID(keyNode.getKey());
+                    listaMaterial.add(material);
+                }
+                dataStatus.DataIsLoaded(listaMaterial,keys);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    // Método que recupera todos los usuarios de la base de datos de firebase
+    public void readAllUsuarios(final UsuariosDataStatusList dataStatus){
+        referenciaUsuarios.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaUsuarios.clear();
+                List<String>keys= new ArrayList<>();
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    keys.add(keyNode.getKey());
+                    Usuario usuario = keyNode.getValue(Usuario.class);
+                    listaUsuarios.add(usuario);
+                }
+                dataStatus.DataIsLoaded(listaUsuarios,keys);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    // Método que recupera todas las reservaciones de la base de datos de firebase
+    public void readAllReservaciones(final ReservaDataStatus dataStatus){
+        referenciaReserva.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaReservaciones.clear();
+                List<String>keys= new ArrayList<>();
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    keys.add(keyNode.getKey());
+                    Reservacion reservacion  = keyNode.getValue(Reservacion.class);
+                    listaReservaciones.add(reservacion);
+                }
+                dataStatus.DataIsLoaded(listaReservaciones,keys);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
+
 
     public void readMaterial(final MaterialDataStatus materialDataStatus, final String[] filtro){
         this.filtro = filtro;
@@ -260,7 +335,7 @@ public class FireBaseDataBaseBibliotecaHelper {
         r.setFechaLimite(fechaLimite);
         boolean resultado;
         try{
-            referenciaReservacion.child(String.valueOf(date)).setValue(r);
+            referenciaReserva.child(String.valueOf(date)).setValue(r);
             resultado=true;
         }catch (Exception e){
             resultado=false;
