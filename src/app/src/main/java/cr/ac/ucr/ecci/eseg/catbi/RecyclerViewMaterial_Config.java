@@ -11,11 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
 public class RecyclerViewMaterial_Config {
     private Context mContext;

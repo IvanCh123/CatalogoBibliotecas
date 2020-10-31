@@ -20,7 +20,7 @@ import java.util.List;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
 public class FireBaseDataBaseBiblitecaHelper {
     private FirebaseDatabase database;
@@ -107,7 +107,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                 for(DataSnapshot keyNode : dataSnapshot.getChildren()){
                     keys.add(keyNode.getKey());
                     Material material = keyNode.getValue(Material.class);
-                    material.setID(keyNode.getKey());
+                    material.setMaterialID(keyNode.getKey());
 
                     if(filtro[2].equalsIgnoreCase("general")){
                         realizarFiltradoSinColeccion(material, filtro, listaMaterial);

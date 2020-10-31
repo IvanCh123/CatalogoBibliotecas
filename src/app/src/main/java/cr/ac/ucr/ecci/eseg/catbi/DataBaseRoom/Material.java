@@ -1,9 +1,10 @@
-package cr.ac.ucr.ecci.eseg.catbi.ui.Resultado;
+package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
 
 import java.io.Serializable;
 
 public class Material implements Serializable {
-    private String id;
+
+    private String materialID;
     private String autor;
     private String año;
     private String cantidad;
@@ -15,7 +16,8 @@ public class Material implements Serializable {
 
     public Material() {}
 
-    public Material(String autor, String año, String cantidad, String coleccion, String formato, String titulo, String idioma, String biblioteca) {
+    public Material(String materialID, String autor, String año, String cantidad, String coleccion, String formato, String titulo, String idioma, String biblioteca) {
+        this.materialID = materialID;
         this.autor = autor;
         this.año = año;
         this.cantidad = cantidad;
@@ -82,19 +84,18 @@ public class Material implements Serializable {
         this.idioma = idioma;
     }
 
-    public String getID() {
-        return id;
-    }
-
-    public void setID(String id) {
-        this.id = id;
-    }
-
     public String getBiblioteca() {
         return biblioteca;
     }
 
     public void setBiblioteca(String biblioteca) {
         this.biblioteca = biblioteca;
+    }
+    public String getMaterialID() {
+        return materialID;
+    }
+
+    public void setMaterialID(String materialID) {
+        this.materialID = materialID;
     }
 }

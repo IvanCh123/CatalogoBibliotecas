@@ -3,15 +3,13 @@ package cr.ac.ucr.ecci.eseg.catbi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
 public class InformacionDetalladaMaterial extends AppCompatActivity {
     private static final String TAG = "InformacionDetalladaMaterial";
@@ -35,7 +33,7 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         TextView textViewContentBiblioteca = findViewById(R.id.textViewContentBiblioteca);
 
         textViewNombreMaterial.setText(materialRecibido.getTitulo());
-        textViewContentID.setText(materialRecibido.getID());
+        textViewContentID.setText(materialRecibido.getMaterialID());
         textViewContentTitulo.setText(materialRecibido.getTitulo());
         textViewContentAutor.setText(materialRecibido.getAutor());
         textViewContentColeccion.setText(materialRecibido.getColeccion());
@@ -46,7 +44,7 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
 
         final Button btnReserva= (Button) findViewById(R.id.button_reserva);
         btnReserva.setOnClickListener(new View.OnClickListener() {
-            String id=materialRecibido.getID();
+            String id=materialRecibido.getMaterialID();
             String biblioteca=materialRecibido.getBiblioteca();
             String titulo=materialRecibido.getTitulo();
             String user=" ";
