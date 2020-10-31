@@ -18,8 +18,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
 public class FireBaseDataBaseBiblitecaHelper {
@@ -35,7 +35,7 @@ public class FireBaseDataBaseBiblitecaHelper {
 
     private String[] filtro;
     private List<Biblioteca> listaBibliotecas= new ArrayList<>();
-    private List<ReservaMaterial> listaReserva=new ArrayList<>();
+    private List<Reservacion> listaReserva=new ArrayList<>();
     private List<Material> listaMaterial = new ArrayList<>();
     private Usuario usuario;
     private List<Reservacion> listaReservaciones = new ArrayList<>();
@@ -241,7 +241,7 @@ public class FireBaseDataBaseBiblitecaHelper {
 
 
 
-    public boolean addReserva(ReservaMaterial r,String c ){
+    public boolean addReserva(Reservacion r, String c ){
         actualizaCantMaterial(c,r.getMaterialID());
         DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");
         String date = df.format(Calendar.getInstance().getTime());
