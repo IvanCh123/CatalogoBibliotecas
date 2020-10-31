@@ -5,15 +5,15 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity
 public class Biblioteca {
-    @PrimaryKey (autoGenerate = true) @NonNull
-    private int bibliotecaID;
+    @PrimaryKey @NonNull
+    private String  bibliotecaID;
     private String nombre;
     private String horario;
     private String telefono;
     private double latitud;
     private double longitud;
 
-    public Biblioteca(int bibliotecaID, String nombre, String horario, String telefono, double latitud, double longitud) {
+    public Biblioteca(String bibliotecaID, String nombre, String horario, String telefono, double latitud, double longitud) {
         this.bibliotecaID = bibliotecaID;
         this.nombre = nombre;
         this.horario = horario;
@@ -25,11 +25,11 @@ public class Biblioteca {
     public Biblioteca() {
     }
 
-    public int getBibliotecaID() {
+    public String getBibliotecaID() {
         return bibliotecaID;
     }
 
-    public void setBibliotecaID(int bibliotecaID) {
+    public void setBibliotecaID(String bibliotecaID) {
         this.bibliotecaID = bibliotecaID;
     }
 

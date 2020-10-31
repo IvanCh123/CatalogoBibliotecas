@@ -5,19 +5,32 @@ import androidx.room.Insert;
 import androidx.room.Update;
 import androidx.room.Query;
 import java.util.List;
+@Dao
 public interface MaterialDAO {
     // Me traigo todas las bibliotecas que hay en la BD
     @Query("SELECT * FROM Material")
     List<Material> leerMateriales();
 
-    // Consulto una biblioteca a partir de su ID
+    // Consulto un material a partir de su ID
     @Query("SELECT * FROM Material WHERE materialID LIKE :materialID LIMIT 1")
     Material leerPorID(String materialID);
 
-    // Consulto una biblioteca a partir de su titulo
-    @Query("SELECT * FROM Material WHERE titulo LIKE :titulo LIMIT 1")
-    Material leerPorTitulo(String titulo);
+    // Busqueda por campo todos y coleccion general
+    // SELECT * FROM MATERIAL WHERE coleccion = 'General' AND (titulo LIKE '%palabraClave%' OR autor LIKE '%palabraClave' OR idioma LIKE '%palabraClave%')
+    @ Query("SELECT * FROM Material WHERE coleccion = :coleccionRecuperada  AND (titulo LIKE '%'||:palabraClave||'%' OR autor LIKE'%'||:palabraClave||'%' OR idioma LIKE '%'||:palabraClave||'%')")
+    List<Material> leerColeccionTodos(String coleccionRecuperada,String palabraClave);
 
+    // Busqueda por campo titulo y coleccion general
+    @Query("SELECT * FROM Material WHERE coleccion =:coleccionRecuperada AND (titulo LIKE '%'||:palabraClave||'%')")
+    List<Material> leerColeccionTitulo(String coleccionRecuperada,String palabraClave);
+
+    // Busqueda por campo autor y coleccion general
+    @Query("SELECT * FROM Material WHERE coleccion =:coleccionRecuperada AND (autor LIKE '%'||:palabraClave||'%')")
+    List<Material> leerColeccionAutor(String coleccionRecuperada,String palabraClave);
+
+    // Busqueda por campo idioma y coleccion general
+    @Query("SELECT * FROM Material WHERE coleccion =:coleccionRecuperada AND (idioma LIKE '%'||:palabraClave||'%')")
+    List<Material> leerColeccionIdioma(String coleccionRecuperada,String palabraClave);
     // Inserto material
     @Insert
     void insertar(Material... materiales);
