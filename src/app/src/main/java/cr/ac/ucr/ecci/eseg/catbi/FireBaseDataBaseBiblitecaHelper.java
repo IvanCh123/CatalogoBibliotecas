@@ -1,5 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,6 +45,8 @@ public class FireBaseDataBaseBiblitecaHelper {
     public List<Material> getListaMaterial() {
         return listaMaterial;
     }
+
+    private int idMaterial=0;
 
     public interface DataStatus{
         void dataLoaded(List<ListarBibliotecas>ListaBibliotecas,List<String>keys);
@@ -275,8 +279,30 @@ public class FireBaseDataBaseBiblitecaHelper {
         referenciaMaterial.child(id).child("cantidad").setValue(String.valueOf(c));
     }
 
-    public boolean addMaterial(Material m){
-        referenciaMaterial.child("10").setValue(m);
+    public boolean addMaterial( Material m){
+        //contarHijosMaterial();
+        Log.v("Cantidad2: ", Integer.toString(idMaterial));
         return true;
+    }
+
+    public void contarHijosMaterial(){
+        referenciaMaterial.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    idMaterial =(int)dataSnapshot.getChildrenCount();
+                    Log.v("Cantidad: ", Integer.toString(idMaterial));
+
+                }else{
+                    idMaterial=0;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 }

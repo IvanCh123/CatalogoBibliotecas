@@ -1,6 +1,9 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Administrar;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
@@ -15,9 +18,13 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
+
+import com.google.firebase.database.FirebaseDatabase;
 
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
@@ -30,6 +37,7 @@ public class AgregarMaterial extends AppCompatActivity {
     View v;
     private ColeccionOnClick coleccionOnClick;
     private BibliotecanOnClick bibliotecaOnClick;
+    private boolean add =false;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +54,8 @@ public class AgregarMaterial extends AppCompatActivity {
 
         coleccionOnClick = new ColeccionOnClick();
         bibliotecaOnClick=new BibliotecanOnClick();
+
+
 
         txtBiblioteca.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -102,9 +112,17 @@ public class AgregarMaterial extends AppCompatActivity {
                 matValido=false;
             }
         }
-        if(matValido){
-            Material newMaterial= new Material(autor,year,cant,col,tipo,titulo,idioma,biblio);
-            new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+        if(matValido) {
+            Material newMaterial = new Material(autor, year, cant, col, tipo, titulo, idioma, biblio);
+            AgregarMatDialogFragment a = new AgregarMatDialogFragment();
+            a.onCreateDialog();
+            if(add){
+                new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
+                new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+            }else{
+                Toast.makeText(getApplication(), "Se ha cancelado el agregado de material" , Toast.LENGTH_SHORT).show();
+            }
+
         }
 
         return true;
@@ -156,6 +174,26 @@ public class AgregarMaterial extends AppCompatActivity {
             txtColeccion.setText(item.getTitle());
 
             return false;
+        }
+    }
+
+    public class AgregarMatDialogFragment extends DialogFragment {
+        public Dialog onCreateDialog() {
+            // Use the Builder class for convenient dialog construction
+            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+            builder.setMessage("Desea agregar este material a la base de datos")
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                           add=true;
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            add=false;
+                        }
+                    });
+            // Create the AlertDialog object and return it
+            return builder.create();
         }
     }
 
