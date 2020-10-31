@@ -16,17 +16,61 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
+
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
+
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText correoUsuario;
     private EditText contrasenaUsuario;
     private Button btnInicioSesion;
     private ProgressBar barraProgreso;
+    private FireBaseDataBaseBibliotecaHelper mFireBaseDataBaseBibliotecaHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        /*
+        //Se crea instancia del helper
+        mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBibliotecaHelper();
+        // Obtener datos de Firebase
+        //Bibliotecas
+        mFireBaseDataBaseBibliotecaHelper.readBibliotecas(new FireBaseDataBaseBibliotecaHelper.DataStatus(){
+            @Override
+            public void dataLoaded(List<Biblioteca> bibliotecas, List<String> keys) {
+                insertarBibliotecasBaseLocal(bibliotecas);
+            }
+        });
+        //Usuarios
+        mFireBaseDataBaseBibliotecaHelper.readAllUsuarios(new FireBaseDataBaseBibliotecaHelper.UsuariosDataStatusList(){
+            @Override
+            public void DataIsLoaded(List<Usuario> usuarios, List<String> keys) {
+                insertarUsuariosBaseLocal(usuarios);
+            }
+        });
+
+        //Reservaciones
+        mFireBaseDataBaseBibliotecaHelper.readAllReservaciones(new FireBaseDataBaseBibliotecaHelper.ReservaDataStatus(){
+            @Override
+            public void DataIsLoaded(List<Reservacion> reservaciones, List<String> keys) {
+                insertarReservacionesBaseLocal(reservaciones);
+            }
+        });
+
+        //Materiales
+        mFireBaseDataBaseBibliotecaHelper.readAllMateriales(new FireBaseDataBaseBibliotecaHelper.MaterialDataStatus(){
+            @Override
+            public void DataIsLoaded(List<Material> materiales, List<String> keys) {
+                insertarMaterialesBaseLocal(materiales);
+            }
+        });
+        */
         mAuth = FirebaseAuth.getInstance();
         correoUsuario = findViewById(R.id.editTextCorreo);
         contrasenaUsuario = findViewById(R.id.editTextContrasena);
@@ -40,7 +84,6 @@ public class LoginActivity extends AppCompatActivity {
                 String correo = correoUsuario.getText().toString();
                 String password = contrasenaUsuario.getText().toString();
                 autenticarUsuarios(correo,password,view);
-
             }
         });
     }
@@ -67,6 +110,22 @@ public class LoginActivity extends AppCompatActivity {
                 }
             });
         }
+
+    }
+
+    public void insertarBibliotecasBaseLocal(List<Biblioteca> bibliotecas){
+
+    }
+
+    public void insertarUsuariosBaseLocal(List<Usuario> usuarios){
+
+    }
+
+    public void insertarReservacionesBaseLocal(List<Reservacion> reservaciones){
+
+    }
+
+    public void insertarMaterialesBaseLocal(List<Material> material){
 
     }
 }
