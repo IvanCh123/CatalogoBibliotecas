@@ -34,7 +34,7 @@
             android:label="@string/title_activity_biblioteca_ubicacion"></activity>
         <activity android:name=".ui.Resultado.ResultadosBusquedaActivity"></activity>
         <activity android:name=".InformacionDetalladaMaterial"></activity>
-        <activity android:name=".RevervaLibros"></activity>
+        <activity android:name=".ReservaLibros"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">

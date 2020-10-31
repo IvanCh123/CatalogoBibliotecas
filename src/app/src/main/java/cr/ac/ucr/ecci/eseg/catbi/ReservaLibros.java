@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 
-public class RevervaLibros extends AppCompatActivity {
+public class ReservaLibros extends AppCompatActivity {
     private String biblio;
     private String titulo;
     private String id;
@@ -89,12 +89,12 @@ public class RevervaLibros extends AppCompatActivity {
 
     private boolean agregarReserva(String dias, String id,String titulo){
         Reservacion reservacion =new Reservacion("",dias,id,titulo,"0");
-        boolean b= new FireBaseDataBaseBiblitecaHelper().addReserva(reservacion,cant);
+        boolean b= new FireBaseDataBaseBibliotecaHelper().addReserva(reservacion,cant);
 
         return b;
     }
 
     private void retornar(){
-        startActivity(new Intent(RevervaLibros.this, MainActivity.class));
+        startActivity(new Intent(ReservaLibros.this, MainActivity.class));
     }
 }

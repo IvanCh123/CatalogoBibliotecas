@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.RecycleViewBibliotecaConfig;
@@ -36,7 +36,7 @@ public class UbicacionFragment extends Fragment {
 
         BibliotecaConfig = v.findViewById(R.id.recycler_bibliotecas);
         Log.d("Tq", String.valueOf(BibliotecaConfig));
-        new FireBaseDataBaseBiblitecaHelper().readBibliotecas(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
+        new FireBaseDataBaseBibliotecaHelper().readBibliotecas(new FireBaseDataBaseBibliotecaHelper.DataStatus() {
             @Override
             public void dataLoaded(List<Biblioteca> listaBibliotecas, List<String> keys) {
                 Log.d("Tq", String.valueOf(listaBibliotecas.size()));
@@ -69,7 +69,7 @@ public class UbicacionFragment extends Fragment {
 
         BibliotecaConfig = v.findViewById(R.id.recycler_bibliotecas);
         Log.d("Tq", String.valueOf(BibliotecaConfig));
-        new FireBaseDataBaseBiblitecaHelper().readBibliotecas(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
+        new FireBaseDataBaseBibliotecaHelper().readBibliotecas(new FireBaseDataBaseBibliotecaHelper.DataStatus() {
             @Override
             public void dataLoaded(List<Biblioteca> listaBibliotecas, List<String> keys) {
                 Log.d("Tq", String.valueOf(listaBibliotecas.size()));

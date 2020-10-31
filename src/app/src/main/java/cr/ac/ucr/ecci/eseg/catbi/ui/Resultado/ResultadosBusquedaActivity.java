@@ -13,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.InformacionDetalladaMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.RecyclerViewMaterial_Config;
@@ -22,7 +22,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
 
     private RecyclerView mRecyclerView;
 
-    private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBibliotecaHelper;
+    private FireBaseDataBaseBibliotecaHelper mFireBaseDataBaseBibliotecaHelper;
 
     public final static String MESSAGE_KEY ="palabraKey";
     public final static String CAMPO_KEY ="campoBusquedaKey";
@@ -39,8 +39,8 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_material);
-        mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBiblitecaHelper();
-        mFireBaseDataBaseBibliotecaHelper.readMaterial(new FireBaseDataBaseBiblitecaHelper.MaterialDataStatus(){
+        mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBibliotecaHelper();
+        mFireBaseDataBaseBibliotecaHelper.readMaterial(new FireBaseDataBaseBibliotecaHelper.MaterialDataStatus(){
             @Override
             public void DataIsLoaded(List<Material> material, List<String> keys) {
                 new RecyclerViewMaterial_Config().setConfig(mRecyclerView, ResultadosBusquedaActivity.this,material,keys,ResultadosBusquedaActivity.this, filtro);

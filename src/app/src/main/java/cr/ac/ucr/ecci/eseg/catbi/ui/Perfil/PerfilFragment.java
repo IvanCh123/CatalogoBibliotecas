@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
@@ -30,7 +30,7 @@ public class PerfilFragment extends Fragment {
     private TextView correoUsuario;
     private FirebaseAuth mAuth;
     private FirebaseUser usuarioActual;
-    private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBibliotecaHelper;
+    private FireBaseDataBaseBibliotecaHelper mFireBaseDataBaseBibliotecaHelper;
     private RecyclerView mRecyclerView;
     private Context mContext;
 
@@ -53,15 +53,15 @@ public class PerfilFragment extends Fragment {
         usuarioActual = mAuth.getCurrentUser();
         String correo = usuarioActual.getEmail();
         String userID = usuarioActual.getUid();
-        mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBiblitecaHelper();
-        mFireBaseDataBaseBibliotecaHelper.readUsuarios(new FireBaseDataBaseBiblitecaHelper.UsuariosDataStatus(){
+        mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBibliotecaHelper();
+        mFireBaseDataBaseBibliotecaHelper.readUsuarios(new FireBaseDataBaseBibliotecaHelper.UsuariosDataStatus(){
             @Override
             public void DataIsLoaded(Usuario usuarioP) {
                 fillText(usuarioP);
             }
         },correo);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.reservacionesRecyclerView);
-        new FireBaseDataBaseBiblitecaHelper().readReservas(new FireBaseDataBaseBiblitecaHelper.ReservaDataStatus(){
+        new FireBaseDataBaseBibliotecaHelper().readReservas(new FireBaseDataBaseBibliotecaHelper.ReservaDataStatus(){
             @Override
             public void DataIsLoaded(List<Reservacion> reservacion, List<String> keys){
                 new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, getContext(), reservacion, keys);
