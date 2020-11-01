@@ -12,33 +12,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
+
 public class ConfirmarAgregarMaterialDialogAlert extends AppCompatDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder alterReserva= new AlertDialog.Builder(getActivity());
-        final String biblio= getArguments().getString("biblio");
-        final String id= getArguments().getString("id");
-        final String titu= getArguments().getString("titulo");
-        final String user= getArguments().getString("user");
-        final String cant= getArguments().getString("cant");
-        //final String finalB =bilio+" " +titu ;
+        final String[] mat= getArguments().getStringArray("material");
+        final Material newMaterial=new Material(mat[0],mat[1],mat[2],mat[3],mat[4],mat[5],mat[6],mat[7]);
         alterReserva.setTitle("¿Desea reservar este libro?")
                 .setMessage("Presione si para continuar el proceso de reserva")
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //Toast.makeText(getActivity(), finalB,Toast.LENGTH_SHORT).show();
-                        //Toast.makeText(getActivity(),"Se presiono SI",Toast.LENGTH_SHORT).show();
-                        Context c=getContext();
-                        Intent intent1 = new Intent(c,RevervaLibros.class);
-                        intent1.putExtra("biblio",biblio);
-                        intent1.putExtra("id",id);
-                        intent1.putExtra("titulo",titu);
-                        intent1.putExtra("user",user);
-                        intent1.putExtra("cant",cant);
-                        c.startActivity(intent1);
-                        //Toast.makeText(getActivity(), finalB,Toast.LENGTH_SHORT).show();
+                        new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
+                        new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+                        Toast.makeText(getActivity(), "Se agrego el material" , Toast.LENGTH_SHORT).show();
                     }
                 }).setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override

@@ -281,6 +281,9 @@ public class FireBaseDataBaseBiblitecaHelper {
 
     public boolean addMaterial( Material m){
         //contarHijosMaterial();
+        DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");
+        String date = df.format(Calendar.getInstance().getTime());
+        referenciaMaterial.child(date).setValue(m);
         Log.v("Cantidad2: ", Integer.toString(idMaterial));
         return true;
     }
