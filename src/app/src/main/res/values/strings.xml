@@ -19,5 +19,6 @@
     <string name="texto_reserva">Reservar Libro</string>
     <string name="hint_campo_text">Todos</string>
     <string name="hint_general">General</string>
+    <string name="hint_todas">Todas</string>
 
 </resources>
