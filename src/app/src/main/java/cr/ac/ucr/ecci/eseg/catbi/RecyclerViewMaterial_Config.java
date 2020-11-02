@@ -1,6 +1,8 @@
 package cr.ac.ucr.ecci.eseg.catbi;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.logging.Handler;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
@@ -19,19 +22,31 @@ public class RecyclerViewMaterial_Config {
     private Context mContext;
     private MaterialAdapter mMaterialAdapter;
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<Material> materiales, List<String> keys, OnNoteListener onNoteListener, String[] filtro){
+    public void setConfig(final RecyclerView recyclerView, final Context context, List<Material> materiales, List<String> keys, OnNoteListener onNoteListener, final String[] filtro, Activity activity){
         mContext = context;
         mMaterialAdapter = new MaterialAdapter(materiales, keys, onNoteListener);
-
         if(mMaterialAdapter.mListaMaterial.size() != 0){
-            Toast.makeText(mContext,"Mostrando resultados para: "+filtro[0]+".\n Buscando por: "+filtro[1]+ "\n En coleccion: "+filtro[2], Toast.LENGTH_LONG).show();
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            recyclerView.setAdapter(mMaterialAdapter);
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(mContext,"Mostrando resultados para: "+filtro[0]+".\n Buscando por: "+filtro[1]+ "\n En coleccion: "+filtro[2], Toast.LENGTH_LONG).show();
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    recyclerView.setAdapter(mMaterialAdapter);
+                }
+            });
+
         }else{
-            Toast.makeText(mContext,"No se encontraron resultados.", Toast.LENGTH_LONG).show();
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(mContext,"No se encontraron resultados.", Toast.LENGTH_LONG).show();
+                }
+            });
+
         }
 
     }
+
 
     class MaterialItemView extends RecyclerView.ViewHolder implements View.OnClickListener{
         private TextView mTitulo;

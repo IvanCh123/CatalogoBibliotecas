@@ -49,7 +49,6 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_material);
 
-
         //Para saber si tiene acceso a internet
         ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -61,7 +60,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
                 @Override
                 public void DataIsLoaded(List<Material> material, List<String> keys) {
 
-                    new RecyclerViewMaterial_Config().setConfig(mRecyclerView, ResultadosBusquedaActivity.this,material,keys,ResultadosBusquedaActivity.this, filtro);
+                    new RecyclerViewMaterial_Config().setConfig(mRecyclerView, ResultadosBusquedaActivity.this,material,keys,ResultadosBusquedaActivity.this, filtro, ResultadosBusquedaActivity.this);
                 }
             }, filtro);
 
@@ -75,10 +74,11 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
                     for(int i =0; i < tamanoLista; i++){
                         keys.add(String.valueOf(i));
                     }
-                    new RecyclerViewMaterial_Config().setConfig(mRecyclerView,ResultadosBusquedaActivity.this,materiales,keys,ResultadosBusquedaActivity.this,filtro);
+                    new RecyclerViewMaterial_Config().setConfig(mRecyclerView,ResultadosBusquedaActivity.this,materiales,keys,ResultadosBusquedaActivity.this,filtro,ResultadosBusquedaActivity.this);
 
                 }
             });
+
             dbLocalHelper = new DataBaseHelperRoom(getApplicationContext());
             dbLocalHelper.readMaterialLocal(parametroAsyncTask);
 

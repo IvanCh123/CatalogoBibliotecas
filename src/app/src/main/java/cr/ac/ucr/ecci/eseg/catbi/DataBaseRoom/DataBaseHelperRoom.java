@@ -33,28 +33,25 @@ public class DataBaseHelperRoom {
         List<Material> consulta = new ArrayList<>();
         if(parametroAsyncTask.getColeccion().equalsIgnoreCase("todas")){
             realizarFiltradoSinColeccionLocal(parametroAsyncTask);
-        }/*else{
+        }else {
             realizarFiltradoConColeccionLocal(parametroAsyncTask);
-        }*/
+        }
     }
 
-    public void realizarFiltradoConColeccionLocal(String filtro []){
-        String palabraClave = filtro[0];
-        String campoBusqueda = filtro[1];
-        String colecionFiltro = filtro[2];
-        new leerCamposBusqueda().execute(colecionFiltro,palabraClave,campoBusqueda);
+    public void realizarFiltradoConColeccionLocal(ObjetoParametroAsyncTask parametroAsyncTask){
+        new leerCamposBusqueda().execute(parametroAsyncTask);
     }
 
     public void realizarFiltradoSinColeccionLocal(ObjetoParametroAsyncTask parametroAsyncTask){
         new leerCamposBusquedaSinColeccion().execute(parametroAsyncTask);
     }
 
-    private class leerCamposBusqueda extends AsyncTask<String, Void, List<Material>> {
+    private class leerCamposBusqueda extends AsyncTask<ObjetoParametroAsyncTask, Void, Void> {
         @Override
-        protected List<Material> doInBackground(String... filtro) {
-            String coleccion = filtro[0];
-            String palabraClave = filtro[1];
-            String campoBusqueda = filtro [2];
+        protected Void doInBackground(ObjetoParametroAsyncTask... filtro) {
+            String coleccion = filtro[0].getColeccion();
+            String palabraClave = filtro[0].getPalabraClave();
+            String campoBusqueda = filtro[0].getCampoBusqueda();
             List<Material> materialesConsultados = new ArrayList<>();
             switch (campoBusqueda){
                 case "titulo":
@@ -70,18 +67,12 @@ public class DataBaseHelperRoom {
                     materialesConsultados = dbLocal.materialDAO().leerColeccionTodos(coleccion,palabraClave);
                     break;
             }
-            return materialesConsultados;
+            ObjetoParametroAsyncTask.MaterialDataStatus materialDataStatus = filtro[0].getMaterialStatus();
+            materialDataStatus.DataIsLoaded(materialesConsultados);
+            return  null;
         }
 
-        @Override
-        protected void onPostExecute(List<Material> materialesConsultados) {
-            if(materialesConsultados != null){
-                materiales = materialesConsultados;
-            }else {
-                List<Material> materialVacio = new ArrayList<>();
-                materiales = materialVacio;
-            }
-        }
+
     }
 
     private class leerCamposBusquedaSinColeccion extends AsyncTask<ObjetoParametroAsyncTask,Void, Void> {
