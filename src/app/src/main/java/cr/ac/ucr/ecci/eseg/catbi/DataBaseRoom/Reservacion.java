@@ -8,14 +8,18 @@ import java.util.Date;
 
 @Entity
 public class Reservacion {
+
+
     @PrimaryKey @NonNull
+    private String reservacionID;
     private String correoUsuario;
     private String fechaLimite;
     private String materialID;
     private String tituloMaterial;
     private String usuarioID;
 
-    public Reservacion() {
+    public Reservacion(){
+
     }
 
     public Reservacion(String correoUsuario, String fechaLimite, String materialID, String tituloMaterial, String usuarioID) {
@@ -34,6 +38,13 @@ public class Reservacion {
         this.correoUsuario = correoUsuario;
     }
 
+    public String getFechaLimite() {
+        return fechaLimite;
+    }
+
+    public void setFechaLimite(String fechaLimite) {
+        this.fechaLimite = fechaLimite;
+    }
 
     public String getMaterialID() {
         return materialID;
@@ -51,19 +62,20 @@ public class Reservacion {
         this.tituloMaterial = tituloMaterial;
     }
 
-    public void setFechaLimite(String fechaLimite) {
-        this.fechaLimite = fechaLimite;
+    public String getUsuarioID() {
+        return usuarioID;
     }
 
     public void setUsuarioID(String usuarioID) {
         this.usuarioID = usuarioID;
     }
 
-    public String getFechaLimite() {
-        return fechaLimite;
+    public String getReservacionID() {
+        return reservacionID;
     }
 
-    public String getUsuarioID() {
-        return usuarioID;
+    public void setReservacionID( String reservacionID) {
+        this.reservacionID = reservacionID;
     }
+
 }

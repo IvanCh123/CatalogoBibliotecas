@@ -9,14 +9,14 @@ public class Usuario {
     @PrimaryKey @NonNull
     private String correo;
     private String nombre;
-    private String contrasena;
+    private String contraseña;
 
     public Usuario() {}
 
-    public Usuario(String correo, String nombre, String contrasena) {
+    public Usuario(String correo, String nombre, String contraseña) {
         this.correo = correo;
         this.nombre = nombre;
-        this.contrasena = contrasena;
+        this.contraseña = contraseña;
     }
 
     public String getCorreo() {
@@ -35,11 +35,11 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getContrasena() {
-        return contrasena;
+    public String getContraseña() {
+        return contraseña;
     }
 
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 }

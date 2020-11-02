@@ -181,6 +181,7 @@ public class FireBaseDataBaseBibliotecaHelper {
                 listaReservaciones.clear();
                 for(DataSnapshot keyNode: dataSnapshot.getChildren()){
                     Reservacion reservacion  = keyNode.getValue(Reservacion.class);
+                    reservacion.setReservacionID(keyNode.getKey());
                     listaReservaciones.add(reservacion);
                 }
                 dataStatus.DataIsLoaded(listaReservaciones);
@@ -192,9 +193,6 @@ public class FireBaseDataBaseBibliotecaHelper {
             }
         });
     }
-
-
-
 
 
     public void readMaterial(final MaterialDataStatus materialDataStatus, final String[] filtro){

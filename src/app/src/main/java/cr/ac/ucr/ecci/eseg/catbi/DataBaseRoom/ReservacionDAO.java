@@ -3,6 +3,7 @@ package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
@@ -15,7 +16,7 @@ public interface ReservacionDAO {
     List<Reservacion> leerPorCorreo(String correo);
 
     // Inserto reservaciones
-    @Insert
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertar(Reservacion... reservacion);
 
     // Borro una reservacion

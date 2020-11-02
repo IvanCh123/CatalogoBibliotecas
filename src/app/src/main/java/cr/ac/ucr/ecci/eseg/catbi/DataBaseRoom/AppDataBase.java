@@ -3,7 +3,7 @@ import androidx.room.Database;
 import androidx.room.RoomDatabase;
 
 // Aca tenemos que definir Biblioteca, Material, Usuario....
-@Database(entities = {Biblioteca.class, Material.class, Usuario.class, Reservacion.class}, version = 1)
+@Database(entities = {Biblioteca.class, Material.class, Usuario.class, Reservacion.class}, version = 4)
 public abstract class AppDataBase extends RoomDatabase {
     public abstract BibliotecaDAO bibliotecaDAO();
     public abstract MaterialDAO materialDAO();

@@ -5,8 +5,9 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity
 public class Biblioteca {
+
     @PrimaryKey @NonNull
-    private String  bibliotecaID;
+    private String bibliotecaID;
     private String nombre;
     private String horario;
     private String telefono;
@@ -72,4 +73,7 @@ public class Biblioteca {
     public void setLongitud(double longitud) {
         this.longitud = longitud;
     }
+
+
+
 }

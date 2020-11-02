@@ -2,6 +2,7 @@ package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Update;
 import androidx.room.Query;
 import java.util.List;
@@ -32,7 +33,7 @@ public interface MaterialDAO {
     @Query("SELECT * FROM Material WHERE coleccion =:coleccionRecuperada AND (idioma LIKE '%'||:palabraClave||'%')")
     List<Material> leerColeccionIdioma(String coleccionRecuperada,String palabraClave);
     // Inserto material
-    @Insert
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertar(Material... materiales);
 
     // Borro un material

@@ -43,20 +43,20 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         //Se crea la base local
         dbLocal = Room.databaseBuilder(getApplicationContext(),
-                AppDataBase.class, "bibliotecasStorage").build();
+                AppDataBase.class, "bibliotecasStorage").fallbackToDestructiveMigration().build();
 
         //Se crea instancia del helper
         mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBibliotecaHelper();
         // Obtener datos de Firebase
         //Bibliotecas
-        mFireBaseDataBaseBibliotecaHelper.readAllBibliotecas(new FireBaseDataBaseBibliotecaHelper.AllBibliotecasDataStatus(){
+        mFireBaseDataBaseBibliotecaHelper.readAllBibliotecas(new FireBaseDataBaseBibliotecaHelper.AllBibliotecasDataStatus() {
             @Override
             public void DataIsLoaded(List<Biblioteca> bibliotecas) {
                 insertarBibliotecasBaseLocal(bibliotecas);
             }
         });
         //Usuarios
-        mFireBaseDataBaseBibliotecaHelper.readAllUsuarios(new FireBaseDataBaseBibliotecaHelper.AllUsuariosDataStatus(){
+        mFireBaseDataBaseBibliotecaHelper.readAllUsuarios(new FireBaseDataBaseBibliotecaHelper.AllUsuariosDataStatus() {
             @Override
             public void DataIsLoaded(List<Usuario> usuarios) {
                 insertarUsuariosBaseLocal(usuarios);
@@ -64,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //Reservaciones
-        mFireBaseDataBaseBibliotecaHelper.readAllReservaciones(new FireBaseDataBaseBibliotecaHelper.AllReservacionesDataStatus(){
+        mFireBaseDataBaseBibliotecaHelper.readAllReservaciones(new FireBaseDataBaseBibliotecaHelper.AllReservacionesDataStatus() {
             @Override
             public void DataIsLoaded(List<Reservacion> reservaciones) {
                 insertarReservacionesBaseLocal(reservaciones);
@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //Materiales
-        mFireBaseDataBaseBibliotecaHelper.readAllMateriales(new FireBaseDataBaseBibliotecaHelper.AllMaterialesDataStatus(){
+        mFireBaseDataBaseBibliotecaHelper.readAllMateriales(new FireBaseDataBaseBibliotecaHelper.AllMaterialesDataStatus() {
             @Override
             public void DataIsLoaded(List<Material> materiales) {
                 insertarMaterialesBaseLocal(materiales);
@@ -91,29 +91,31 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String correo = correoUsuario.getText().toString();
                 String password = contrasenaUsuario.getText().toString();
-                autenticarUsuarios(correo,password,view);
+                //autenticarUsuariosFirebase(correo, password, view);
+                autenticarUsuariosLocal(correo,password,view);
             }
         });
     }
+
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
         barraProgreso.setVisibility(View.INVISIBLE);
     }
 
 
-    public void autenticarUsuarios (String correo, String password, final View view){
-        if (correo.isEmpty() || password.isEmpty()){
-            Toast.makeText(LoginActivity.this,"Por favor digite un correo y una contraseña",Toast.LENGTH_SHORT).show();
+    public void autenticarUsuariosFirebase(String correo, String password, final View view) {
+        if (correo.isEmpty() || password.isEmpty()) {
+            Toast.makeText(LoginActivity.this, "Por favor digite un correo y una contraseña", Toast.LENGTH_SHORT).show();
         } else {
-            mAuth.signInWithEmailAndPassword(correo,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(correo, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
+                    if (task.isSuccessful()) {
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         barraProgreso.setVisibility(view.VISIBLE);
-                    }else {
-                        Toast.makeText(LoginActivity.this,"Credenciales inválidas",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -121,27 +123,37 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void insertarBibliotecasBaseLocal(List<Biblioteca> bibliotecas){
+    public void autenticarUsuariosLocal(String correo, String password, final View view) {
+        if (correo.isEmpty() || password.isEmpty()) {
+            Toast.makeText(LoginActivity.this, "Por favor digite un correo y una contraseña", Toast.LENGTH_SHORT).show();
+        } else {
+            Usuario usuario = new Usuario();
+            new leerUsuario().execute(correo, password);
+        }
+
+    }
+
+    public void insertarBibliotecasBaseLocal(List<Biblioteca> bibliotecas) {
         new insertarBibliotecas().execute(bibliotecas);
     }
 
-    public void insertarUsuariosBaseLocal(List<Usuario> usuarios){
+    public void insertarUsuariosBaseLocal(List<Usuario> usuarios) {
         new insertarUsuarios().execute(usuarios);
     }
 
-    public void insertarReservacionesBaseLocal(List<Reservacion> reservaciones){
+    public void insertarReservacionesBaseLocal(List<Reservacion> reservaciones) {
         new insertarReservaciones().execute(reservaciones);
     }
 
-    public void insertarMaterialesBaseLocal(List<Material> materiales){
+    public void insertarMaterialesBaseLocal(List<Material> materiales) {
         new insertarMateriales().execute(materiales);
     }
 
     private class insertarBibliotecas extends AsyncTask<List<Biblioteca>, Void, Void> {
         @Override
         protected Void doInBackground(List<Biblioteca>... lists) {
-            List <Biblioteca> bibliotecas = lists[0];
-            for(int i = 0; i<bibliotecas.size();i++){
+            List<Biblioteca> bibliotecas = lists[0];
+            for (int i = 0; i < bibliotecas.size(); i++) {
                 Biblioteca biblioteca = (Biblioteca) bibliotecas.get(i);
                 dbLocal.bibliotecaDAO().insertar(biblioteca);
             }
@@ -149,17 +161,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute (Void aVoid) {
-        // Mostrar un mensaje para el usuario
-            Toast.makeText(getApplicationContext(), "Se han insertado las bilbiotecas" , Toast.LENGTH_LONG).show();
+        protected void onPostExecute(Void aVoid) {
+            // Mostrar un mensaje para el usuario
+            Toast.makeText(getApplicationContext(), "Se han insertado las bilbiotecas", Toast.LENGTH_LONG).show();
         }
     }
 
     private class insertarUsuarios extends AsyncTask<List<Usuario>, Void, Void> {
         @Override
         protected Void doInBackground(List<Usuario>... lists) {
-            List <Usuario> usuarios = lists[0];
-            for(int i = 0; i<usuarios.size();i++){
+            List<Usuario> usuarios = lists[0];
+            for (int i = 0; i < usuarios.size(); i++) {
                 Usuario usuario = (Usuario) usuarios.get(i);
                 dbLocal.usuarioDAO().insertar(usuario);
             }
@@ -167,17 +179,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute (Void aVoid) {
+        protected void onPostExecute(Void aVoid) {
             // Mostrar un mensaje para el usuario
-            Toast.makeText(getApplicationContext(), "Se han insertado los usuarios" , Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Se han insertado los usuarios", Toast.LENGTH_LONG).show();
         }
     }
 
     private class insertarReservaciones extends AsyncTask<List<Reservacion>, Void, Void> {
         @Override
         protected Void doInBackground(List<Reservacion>... lists) {
-            List <Reservacion> reservaciones = lists[0];
-            for(int i = 0; i<reservaciones.size();i++){
+            List<Reservacion> reservaciones = lists[0];
+            for (int i = 0; i < reservaciones.size(); i++) {
                 Reservacion reservacion = (Reservacion) reservaciones.get(i);
                 dbLocal.reservacionDAO().insertar(reservacion);
             }
@@ -185,17 +197,17 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute (Void aVoid) {
+        protected void onPostExecute(Void aVoid) {
             // Mostrar un mensaje para el usuario
-            Toast.makeText(getApplicationContext(), "Se han insertado las reservaciones" , Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Se han insertado las reservaciones", Toast.LENGTH_LONG).show();
         }
     }
 
     private class insertarMateriales extends AsyncTask<List<Material>, Void, Void> {
         @Override
         protected Void doInBackground(List<Material>... lists) {
-            List <Material> materiales = lists[0];
-            for(int i = 0; i<materiales.size();i++){
+            List<Material> materiales = lists[0];
+            for (int i = 0; i < materiales.size(); i++) {
                 Material material = (Material) materiales.get(i);
                 dbLocal.materialDAO().insertar(material);
             }
@@ -203,9 +215,28 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute (Void aVoid) {
+        protected void onPostExecute(Void aVoid) {
             // Mostrar un mensaje para el usuario
-            Toast.makeText(getApplicationContext(), "Se han insertado los materiales" , Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Se han insertado los materiales", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private class leerUsuario extends AsyncTask<String, Void, Usuario> {
+        @Override
+        protected Usuario doInBackground(String... autenticacion) {
+            String correo = autenticacion[0];
+            String password = autenticacion[1];
+            Usuario usuario = dbLocal.usuarioDAO().leerAutenticacion(correo, password);
+            return usuario;
+        }
+
+        @Override
+        protected void onPostExecute(Usuario usuario) {
+            if(usuario != null){
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            }else{
+                Toast.makeText(LoginActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

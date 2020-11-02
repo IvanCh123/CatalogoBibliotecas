@@ -2,6 +2,7 @@ package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Update;
 import androidx.room.Query;
 import java.util.List;
@@ -17,7 +18,7 @@ public interface BibliotecaDAO {
     Biblioteca leerPorID(String bibliotecaID);
 
     // Inserto biblioteca
-    @Insert
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertar(Biblioteca... bibliotecas);
 
     // Borro una biblioteca
