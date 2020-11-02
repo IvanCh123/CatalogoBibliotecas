@@ -4,7 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -91,8 +94,16 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String correo = correoUsuario.getText().toString();
                 String password = contrasenaUsuario.getText().toString();
-                //autenticarUsuariosFirebase(correo, password, view);
-                autenticarUsuariosLocal(correo,password,view);
+                //Pkara saber si tiene acceso a internet
+                ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+                boolean isConnected = activeNetwork != null &&
+                        activeNetwork.isConnectedOrConnecting();
+                if(isConnected){
+                    autenticarUsuariosFirebase(correo, password, view);
+                }else{
+                    autenticarUsuariosLocal(correo,password,view);
+                }
             }
         });
     }
