@@ -31,21 +31,21 @@ public class DataBaseHelperRoom {
     public List<Material> readMaterialLocal (String filtro []){
         List<Material> consulta = new ArrayList<>();
         if(filtro[2].equalsIgnoreCase("general")){
-            realizarFiltradoSinColeccionLocal(filtro);
+            //realizarFiltradoSinColeccionLocal(filtro);
         }else{
-            //realizarFiltradoConColeccionLocal(filtro);
+            realizarFiltradoConColeccionLocal(filtro);
         }
         return consulta;
     }
 
-    public void realizarFiltradoSinColeccionLocal(String filtro []){
+    public void realizarFiltradoConColeccionLocal(String filtro []){
         String palabraClave = filtro[0];
         String campoBusqueda = filtro[1];
         String colecionFiltro = filtro[2];
         new leerCamposBusqueda().execute(colecionFiltro,palabraClave,campoBusqueda);
     }
 
-    /*public List<Material> realizarFiltradoConColeccionLocal(String filtro []){
+    /*public List<Material> realizarFiltradoSinColeccionLocal(String filtro []){
         String palabraClave = filtro[0];
         String campoBusqueda = filtro[1];
         String colecionFiltro = filtro[2];
