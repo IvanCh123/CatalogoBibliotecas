@@ -30,8 +30,8 @@ public class DataBaseHelperRoom {
 
     public List<Material> readMaterialLocal (String filtro []){
         List<Material> consulta = new ArrayList<>();
-        if(filtro[2].equalsIgnoreCase("general")){
-            //realizarFiltradoSinColeccionLocal(filtro);
+        if(filtro[2].equalsIgnoreCase("todas")){
+            realizarFiltradoSinColeccionLocal(filtro);
         }else{
             realizarFiltradoConColeccionLocal(filtro);
         }
@@ -45,12 +45,11 @@ public class DataBaseHelperRoom {
         new leerCamposBusqueda().execute(colecionFiltro,palabraClave,campoBusqueda);
     }
 
-    /*public List<Material> realizarFiltradoSinColeccionLocal(String filtro []){
+    public void realizarFiltradoSinColeccionLocal(String filtro []){
         String palabraClave = filtro[0];
         String campoBusqueda = filtro[1];
-        String colecionFiltro = filtro[2];
-        new leerCamposBusquedaColeccion().execute(colecionFiltro,palabraClave,campoBusqueda);
-    }*/
+        new leerCamposBusquedaSinColeccion().execute(palabraClave,campoBusqueda);
+    }
 
 
     private class leerCamposBusqueda extends AsyncTask<String, Void, List<Material>> {
@@ -85,9 +84,42 @@ public class DataBaseHelperRoom {
                 List<Material> materialVacio = new ArrayList<>();
                 materiales = materialVacio;
             }
-
-
         }
+    }
+
+    private class leerCamposBusquedaSinColeccion extends AsyncTask<String, Void, List<Material>> {
+        @Override
+        protected List<Material> doInBackground(String... filtro) {
+            String palabraClave = filtro[0];
+            String campoBusqueda = filtro[1];
+            List<Material> materialesConsultados = new ArrayList<>();
+            switch (campoBusqueda) {
+                case "titulo":
+                    materialesConsultados = dbLocal.materialDAO().leerSinColeccionTitulo(palabraClave);
+                    break;
+                case "autor":
+                    materialesConsultados = dbLocal.materialDAO().leerSinColeccionAutor(palabraClave);
+                    break;
+                case "idioma":
+                    materialesConsultados = dbLocal.materialDAO().leerSinColeccionIdioma(palabraClave);
+                    break;
+                case "todo":
+                    materialesConsultados = dbLocal.materialDAO().leerSinColeccionTodos(palabraClave);
+                    break;
+            }
+            return materialesConsultados;
+        }
+
+        @Override
+        protected void onPostExecute(List<Material> materialesConsultados) {
+            if(materialesConsultados != null){
+                materiales = materialesConsultados;
+            }else {
+                List<Material> materialVacio = new ArrayList<>();
+                materiales = materialVacio;
+            }
+        }
+
     }
 
 
