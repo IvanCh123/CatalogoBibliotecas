@@ -21,7 +21,7 @@ public interface MaterialDAO {
     @ Query("SELECT * FROM Material WHERE coleccion = :coleccionRecuperada  AND (titulo LIKE '%'||:palabraClave||'%' OR autor LIKE'%'||:palabraClave||'%' OR idioma LIKE '%'||:palabraClave||'%')")
     List<Material> leerColeccionTodos(String coleccionRecuperada,String palabraClave);
 
-    // Busqueda por campo titulo y coleccion general
+    // Busqueda por campo titulo y colección
     @Query("SELECT * FROM Material WHERE coleccion =:coleccionRecuperada AND (titulo LIKE '%'||:palabraClave||'%')")
     List<Material> leerColeccionTitulo(String coleccionRecuperada,String palabraClave);
 
