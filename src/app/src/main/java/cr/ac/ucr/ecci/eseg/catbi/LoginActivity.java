@@ -94,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String correo = correoUsuario.getText().toString();
                 String password = contrasenaUsuario.getText().toString();
-                //Pkara saber si tiene acceso a internet
+                //Para saber si tiene acceso a internet
                 ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
                 NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
                 boolean isConnected = activeNetwork != null &&
