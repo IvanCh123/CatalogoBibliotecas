@@ -28,6 +28,10 @@ public class DataBaseHelperRoom {
                 AppDataBase.class, "bibliotecasStorage").fallbackToDestructiveMigration().build();
     }
 
+    public List<Material> getMateriales() {
+        return materiales;
+    }
+
 
     public void readMaterialLocal (ObjetoParametroAsyncTask parametroAsyncTask){
         List<Material> consulta = new ArrayList<>();
@@ -67,6 +71,7 @@ public class DataBaseHelperRoom {
                     materialesConsultados = dbLocal.materialDAO().leerColeccionTodos(coleccion,palabraClave);
                     break;
             }
+            materiales = materialesConsultados;
             ObjetoParametroAsyncTask.MaterialDataStatus materialDataStatus = filtro[0].getMaterialStatus();
             materialDataStatus.DataIsLoaded(materialesConsultados);
             return  null;
@@ -95,6 +100,7 @@ public class DataBaseHelperRoom {
                     materialesConsultados = dbLocal.materialDAO().leerSinColeccionTodos(palabraClave);
                     break;
             }
+            materiales = materialesConsultados;
             ObjetoParametroAsyncTask.MaterialDataStatus materialDataStatus = filtro[0].getMaterialStatus();
             materialDataStatus.DataIsLoaded(materialesConsultados);
             return  null;

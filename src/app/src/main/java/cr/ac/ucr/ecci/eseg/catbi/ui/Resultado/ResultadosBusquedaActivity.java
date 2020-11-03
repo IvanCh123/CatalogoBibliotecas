@@ -37,8 +37,6 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
     private static final String TAG = "ResultadosBusquedaActivity";
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,12 +48,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_material);
 
-        //Para saber si tiene acceso a internet
-        ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
-        if(isConnected){
+        if(hayConexionAInternet()){
             mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBibliotecaHelper();
             mFireBaseDataBaseBibliotecaHelper.readMaterial(new FireBaseDataBaseBibliotecaHelper.MaterialDataStatus(){
                 @Override
@@ -118,14 +111,31 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         return new String[]{palabraClave,campoBusqueda,coleccion};
     }
 
+    public boolean hayConexionAInternet(){
+        ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        return isConnected;
+    }
     @SuppressLint("LongLogTag")
     @Override
     public void onNoteClick(int position) {
         Log.d(TAG, "onNoteClick: clicked." + position);
+
+
         Intent intent = new Intent(getApplicationContext(), InformacionDetalladaMaterial.class);
-        Material materialClickeado = mFireBaseDataBaseBibliotecaHelper.getListaMaterial().get(position);
-        intent.putExtra("materialClickeado", materialClickeado);
-        startActivity(intent);
+        if(hayConexionAInternet()){
+            Material materialClickeado = mFireBaseDataBaseBibliotecaHelper.getListaMaterial().get(position);
+            intent.putExtra("materialClickeado", materialClickeado);
+            startActivity(intent);
+        }else{
+            Material materialClickeado = dbLocalHelper.getMateriales().get(position);
+            intent.putExtra("materialClickeado", materialClickeado);
+            startActivity(intent);
+        }
+
+
     }
 
 
