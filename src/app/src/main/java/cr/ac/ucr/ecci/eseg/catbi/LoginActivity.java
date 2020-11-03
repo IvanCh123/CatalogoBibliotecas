@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(isConnected){
                     autenticarUsuariosFirebase(correo, password, view);
                 }else{
-                    autenticarUsuariosLocal(correo,password,view);
+                    autenticarUsuariosLocal(correo,password);
                 }
             }
         });
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void autenticarUsuariosLocal(String correo, String password, final View view) {
+    public void autenticarUsuariosLocal(String correo, String password) {
         if (correo.isEmpty() || password.isEmpty()) {
             Toast.makeText(LoginActivity.this, "Por favor digite un correo y una contraseña", Toast.LENGTH_SHORT).show();
         } else {
@@ -242,9 +242,11 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(Usuario usuario) {
+        protected void onPostExecute(Usuario usuario){
             if(usuario != null){
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                barraProgreso.setVisibility(View.VISIBLE);
+
             }else{
                 Toast.makeText(LoginActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
             }
