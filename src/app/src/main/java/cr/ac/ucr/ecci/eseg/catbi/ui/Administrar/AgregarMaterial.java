@@ -77,7 +77,7 @@ public class AgregarMaterial extends AppCompatActivity {
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(getApplication(), v);
                 popupMenu.setOnMenuItemClickListener(coleccionOnClick);
-                popupMenu.inflate(R.menu.menu_coleccion);
+                popupMenu.inflate(R.menu.menu_formatos);
                 popupMenu.show();
             }
         });
@@ -95,6 +95,8 @@ public class AgregarMaterial extends AppCompatActivity {
                 boolean creado= crearMaterial(titulo,autor,idioma,tipo,cantidad,coleccion,biblioteca,year);
                 if(creado){
                     retornar();
+                }else{
+                    Toast.makeText(getApplication(), "Se a presentado un error al agregar datos a la base de datos ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -103,7 +105,9 @@ public class AgregarMaterial extends AppCompatActivity {
     private boolean crearMaterial(String titulo,String autor,String idioma,String tipo, String cant, String col, String biblio,String year){
         boolean matValido=true;
         boolean valido[];
+        boolean agregado=false;
         valido= new boolean[8];
+
         valido[0]=validarNumero(year,"Año");
         valido[1]=validarNumero(cant,"Cantidad");
         valido[2]=validarTexto(titulo,"Titulo");
@@ -121,7 +125,7 @@ public class AgregarMaterial extends AppCompatActivity {
             String[] mat={autor, year, cant, col, tipo, titulo, idioma, biblio};
             Material newMaterial=new Material(autor, year, cant, col, tipo, titulo, idioma, biblio);
             new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
-            new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+            agregado=new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
           //  newMaterial = new Material(autor, year, cant, col, tipo, titulo, idioma, biblio);
            /* DialogFragment confirmarDialogAlert=new ConfirmarAgregarMaterialDialogAlert();
             Bundle bundle = new Bundle();
@@ -139,7 +143,7 @@ public class AgregarMaterial extends AppCompatActivity {
 
         }
 
-        return true;
+        return agregado;
     }
 
 
