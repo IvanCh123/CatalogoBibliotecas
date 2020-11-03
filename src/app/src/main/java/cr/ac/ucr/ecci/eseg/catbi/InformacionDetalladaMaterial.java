@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
@@ -47,23 +49,24 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
 
 
         btnReserva= (Button) findViewById(R.id.button_reserva);
-        if(hayConexionAInternet()){
-            btnReserva.setOnClickListener(new View.OnClickListener() {
-                String id=materialRecibido.getMaterialID();
-                String biblioteca=materialRecibido.getBiblioteca();
-                String titulo=materialRecibido.getTitulo();
-                String user=" ";
-                String cant=materialRecibido.getCantidad();
+        btnReserva.setOnClickListener(new View.OnClickListener() {
+        String id=materialRecibido.getMaterialID();
+        String biblioteca=materialRecibido.getBiblioteca();
+        String titulo=materialRecibido.getTitulo();
+        String user=" ";
+        String cant=materialRecibido.getCantidad();
 
+        @Override
+        public void onClick(View v) {
+            if(hayConexionAInternet()){
+                confirmarReserva(id,biblioteca,titulo,user,cant);
+            }else{
+                Toast.makeText(v.getContext(),"Las reservaciones solo se pueden realizar si el dispositivo tiene conexión a internet",Toast.LENGTH_LONG).show();
+                startActivity(new Intent(InformacionDetalladaMaterial.this, MainActivity.class));
+            }
 
-                @Override
-                public void onClick(View v) {
-                    confirmarReserva(id,biblioteca,titulo,user,cant);
-                }
-            });
-        }else{
-            btnReserva.setVisibility(View.INVISIBLE);
         }
+    });
 
     }
 
