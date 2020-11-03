@@ -44,8 +44,9 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultados_busqueda);
 
-        final String[] filtro = getFiltro();
 
+        final String[] filtroFirebase = getFiltro();
+        final String[] filtroBaseDatosLocal = getFiltroBaseDatosLocal();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_material);
 
@@ -60,12 +61,12 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
                 @Override
                 public void DataIsLoaded(List<Material> material, List<String> keys) {
 
-                    new RecyclerViewMaterial_Config().setConfig(mRecyclerView, ResultadosBusquedaActivity.this,material,keys,ResultadosBusquedaActivity.this, filtro, ResultadosBusquedaActivity.this);
+                    new RecyclerViewMaterial_Config().setConfig(mRecyclerView, ResultadosBusquedaActivity.this,material,keys,ResultadosBusquedaActivity.this, filtroFirebase, ResultadosBusquedaActivity.this);
                 }
-            }, filtro);
+            }, filtroFirebase);
 
         }else{
-            ObjetoParametroAsyncTask parametroAsyncTask = new ObjetoParametroAsyncTask(filtro[2], filtro[0], filtro[1], new ObjetoParametroAsyncTask.MaterialDataStatus() {
+            ObjetoParametroAsyncTask parametroAsyncTask = new ObjetoParametroAsyncTask(filtroBaseDatosLocal[2], filtroBaseDatosLocal[0], filtroBaseDatosLocal[1], new ObjetoParametroAsyncTask.MaterialDataStatus() {
                 @Override
                 public void DataIsLoaded(List<Material> materiales) {
                     int tamanoLista = materiales.size();
@@ -74,7 +75,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
                     for(int i =0; i < tamanoLista; i++){
                         keys.add(String.valueOf(i));
                     }
-                    new RecyclerViewMaterial_Config().setConfig(mRecyclerView,ResultadosBusquedaActivity.this,materiales,keys,ResultadosBusquedaActivity.this,filtro,ResultadosBusquedaActivity.this);
+                    new RecyclerViewMaterial_Config().setConfig(mRecyclerView,ResultadosBusquedaActivity.this,materiales,keys,ResultadosBusquedaActivity.this,filtroBaseDatosLocal,ResultadosBusquedaActivity.this);
 
                 }
             });
@@ -101,6 +102,19 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         palabraClave = StringUtils.stripAccents(palabraClave);
         coleccion = StringUtils.stripAccents(coleccion);
 
+        return new String[]{palabraClave,campoBusqueda,coleccion};
+    }
+
+    // Ver si se puede hacer un solo método
+    private String [] getFiltroBaseDatosLocal(){
+        Intent intent = getIntent();
+        String palabraClave = intent.getStringExtra(MESSAGE_KEY);
+        String campoBusqueda = intent.getStringExtra(CAMPO_KEY).toLowerCase();
+        String coleccion = intent.getStringExtra(COLECCION_KEY);
+        if(campoBusqueda.isEmpty())
+            campoBusqueda = "todo";
+        if(coleccion.isEmpty())
+            coleccion = "todas";
         return new String[]{palabraClave,campoBusqueda,coleccion};
     }
 
