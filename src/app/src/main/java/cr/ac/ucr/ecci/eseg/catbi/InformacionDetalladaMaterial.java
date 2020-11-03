@@ -3,6 +3,9 @@ package cr.ac.ucr.ecci.eseg.catbi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +16,7 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
 public class InformacionDetalladaMaterial extends AppCompatActivity {
     private static final String TAG = "InformacionDetalladaMaterial";
+    private Button btnReserva;
 
     @SuppressLint("LongLogTag")
     @Override
@@ -42,21 +46,25 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         textViewContentBiblioteca.setText(materialRecibido.getBiblioteca());
 
 
-        final Button btnReserva= (Button) findViewById(R.id.button_reserva);
-        btnReserva.setOnClickListener(new View.OnClickListener() {
-            String id=materialRecibido.getMaterialID();
-            String biblioteca=materialRecibido.getBiblioteca();
-            String titulo=materialRecibido.getTitulo();
-            String user=" ";
-            String cant=materialRecibido.getCantidad();
+        btnReserva= (Button) findViewById(R.id.button_reserva);
+        if(hayConexionAInternet()){
+            btnReserva.setOnClickListener(new View.OnClickListener() {
+                String id=materialRecibido.getMaterialID();
+                String biblioteca=materialRecibido.getBiblioteca();
+                String titulo=materialRecibido.getTitulo();
+                String user=" ";
+                String cant=materialRecibido.getCantidad();
 
 
-            @Override
-            public void onClick(View v) {
-                //Log.v("button","1");
-                confirmarReserva(id,biblioteca,titulo,user,cant);
-            }
-        });
+                @Override
+                public void onClick(View v) {
+                    confirmarReserva(id,biblioteca,titulo,user,cant);
+                }
+            });
+        }else{
+            btnReserva.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     public void confirmarReserva(String id,String biblioteca,String titulo,String user,String cant){
@@ -69,12 +77,12 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         bundle.putString("cant",cant);
         confirmarReservaDialogAlert.setArguments(bundle);
         confirmarReservaDialogAlert.show(getSupportFragmentManager(),"Confirmar");
-       // Context c=getContext();
-        /*Intent intent1 = new Intent(this,RevervaLibros.class);
-        intent1.putExtra("biblio",biblioteca);
-        intent1.putExtra("id",id);
-        intent1.putExtra("titulo",titulo);
-        intent1.putExtra("user",user);
-        this.startActivities(new Intent[]{intent1});*/
+    }
+    public boolean hayConexionAInternet(){
+        ConnectivityManager cm = (ConnectivityManager)getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        return isConnected;
     }
 }
