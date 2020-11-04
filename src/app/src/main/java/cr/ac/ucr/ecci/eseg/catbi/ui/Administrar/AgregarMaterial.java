@@ -56,12 +56,9 @@ public class AgregarMaterial extends AppCompatActivity {
         final TextView txtColeccion = (TextView) findViewById(R.id.add_coleccion);
         final TextView txtBiblioteca =  (TextView) findViewById(R.id.add_biblioteca);
         final Button btn_agregar=(Button)findViewById(R.id.btn_add_material);
-
         coleccionOnClick = new ColeccionOnClick();
         bibliotecaOnClick=new BibliotecanOnClick();
-
-
-
+        //Funcion que despliega opciones de biblioteca
         txtBiblioteca.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -71,7 +68,7 @@ public class AgregarMaterial extends AppCompatActivity {
                 popupMenu.show();
             }
         });
-
+        //Funcion que despliega opciones de colecciones
         txtColeccion.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -81,6 +78,7 @@ public class AgregarMaterial extends AppCompatActivity {
                 popupMenu.show();
             }
         });
+        //Funcion que realiza operacion de agregado d material
         btn_agregar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,22 +91,22 @@ public class AgregarMaterial extends AppCompatActivity {
                 String biblioteca = txtBiblioteca.getText().toString();
                 String year=editTextAñotMaterial.getText().toString();
                 boolean creado= crearMaterial(titulo,autor,idioma,tipo,cantidad,coleccion,biblioteca,year);
-                if(creado){
+                /*if(creado){
                     Toast.makeText(getApplication(), "Se a agregado el material a la base de datos ", Toast.LENGTH_SHORT).show();
                     retornar();
                 }else{
                     Toast.makeText(getApplication(), "Se a presentado un error al agregar datos a la base de datos ", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
     }
 
+    //Funcion que reune los datos y llama a confirmar el agregado de datos
     private boolean crearMaterial(String titulo,String autor,String idioma,String tipo, String cant, String col, String biblio,String year){
         boolean matValido=true;
         boolean valido[];
         boolean agregado=false;
         valido= new boolean[8];
-
         valido[0]=validarNumero(year,"Año");
         valido[1]=validarNumero(cant,"Cantidad");
         valido[2]=validarTexto(titulo,"Titulo");
@@ -123,16 +121,16 @@ public class AgregarMaterial extends AppCompatActivity {
             }
         }
         if(matValido) {
-            String[] mat={autor, year, cant, col, tipo, titulo, idioma, biblio};
-            Material newMaterial=new Material(autor, year, cant, col, tipo, titulo, idioma, biblio);
-           // new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
-            //agregado=new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
-          //  newMaterial = new Material(autor, year, cant, col, tipo, titulo, idioma, biblio);
+            String[] materialInfo={autor, year, cant, col, tipo, titulo, idioma, biblio};
             DialogFragment confirmarDialogAlert=new ConfirmarAgregarMaterialDialogAlert();
             Bundle bundle = new Bundle();
-            bundle.putStringArray("material",mat);
+            bundle.putStringArray("material",materialInfo);
             confirmarDialogAlert.setArguments(bundle);
             confirmarDialogAlert.show(getSupportFragmentManager(),"Confirmar");
+            //Material newMaterial=new Material(autor, year, cant, col, tipo, titulo, idioma, biblio);
+            // new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
+            //agregado=new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+            //  newMaterial = new Material(autor, year, cant, col, tipo, titulo, idioma, biblio);
             //AgregarDialogFragment a = new AgregarDialogFragment();
             //a.show(getSupportFragmentManager(),"Confirmar");
             /*if(add){
@@ -147,7 +145,7 @@ public class AgregarMaterial extends AppCompatActivity {
         return agregado;
     }
 
-
+    // funcion que valida que los campos de texto no esten vacios
     private boolean validarTexto(String s, String tipo){
         boolean result=true;
         if (s.isEmpty()){
@@ -156,6 +154,8 @@ public class AgregarMaterial extends AppCompatActivity {
         }
         return result;
     }
+
+    // funcion que valida que los campos numericos no esten vacios y sean de numeros
     private boolean validarNumero(String n,String tipo){
         boolean result;
         try {
@@ -168,11 +168,8 @@ public class AgregarMaterial extends AppCompatActivity {
         return result;
     }
 
-    private void retornar(){
-        startActivity(new Intent(AgregarMaterial.this, MainActivity.class));
-    }
-
-    private class  ColeccionOnClick implements PopupMenu.OnMenuItemClickListener{
+    // Funcion que carga opciones de la lista de colecciones
+    private class ColeccionOnClick implements PopupMenu.OnMenuItemClickListener{
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             Toast.makeText(getApplication(), "Colección seleccionada: " +item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -184,6 +181,7 @@ public class AgregarMaterial extends AppCompatActivity {
         }
     }
 
+    // Funcion que carga opciones de la lista de bibliotecas
     private class  BibliotecanOnClick implements PopupMenu.OnMenuItemClickListener{
         @Override
         public boolean onMenuItemClick(MenuItem item) {
@@ -196,4 +194,8 @@ public class AgregarMaterial extends AppCompatActivity {
         }
     }
 
+    /*
+    private void retornar(){
+        startActivity(new Intent(AgregarMaterial.this, MainActivity.class));
+    }*/
 }

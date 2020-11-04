@@ -279,6 +279,7 @@ public class FireBaseDataBaseBiblitecaHelper {
         referenciaMaterial.child(id).child("cantidad").setValue(String.valueOf(c));
     }
 
+    // funcion que agrega un nuevo valor a la base de datos y genera una id unica
     public boolean addMaterial( Material m){
         //contarHijosMaterial();
         boolean add=true;
@@ -295,12 +296,10 @@ public class FireBaseDataBaseBiblitecaHelper {
         }catch (Exception e){
             add=false;
         }
-
-        //Log.v("Cantidad2: ", Integer.toString(idMaterial));
         return add;
     }
 
-    public void contarHijosMaterial(){
+    /*public void contarHijosMaterial(){
         referenciaMaterial.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -319,5 +318,5 @@ public class FireBaseDataBaseBiblitecaHelper {
             }
         });
 
-    }
+    }*/
 }
