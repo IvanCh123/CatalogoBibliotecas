@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -59,6 +60,7 @@ public class PerfilFragment extends Fragment {
 
         nombreUsuario =  (TextView) root.findViewById(R.id.txtNombre);
         correoUsuario = (TextView) root.findViewById(R.id.txtCorreo);
+        mRecyclerView = (RecyclerView) root.findViewById(R.id.reservacionesRecyclerView);
 
         if(hayConexionAInternet()) {
             mAuth = FirebaseAuth.getInstance();
@@ -72,20 +74,20 @@ public class PerfilFragment extends Fragment {
                     fillText(usuarioP);
                 }
             }, correo);
-            mRecyclerView = (RecyclerView) root.findViewById(R.id.reservacionesRecyclerView);
+
             new FireBaseDataBaseBibliotecaHelper().readReservas(new FireBaseDataBaseBibliotecaHelper.ReservaDataStatus() {
                 @Override
                 public void DataIsLoaded(List<Reservacion> reservacion, List<String> keys) {
-                    new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, getContext(), reservacion, keys);
+                    new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, getContext(), reservacion, keys,getActivity());
                 }
             }, correo);
         }else{
-            String correoUsuarioActual = getArguments().getString("correoUsuarioActual");
-            String nombreUsuarioActual = getArguments().getString("nombreUsuarioActual");
+            Bundle bundle = getActivity().getIntent().getExtras();
+            String correoUsuarioActual = bundle.getString("correoUsuarioActual");
+            String nombreUsuarioActual = bundle.getString("nombreUsuarioActual");
             nombreUsuario.setText(nombreUsuarioActual);
             correoUsuario.setText(correoUsuarioActual);
             dbLocalHelper = new DataBaseHelperRoom(getContext());
-
             ReservacionParametroAsyncTask parametroAsyncTask = new ReservacionParametroAsyncTask(correoUsuarioActual, new ReservacionParametroAsyncTask.ReservacionDataStatus() {
                 @Override
                 public void DataIsLoaded(List<Reservacion> reservaciones) {
@@ -95,7 +97,7 @@ public class PerfilFragment extends Fragment {
                     for(int i =0; i < tamanoLista; i++){
                         keys.add(String.valueOf(i));
                     }
-                    new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, getContext(), reservaciones, keys);
+                    new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, getContext(), reservaciones, keys,getActivity());
                 }
             });
 

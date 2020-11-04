@@ -1,5 +1,6 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Perfil;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -24,11 +25,18 @@ public class RecyclerViewReservaciones_Config {
     private Context mContext;
     private RecyclerViewReservaciones_Config.ReservacionesAdapter mReservacionAdapter;
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<Reservacion> reservaciones, List<String> keys){
+    public void setConfig(final RecyclerView recyclerView, final Context context, final List<Reservacion> reservaciones, final List<String> keys, Activity activity){
         mContext = context;
-        mReservacionAdapter = new RecyclerViewReservaciones_Config.ReservacionesAdapter(reservaciones, keys);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(mReservacionAdapter);
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mReservacionAdapter = new RecyclerViewReservaciones_Config.ReservacionesAdapter(reservaciones, keys);
+                recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                recyclerView.setAdapter(mReservacionAdapter);
+
+            }
+        });
+
     }
     class ReservacionItemView extends RecyclerView.ViewHolder{
         private TextView mTitulo;

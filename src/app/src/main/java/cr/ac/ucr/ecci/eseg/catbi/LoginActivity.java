@@ -246,13 +246,11 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario){
             if(usuario != null){
-                Bundle bundle = new Bundle();
-                bundle.putString("correoUsuarioActual", usuario.getCorreo());
-                bundle.putString("nombreUsuarioActual", usuario.getNombre());
-                // set Fragmentclass Arguments
-                PerfilFragment fragmentoPerfil = new PerfilFragment();
-                fragmentoPerfil.setArguments(bundle);
-                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.putExtra("correoUsuarioActual", usuario.getCorreo());
+                intent.putExtra("nombreUsuarioActual",usuario.getNombre());
+                startActivity(intent);
                 barraProgreso.setVisibility(View.VISIBLE);
 
             }else{
