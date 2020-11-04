@@ -24,6 +24,7 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.MaterialParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ReservacionParametroAsyncTask;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.UsuarioParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
@@ -84,10 +85,23 @@ public class PerfilFragment extends Fragment {
         }else{
             Bundle bundle = getActivity().getIntent().getExtras();
             String correoUsuarioActual = bundle.getString("correoUsuarioActual");
-            String nombreUsuarioActual = bundle.getString("nombreUsuarioActual");
-            nombreUsuario.setText(nombreUsuarioActual);
-            correoUsuario.setText(correoUsuarioActual);
             dbLocalHelper = new DataBaseHelperRoom(getContext());
+
+            // Para recuperar los datos del usuario
+            UsuarioParametroAsyncTask usuarioParametroAsyncTask = new UsuarioParametroAsyncTask(correoUsuarioActual, new UsuarioParametroAsyncTask.UsuarioDataStatus() {
+                @Override
+                public void DataIsLoaded(final Usuario usuario) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            fillText(usuario);
+                        }
+                    });
+                }
+            });
+            dbLocalHelper.readUsuario(usuarioParametroAsyncTask);
+
+            // Para recuperar las reservaciones
             ReservacionParametroAsyncTask parametroAsyncTask = new ReservacionParametroAsyncTask(correoUsuarioActual, new ReservacionParametroAsyncTask.ReservacionDataStatus() {
                 @Override
                 public void DataIsLoaded(List<Reservacion> reservaciones) {
@@ -100,7 +114,6 @@ public class PerfilFragment extends Fragment {
                     new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, getContext(), reservaciones, keys,getActivity());
                 }
             });
-
             dbLocalHelper.readReservacion(parametroAsyncTask);
         }
         return root;

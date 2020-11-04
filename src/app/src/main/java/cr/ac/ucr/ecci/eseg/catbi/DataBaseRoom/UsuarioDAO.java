@@ -9,6 +9,9 @@ import androidx.room.Update;
 
 @Dao
 public interface UsuarioDAO {
+    // Consulto un usuario a partir de un correo
+    @Query("SELECT * FROM Usuario WHERE correo LIKE :correo LIMIT 1")
+    Usuario leerUsuario(String correo);
 
     // Consulto un usuario a partir de un correo y contraseña para autenticar
     @Query("SELECT * FROM Usuario WHERE correo LIKE :correo AND contraseña LIKE :contrasena LIMIT 1")

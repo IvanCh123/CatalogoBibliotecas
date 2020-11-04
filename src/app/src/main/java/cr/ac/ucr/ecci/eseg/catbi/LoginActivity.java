@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    public void autenticarUsuariosFirebase(String correo, String password, final View view) {
+    public void autenticarUsuariosFirebase(final String correo, String password, final View view) {
         if (correo.isEmpty() || password.isEmpty()) {
             Toast.makeText(LoginActivity.this, "Por favor digite un correo y una contraseña", Toast.LENGTH_SHORT).show();
         } else {
@@ -125,7 +125,9 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        intent.putExtra("correoUsuarioActual", correo);
+                        startActivity(intent);
                         barraProgreso.setVisibility(view.VISIBLE);
                     } else {
                         Toast.makeText(LoginActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
@@ -246,10 +248,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario){
             if(usuario != null){
-
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("correoUsuarioActual", usuario.getCorreo());
-                intent.putExtra("nombreUsuarioActual",usuario.getNombre());
                 startActivity(intent);
                 barraProgreso.setVisibility(View.VISIBLE);
 

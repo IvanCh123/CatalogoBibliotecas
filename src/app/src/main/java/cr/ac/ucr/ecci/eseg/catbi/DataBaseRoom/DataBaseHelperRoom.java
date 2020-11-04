@@ -43,6 +43,10 @@ public class DataBaseHelperRoom {
         new leerReservaciones().execute(parametroAsyncTask);
     }
 
+    public void readUsuario (UsuarioParametroAsyncTask parametroAsyncTask){
+        new leerUsuario().execute(parametroAsyncTask);
+    }
+
     public void realizarFiltradoConColeccionLocal(MaterialParametroAsyncTask parametroAsyncTask){
         new leerCamposBusqueda().execute(parametroAsyncTask);
     }
@@ -126,6 +130,17 @@ public class DataBaseHelperRoom {
             reservacionesConsultadas = dbLocal.reservacionDAO().leerPorCorreo(correo);
             ReservacionParametroAsyncTask.ReservacionDataStatus reservacionDataStatus = reservacionParametro[0].getReservacionStatus();
             reservacionDataStatus.DataIsLoaded(reservacionesConsultadas);
+            return null;
+        }
+    }
+
+    private class leerUsuario extends AsyncTask<UsuarioParametroAsyncTask,Void, Void> {
+        @Override
+        protected Void doInBackground(UsuarioParametroAsyncTask... usuarioParametro) {
+            String correo = usuarioParametro[0].getCorreo();
+            Usuario usuario = dbLocal.usuarioDAO().leerUsuario(correo);
+            UsuarioParametroAsyncTask.UsuarioDataStatus reservacionDataStatus = usuarioParametro[0].getUsuarioStatus();
+            reservacionDataStatus.DataIsLoaded(usuario);
             return null;
         }
     }
