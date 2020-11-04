@@ -20,6 +20,7 @@ import java.util.List;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
+import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.RecycleViewBibliotecaConfig;
 
@@ -43,7 +44,7 @@ public class UbicacionFragment extends Fragment {
                 @Override
                 public void dataLoaded(List<Biblioteca> listaBibliotecas, List<String> keys) {
                     Log.d("Tq", String.valueOf(listaBibliotecas.size()));
-                    new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto, listaBibliotecas, keys);
+                    new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto, listaBibliotecas, keys,getActivity());
                 }
             });
         }else{
@@ -57,29 +58,14 @@ public class UbicacionFragment extends Fragment {
                     for(int i =0; i < tamanoLista; i++){
                         keys.add(String.valueOf(i));
                     }
-                    new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto, bibliotecas, keys);
+                    new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto, bibliotecas, keys, getActivity());
                 }
             });
         }
 
         return v;
     }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-
-        BibliotecaConfig = v.findViewById(R.id.recycler_bibliotecas);
-        Log.d("Tq", String.valueOf(BibliotecaConfig));
-        new FireBaseDataBaseBibliotecaHelper().readBibliotecas(new FireBaseDataBaseBibliotecaHelper.DataStatus() {
-            @Override
-            public void dataLoaded(List<Biblioteca> listaBibliotecas, List<String> keys) {
-                Log.d("Tq", String.valueOf(listaBibliotecas.size()));
-                new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto,listaBibliotecas,keys);
-            }
-        });
-
-    }
+    
 
     public boolean hayConexionAInternet(){
         ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);

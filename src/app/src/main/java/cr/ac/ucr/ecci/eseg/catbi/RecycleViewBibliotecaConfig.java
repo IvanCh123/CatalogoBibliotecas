@@ -1,5 +1,6 @@
 package cr.ac.ucr.ecci.eseg.catbi;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -20,11 +21,17 @@ public class RecycleViewBibliotecaConfig {
     private Context contexto;
     private  bibliotecaAdapter biblioAdapter;
 
-    public void setConfig(RecyclerView recyclerView, Context context, List<Biblioteca> listaBiblio, List<String>keys){
-        contexto = context;
-        biblioAdapter=new bibliotecaAdapter(listaBiblio,keys);
-        recyclerView.setLayoutManager(new LinearLayoutManager(contexto));
-        recyclerView.setAdapter(biblioAdapter);
+    public void setConfig(final RecyclerView recyclerView, final Context context, final List<Biblioteca> listaBiblio, final List<String>keys, Activity activity){
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                contexto = context;
+                biblioAdapter=new bibliotecaAdapter(listaBiblio,keys);
+                recyclerView.setLayoutManager(new LinearLayoutManager(contexto));
+                recyclerView.setAdapter(biblioAdapter);
+            }
+        });
+
     }
 
 
