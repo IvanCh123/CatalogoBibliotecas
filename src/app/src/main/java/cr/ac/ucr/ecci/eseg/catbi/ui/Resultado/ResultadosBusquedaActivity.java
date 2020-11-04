@@ -18,7 +18,7 @@ import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ObjetoParametroAsyncTask;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.MaterialParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.InformacionDetalladaMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.R;
@@ -59,7 +59,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
             }, filtroFirebase);
 
         }else{
-            ObjetoParametroAsyncTask parametroAsyncTask = new ObjetoParametroAsyncTask(filtroBaseDatosLocal[2], filtroBaseDatosLocal[0], filtroBaseDatosLocal[1], new ObjetoParametroAsyncTask.MaterialDataStatus() {
+            MaterialParametroAsyncTask parametroAsyncTask = new MaterialParametroAsyncTask(filtroBaseDatosLocal[2], filtroBaseDatosLocal[0], filtroBaseDatosLocal[1], new MaterialParametroAsyncTask.MaterialDataStatus() {
                 @Override
                 public void DataIsLoaded(List<Material> materiales) {
                     int tamanoLista = materiales.size();
@@ -118,12 +118,11 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
                 activeNetwork.isConnectedOrConnecting();
         return isConnected;
     }
+
     @SuppressLint("LongLogTag")
     @Override
     public void onNoteClick(int position) {
         Log.d(TAG, "onNoteClick: clicked." + position);
-
-
         Intent intent = new Intent(getApplicationContext(), InformacionDetalladaMaterial.class);
         if(hayConexionAInternet()){
             Material materialClickeado = mFireBaseDataBaseBibliotecaHelper.getListaMaterial().get(position);

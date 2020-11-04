@@ -1,18 +1,8 @@
 package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
-import androidx.loader.content.AsyncTaskLoader;
 import androidx.room.Room;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.AppDataBase;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
-import cr.ac.ucr.ecci.eseg.catbi.LoginActivity;
-import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +11,10 @@ public class DataBaseHelperRoom {
     private AppDataBase dbLocal;
     private Context context;
     private List<Material> materiales;
+
+    public interface BibliotecaDataStatus {
+        void DataIsLoaded(List<Biblioteca> bibliotecas);
+    }
 
     public DataBaseHelperRoom (Context context){
         this.context = context;
@@ -33,8 +27,7 @@ public class DataBaseHelperRoom {
     }
 
 
-    public void readMaterialLocal (ObjetoParametroAsyncTask parametroAsyncTask){
-        List<Material> consulta = new ArrayList<>();
+    public void readMaterialLocal (MaterialParametroAsyncTask parametroAsyncTask){
         if(parametroAsyncTask.getColeccion().equalsIgnoreCase("todas")){
             realizarFiltradoSinColeccionLocal(parametroAsyncTask);
         }else {
@@ -42,17 +35,21 @@ public class DataBaseHelperRoom {
         }
     }
 
-    public void realizarFiltradoConColeccionLocal(ObjetoParametroAsyncTask parametroAsyncTask){
+    public void readBibliotecas (BibliotecaDataStatus dataStatus){
+        new leerBibliotecas().execute(dataStatus);
+    }
+
+    public void realizarFiltradoConColeccionLocal(MaterialParametroAsyncTask parametroAsyncTask){
         new leerCamposBusqueda().execute(parametroAsyncTask);
     }
 
-    public void realizarFiltradoSinColeccionLocal(ObjetoParametroAsyncTask parametroAsyncTask){
+    public void realizarFiltradoSinColeccionLocal(MaterialParametroAsyncTask parametroAsyncTask){
         new leerCamposBusquedaSinColeccion().execute(parametroAsyncTask);
     }
 
-    private class leerCamposBusqueda extends AsyncTask<ObjetoParametroAsyncTask, Void, Void> {
+    private class leerCamposBusqueda extends AsyncTask<MaterialParametroAsyncTask, Void, Void> {
         @Override
-        protected Void doInBackground(ObjetoParametroAsyncTask... filtro) {
+        protected Void doInBackground(MaterialParametroAsyncTask... filtro) {
             String coleccion = filtro[0].getColeccion();
             String palabraClave = filtro[0].getPalabraClave();
             String campoBusqueda = filtro[0].getCampoBusqueda();
@@ -72,7 +69,7 @@ public class DataBaseHelperRoom {
                     break;
             }
             materiales = materialesConsultados;
-            ObjetoParametroAsyncTask.MaterialDataStatus materialDataStatus = filtro[0].getMaterialStatus();
+            MaterialParametroAsyncTask.MaterialDataStatus materialDataStatus = filtro[0].getMaterialStatus();
             materialDataStatus.DataIsLoaded(materialesConsultados);
             return  null;
         }
@@ -80,9 +77,9 @@ public class DataBaseHelperRoom {
 
     }
 
-    private class leerCamposBusquedaSinColeccion extends AsyncTask<ObjetoParametroAsyncTask,Void, Void> {
+    private class leerCamposBusquedaSinColeccion extends AsyncTask<MaterialParametroAsyncTask,Void, Void> {
         @Override
-        protected Void doInBackground(ObjetoParametroAsyncTask... filtro) {
+        protected Void doInBackground(MaterialParametroAsyncTask... filtro) {
             String palabraClave = filtro[0].getPalabraClave();
             String campoBusqueda = filtro[0].getCampoBusqueda();
             List<Material> materialesConsultados = new ArrayList<>();
@@ -101,13 +98,20 @@ public class DataBaseHelperRoom {
                     break;
             }
             materiales = materialesConsultados;
-            ObjetoParametroAsyncTask.MaterialDataStatus materialDataStatus = filtro[0].getMaterialStatus();
+            MaterialParametroAsyncTask.MaterialDataStatus materialDataStatus = filtro[0].getMaterialStatus();
             materialDataStatus.DataIsLoaded(materialesConsultados);
             return  null;
         }
+    }
 
-
-
+    private class leerBibliotecas extends AsyncTask<BibliotecaDataStatus,Void, Void> {
+        @Override
+        protected Void doInBackground(BibliotecaDataStatus... bibliotecaDataStatus) {
+            List<Biblioteca> BibliotecasConsultadas = new ArrayList<>();
+            BibliotecasConsultadas = dbLocal.bibliotecaDAO().leerBibliotecas();
+            bibliotecaDataStatus[0].DataIsLoaded(BibliotecasConsultadas);
+            return null;
+        }
     }
 
 

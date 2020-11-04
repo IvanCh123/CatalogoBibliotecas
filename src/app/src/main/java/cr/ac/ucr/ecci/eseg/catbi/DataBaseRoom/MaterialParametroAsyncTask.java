@@ -2,7 +2,7 @@ package cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom;
 
 import java.util.List;
 
-public class ObjetoParametroAsyncTask {
+public class MaterialParametroAsyncTask {
     private String coleccion;
     private String palabraClave;
     private String campoBusqueda;
@@ -12,7 +12,7 @@ public class ObjetoParametroAsyncTask {
         void DataIsLoaded(List<Material> materiales);
     }
 
-    public ObjetoParametroAsyncTask(String coleccion, String palabraClave, String campoBusqueda, MaterialDataStatus materialStatus) {
+    public MaterialParametroAsyncTask(String coleccion, String palabraClave, String campoBusqueda, MaterialDataStatus materialStatus) {
         this.coleccion = coleccion;
         this.palabraClave = palabraClave;
         this.campoBusqueda = campoBusqueda;
