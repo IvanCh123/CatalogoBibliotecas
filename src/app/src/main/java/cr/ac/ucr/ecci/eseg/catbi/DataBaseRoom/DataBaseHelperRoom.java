@@ -39,6 +39,10 @@ public class DataBaseHelperRoom {
         new leerBibliotecas().execute(dataStatus);
     }
 
+    public void readReservacion (ReservacionParametroAsyncTask parametroAsyncTask){
+        new leerReservaciones().execute(parametroAsyncTask);
+    }
+
     public void realizarFiltradoConColeccionLocal(MaterialParametroAsyncTask parametroAsyncTask){
         new leerCamposBusqueda().execute(parametroAsyncTask);
     }
@@ -114,7 +118,17 @@ public class DataBaseHelperRoom {
         }
     }
 
-
+    private class leerReservaciones extends AsyncTask<ReservacionParametroAsyncTask,Void, Void> {
+        @Override
+        protected Void doInBackground(ReservacionParametroAsyncTask... reservacionParametro) {
+            String correo = reservacionParametro[0].getCorreo();
+            List<Reservacion> reservacionesConsultadas = new ArrayList<>();
+            reservacionesConsultadas = dbLocal.reservacionDAO().leerPorCorreo(correo);
+            ReservacionParametroAsyncTask.ReservacionDataStatus reservacionDataStatus = reservacionParametro[0].getReservacionStatus();
+            reservacionDataStatus.DataIsLoaded(reservacionesConsultadas);
+            return null;
+        }
+    }
 
 }
 

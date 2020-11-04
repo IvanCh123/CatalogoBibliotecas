@@ -29,6 +29,8 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.PerfilFragment;
+
 import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
@@ -244,6 +246,12 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario){
             if(usuario != null){
+                Bundle bundle = new Bundle();
+                bundle.putString("correoUsuarioActual", usuario.getCorreo());
+                bundle.putString("nombreUsuarioActual", usuario.getNombre());
+                // set Fragmentclass Arguments
+                PerfilFragment fragmentoPerfil = new PerfilFragment();
+                fragmentoPerfil.setArguments(bundle);
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
                 barraProgreso.setVisibility(View.VISIBLE);
 
