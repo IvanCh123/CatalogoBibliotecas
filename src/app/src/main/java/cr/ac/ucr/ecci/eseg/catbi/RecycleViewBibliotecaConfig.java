@@ -3,11 +3,14 @@ package cr.ac.ucr.ecci.eseg.catbi;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -93,18 +96,10 @@ public class RecycleViewBibliotecaConfig {
                     intent1.putExtra("L1", L1);
                     intent1.putExtra("L2", L2);
                     contexto.startActivity(intent1);
-                    /*Log.d("Coordenada",String.valueOf(listaBiblioteca.get(position).getLatitud()));
-                    Log.d("Coordenada",String.valueOf(listaBiblioteca.get(position).getLongitud()));
-                    double L1=listaBiblioteca.get(position).getLatitud();
-                    double L2=listaBiblioteca.get(position).getLongitud();
-                    String name=listaBiblioteca.get(position).getNombre();
-                    Intent intent1 = new Intent(RecycleViewBibliotecaConfig.this,
-                            BibliotecaUbicacion.class);//BibliotecaUbicacion.class
-                    intent1.putExtra("name", name);
-                    intent1.putExtra("L1", L1);
-                    intent1.putExtra("L2", L2);
-                    startActivity(intent1);*/
 
+                    if(!hayConexionAInternet()){
+                        Toast.makeText(v.getContext(),"El dispositivo no tiene internet las funcionalidades del mapa son limitadas",Toast.LENGTH_LONG).show();
+                    }
                 }
             });
 
@@ -114,6 +109,14 @@ public class RecycleViewBibliotecaConfig {
         public int getItemCount() {
             Log.d("T4","4");
             return listaBiblioteca.size();
+        }
+
+        public boolean hayConexionAInternet(){
+            ConnectivityManager cm = (ConnectivityManager)contexto.getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            boolean isConnected = activeNetwork != null &&
+                    activeNetwork.isConnectedOrConnecting();
+            return isConnected;
         }
     }
 }
