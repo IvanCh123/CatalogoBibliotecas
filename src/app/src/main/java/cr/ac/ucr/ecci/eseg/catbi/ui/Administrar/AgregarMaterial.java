@@ -94,6 +94,7 @@ public class AgregarMaterial extends AppCompatActivity {
                 String year=editTextAñotMaterial.getText().toString();
                 boolean creado= crearMaterial(titulo,autor,idioma,tipo,cantidad,coleccion,biblioteca,year);
                 if(creado){
+                    Toast.makeText(getApplication(), "Se a agregado el material a la base de datos ", Toast.LENGTH_SHORT).show();
                     retornar();
                 }else{
                     Toast.makeText(getApplication(), "Se a presentado un error al agregar datos a la base de datos ", Toast.LENGTH_SHORT).show();
@@ -124,14 +125,14 @@ public class AgregarMaterial extends AppCompatActivity {
         if(matValido) {
             String[] mat={autor, year, cant, col, tipo, titulo, idioma, biblio};
             Material newMaterial=new Material(autor, year, cant, col, tipo, titulo, idioma, biblio);
-            new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
-            agregado=new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+           // new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
+            //agregado=new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
           //  newMaterial = new Material(autor, year, cant, col, tipo, titulo, idioma, biblio);
-           /* DialogFragment confirmarDialogAlert=new ConfirmarAgregarMaterialDialogAlert();
+            DialogFragment confirmarDialogAlert=new ConfirmarAgregarMaterialDialogAlert();
             Bundle bundle = new Bundle();
             bundle.putStringArray("material",mat);
             confirmarDialogAlert.setArguments(bundle);
-            confirmarDialogAlert.show(getSupportFragmentManager(),"Confirmar");*/
+            confirmarDialogAlert.show(getSupportFragmentManager(),"Confirmar");
             //AgregarDialogFragment a = new AgregarDialogFragment();
             //a.show(getSupportFragmentManager(),"Confirmar");
             /*if(add){

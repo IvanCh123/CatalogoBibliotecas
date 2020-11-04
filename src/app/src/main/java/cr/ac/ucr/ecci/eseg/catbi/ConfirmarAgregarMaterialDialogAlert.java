@@ -26,7 +26,7 @@ public class ConfirmarAgregarMaterialDialogAlert extends AppCompatDialogFragment
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
+                        //new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
                         new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
                         Toast.makeText(getActivity(), "Se agrego el material" , Toast.LENGTH_SHORT).show();
                     }
