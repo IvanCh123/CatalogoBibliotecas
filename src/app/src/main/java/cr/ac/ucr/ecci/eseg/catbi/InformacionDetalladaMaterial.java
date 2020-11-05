@@ -1,16 +1,20 @@
 package cr.ac.ucr.ecci.eseg.catbi;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.EditarActivity;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
 public class InformacionDetalladaMaterial extends AppCompatActivity {
@@ -61,7 +65,36 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         });
     }
 
-    public void confirmarReserva(String id,String biblioteca,String titulo,String user,String cant){
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.opciones_material, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch(item.getItemId()){
+            case R.id.editar_material:
+                editarMaterial();
+                break;
+            case R.id.eliminar_material:
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void editarMaterial() {
+        Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
+
+        Intent intent = new Intent(getApplicationContext(), EditarActivity.class);
+        intent.putExtra("materialClickeado", materialRecibido);
+        startActivity(intent);
+    }
+
+    public void confirmarReserva(String id, String biblioteca, String titulo, String user, String cant){
         ConfirmarReservaDialogAlert confirmarReservaDialogAlert=new ConfirmarReservaDialogAlert();
         Bundle bundle = new Bundle();
         bundle.putString("id",id);

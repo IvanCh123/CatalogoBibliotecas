@@ -28,5 +28,7 @@
     <string name="cant">Cantidad</string>
     <string name="biblioteca">Biblioteca</string>
     <string name="btn_agregar">Agregar material</string>
+    <string name="editar_material">Editar</string>
+    <string name="eliminar_material">Eliminar</string>
 
 </resources>
