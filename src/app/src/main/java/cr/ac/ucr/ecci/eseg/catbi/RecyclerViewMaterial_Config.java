@@ -26,11 +26,11 @@ public class RecyclerViewMaterial_Config {
         mMaterialAdapter = new MaterialAdapter(materiales, keys, onNoteListener);
 
         if(mMaterialAdapter.mListaMaterial.size() != 0){
-            Toast.makeText(mContext,"Mostrando resultados para: "+filtro[0]+".\n Buscando por: "+filtro[1]+ "\n En coleccion: "+filtro[2], Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext,"Mostrando resultados para: "+filtro[0]+".\n Buscando por: "+filtro[1]+ "\n En coleccion: "+filtro[2], Toast.LENGTH_SHORT).show();
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             recyclerView.setAdapter(mMaterialAdapter);
         }else{
-            Toast.makeText(mContext,"No se encontraron resultados.", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext,"No se encontraron resultados.", Toast.LENGTH_SHORT).show();
         }
 
     }

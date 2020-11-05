@@ -244,8 +244,6 @@ public class FireBaseDataBaseBiblitecaHelper {
         }
     }
 
-
-
     public boolean addReserva(ReservaMaterial r,String c ){
         actualizaCantMaterial(c,r.getMaterialID());
         DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");

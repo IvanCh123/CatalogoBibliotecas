@@ -200,4 +200,18 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewContentBibliotecaEditor"
         app:layout_constraintVertical_bias="0.296" />
 
+    <Button
+        android:id="@+id/button_regresar"
+        android:layout_width="357dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="8dp"
+        android:onClick="regresarADetalles"
+        android:text="@string/boton_cancelar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.37"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_update"
+        app:layout_constraintVertical_bias="0.296" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

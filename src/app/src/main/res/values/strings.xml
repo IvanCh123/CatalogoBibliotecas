@@ -31,5 +31,6 @@
     <string name="editar_material">Editar</string>
     <string name="eliminar_material">Eliminar</string>
     <string name="boton_actualizar">Actualizar</string>
+    <string name="boton_cancelar">Cancelar</string>
 
 </resources>

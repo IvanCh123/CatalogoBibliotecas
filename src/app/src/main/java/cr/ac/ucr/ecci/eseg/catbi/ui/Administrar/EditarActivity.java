@@ -2,6 +2,7 @@ package cr.ac.ucr.ecci.eseg.catbi.ui.Administrar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.InformacionDetalladaMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
@@ -74,8 +76,6 @@ public class EditarActivity extends AppCompatActivity {
     private class BibliotecaOnClick implements PopupMenu.OnMenuItemClickListener{
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            Toast.makeText(getApplicationContext(), "Campo de búsqueda seleccionado: " +item.getTitle(), Toast.LENGTH_SHORT).show();
-
             TextView txtCampoBusqueda = findViewById(R.id.textViewContentBibliotecaEditor);
             txtCampoBusqueda.setText(item.getTitle());
 
@@ -86,8 +86,6 @@ public class EditarActivity extends AppCompatActivity {
     private class ColeccionOnClick implements PopupMenu.OnMenuItemClickListener{
         @Override
         public boolean onMenuItemClick(MenuItem item) {
-            Toast.makeText(getApplicationContext(), "Colección seleccionada: " +item.getTitle(), Toast.LENGTH_SHORT).show();
-
             TextView txtColeccion = findViewById(R.id.textViewContentColeccionEditor);
             txtColeccion.setText(item.getTitle());
 
@@ -100,7 +98,20 @@ public class EditarActivity extends AppCompatActivity {
         FireBaseDataBaseBiblitecaHelper db = new FireBaseDataBaseBiblitecaHelper();
         db.actualizarDatos(materialActualizado);
 
-        Toast.makeText(getApplicationContext(), "Los datos se han actualizado",Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Los datos se han actualizado",Toast.LENGTH_SHORT).show();
+        actualizarMaterialRetorno(materialActualizado);
+    }
+
+    public void regresarADetalles(View view){
+        Material materialActualizado = getNuevosDatos();
+        actualizarMaterialRetorno(materialActualizado);
+    }
+
+    private Intent actualizarMaterialRetorno(Material materialActualizado) {
+        Intent intent = new Intent(getApplicationContext(), InformacionDetalladaMaterial.class);
+        intent.putExtra("materialClickeado", materialActualizado);
+        startActivity(intent);
+        return intent;
     }
 
     private Material getNuevosDatos()
