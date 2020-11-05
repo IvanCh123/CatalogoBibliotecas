@@ -103,13 +103,13 @@ public class EditarActivity extends AppCompatActivity {
     }
 
     public void regresarADetalles(View view){
-        Material materialActualizado = getNuevosDatos();
-        actualizarMaterialRetorno(materialActualizado);
+        actualizarMaterialRetorno(null);
     }
 
     private Intent actualizarMaterialRetorno(Material materialActualizado) {
         Intent intent = new Intent(getApplicationContext(), InformacionDetalladaMaterial.class);
-        intent.putExtra("materialClickeado", materialActualizado);
+        if(materialActualizado != null)
+            intent.putExtra("materialClickeado", materialActualizado);
         startActivity(intent);
         return intent;
     }
