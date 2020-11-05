@@ -19,7 +19,7 @@ public class EditarActivity extends AppCompatActivity {
 
     private BibliotecaOnClick bibliotecaOnClick;
     private ColeccionOnClick coleccionOnClick;
-    private TextView _NOMBREMATERIAL,_BIBLIOTECA, _COLECCION, _ID, _TITULO, _AUTOR, _IDIOMA, _FORMATO;
+    private TextView _NOMBREMATERIAL,_BIBLIOTECA, _COLECCION, _CANTIDAD, _ID, _TITULO, _AUTOR, _IDIOMA, _FORMATO;
     private Material materialOriginal;
 
     @Override
@@ -64,6 +64,7 @@ public class EditarActivity extends AppCompatActivity {
         _FORMATO = findViewById(R.id.textViewContentTipoEditor);
         _BIBLIOTECA = findViewById(R.id.textViewContentBibliotecaEditor);
         _COLECCION = findViewById(R.id.textViewContentColeccionEditor);
+        _CANTIDAD = findViewById(R.id.textViewContentCantidadEditor);
 
         _NOMBREMATERIAL.setText(material.getTitulo());
         _ID.setText(material.getID());
@@ -73,6 +74,7 @@ public class EditarActivity extends AppCompatActivity {
         _FORMATO.setText(material.getFormato());
         _BIBLIOTECA.setText(material.getBiblioteca());
         _COLECCION.setText(material.getColeccion());
+        _CANTIDAD.setText(material.getCantidad());
     }
 
     private class BibliotecaOnClick implements PopupMenu.OnMenuItemClickListener{
@@ -122,6 +124,7 @@ public class EditarActivity extends AppCompatActivity {
         materialActualizado.setTitulo(_TITULO.getText().toString());
         materialActualizado.setAutor(_AUTOR.getText().toString());
         materialActualizado.setColeccion(_COLECCION.getText().toString());
+        materialActualizado.setCantidad(_CANTIDAD.getText().toString());
         materialActualizado.setIdioma(_IDIOMA.getText().toString());
         materialActualizado.setFormato(_FORMATO.getText().toString());
         materialActualizado.setBiblioteca(_BIBLIOTECA.getText().toString());

@@ -24,6 +24,7 @@ import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
 public class InformacionDetalladaMaterial extends AppCompatActivity {
     private static final String TAG = "InformacionDetalladaMaterial";
+    private Material materialActual = new Material();
 
     @SuppressLint("LongLogTag")
     @Override
@@ -32,16 +33,16 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         setContentView(R.layout.activity_informacion_detallada_material);
         Log.d(TAG, "onCreate: called.");
 
-        final Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
-        setMaterial(materialRecibido);
+        materialActual = (Material) getIntent().getSerializableExtra("materialClickeado");
+        setMaterial(materialActual);
 
         final Button btnReserva= (Button) findViewById(R.id.button_reserva);
         btnReserva.setOnClickListener(new View.OnClickListener() {
-            String id=materialRecibido.getID();
-            String biblioteca=materialRecibido.getBiblioteca();
-            String titulo=materialRecibido.getTitulo();
+            String id=materialActual.getID();
+            String biblioteca=materialActual.getBiblioteca();
+            String titulo=materialActual.getTitulo();
             String user=" ";
-            String cant=materialRecibido.getCantidad();
+            String cant=materialActual.getCantidad();
 
 
             @Override
@@ -57,7 +58,8 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == RESULT_OK){
             Material materialRecibido = (Material) data.getSerializableExtra("materialActualizado");
-            setMaterial(materialRecibido);
+            this.materialActual = materialRecibido;
+            setMaterial(materialActual);
         }
     }
 
@@ -83,6 +85,10 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public Material getMaterialActual(){
+        return this.materialActual;
+    }
+
     public void setMaterial(Material materialRecibido){
         TextView textViewNombreMaterial = findViewById(R.id.textViewNombreMaterial);
         TextView textViewContentID = findViewById(R.id.textViewContentID);
@@ -104,7 +110,7 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
     }
 
     private void eliminarMaterial() {
-        Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
+        Material materialRecibido = getMaterialActual();
 
         EliminarDialogAlert eliminarDialogAlert = new EliminarDialogAlert(materialRecibido.getID());
 
@@ -112,7 +118,7 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
     }
 
     private void editarMaterial() {
-        Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
+        Material materialRecibido = getMaterialActual();
 
         Intent intent = new Intent(getApplicationContext(), EditarActivity.class);
         intent.putExtra("materialClickeado", materialRecibido);
