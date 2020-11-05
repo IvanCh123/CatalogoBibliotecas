@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombreMaterial" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreMaterialEditor" />
 
     <TextView
         android:id="@+id/textViewID"
@@ -59,7 +59,7 @@
         android:layout_marginTop="28dp"
         android:text="ID:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewNombreMaterial" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewNombreMaterialEditor" />
 
     <TextView
         android:id="@+id/textViewAutor"
@@ -172,7 +172,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewContentIdiomaEditor" />
 
     <TextView
-        android:id="@+id/textViewNombreMaterial"
+        android:id="@+id/textViewNombreMaterialEditor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="240dp"
