@@ -89,7 +89,7 @@ public class ReservaLibros extends AppCompatActivity {
 
     private boolean agregarReserva(String dias, String id,String titulo){
         Reservacion reservacion =new Reservacion("",dias,id,titulo,"0");
-        boolean b= new FireBaseDataBaseBibliotecaHelper().addReserva(reservacion,cant);
+        boolean b= new FireBaseDataBaseBibliotecaHelper().addReserva(reservacion,cant,getApplicationContext());
 
         return b;
     }

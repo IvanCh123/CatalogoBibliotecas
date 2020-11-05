@@ -62,7 +62,6 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
                 confirmarReserva(id,biblioteca,titulo,user,cant);
             }else{
                 Toast.makeText(v.getContext(),"Las reservaciones solo se pueden realizar si el dispositivo tiene conexión a internet",Toast.LENGTH_LONG).show();
-                startActivity(new Intent(InformacionDetalladaMaterial.this, MainActivity.class));
             }
 
         }

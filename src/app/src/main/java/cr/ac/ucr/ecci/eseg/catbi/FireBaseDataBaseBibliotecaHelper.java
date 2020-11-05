@@ -1,5 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,6 +21,7 @@ import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
@@ -41,7 +44,7 @@ public class FireBaseDataBaseBibliotecaHelper {
     public List<Material> getListaMaterial() {
         return listaMaterial;
     }
-
+    private Session session;
 
     // Interfaces utilizadas para recuperar todos los datos de firebase
     public interface AllBibliotecasDataStatus {
@@ -340,13 +343,14 @@ public class FireBaseDataBaseBibliotecaHelper {
 
 
 
-    public boolean addReserva(Reservacion r, String c ){
+    public boolean addReserva(Reservacion r, String c , Context context){
         actualizaCantMaterial(c,r.getMaterialID());
         DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");
         String date = df.format(Calendar.getInstance().getTime());
-
+        session = new Session(context);
+        String correoUsuario = session.getCorreo();
         try{
-            r.setCorreoUsuario(user.getEmail());
+            r.setCorreoUsuario(correoUsuario);
         }catch (Exception e){
             r.setCorreoUsuario("DESCONOCIDO");
         }

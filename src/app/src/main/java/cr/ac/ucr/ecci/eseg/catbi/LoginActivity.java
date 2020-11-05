@@ -27,6 +27,7 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.AppDataBase;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.PerfilFragment;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar barraProgreso;
     private FireBaseDataBaseBibliotecaHelper mFireBaseDataBaseBibliotecaHelper;
     private AppDataBase dbLocal;
+    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -248,6 +250,8 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario){
             if(usuario != null){
+                session = new Session(getApplicationContext());
+                session.setCorreo(usuario.getCorreo());
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("correoUsuarioActual", usuario.getCorreo());
                 startActivity(intent);

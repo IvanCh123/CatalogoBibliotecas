@@ -64,24 +64,25 @@ public class PerfilFragment extends Fragment {
         mRecyclerView = (RecyclerView) root.findViewById(R.id.reservacionesRecyclerView);
 
         if(hayConexionAInternet()) {
-            mAuth = FirebaseAuth.getInstance();
-            usuarioActual = mAuth.getCurrentUser();
-            String correo = usuarioActual.getEmail();
-            String userID = usuarioActual.getUid();
+            //mAuth = FirebaseAuth.getInstance();
+           //usuarioActual = mAuth.getCurrentUser();
+            //String correo = usuarioActual.getEmail();
+            Bundle bundle = getActivity().getIntent().getExtras();
+            String correoUsuarioActual = bundle.getString("correoUsuarioActual");
             mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBibliotecaHelper();
             mFireBaseDataBaseBibliotecaHelper.readUsuarios(new FireBaseDataBaseBibliotecaHelper.UsuariosDataStatus() {
                 @Override
                 public void DataIsLoaded(Usuario usuarioP) {
                     fillText(usuarioP);
                 }
-            }, correo);
+            }, correoUsuarioActual);
 
             new FireBaseDataBaseBibliotecaHelper().readReservas(new FireBaseDataBaseBibliotecaHelper.ReservaDataStatus() {
                 @Override
                 public void DataIsLoaded(List<Reservacion> reservacion, List<String> keys) {
                     new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, getContext(), reservacion, keys,getActivity());
                 }
-            }, correo);
+            }, correoUsuarioActual);
         }else{
             Bundle bundle = getActivity().getIntent().getExtras();
             String correoUsuarioActual = bundle.getString("correoUsuarioActual");
