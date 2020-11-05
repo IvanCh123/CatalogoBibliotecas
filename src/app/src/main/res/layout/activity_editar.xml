@@ -7,17 +7,16 @@
     tools:context=".ui.Administrar.EditarActivity">
 
     <TextView
-        android:id="@+id/textViewContentBiblioteca"
+        android:id="@+id/textViewContentBibliotecaEditor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="32dp"
-        android:editable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentTipo" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentTipoEditor" />
 
     <TextView
         android:id="@+id/textView"
@@ -38,10 +37,10 @@
         android:layout_marginTop="36dp"
         android:text="Título:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentID" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentIDEditor" />
 
     <TextView
-        android:id="@+id/textViewContentID"
+        android:id="@+id/textViewContentIDEditor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
@@ -70,7 +69,7 @@
         android:layout_marginTop="36dp"
         android:text="Autor(es):"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentTitulo" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentTituloEditor" />
 
     <TextView
         android:id="@+id/textViewColeccion"
@@ -80,7 +79,7 @@
         android:layout_marginTop="48dp"
         android:text="Colección:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentAutor" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentAutorEditor" />
 
     <TextView
         android:id="@+id/textViewIdioma"
@@ -90,7 +89,7 @@
         android:layout_marginTop="44dp"
         android:text="Idioma:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentColeccion" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentColeccionEditor" />
 
     <TextView
         android:id="@+id/textViewMaterial"
@@ -100,7 +99,7 @@
         android:layout_marginTop="56dp"
         android:text="Tipo de material:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentIdioma" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentIdiomaEditor" />
 
     <TextView
         android:id="@+id/textViewBiblioteca"
@@ -110,72 +109,67 @@
         android:layout_marginTop="40dp"
         android:text="Biblioteca:"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentTipo" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentTipoEditor" />
 
-    <TextView
-        android:id="@+id/textViewContentAutor"
+    <EditText
+        android:id="@+id/textViewContentAutorEditor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
-        android:editable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentTitulo" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentTituloEditor" />
 
-    <TextView
-        android:id="@+id/textViewContentTitulo"
+    <EditText
+        android:id="@+id/textViewContentTituloEditor"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="32dp"
-        android:editable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentID" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentIDEditor" />
 
-    <TextView
-        android:id="@+id/textViewContentColeccion"
+    <EditText
+        android:id="@+id/textViewContentColeccionEditor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="32dp"
-        android:editable="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentAutor" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentAutorEditor" />
 
-    <TextView
-        android:id="@+id/textViewContentIdioma"
+    <EditText
+        android:id="@+id/textViewContentIdiomaEditor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentColeccionEditor" />
+
+    <EditText
+        android:id="@+id/textViewContentTipoEditor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="32dp"
-        android:editable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentColeccion" />
-
-    <TextView
-        android:id="@+id/textViewContentTipo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="150dp"
-        android:layout_marginTop="56dp"
-        android:layout_marginEnd="32dp"
-        android:editable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContentIdioma" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewContentIdiomaEditor" />
 
     <TextView
         android:id="@+id/textViewNombreMaterial"
