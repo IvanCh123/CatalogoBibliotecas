@@ -97,4 +97,6 @@ public class Material implements Serializable {
     public void setBiblioteca(String biblioteca) {
         this.biblioteca = biblioteca;
     }
+
+    public boolean isValid(){return !autor.isEmpty() && !cantidad.isEmpty() && !coleccion.isEmpty() && !formato.isEmpty() && !titulo.isEmpty() && !idioma.isEmpty() && !biblioteca.isEmpty();}
 }

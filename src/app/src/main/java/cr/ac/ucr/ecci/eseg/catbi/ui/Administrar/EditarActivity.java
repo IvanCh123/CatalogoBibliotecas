@@ -100,10 +100,15 @@ public class EditarActivity extends AppCompatActivity {
     public void actualizarDatos(View view){
         Material materialActualizado = getNuevosDatos();
         FireBaseDataBaseBiblitecaHelper db = new FireBaseDataBaseBiblitecaHelper();
-        db.actualizarDatos(materialActualizado);
 
-        Toast.makeText(getApplicationContext(), "Los datos se han actualizado",Toast.LENGTH_SHORT).show();
-        actualizarMaterialRetorno(materialActualizado);
+        if(materialActualizado.isValid()){
+            db.actualizarDatos(materialActualizado);
+            Toast.makeText(getApplicationContext(), "Los datos se han actualizado",Toast.LENGTH_SHORT).show();
+            actualizarMaterialRetorno(materialActualizado);
+        }else{
+            Toast.makeText(getApplicationContext(), "No deje datos vacios",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void regresarADetalles(View view){
