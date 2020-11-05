@@ -13,8 +13,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.EditarActivity;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
 public class InformacionDetalladaMaterial extends AppCompatActivity {
@@ -91,6 +93,11 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         FireBaseDataBaseBiblitecaHelper db = new FireBaseDataBaseBiblitecaHelper();
         Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
         db.eliminarMaterial(materialRecibido.getID());
+
+        Toast.makeText(getApplicationContext(), "Material eliminado correctamente",Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(getApplicationContext(), BusquedaFragment.class);
+        startActivity(intent);
     }
 
     private void editarMaterial() {

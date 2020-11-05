@@ -328,6 +328,6 @@ public class FireBaseDataBaseBiblitecaHelper {
     }
 
     public void eliminarMaterial(String id) {
-
+        referenciaMaterial.child(id).removeValue();
     }
 }
