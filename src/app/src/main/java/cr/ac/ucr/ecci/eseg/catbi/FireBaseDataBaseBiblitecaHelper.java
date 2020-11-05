@@ -326,4 +326,8 @@ public class FireBaseDataBaseBiblitecaHelper {
         referenciaMaterial.child(material.getID()).child("idioma").setValue(material.getIdioma());
         referenciaMaterial.child(material.getID()).child("titulo").setValue(material.getTitulo());
     }
+
+    public void eliminarMaterial(String id) {
+
+    }
 }

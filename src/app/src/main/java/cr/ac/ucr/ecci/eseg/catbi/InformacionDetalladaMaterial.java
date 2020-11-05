@@ -80,10 +80,17 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
                 editarMaterial();
                 break;
             case R.id.eliminar_material:
+                eliminarMaterial();
                 break;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void eliminarMaterial() {
+        FireBaseDataBaseBiblitecaHelper db = new FireBaseDataBaseBiblitecaHelper();
+        Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
+        db.eliminarMaterial(materialRecibido.getID());
     }
 
     private void editarMaterial() {
