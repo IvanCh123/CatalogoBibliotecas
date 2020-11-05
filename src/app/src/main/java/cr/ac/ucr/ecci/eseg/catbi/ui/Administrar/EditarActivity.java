@@ -9,14 +9,15 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
 public class EditarActivity extends AppCompatActivity {
 
     private BibliotecaOnClick bibliotecaOnClick;
     private ColeccionOnClick coleccionOnClick;
+    private TextView _NOMBREMATERIAL,_BIBLIOTECA, _COLECCION, _ID, _TITULO, _AUTOR, _IDIOMA, _FORMATO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +26,11 @@ public class EditarActivity extends AppCompatActivity {
 
         bibliotecaOnClick = new BibliotecaOnClick();
         coleccionOnClick = new ColeccionOnClick();
-        final Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
-        TextView biblioteca = findViewById(R.id.textViewContentBibliotecaEditor);
-        TextView coleccion = findViewById(R.id.textViewContentColeccionEditor);
+        Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
 
-        setMaterial(biblioteca, coleccion, materialRecibido);
+        setMaterial(materialRecibido);
 
-        biblioteca.setOnClickListener(new View.OnClickListener(){
+        _BIBLIOTECA.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(getApplicationContext(), v);
@@ -41,7 +40,7 @@ public class EditarActivity extends AppCompatActivity {
             }
         });
 
-        coleccion.setOnClickListener(new View.OnClickListener(){
+        _COLECCION.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(getApplicationContext(), v);
@@ -52,23 +51,24 @@ public class EditarActivity extends AppCompatActivity {
         });
     }
 
-    private void setMaterial(TextView biblioteca, TextView coleccion, Material material) {
-        TextView nombreMaterial = findViewById(R.id.textViewNombreMaterialEditor);
-        TextView id = findViewById(R.id.textViewContentIDEditor);
-        TextView titulo = findViewById(R.id.textViewContentTituloEditor);
-        TextView autor = findViewById(R.id.textViewContentAutorEditor);
-        TextView idioma = findViewById(R.id.textViewContentIdiomaEditor);
-        TextView tipo = findViewById(R.id.textViewContentTipoEditor);
+    private void setMaterial(Material material) {
+        _NOMBREMATERIAL = findViewById(R.id.textViewNombreMaterialEditor);
+        _ID = findViewById(R.id.textViewContentIDEditor);
+        _TITULO = findViewById(R.id.textViewContentTituloEditor);
+        _AUTOR = findViewById(R.id.textViewContentAutorEditor);
+        _IDIOMA = findViewById(R.id.textViewContentIdiomaEditor);
+        _FORMATO = findViewById(R.id.textViewContentTipoEditor);
+        _BIBLIOTECA = findViewById(R.id.textViewContentBibliotecaEditor);
+        _COLECCION = findViewById(R.id.textViewContentColeccionEditor);
 
-        nombreMaterial.setText(material.getTitulo());
-        id.setText(material.getID());
-        titulo.setText(material.getTitulo());
-        autor.setText(material.getAutor());
-        idioma.setText(material.getIdioma());
-        tipo.setText(material.getFormato());
-        biblioteca.setText(material.getBiblioteca());
-        coleccion.setText(material.getColeccion());
-
+        _NOMBREMATERIAL.setText(material.getTitulo());
+        _ID.setText(material.getID());
+        _TITULO.setText(material.getTitulo());
+        _AUTOR.setText(material.getAutor());
+        _IDIOMA.setText(material.getIdioma());
+        _FORMATO.setText(material.getFormato());
+        _BIBLIOTECA.setText(material.getBiblioteca());
+        _COLECCION.setText(material.getColeccion());
     }
 
     private class BibliotecaOnClick implements PopupMenu.OnMenuItemClickListener{
@@ -95,5 +95,24 @@ public class EditarActivity extends AppCompatActivity {
         }
     }
 
+    public void actualizarDatos(View view){
+        Material materialActualizado = getNuevosDatos();
+        FireBaseDataBaseBiblitecaHelper db = new FireBaseDataBaseBiblitecaHelper();
+        db.actualizarDatos(materialActualizado);
 
+        Toast.makeText(getApplicationContext(), "Los datos se han actualizado",Toast.LENGTH_LONG).show();
+    }
+
+    private Material getNuevosDatos()
+    {
+        Material materialActualizado = new Material();
+        materialActualizado.setID(_ID.getText().toString());
+        materialActualizado.setTitulo(_TITULO.getText().toString());
+        materialActualizado.setAutor(_AUTOR.getText().toString());
+        materialActualizado.setColeccion(_COLECCION.getText().toString());
+        materialActualizado.setIdioma(_IDIOMA.getText().toString());
+        materialActualizado.setFormato(_FORMATO.getText().toString());
+        materialActualizado.setBiblioteca(_BIBLIOTECA.getText().toString());
+        return materialActualizado;
+    }
 }

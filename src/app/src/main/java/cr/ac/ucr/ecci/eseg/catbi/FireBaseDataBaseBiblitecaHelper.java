@@ -319,4 +319,13 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
 
     }*/
+
+    public void actualizarDatos(Material material){
+        referenciaMaterial.child(material.getID()).child("autor").setValue(material.getAutor());
+        referenciaMaterial.child(material.getID()).child("biblioteca").setValue(material.getBiblioteca());
+        referenciaMaterial.child(material.getID()).child("coleccion").setValue(material.getColeccion());
+        referenciaMaterial.child(material.getID()).child("formato").setValue(material.getFormato());
+        referenciaMaterial.child(material.getID()).child("idioma").setValue(material.getIdioma());
+        referenciaMaterial.child(material.getID()).child("titulo").setValue(material.getTitulo());
+    }
 }
