@@ -44,8 +44,6 @@ public class FireBaseDataBaseBiblitecaHelper {
         return listaMaterial;
     }
 
-    private int idMaterial=0;
-
     public interface DataStatus{
         void dataLoaded(List<ListarBibliotecas>ListaBibliotecas,List<String>keys);
         void dataInserted();
@@ -174,7 +172,6 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
-
     private void realizarFiltradoConColeccion(Material material, String[] filtro, List<Material> listaMaterial) {
         String titulo = StringUtils.stripAccents(material.getTitulo()).toLowerCase();
         String autor = StringUtils.stripAccents(material.getAutor()).toLowerCase();
@@ -294,27 +291,6 @@ public class FireBaseDataBaseBiblitecaHelper {
         }
         return add;
     }
-
-    /*public void contarHijosMaterial(){
-        referenciaMaterial.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    idMaterial =(int)dataSnapshot.getChildrenCount();
-                    Log.v("Cantidad: ", Integer.toString(idMaterial));
-
-                }else{
-                    idMaterial=0;
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }*/
 
     public void actualizarDatos(Material material){
         referenciaMaterial.child(material.getID()).child("autor").setValue(material.getAutor());

@@ -1,6 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Resultado;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.EditarActivity;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Alert.ConfirmarReservaDialogAlert;
@@ -31,25 +33,7 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         Log.d(TAG, "onCreate: called.");
 
         final Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
-
-        TextView textViewNombreMaterial = findViewById(R.id.textViewNombreMaterial);
-        TextView textViewContentID = findViewById(R.id.textViewContentID);
-        TextView textViewContentTitulo = findViewById(R.id.textViewContentTitulo);
-        TextView textViewContentAutor = findViewById(R.id.textViewContentAutor);
-        TextView textViewContentColeccion = findViewById(R.id.textViewContentColeccion);
-        TextView textViewContentIdioma = findViewById(R.id.textViewContentIdioma);
-        TextView textViewContentTipo = findViewById(R.id.textViewContentTipo);
-        TextView textViewContentBiblioteca = findViewById(R.id.textViewContentBiblioteca);
-
-        textViewNombreMaterial.setText(materialRecibido.getTitulo());
-        textViewContentID.setText(materialRecibido.getID());
-        textViewContentTitulo.setText(materialRecibido.getTitulo());
-        textViewContentAutor.setText(materialRecibido.getAutor());
-        textViewContentColeccion.setText(materialRecibido.getColeccion());
-        textViewContentIdioma.setText(materialRecibido.getIdioma());
-        textViewContentTipo.setText(materialRecibido.getFormato());
-        textViewContentBiblioteca.setText(materialRecibido.getBiblioteca());
-
+        setMaterial(materialRecibido);
 
         final Button btnReserva= (Button) findViewById(R.id.button_reserva);
         btnReserva.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +50,15 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
                 confirmarReserva(id,biblioteca,titulo,user,cant);
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            Material materialRecibido = (Material) data.getSerializableExtra("materialActualizado");
+            setMaterial(materialRecibido);
+        }
     }
 
     @Override
@@ -90,21 +83,32 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void setMaterial(Material materialRecibido){
+        TextView textViewNombreMaterial = findViewById(R.id.textViewNombreMaterial);
+        TextView textViewContentID = findViewById(R.id.textViewContentID);
+        TextView textViewContentTitulo = findViewById(R.id.textViewContentTitulo);
+        TextView textViewContentAutor = findViewById(R.id.textViewContentAutor);
+        TextView textViewContentColeccion = findViewById(R.id.textViewContentColeccion);
+        TextView textViewContentIdioma = findViewById(R.id.textViewContentIdioma);
+        TextView textViewContentTipo = findViewById(R.id.textViewContentTipo);
+        TextView textViewContentBiblioteca = findViewById(R.id.textViewContentBiblioteca);
+
+        textViewNombreMaterial.setText(materialRecibido.getTitulo());
+        textViewContentID.setText(materialRecibido.getID());
+        textViewContentTitulo.setText(materialRecibido.getTitulo());
+        textViewContentAutor.setText(materialRecibido.getAutor());
+        textViewContentColeccion.setText(materialRecibido.getColeccion());
+        textViewContentIdioma.setText(materialRecibido.getIdioma());
+        textViewContentTipo.setText(materialRecibido.getFormato());
+        textViewContentBiblioteca.setText(materialRecibido.getBiblioteca());
+    }
+
     private void eliminarMaterial() {
         Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
 
         EliminarDialogAlert eliminarDialogAlert = new EliminarDialogAlert(materialRecibido.getID());
 
         eliminarDialogAlert.show(getSupportFragmentManager(), "Confirmar");
-
-//        FireBaseDataBaseBiblitecaHelper db = new FireBaseDataBaseBiblitecaHelper();
-//
-//        db.eliminarMaterial(materialRecibido.getID());
-//
-//        Toast.makeText(getApplicationContext(), "Material eliminado correctamente",Toast.LENGTH_SHORT).show();
-//
-//        Intent intent = new Intent(getApplicationContext(), BusquedaFragment.class);
-//        startActivity(intent);
     }
 
     private void editarMaterial() {
@@ -112,7 +116,7 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
 
         Intent intent = new Intent(getApplicationContext(), EditarActivity.class);
         intent.putExtra("materialClickeado", materialRecibido);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
 
     public void confirmarReserva(String id, String biblioteca, String titulo, String user, String cant){
