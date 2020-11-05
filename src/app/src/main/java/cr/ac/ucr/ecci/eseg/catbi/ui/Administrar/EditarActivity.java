@@ -20,6 +20,7 @@ public class EditarActivity extends AppCompatActivity {
     private BibliotecaOnClick bibliotecaOnClick;
     private ColeccionOnClick coleccionOnClick;
     private TextView _NOMBREMATERIAL,_BIBLIOTECA, _COLECCION, _ID, _TITULO, _AUTOR, _IDIOMA, _FORMATO;
+    private Material materialOriginal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,7 @@ public class EditarActivity extends AppCompatActivity {
         Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
 
         setMaterial(materialRecibido);
+        materialOriginal = getNuevosDatos();
 
         _BIBLIOTECA.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -103,7 +105,7 @@ public class EditarActivity extends AppCompatActivity {
     }
 
     public void regresarADetalles(View view){
-        actualizarMaterialRetorno(null);
+        actualizarMaterialRetorno(materialOriginal);
     }
 
     private Intent actualizarMaterialRetorno(Material materialActualizado) {
