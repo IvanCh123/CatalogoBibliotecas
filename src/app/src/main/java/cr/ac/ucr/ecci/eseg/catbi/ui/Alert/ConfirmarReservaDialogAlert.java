@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Alert;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -6,12 +6,13 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import cr.ac.ucr.ecci.eseg.catbi.ui.Reserva.RevervaLibros;
 
 public class ConfirmarReservaDialogAlert extends AppCompatDialogFragment {
 
@@ -33,7 +34,7 @@ public class ConfirmarReservaDialogAlert extends AppCompatDialogFragment {
                         //Toast.makeText(getActivity(), finalB,Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getActivity(),"Se presiono SI",Toast.LENGTH_SHORT).show();
                         Context c=getContext();
-                        Intent intent1 = new Intent(c,RevervaLibros.class);
+                        Intent intent1 = new Intent(c, RevervaLibros.class);
                         intent1.putExtra("biblio",biblio);
                         intent1.putExtra("id",id);
                         intent1.putExtra("titulo",titu);

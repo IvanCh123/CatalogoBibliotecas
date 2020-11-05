@@ -1,17 +1,13 @@
-package cr.ac.ucr.ecci.eseg.catbi;
-
-import android.util.Log;
+package cr.ac.ucr.ecci.eseg.catbi.BaseDatos;
 
 import androidx.annotation.NonNull;
 
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import cr.ac.ucr.ecci.eseg.catbi.ui.Bibliotecas.ListarBibliotecas;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Reserva.ReservaMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Usuarios;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
@@ -327,7 +325,12 @@ public class FireBaseDataBaseBiblitecaHelper {
         referenciaMaterial.child(material.getID()).child("titulo").setValue(material.getTitulo());
     }
 
-    public void eliminarMaterial(String id) {
-        referenciaMaterial.child(id).removeValue();
+    public boolean eliminarMaterial(String id) {
+        try{
+            referenciaMaterial.child(id).removeValue();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }

@@ -10,8 +10,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
-import cr.ac.ucr.ecci.eseg.catbi.InformacionDetalladaMaterial;
+import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.InformacionDetalladaMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 

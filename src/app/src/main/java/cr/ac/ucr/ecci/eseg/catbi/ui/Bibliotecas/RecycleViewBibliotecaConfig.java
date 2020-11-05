@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Bibliotecas;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaViewModel;
+import cr.ac.ucr.ecci.eseg.catbi.R;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Bibliotecas.BibliotecaUbicacion;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Bibliotecas.ListarBibliotecas;
 
 public class RecycleViewBibliotecaConfig {
     private Context contexto;

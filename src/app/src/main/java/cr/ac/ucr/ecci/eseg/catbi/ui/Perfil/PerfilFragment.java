@@ -13,22 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
-import java.util.ArrayList;
 
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
-import cr.ac.ucr.ecci.eseg.catbi.RecyclerViewMaterial_Config;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
+
 import android.content.Context;
 
 public class PerfilFragment extends Fragment {

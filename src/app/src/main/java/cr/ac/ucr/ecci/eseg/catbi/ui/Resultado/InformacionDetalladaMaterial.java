@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Resultado;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,10 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.EditarActivity;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Alert.ConfirmarReservaDialogAlert;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Alert.EliminarDialogAlert;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
 public class InformacionDetalladaMaterial extends AppCompatActivity {
@@ -90,14 +91,20 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
     }
 
     private void eliminarMaterial() {
-        FireBaseDataBaseBiblitecaHelper db = new FireBaseDataBaseBiblitecaHelper();
         Material materialRecibido = (Material) getIntent().getSerializableExtra("materialClickeado");
-        db.eliminarMaterial(materialRecibido.getID());
 
-        Toast.makeText(getApplicationContext(), "Material eliminado correctamente",Toast.LENGTH_SHORT).show();
+        EliminarDialogAlert eliminarDialogAlert = new EliminarDialogAlert(materialRecibido.getID());
 
-        Intent intent = new Intent(getApplicationContext(), BusquedaFragment.class);
-        startActivity(intent);
+        eliminarDialogAlert.show(getSupportFragmentManager(), "Confirmar");
+
+//        FireBaseDataBaseBiblitecaHelper db = new FireBaseDataBaseBiblitecaHelper();
+//
+//        db.eliminarMaterial(materialRecibido.getID());
+//
+//        Toast.makeText(getApplicationContext(), "Material eliminado correctamente",Toast.LENGTH_SHORT).show();
+//
+//        Intent intent = new Intent(getApplicationContext(), BusquedaFragment.class);
+//        startActivity(intent);
     }
 
     private void editarMaterial() {

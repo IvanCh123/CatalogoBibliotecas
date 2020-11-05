@@ -12,10 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
-import cr.ac.ucr.ecci.eseg.catbi.InformacionDetalladaMaterial;
+import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
-import cr.ac.ucr.ecci.eseg.catbi.RecyclerViewMaterial_Config;
 
 public class ResultadosBusquedaActivity extends AppCompatActivity implements RecyclerViewMaterial_Config.OnNoteListener{
 

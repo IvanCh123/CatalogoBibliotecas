@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Bibliotecas;
 
 public class ListarBibliotecas {
     private String horario;

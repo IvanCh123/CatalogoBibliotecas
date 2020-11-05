@@ -1,8 +1,7 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Alert;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.AgregarMaterial;
+import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
 public class ConfirmarAgregarMaterialDialogAlert extends AppCompatDialogFragment {

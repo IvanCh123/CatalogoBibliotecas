@@ -1,41 +1,19 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Administrar;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.util.ArrayList;
-
-import cr.ac.ucr.ecci.eseg.catbi.ConfirmarAgregarMaterialDialogAlert;
-import cr.ac.ucr.ecci.eseg.catbi.ConfirmarReservaDialogAlert;
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
-import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Alert.ConfirmarAgregarMaterialDialogAlert;
 import cr.ac.ucr.ecci.eseg.catbi.R;
-import cr.ac.ucr.ecci.eseg.catbi.RevervaLibros;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
 
 public class AgregarMaterial extends AppCompatActivity {
     View v;
