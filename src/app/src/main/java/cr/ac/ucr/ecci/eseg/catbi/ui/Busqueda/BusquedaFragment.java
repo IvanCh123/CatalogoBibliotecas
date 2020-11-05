@@ -118,7 +118,7 @@ public class BusquedaFragment extends Fragment {
         startActivity(intent);
     }
 
-        private class  CampoBusquedaOnClick implements PopupMenu.OnMenuItemClickListener{
+    private class  CampoBusquedaOnClick implements PopupMenu.OnMenuItemClickListener{
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             Toast.makeText(getContext(), "Campo de búsqueda seleccionado: " +item.getTitle(), Toast.LENGTH_SHORT).show();
@@ -130,7 +130,7 @@ public class BusquedaFragment extends Fragment {
         }
     }
 
-    private class  ColeccionOnClick implements PopupMenu.OnMenuItemClickListener{
+    private class ColeccionOnClick implements PopupMenu.OnMenuItemClickListener{
         @Override
         public boolean onMenuItemClick(MenuItem item) {
             Toast.makeText(getContext(), "Colección seleccionada: " +item.getTitle(), Toast.LENGTH_SHORT).show();
