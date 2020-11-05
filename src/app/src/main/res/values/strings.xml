@@ -30,5 +30,6 @@
     <string name="btn_agregar">Agregar material</string>
     <string name="editar_material">Editar</string>
     <string name="eliminar_material">Eliminar</string>
+    <string name="boton_actualizar">Actualizar</string>
 
 </resources>
