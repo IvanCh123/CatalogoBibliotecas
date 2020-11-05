@@ -54,7 +54,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         if(campoBusqueda.isEmpty())
             campoBusqueda = "todo";
         if(coleccion.isEmpty())
-            coleccion = "general";
+            coleccion = "todas";
 
         palabraClave = StringUtils.stripAccents(palabraClave);
         coleccion = StringUtils.stripAccents(coleccion);

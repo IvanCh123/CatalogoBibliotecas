@@ -51,7 +51,7 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 * **Requerimientos funcionales**
 
 
-| Sprint 2 |   |
+| Sprint 3 |   |
 | -------- |----------------|
 | Codigo   |   Nombre  |
 | CNQ-71    |            [Agregar material](http://10.1.4.22:8080/browse/CNQ-71)|
@@ -59,6 +59,8 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 | CNQ-73    |         [Eliminación de material](http://10.1.4.22:8080/browse/CNQ-73)         |
 | CNQ-79    |            [Notificación límite de reserva](http://10.1.4.22:8080/browse/CNQ-79) |
 | CNQ-80    | [Corrección pantalla de reservas](http://10.1.4.22:8080/browse/CNQ-80) |
+| CNQ-81    | [Sincronización base de datos](http://10.1.4.22:8080/browse/CNQ-81) |
+
 
 
 
@@ -99,7 +101,88 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 * Estado actual de la base de datos
 ![](./img/ArtefactosBasesDatos/BDActual.PNG)
  
+## Casos de prueba
+### Caso 1
 
+
+|                      |     |
+| -------------------- | --- |
+| Nombre del Epic      | Administración Material |
+| Id de la Historia    | CNQ - 71  Agregar Material |
+| Id de caso de prueba |    0 |
+| Descripción |    Agregar un material a la base de datos de la aplicación |
+| Versión |   1.0  |
+| Implementado? | No    |
+| Nivel |   Sistema  |
+| Tipo |   Caja Negra  |
+|Pre-requisitos|<ul><li>Tener una cuenta institucional</li><li>El usuario ha iniciado sesión en la aplicación.</li>|
+| Datos de prueba|<ul><li>Titulo: Drácula</li><li>Autores: Bram Stoker</li><li>Colección: Literaria</li><li>Tipo de material:pdf</li><li>Biblioteca:Monge</li></ul> |
+| Escenario esperado | Se despliega ventana de retroalimentación indicando que se ha agregado material y se almacena en la base de datos, se realiza una redirección a la actividad principal.|
+
+#### Escenario esperado
+
+
+| #   | Instrucción | Resultado Esperado |
+| --- | ----------- | ------------------ |
+|   1  |      Iniciar sesión en la aplicación       |                Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)    |
+|   2  |        Dirigirse al ícono de agregar material (+) y presionarlo.     |        Se redirige a la actividad de agregar material. En donde se despliega un formulario.            |
+|   3  |       Rellenar el campo de título escribiendo Drácula, rellenar el campo de autores escribiendo Bram Stoker, seleccionar la opción literaria en el campo de coleccion, en el campo de tipo de material escribir pdf y en el campo de biblioteca seleccionar Monge.      |                 Se muestran los campos del formulario con la información ingresada.|
+|    4 |           Presionar el botón de agregar material  |             Se muestra una ventana emergente indicando que se ha agregado el material exitosamente y se guarda en la base de datos |
+
+
+
+### Caso 2
+|  |       |
+| -------- | ----------- |
+|Nombre del Epic|Administración Material|
+|ID de la historia|CNQ 72 Modificación Material|
+|ID del caso de prueba|1|
+|Descripción|Modificar un material dentro de la aplicación|
+|Versión|1.0|
+|Implementado?|No|
+|Nivel|Sistema|
+|Tipo|Caja Negra|
+|Pre-requisitos|<ul><li>Tener una cuenta institucional</li><li>El usuario ha iniciado sesión en la aplicación.</li><li>El material debe de existir en la aplicación.</li></ul>|
+|Datos de prueba|<ul><li>Búsqueda: Don Quijote</li><li>Modificación de la colección literaria a General.</li></ul>|
+|Escenario esperado|Aparece una ventana emergente indicando que el material se ha modificado exitosamente y se redirige a la actividad principal.|
+
+#### Escenario esperado
+
+|#|Instrucción|Resultado esperado|
+|--------|-----|---|
+|1|Iniciar sesión en la aplicación|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)|
+|2|Realizar una búsqueda del material que se desea modificar en este caso Don Quijote. |Se despliega una lista con los resultados de la búsqueda.|
+|3|Seleccionar el material que se desea modificar|Se despliega una pantalla de detalles con la información del material|
+|4|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción editar.|Se despliega una pantalla que indica si se desea modificar el material.|
+|5|Se selecciona si se desea modificar|Se despliega una pantalla de modificación de la información del material.|
+|6|Seleccionar el campo de colección y cambiar la Presionar el botón de guardar.colección a General|Se muestra el campo con la información modificada.|
+|7|Presionar el botón de guardar.|Se muestra una ventana emergente indicando que se ha modificado exitosamente el material y se guarda el cambio en la base de datos.|
+
+### Caso 3
+
+|  |       |
+| -------- | ----------- |
+|Nombre del Epic|Administración Material|
+|ID de la historia|CNQ 73 Eliminación Material|
+|ID del caso de prueba|2|
+|Descripción|Eliminar un material dentro de la aplicación|
+|Versión|1.0|
+|Implementado|No|
+|Nivel|Sistema|
+|Tipo|Caja Negra|
+|Pre-requisitos|<ul><li>Tener una cuenta institucional </li><li>El usuario ha iniciado sesión en la aplicación.</li><li>El material debe de existir en la aplicación.</li></ul>|
+|Datos de prueba|Búsqueda: Don Quijote.|
+|Escenario esperado|Aparece una ventana emergente indicando que el material se ha eliminado exitosamente y se redirige a la actividad principal.|
+
+#### Escenario esperado
+
+|#|Instrucción|Resultado esperado|
+|--------|-----|---|
+|1|Iniciar sesión en la aplicación|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)|
+|2|Realizar una búsqueda del material que se desea eliminar en este caso Don Quijote. |Se despliega una lista con los resultados de la búsqueda.|
+|3|Seleccionar el material que se desea eliminar|Se despliega una pantalla de detalles con la información del material|
+|4|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción eliminar.|Se despliega una ventana emergente indicando si se desea eliminar el material|
+|5|Presionar Ok|Se redirige a la pantalla principal y se muestra el toast indicando que se ha eliminado el material.|
 
 
 
@@ -122,18 +205,20 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
     * Al clonar el proyecto para correrlo se debe abrir la carpeta src.
     * Estrategia de branches: La estrategia que se va a utilizar es la de trabajar por módulos y funcionalidades, donde habría una rama de módulo que representa un subgrupo grande de la aplicación, que para nuestro caso va a representar una épica, y a su vez este módulo generaría más ramas, las cuales representan funcionalidades ya más específicas que se van a desarrollar y que pueden ser desarrolladas por un solo desarrollador usualmente. Además se utilizaría la rama master para solo tener versiones estables del proyecto.
     * Para esta iteración las ramas módulo son:
-         * TBD 
-         * TBD 
+         * administracion-material 
+         * reservacion-material 
     * Las de funcionalidad son:
-         * TBD
-         * TBD
-         * TBD
+         * agregar_material
+         * modificar-material
+         * eliminar-material
+         * sincronizacion-base-datos
     * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
 
 * **Definición de listo**
     Para que una historia se considere como lista tiene que estar en master, ser validada por los miembros del equipo y cumplir con los siguientes criterios de aceptación correspondientes a cada una de las historias de usuario:
-    * CNQ-71 Agregar material: 
-    * CNQ-72 Modificación de material: 
-    * CNQ-73 Eliminación de material: 
-    * CNQ-79 Notificación límite de reserva: 
-    * CNQ-80 Corrección pantalla de reservas:
+    * CNQ-71 Agregar material: Al entrar a la aplicación tengo un espacio para agregar material, este me permite insertar material en la base de datos de la bibliotecas.
+    * CNQ-72 Modificación de material: La aplicación me permite modificar los datos de materiales ingresados a la base de datos de las bibliotecas. 
+    * CNQ-73 Eliminación de material:La aplicación me permite eliminar material ingresado a la base de datos de bibliotecas 
+    * CNQ-79 Notificación límite de reserva: La aplicación me notifica cuantos días me quedan de una reservación. 
+    * CNQ-80 Corrección pantalla de reservas: Corregir las pantallas de reserva para distribuir mejor los elementos.
+    * CNQ-81 Sincronización de Bases de datos:  Si la aplicación no tiene internet, esta debe permitir ver la última versión de la base de datos de las bibliotecas.

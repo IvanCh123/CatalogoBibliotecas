@@ -110,7 +110,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                     Material material = keyNode.getValue(Material.class);
                     material.setID(keyNode.getKey());
 
-                    if(filtro[2].equalsIgnoreCase("general")){
+                    if(filtro[2].equalsIgnoreCase("todas")){
                         realizarFiltradoSinColeccion(material, filtro, listaMaterial);
                     }else{
                         realizarFiltradoConColeccion(material, filtro, listaMaterial);
