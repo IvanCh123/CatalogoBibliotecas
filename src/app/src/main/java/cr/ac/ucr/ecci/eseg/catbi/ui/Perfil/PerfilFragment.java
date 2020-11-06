@@ -18,12 +18,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ReservacionParametroAsyncTask;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.UsuarioParametroAsyncTask;
-import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
@@ -43,6 +42,7 @@ public class PerfilFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private Context mContext;
     private DataBaseHelperRoom dbLocalHelper;
+    private Session session;
 
     @Override
     public void onAttach(Context context) {
@@ -62,11 +62,8 @@ public class PerfilFragment extends Fragment {
         mRecyclerView = (RecyclerView) root.findViewById(R.id.reservacionesRecyclerView);
 
         if(hayConexionAInternet()) {
-            //mAuth = FirebaseAuth.getInstance();
-           //usuarioActual = mAuth.getCurrentUser();
-            //String correo = usuarioActual.getEmail();
-            Bundle bundle = getActivity().getIntent().getExtras();
-            String correoUsuarioActual = bundle.getString("correoUsuarioActual");
+            session = new Session(getContext());
+            String correoUsuarioActual = session.getCorreo();
             mFireBaseDataBaseBiblitecaHelper = new FireBaseDataBaseBiblitecaHelper();
             mFireBaseDataBaseBiblitecaHelper.readUsuarios(new FireBaseDataBaseBiblitecaHelper.UsuariosDataStatus() {
                 @Override
