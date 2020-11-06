@@ -84,10 +84,18 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
 
         switch(item.getItemId()){
             case R.id.editar_material:
-                editarMaterial();
+                if(hayConexionAInternet()){
+                    editarMaterial();
+                }else{
+                    Toast.makeText(getApplicationContext(),"La edición de materiales solo se pueden realizar si el dispositivo tiene conexión a internet",Toast.LENGTH_LONG).show();
+                }
                 break;
             case R.id.eliminar_material:
-                eliminarMaterial();
+                if(hayConexionAInternet()){
+                    eliminarMaterial();
+                }else{
+                    Toast.makeText(getApplicationContext(),"La eliminación de materiales solo se pueden realizar si el dispositivo tiene conexión a internet",Toast.LENGTH_LONG).show();
+                }
                 break;
         }
 
