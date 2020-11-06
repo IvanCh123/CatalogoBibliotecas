@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.RecycleViewBibliotecaConfig;
