@@ -273,7 +273,6 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
-
     private void realizarFiltradoConColeccion(Material material, String[] filtro, List<Material> listaMaterial) {
         String titulo = StringUtils.stripAccents(material.getTitulo()).toLowerCase();
         String autor = StringUtils.stripAccents(material.getAutor()).toLowerCase();
@@ -375,5 +374,44 @@ public class FireBaseDataBaseBiblitecaHelper {
     private void actualizaCantMaterial(String  cant, String id){
         int c=Integer.parseInt(cant)-1;
         referenciaMaterial.child(id).child("cantidad").setValue(String.valueOf(c));
+    }
+
+    // funcion que agrega un nuevo valor a la base de datos y genera una id unica
+    public boolean addMaterial( Material m){
+        //contarHijosMaterial();
+        boolean add=true;
+        int inicio=0;
+        int fin=2;
+        DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");
+        String date = df.format(Calendar.getInstance().getTime());
+        String titulo=m.getTitulo();
+        String year=m.getAño();
+        String biblio=m.getBiblioteca();
+        String idM=year+date+biblio.substring(inicio,fin)+titulo.substring(inicio,1);
+        try{
+            referenciaMaterial.child(idM).setValue(m);
+        }catch (Exception e){
+            add=false;
+        }
+        return add;
+    }
+
+    public void actualizarDatos(Material material){
+        referenciaMaterial.child(material.getMaterialID()).child("autor").setValue(material.getAutor());
+        referenciaMaterial.child(material.getMaterialID()).child("biblioteca").setValue(material.getBiblioteca());
+        referenciaMaterial.child(material.getMaterialID()).child("coleccion").setValue(material.getColeccion());
+        referenciaMaterial.child(material.getMaterialID()).child("cantidad").setValue(material.getCantidad());
+        referenciaMaterial.child(material.getMaterialID()).child("formato").setValue(material.getFormato());
+        referenciaMaterial.child(material.getMaterialID()).child("idioma").setValue(material.getIdioma());
+        referenciaMaterial.child(material.getMaterialID()).child("titulo").setValue(material.getTitulo());
+    }
+
+    public boolean eliminarMaterial(String id) {
+        try{
+            referenciaMaterial.child(id).removeValue();
+            return true;
+        }catch (Exception e){
+            return false;
+        }
     }
 }

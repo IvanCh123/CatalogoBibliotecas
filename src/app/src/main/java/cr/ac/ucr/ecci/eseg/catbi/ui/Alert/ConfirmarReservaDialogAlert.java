@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Alert;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+
+import cr.ac.ucr.ecci.eseg.catbi.ui.Reserva.RevervaLibros;
 
 public class ConfirmarReservaDialogAlert extends AppCompatDialogFragment {
 

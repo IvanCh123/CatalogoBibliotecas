@@ -1,10 +1,9 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Bibliotecas;
 
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -29,6 +28,8 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
+
+import cr.ac.ucr.ecci.eseg.catbi.R;
 
 public class BibliotecaUbicacion extends AppCompatActivity  implements
         OnMapReadyCallback, GoogleMap.OnMapClickListener, GoogleMap.OnMapLongClickListener {

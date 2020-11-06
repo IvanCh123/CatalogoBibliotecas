@@ -19,6 +19,19 @@
     <string name="texto_reserva">Reservar Libro</string>
     <string name="hint_campo_text">Todos</string>
     <string name="hint_general">General</string>
+    <string name="title_add_mat">Agregar nuevo material</string>
+    <string name="titulo">Titulo</string>
+    <string name="autor">Autor</string>
+    <string name="coleccion">Colección</string>
+    <string name="tipo_mat">Tipo de material</string>
+    <string name="idioma">Idioma</string>
+    <string name="cant">Cantidad</string>
+    <string name="biblioteca">Biblioteca</string>
+    <string name="btn_agregar">Agregar material</string>
+    <string name="editar_material">Editar</string>
+    <string name="eliminar_material">Eliminar</string>
+    <string name="boton_actualizar">Actualizar</string>
+    <string name="boton_cancelar">Cancelar</string>
     <string name="hint_todas">Todas</string>
 
 </resources>

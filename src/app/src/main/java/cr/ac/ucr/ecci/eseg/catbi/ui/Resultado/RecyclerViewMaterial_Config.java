@@ -1,4 +1,4 @@
-package cr.ac.ucr.ecci.eseg.catbi;
+package cr.ac.ucr.ecci.eseg.catbi.ui.Resultado;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Handler;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
+import cr.ac.ucr.ecci.eseg.catbi.R;
 
 public class RecyclerViewMaterial_Config {
     private Context mContext;

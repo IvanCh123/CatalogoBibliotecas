@@ -20,9 +20,9 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.MaterialParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
-import cr.ac.ucr.ecci.eseg.catbi.InformacionDetalladaMaterial;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.InformacionDetalladaMaterial;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.RecyclerViewMaterial_Config;
 import cr.ac.ucr.ecci.eseg.catbi.R;
-import cr.ac.ucr.ecci.eseg.catbi.RecyclerViewMaterial_Config;
 
 public class ResultadosBusquedaActivity extends AppCompatActivity implements RecyclerViewMaterial_Config.OnNoteListener{
 

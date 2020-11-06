@@ -102,4 +102,6 @@ public class Material implements Serializable {
     public void setMaterialID(String materialID) {
         this.materialID = materialID;
     }
+
+    public boolean isValid(){return !autor.isEmpty() && !cantidad.isEmpty() && !coleccion.isEmpty() && !formato.isEmpty() && !titulo.isEmpty() && !idioma.isEmpty() && !biblioteca.isEmpty();}
 }
