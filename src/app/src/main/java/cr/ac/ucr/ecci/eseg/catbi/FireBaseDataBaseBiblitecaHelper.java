@@ -25,7 +25,7 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
-public class FireBaseDataBaseBibliotecaHelper {
+public class FireBaseDataBaseBiblitecaHelper {
     private FirebaseDatabase database;
     private DatabaseReference referenciaBiblioteca;
     private DatabaseReference referenciaMaterial;
@@ -80,7 +80,7 @@ public class FireBaseDataBaseBibliotecaHelper {
         void DataIsLoaded(List<Reservacion> reservacion, List<String> keys);
     }
 
-    public FireBaseDataBaseBibliotecaHelper() {
+    public FireBaseDataBaseBiblitecaHelper() {
         database=FirebaseDatabase.getInstance();
         referenciaBiblioteca= database.getReference("Bibliotecas");
         referenciaMaterial= database.getReference("Material");

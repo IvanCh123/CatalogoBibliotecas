@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import android.content.Intent;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -21,16 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.MaterialParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ReservacionParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.UsuarioParametroAsyncTask;
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
-import cr.ac.ucr.ecci.eseg.catbi.RecyclerViewMaterial_Config;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
 
 import android.content.Context;
 
@@ -41,7 +36,7 @@ public class PerfilFragment extends Fragment {
     private TextView correoUsuario;
     private FirebaseAuth mAuth;
     private FirebaseUser usuarioActual;
-    private FireBaseDataBaseBibliotecaHelper mFireBaseDataBaseBibliotecaHelper;
+    private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBiblitecaHelper;
     private RecyclerView mRecyclerView;
     private Context mContext;
     private DataBaseHelperRoom dbLocalHelper;
@@ -69,15 +64,15 @@ public class PerfilFragment extends Fragment {
             //String correo = usuarioActual.getEmail();
             Bundle bundle = getActivity().getIntent().getExtras();
             String correoUsuarioActual = bundle.getString("correoUsuarioActual");
-            mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBibliotecaHelper();
-            mFireBaseDataBaseBibliotecaHelper.readUsuarios(new FireBaseDataBaseBibliotecaHelper.UsuariosDataStatus() {
+            mFireBaseDataBaseBiblitecaHelper = new FireBaseDataBaseBiblitecaHelper();
+            mFireBaseDataBaseBiblitecaHelper.readUsuarios(new FireBaseDataBaseBiblitecaHelper.UsuariosDataStatus() {
                 @Override
                 public void DataIsLoaded(Usuario usuarioP) {
                     fillText(usuarioP);
                 }
             }, correoUsuarioActual);
 
-            new FireBaseDataBaseBibliotecaHelper().readReservas(new FireBaseDataBaseBibliotecaHelper.ReservaDataStatus() {
+            new FireBaseDataBaseBiblitecaHelper().readReservas(new FireBaseDataBaseBiblitecaHelper.ReservaDataStatus() {
                 @Override
                 public void DataIsLoaded(List<Reservacion> reservacion, List<String> keys) {
                     new RecyclerViewReservaciones_Config().setConfig(mRecyclerView, getContext(), reservacion, keys,getActivity());

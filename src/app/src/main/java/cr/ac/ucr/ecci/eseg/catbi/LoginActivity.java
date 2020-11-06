@@ -29,10 +29,6 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.PerfilFragment;
-
-import java.util.concurrent.ExecutionException;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -40,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText contrasenaUsuario;
     private Button btnInicioSesion;
     private ProgressBar barraProgreso;
-    private FireBaseDataBaseBibliotecaHelper mFireBaseDataBaseBibliotecaHelper;
+    private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBiblitecaHelper;
     private AppDataBase dbLocal;
     private Session session;
 
@@ -53,17 +49,17 @@ public class LoginActivity extends AppCompatActivity {
                 AppDataBase.class, "bibliotecasStorage").fallbackToDestructiveMigration().build();
 
         //Se crea instancia del helper
-        mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBibliotecaHelper();
+        mFireBaseDataBaseBiblitecaHelper = new FireBaseDataBaseBiblitecaHelper();
         // Obtener datos de Firebase
         //Bibliotecas
-        mFireBaseDataBaseBibliotecaHelper.readAllBibliotecas(new FireBaseDataBaseBibliotecaHelper.AllBibliotecasDataStatus() {
+        mFireBaseDataBaseBiblitecaHelper.readAllBibliotecas(new FireBaseDataBaseBiblitecaHelper.AllBibliotecasDataStatus() {
             @Override
             public void DataIsLoaded(List<Biblioteca> bibliotecas) {
                 insertarBibliotecasBaseLocal(bibliotecas);
             }
         });
         //Usuarios
-        mFireBaseDataBaseBibliotecaHelper.readAllUsuarios(new FireBaseDataBaseBibliotecaHelper.AllUsuariosDataStatus() {
+        mFireBaseDataBaseBiblitecaHelper.readAllUsuarios(new FireBaseDataBaseBiblitecaHelper.AllUsuariosDataStatus() {
             @Override
             public void DataIsLoaded(List<Usuario> usuarios) {
                 insertarUsuariosBaseLocal(usuarios);
@@ -71,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //Reservaciones
-        mFireBaseDataBaseBibliotecaHelper.readAllReservaciones(new FireBaseDataBaseBibliotecaHelper.AllReservacionesDataStatus() {
+        mFireBaseDataBaseBiblitecaHelper.readAllReservaciones(new FireBaseDataBaseBiblitecaHelper.AllReservacionesDataStatus() {
             @Override
             public void DataIsLoaded(List<Reservacion> reservaciones) {
                 insertarReservacionesBaseLocal(reservaciones);
@@ -79,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         //Materiales
-        mFireBaseDataBaseBibliotecaHelper.readAllMateriales(new FireBaseDataBaseBibliotecaHelper.AllMaterialesDataStatus() {
+        mFireBaseDataBaseBiblitecaHelper.readAllMateriales(new FireBaseDataBaseBiblitecaHelper.AllMaterialesDataStatus() {
             @Override
             public void DataIsLoaded(List<Material> materiales) {
                 insertarMaterialesBaseLocal(materiales);

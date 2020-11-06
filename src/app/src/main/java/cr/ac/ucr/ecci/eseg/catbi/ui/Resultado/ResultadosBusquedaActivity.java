@@ -19,7 +19,7 @@ import java.util.List;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.MaterialParametroAsyncTask;
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.InformacionDetalladaMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.RecyclerViewMaterial_Config;
@@ -27,7 +27,7 @@ import cr.ac.ucr.ecci.eseg.catbi.RecyclerViewMaterial_Config;
 public class ResultadosBusquedaActivity extends AppCompatActivity implements RecyclerViewMaterial_Config.OnNoteListener{
 
     private RecyclerView mRecyclerView;
-    private FireBaseDataBaseBibliotecaHelper mFireBaseDataBaseBibliotecaHelper;
+    private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBiblitecaHelper;
     private DataBaseHelperRoom dbLocalHelper;
 
     public final static String MESSAGE_KEY ="palabraKey";
@@ -49,8 +49,8 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_material);
 
         if(hayConexionAInternet()){
-            mFireBaseDataBaseBibliotecaHelper = new FireBaseDataBaseBibliotecaHelper();
-            mFireBaseDataBaseBibliotecaHelper.readMaterial(new FireBaseDataBaseBibliotecaHelper.MaterialDataStatus(){
+            mFireBaseDataBaseBiblitecaHelper = new FireBaseDataBaseBiblitecaHelper();
+            mFireBaseDataBaseBiblitecaHelper.readMaterial(new FireBaseDataBaseBiblitecaHelper.MaterialDataStatus(){
                 @Override
                 public void DataIsLoaded(List<Material> material, List<String> keys) {
 
@@ -125,7 +125,7 @@ public class ResultadosBusquedaActivity extends AppCompatActivity implements Rec
         Log.d(TAG, "onNoteClick: clicked." + position);
         Intent intent = new Intent(getApplicationContext(), InformacionDetalladaMaterial.class);
         if(hayConexionAInternet()){
-            Material materialClickeado = mFireBaseDataBaseBibliotecaHelper.getListaMaterial().get(position);
+            Material materialClickeado = mFireBaseDataBaseBiblitecaHelper.getListaMaterial().get(position);
             intent.putExtra("materialClickeado", materialClickeado);
             startActivity(intent);
         }else{

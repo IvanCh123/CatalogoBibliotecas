@@ -32,7 +32,7 @@ public class ConfirmarReservaDialogAlert extends AppCompatDialogFragment {
                         //Toast.makeText(getActivity(), finalB,Toast.LENGTH_SHORT).show();
                         //Toast.makeText(getActivity(),"Se presiono SI",Toast.LENGTH_SHORT).show();
                         Context c=getContext();
-                        Intent intent1 = new Intent(c, ReservaLibros.class);
+                        Intent intent1 = new Intent(c, RevervaLibros.class);
                         intent1.putExtra("biblio",biblio);
                         intent1.putExtra("id",id);
                         intent1.putExtra("titulo",titu);

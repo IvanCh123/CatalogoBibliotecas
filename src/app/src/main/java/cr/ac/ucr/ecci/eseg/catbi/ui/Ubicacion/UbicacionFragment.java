@@ -18,9 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
-import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBibliotecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
-import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.RecycleViewBibliotecaConfig;
 
@@ -40,7 +39,7 @@ public class UbicacionFragment extends Fragment {
         BibliotecaConfig = v.findViewById(R.id.recycler_bibliotecas);
 
         if(hayConexionAInternet()) {
-            new FireBaseDataBaseBibliotecaHelper().readBibliotecas(new FireBaseDataBaseBibliotecaHelper.DataStatus() {
+            new FireBaseDataBaseBiblitecaHelper().readBibliotecas(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
                 @Override
                 public void dataLoaded(List<Biblioteca> listaBibliotecas, List<String> keys) {
                     Log.d("Tq", String.valueOf(listaBibliotecas.size()));
