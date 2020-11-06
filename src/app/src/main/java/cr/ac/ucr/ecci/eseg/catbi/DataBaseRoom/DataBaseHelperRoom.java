@@ -35,6 +35,10 @@ public class DataBaseHelperRoom {
         }
     }
 
+    public void borrarMaterial(String id){
+        new borrarMaterial().execute(id);
+    }
+
     public void readBibliotecas (BibliotecaDataStatus dataStatus){
         new leerBibliotecas().execute(dataStatus);
     }
@@ -141,6 +145,15 @@ public class DataBaseHelperRoom {
             Usuario usuario = dbLocal.usuarioDAO().leerUsuario(correo);
             UsuarioParametroAsyncTask.UsuarioDataStatus reservacionDataStatus = usuarioParametro[0].getUsuarioStatus();
             reservacionDataStatus.DataIsLoaded(usuario);
+            return null;
+        }
+    }
+
+    private class borrarMaterial extends AsyncTask<String,Void, Void> {
+        @Override
+        protected Void doInBackground(String... parametro) {
+            String materialID = parametro[0];
+            dbLocal.materialDAO().borrarPorMaterialID(materialID);
             return null;
         }
     }

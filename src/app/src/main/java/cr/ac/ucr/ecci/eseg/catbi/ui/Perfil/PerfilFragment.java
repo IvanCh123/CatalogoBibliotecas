@@ -79,8 +79,8 @@ public class PerfilFragment extends Fragment {
                 }
             }, correoUsuarioActual);
         }else{
-            Bundle bundle = getActivity().getIntent().getExtras();
-            String correoUsuarioActual = bundle.getString("correoUsuarioActual");
+            session = new Session(getContext());
+            String correoUsuarioActual = session.getCorreo();
             dbLocalHelper = new DataBaseHelperRoom(getContext());
 
             // Para recuperar los datos del usuario

@@ -49,6 +49,9 @@ public interface MaterialDAO {
     @Query("SELECT * FROM Material WHERE idioma LIKE '%'||:palabraClave||'%'")
     List<Material> leerSinColeccionIdioma(String palabraClave);
 
+    @Query("DELETE FROM Material WHERE materialID LIKE '%'||:materialID||'%'")
+    void borrarPorMaterialID(String materialID);
+
     // Inserto material
     @Insert (onConflict = OnConflictStrategy.REPLACE)
     void insertar(Material... materiales);

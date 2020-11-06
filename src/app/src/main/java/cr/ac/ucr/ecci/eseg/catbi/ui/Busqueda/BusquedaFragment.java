@@ -156,8 +156,6 @@ public class BusquedaFragment extends Fragment {
         if (palabra.isEmpty()){
             Toast.makeText(view.getContext(),"Digite una palabra o frase",Toast.LENGTH_SHORT).show();
         }else{
-            Bundle bundle = getActivity().getIntent().getExtras();
-            String correoUsuarioActual = bundle.getString("correoUsuarioActual");
             Intent intent= new Intent(getContext(), ResultadosBusquedaActivity.class); // Envío la palabra a buscar a la actividad de Iván.
             intent.putExtra(CAMPO_KEY,campo);
             intent.putExtra(MESSAGE_KEY,palabra);
