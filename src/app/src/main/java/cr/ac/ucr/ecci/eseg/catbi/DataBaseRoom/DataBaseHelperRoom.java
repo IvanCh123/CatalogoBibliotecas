@@ -59,6 +59,10 @@ public class DataBaseHelperRoom {
         new leerCamposBusquedaSinColeccion().execute(parametroAsyncTask);
     }
 
+    public void actualizarMaterial(Material material){
+        new actualizarMaterial().execute(material);
+    }
+
     private class leerCamposBusqueda extends AsyncTask<MaterialParametroAsyncTask, Void, Void> {
         @Override
         protected Void doInBackground(MaterialParametroAsyncTask... filtro) {
@@ -154,6 +158,14 @@ public class DataBaseHelperRoom {
         protected Void doInBackground(String... parametro) {
             String materialID = parametro[0];
             dbLocal.materialDAO().borrarPorMaterialID(materialID);
+            return null;
+        }
+    }
+
+    private class actualizarMaterial extends AsyncTask<Material,Void, Void> {
+        @Override
+        protected Void doInBackground(Material... material) {
+            dbLocal.materialDAO().actualizar(material[0]);
             return null;
         }
     }

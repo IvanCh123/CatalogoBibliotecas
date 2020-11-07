@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.InformacionDetalladaMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
@@ -104,7 +105,11 @@ public class EditarActivity extends AppCompatActivity {
         if(materialActualizado.isValid()){
             db.actualizarDatos(materialActualizado);
             Toast.makeText(getApplicationContext(), "Los datos se han actualizado",Toast.LENGTH_SHORT).show();
+            DataBaseHelperRoom dbLocal = new DataBaseHelperRoom(getApplicationContext());
+            // Se actualiza la base local
+            dbLocal.actualizarMaterial(materialActualizado);
             actualizarMaterialRetorno(materialActualizado);
+
         }else{
             Toast.makeText(getApplicationContext(), "No deje datos vacios",Toast.LENGTH_SHORT).show();
         }
