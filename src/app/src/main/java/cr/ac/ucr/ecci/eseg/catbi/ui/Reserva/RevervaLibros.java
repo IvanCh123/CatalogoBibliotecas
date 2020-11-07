@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 
@@ -90,8 +92,8 @@ public class RevervaLibros extends AppCompatActivity {
 
 
     private boolean agregarReserva(String dias, String id,String titulo){
-        ReservaMaterial reservaMaterial=new ReservaMaterial("",dias,id,titulo,"0");
-        boolean b= new FireBaseDataBaseBiblitecaHelper().addReserva(reservaMaterial,cant);
+        Reservacion reservacion =new Reservacion("",dias,id,titulo,"0");
+        boolean b= new FireBaseDataBaseBiblitecaHelper().addReserva(reservacion,cant,getApplicationContext());
 
         return b;
     }

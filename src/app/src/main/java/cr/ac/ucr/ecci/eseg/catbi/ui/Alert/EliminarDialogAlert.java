@@ -12,11 +12,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 
 public class EliminarDialogAlert extends AppCompatDialogFragment {
 
     String idMaterial;
+    private DataBaseHelperRoom dbLocal;
 
     public EliminarDialogAlert(String idMaterial){
         this.idMaterial = idMaterial;
@@ -36,6 +38,8 @@ public class EliminarDialogAlert extends AppCompatDialogFragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         boolean eliminado =new FireBaseDataBaseBiblitecaHelper().eliminarMaterial(idMaterial);
+                        dbLocal = new DataBaseHelperRoom(getContext());
+                        dbLocal.borrarMaterial(idMaterial);
                         if(eliminado){
                             Toast.makeText(getActivity(), "Se eliminó material correctamente" , Toast.LENGTH_SHORT).show();
                             retornar();
