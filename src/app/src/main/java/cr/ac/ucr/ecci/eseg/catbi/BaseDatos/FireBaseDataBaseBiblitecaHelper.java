@@ -365,6 +365,9 @@ public class FireBaseDataBaseBiblitecaHelper {
         boolean resultado;
         try{
             referenciaReserva.child(String.valueOf(date)).setValue(r);
+            r.setReservacionID(date);
+            DataBaseHelperRoom dbLocal = new DataBaseHelperRoom(context);
+            dbLocal.insertarReservacion(r);
             resultado=true;
         }catch (Exception e){
             resultado=false;

@@ -67,6 +67,10 @@ public class DataBaseHelperRoom {
         new insertarMaterial().execute(material);
     }
 
+    public void insertarReservacion (Reservacion reservacion){
+        new insertarReservacion().execute(reservacion);
+    }
+
     private class leerCamposBusqueda extends AsyncTask<MaterialParametroAsyncTask, Void, Void> {
         @Override
         protected Void doInBackground(MaterialParametroAsyncTask... filtro) {
@@ -182,7 +186,13 @@ public class DataBaseHelperRoom {
         }
     }
 
-
+    private class insertarReservacion extends AsyncTask<Reservacion,Void, Void> {
+        @Override
+        protected Void doInBackground(Reservacion... reservacion) {
+            dbLocal.reservacionDAO().insertar(reservacion[0]);
+            return null;
+        }
+    }
 
 }
 
