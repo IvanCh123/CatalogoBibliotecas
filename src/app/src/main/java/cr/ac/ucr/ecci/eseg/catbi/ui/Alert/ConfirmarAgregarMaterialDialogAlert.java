@@ -23,13 +23,13 @@ public class ConfirmarAgregarMaterialDialogAlert extends AppCompatDialogFragment
         AlertDialog.Builder alterReserva= new AlertDialog.Builder(getActivity());
         final String[] mat= getArguments().getStringArray("material");
         final Material newMaterial=new Material(null,mat[0],mat[1],mat[2],mat[3],mat[4],mat[5],mat[6],mat[7]);
-        alterReserva.setTitle("¿Desea reservar este libro?")
-                .setMessage("Presione si para continuar el proceso de reserva")
+        alterReserva.setTitle("¿Desea agregar este material?")
+                .setMessage("Presione si para agregar el material")
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //new FireBaseDataBaseBiblitecaHelper().contarHijosMaterial();
-                        boolean agregado=new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial);
+                        boolean agregado=new FireBaseDataBaseBiblitecaHelper().addMaterial(newMaterial,getContext());
                         if(agregado){
                             Toast.makeText(getActivity(), "Se agrego el material" , Toast.LENGTH_SHORT).show();
                             retornar();

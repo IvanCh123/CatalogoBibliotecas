@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
@@ -45,6 +46,7 @@ public class FireBaseDataBaseBiblitecaHelper {
         return listaMaterial;
     }
     private Session session;
+    private DataBaseHelperRoom dbLocal;
 
     // Interfaces utilizadas para recuperar todos los datos de firebase
     public interface AllBibliotecasDataStatus {
@@ -377,8 +379,7 @@ public class FireBaseDataBaseBiblitecaHelper {
     }
 
     // funcion que agrega un nuevo valor a la base de datos y genera una id unica
-    public boolean addMaterial( Material m){
-        //contarHijosMaterial();
+    public boolean addMaterial( Material m, Context context){
         boolean add=true;
         int inicio=0;
         int fin=2;
@@ -388,8 +389,12 @@ public class FireBaseDataBaseBiblitecaHelper {
         String year=m.getAño();
         String biblio=m.getBiblioteca();
         String idM=year+date+biblio.substring(inicio,fin)+titulo.substring(inicio,1);
+        m.setMaterialID(idM);
+        dbLocal = new DataBaseHelperRoom(context);
         try{
             referenciaMaterial.child(idM).setValue(m);
+            dbLocal.insertarMaterial(m);
+
         }catch (Exception e){
             add=false;
         }
