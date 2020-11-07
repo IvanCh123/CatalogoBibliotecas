@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cr.ac.ucr.ecci.eseg.catbi">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -31,10 +32,10 @@
 
         <activity
             android:name=".ui.Bibliotecas.BibliotecaUbicacion"
-            android:label="@string/title_activity_biblioteca_ubicacion" />
-        <activity android:name=".ui.Resultado.ResultadosBusquedaActivity" />
-        <activity android:name=".ui.Resultado.InformacionDetalladaMaterial" />
-        <activity android:name=".ui.Reserva.RevervaLibros" />
+            android:label="@string/title_activity_biblioteca_ubicacion"></activity>
+        <activity android:name=".ui.Resultado.ResultadosBusquedaActivity"></activity>
+        <activity android:name=".ui.Resultado.InformacionDetalladaMaterial"></activity>
+        <activity android:name=".ui.Reserva.RevervaLibros"></activity>
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">

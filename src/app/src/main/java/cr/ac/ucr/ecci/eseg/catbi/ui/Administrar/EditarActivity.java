@@ -11,9 +11,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.InformacionDetalladaMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.R;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
 public class EditarActivity extends AppCompatActivity {
 
@@ -67,7 +68,7 @@ public class EditarActivity extends AppCompatActivity {
         _CANTIDAD = findViewById(R.id.textViewContentCantidadEditor);
 
         _NOMBREMATERIAL.setText(material.getTitulo());
-        _ID.setText(material.getID());
+        _ID.setText(material.getMaterialID());
         _TITULO.setText(material.getTitulo());
         _AUTOR.setText(material.getAutor());
         _IDIOMA.setText(material.getIdioma());
@@ -104,7 +105,11 @@ public class EditarActivity extends AppCompatActivity {
         if(materialActualizado.isValid()){
             db.actualizarDatos(materialActualizado);
             Toast.makeText(getApplicationContext(), "Los datos se han actualizado",Toast.LENGTH_SHORT).show();
+            DataBaseHelperRoom dbLocal = new DataBaseHelperRoom(getApplicationContext());
+            // Se actualiza la base local
+            dbLocal.actualizarMaterial(materialActualizado);
             actualizarMaterialRetorno(materialActualizado);
+
         }else{
             Toast.makeText(getApplicationContext(), "No deje datos vacios",Toast.LENGTH_SHORT).show();
         }
@@ -125,7 +130,7 @@ public class EditarActivity extends AppCompatActivity {
     private Material getNuevosDatos()
     {
         Material materialActualizado = new Material();
-        materialActualizado.setID(_ID.getText().toString());
+        materialActualizado.setMaterialID(_ID.getText().toString());
         materialActualizado.setTitulo(_TITULO.getText().toString());
         materialActualizado.setAutor(_AUTOR.getText().toString());
         materialActualizado.setColeccion(_COLECCION.getText().toString());

@@ -1,6 +1,9 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -105,7 +108,11 @@ public class BusquedaFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.formulario_agregar) {
-            irActAgregarMat();
+            if (hayConexionAInternet()){
+                irActAgregarMat();
+            }else{
+                Toast.makeText(getContext(), "El dispositivo no tiene conexión a internet, no se permite agregar material.",Toast.LENGTH_LONG).show();
+            }
             return true;
         }else{
             Log.v("g","y");
@@ -160,6 +167,13 @@ public class BusquedaFragment extends Fragment {
 
     public void limpiarBusqueda(EditText campoBusqueda){
         campoBusqueda.setText(""); // Limpio el campo de búsqueda
+    }
+    public boolean hayConexionAInternet(){
+        ConnectivityManager cm = (ConnectivityManager)getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        boolean isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+        return isConnected;
     }
 
 

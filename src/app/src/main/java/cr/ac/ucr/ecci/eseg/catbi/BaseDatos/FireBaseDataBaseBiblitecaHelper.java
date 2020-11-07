@@ -1,5 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi.BaseDatos;
 
+import android.content.Context;
+
 import androidx.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,11 +19,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import cr.ac.ucr.ecci.eseg.catbi.ui.Bibliotecas.ListarBibliotecas;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Reserva.ReservaMaterial;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Reservacion;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.Usuarios;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.Material;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 
 public class FireBaseDataBaseBiblitecaHelper {
     private FirebaseDatabase database;
@@ -29,35 +32,51 @@ public class FireBaseDataBaseBiblitecaHelper {
     private DatabaseReference referenciaMaterial;
     private DatabaseReference referenciaUsuarios;
     private DatabaseReference referenciaReserva;
-    private DatabaseReference referenciaReservacion;
     private FirebaseAuth mAuth;
     FirebaseUser user;
 
 
     private String[] filtro;
-    private List<ListarBibliotecas> listaBibliotecas= new ArrayList<>();
-    private List<ReservaMaterial> listaReserva=new ArrayList<>();
+    private List<Biblioteca> listaBibliotecas= new ArrayList<>();
     private List<Material> listaMaterial = new ArrayList<>();
-    private Usuarios usuario;
+    private List<Usuario> listaUsuarios = new ArrayList<>();
+    private Usuario usuario;
     private List<Reservacion> listaReservaciones = new ArrayList<>();
     public List<Material> getListaMaterial() {
         return listaMaterial;
     }
+    private Session session;
+    private DataBaseHelperRoom dbLocal;
 
-    public interface DataStatus{
-        void dataLoaded(List<ListarBibliotecas>ListaBibliotecas,List<String>keys);
-        void dataInserted();
-        void dataDeleted();
-        void dataUpdated();
+    // Interfaces utilizadas para recuperar todos los datos de firebase
+    public interface AllBibliotecasDataStatus {
+        void DataIsLoaded(List<Biblioteca> bibliotecas);
     }
 
+    public interface AllMaterialesDataStatus {
+        void DataIsLoaded(List<Material> materiales);
+    }
+
+    public interface AllUsuariosDataStatus{
+        void DataIsLoaded(List<Usuario> usuarios);
+    }
+
+    public interface AllReservacionesDataStatus{
+        void DataIsLoaded(List<Reservacion> reservaciones);
+    }
+    //
+
+    public interface DataStatus{
+        void dataLoaded(List<Biblioteca>ListaBibliotecas, List<String>keys);
+    }
     public interface MaterialDataStatus{
         void DataIsLoaded(List<Material> material, List<String> keys);
     }
 
     public interface UsuariosDataStatus{
-        void DataIsLoaded(Usuarios usuario);
+        void DataIsLoaded(Usuario usuario);
     }
+
 
     public interface ReservaDataStatus{
         void DataIsLoaded(List<Reservacion> reservacion, List<String> keys);
@@ -67,7 +86,6 @@ public class FireBaseDataBaseBiblitecaHelper {
         database=FirebaseDatabase.getInstance();
         referenciaBiblioteca= database.getReference("Bibliotecas");
         referenciaMaterial= database.getReference("Material");
-        referenciaReservacion=database.getReference("Usuario_Material");
         //filtro = "";
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
@@ -84,7 +102,8 @@ public class FireBaseDataBaseBiblitecaHelper {
                 List<String>keys= new ArrayList<>();
                 for(DataSnapshot keyNode: dataSnapshot.getChildren()){
                     keys.add(keyNode.getKey());
-                    ListarBibliotecas listaBiblioteca= keyNode.getValue(ListarBibliotecas.class);
+                    Biblioteca listaBiblioteca= keyNode.getValue(Biblioteca.class);
+                    listaBiblioteca.setBibliotecaID(keyNode.getKey());
                     listaBibliotecas.add(listaBiblioteca);
                 }
                 dataStatus.dataLoaded(listaBibliotecas,keys);
@@ -97,6 +116,90 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
+    // Método que recupera todos las bibliotecas de la base de datos de firebase
+    public void readAllBibliotecas(final AllBibliotecasDataStatus dataStatus){
+        referenciaBiblioteca.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaBibliotecas.clear();
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    Biblioteca listaBiblioteca= keyNode.getValue(Biblioteca.class);
+                    listaBiblioteca.setBibliotecaID(keyNode.getKey());
+                    listaBibliotecas.add(listaBiblioteca);
+                }
+                dataStatus.DataIsLoaded(listaBibliotecas);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    // Método que recupera todos los materiales de la base de datos de firebase
+    public void readAllMateriales(final AllMaterialesDataStatus dataStatus){
+        referenciaMaterial.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaMaterial.clear();
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    Material material= keyNode.getValue(Material.class);
+                    material.setMaterialID(keyNode.getKey());
+                    listaMaterial.add(material);
+                }
+                dataStatus.DataIsLoaded(listaMaterial);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    // Método que recupera todos los usuarios de la base de datos de firebase
+    public void readAllUsuarios(final AllUsuariosDataStatus dataStatus){
+        referenciaUsuarios.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaUsuarios.clear();
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    Usuario usuario = keyNode.getValue(Usuario.class);
+                    listaUsuarios.add(usuario);
+                }
+                dataStatus.DataIsLoaded(listaUsuarios);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    // Método que recupera todas las reservaciones de la base de datos de firebase
+    public void readAllReservaciones(final AllReservacionesDataStatus dataStatus){
+        referenciaReserva.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaReservaciones.clear();
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    Reservacion reservacion  = keyNode.getValue(Reservacion.class);
+                    reservacion.setReservacionID(keyNode.getKey());
+                    listaReservaciones.add(reservacion);
+                }
+                dataStatus.DataIsLoaded(listaReservaciones);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
     public void readMaterial(final MaterialDataStatus materialDataStatus, final String[] filtro){
         this.filtro = filtro;
         referenciaMaterial.addValueEventListener(new ValueEventListener() {
@@ -108,7 +211,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                 for(DataSnapshot keyNode : dataSnapshot.getChildren()){
                     keys.add(keyNode.getKey());
                     Material material = keyNode.getValue(Material.class);
-                    material.setID(keyNode.getKey());
+                    material.setMaterialID(keyNode.getKey());
 
                     if(filtro[2].equalsIgnoreCase("todas")){
                         realizarFiltradoSinColeccion(material, filtro, listaMaterial);
@@ -132,7 +235,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                     if(ds.child("correo").getValue().equals(correoP)){
                         String nombreUsuarioFromDB = ds.child("nombre").getValue(String.class);
                         String correoFromDB = ds.child("correo").getValue(String.class);
-                        usuario = new Usuarios(correoFromDB, nombreUsuarioFromDB);
+                        usuario = new Usuario(correoFromDB, nombreUsuarioFromDB, null);
                         userDataStatus.DataIsLoaded(usuario);
                         break;
                     }
@@ -239,13 +342,16 @@ public class FireBaseDataBaseBiblitecaHelper {
         }
     }
 
-    public boolean addReserva(ReservaMaterial r,String c ){
+
+
+    public boolean addReserva(Reservacion r, String c , Context context){
         actualizaCantMaterial(c,r.getMaterialID());
         DateFormat df = new SimpleDateFormat("yyMMddHHmmssZ");
         String date = df.format(Calendar.getInstance().getTime());
-
+        session = new Session(context);
+        String correoUsuario = session.getCorreo();
         try{
-            r.setCorreoUsuario(user.getEmail());
+            r.setCorreoUsuario(correoUsuario);
         }catch (Exception e){
             r.setCorreoUsuario("DESCONOCIDO");
         }
@@ -258,7 +364,10 @@ public class FireBaseDataBaseBiblitecaHelper {
         r.setFechaLimite(fechaLimite);
         boolean resultado;
         try{
-            referenciaReservacion.child(String.valueOf(date)).setValue(r);
+            referenciaReserva.child(String.valueOf(date)).setValue(r);
+            r.setReservacionID(date);
+            DataBaseHelperRoom dbLocal = new DataBaseHelperRoom(context);
+            dbLocal.insertarReservacion(r);
             resultado=true;
         }catch (Exception e){
             resultado=false;
@@ -273,8 +382,7 @@ public class FireBaseDataBaseBiblitecaHelper {
     }
 
     // funcion que agrega un nuevo valor a la base de datos y genera una id unica
-    public boolean addMaterial( Material m){
-        //contarHijosMaterial();
+    public boolean addMaterial( Material m, Context context){
         boolean add=true;
         int inicio=0;
         int fin=2;
@@ -284,8 +392,12 @@ public class FireBaseDataBaseBiblitecaHelper {
         String year=m.getAño();
         String biblio=m.getBiblioteca();
         String idM=year+date+biblio.substring(inicio,fin)+titulo.substring(inicio,1);
+        m.setMaterialID(idM);
+        dbLocal = new DataBaseHelperRoom(context);
         try{
             referenciaMaterial.child(idM).setValue(m);
+            dbLocal.insertarMaterial(m);
+
         }catch (Exception e){
             add=false;
         }
@@ -293,13 +405,13 @@ public class FireBaseDataBaseBiblitecaHelper {
     }
 
     public void actualizarDatos(Material material){
-        referenciaMaterial.child(material.getID()).child("autor").setValue(material.getAutor());
-        referenciaMaterial.child(material.getID()).child("biblioteca").setValue(material.getBiblioteca());
-        referenciaMaterial.child(material.getID()).child("coleccion").setValue(material.getColeccion());
-        referenciaMaterial.child(material.getID()).child("cantidad").setValue(material.getCantidad());
-        referenciaMaterial.child(material.getID()).child("formato").setValue(material.getFormato());
-        referenciaMaterial.child(material.getID()).child("idioma").setValue(material.getIdioma());
-        referenciaMaterial.child(material.getID()).child("titulo").setValue(material.getTitulo());
+        referenciaMaterial.child(material.getMaterialID()).child("autor").setValue(material.getAutor());
+        referenciaMaterial.child(material.getMaterialID()).child("biblioteca").setValue(material.getBiblioteca());
+        referenciaMaterial.child(material.getMaterialID()).child("coleccion").setValue(material.getColeccion());
+        referenciaMaterial.child(material.getMaterialID()).child("cantidad").setValue(material.getCantidad());
+        referenciaMaterial.child(material.getMaterialID()).child("formato").setValue(material.getFormato());
+        referenciaMaterial.child(material.getMaterialID()).child("idioma").setValue(material.getIdioma());
+        referenciaMaterial.child(material.getMaterialID()).child("titulo").setValue(material.getTitulo());
     }
 
     public boolean eliminarMaterial(String id) {
