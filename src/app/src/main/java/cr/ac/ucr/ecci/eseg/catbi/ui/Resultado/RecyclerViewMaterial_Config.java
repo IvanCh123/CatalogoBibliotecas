@@ -118,11 +118,7 @@ public class RecyclerViewMaterial_Config {
 
         @Override
         public int getItemCount() {
-            if(mListaMaterial.size() > limit){
-                return limit;
-            }else{
-                return mListaMaterial.size();
-            }
+            return mListaMaterial.size();
         }
     }
 }
