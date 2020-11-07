@@ -15,6 +15,7 @@ import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.AgregarMaterial;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static junit.framework.TestCase.assertEquals;
@@ -40,8 +41,8 @@ public class AgregarMatTest {
         onView(withId(R.id.add_año)).perform(typeText(TEST_STRING_YEAR), closeSoftKeyboard());
         onView(withId(R.id.add_cantidad)).perform(typeText(TEST_STRING_CANTIDAD), closeSoftKeyboard());
         //onView(withId(R.id.add_coleccion)).perform(typeText(TEST_STRING_COLECCION), closeSoftKeyboard());
-        onView(withId(R.id.add_idioma)).perform(typeText(TEST_STRING_IDIOMA), closeSoftKeyboard());
-        onView(withId(R.id.add_tipo_mat)).perform(typeText(TEST_STRING_TIPO), closeSoftKeyboard());
+        onView(withId(R.id.add_idioma)).perform(replaceText(TEST_STRING_IDIOMA));
+        onView(withId(R.id.add_tipo_mat)).perform(replaceText(TEST_STRING_TIPO));
         //onView(withId(R.id.add_biblioteca)).perform(typeText(TEST_STRING_BIBLIOTECA), closeSoftKeyboard());
         onView(withId(R.id.btn_add_material)).perform(click());
         onView(withId(android.R.id.button1)).perform(click());
