@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         btnInicioSesion = findViewById(R.id.btnInicioSesion);
         barraProgreso = findViewById(R.id.progressBar);
         barraProgreso.setVisibility(View.INVISIBLE);
+        session = new Session(getApplicationContext());
 
         btnInicioSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,6 +127,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("correoUsuarioActual", correo);
+                        session.setCorreo(correo);
                         startActivity(intent);
                         barraProgreso.setVisibility(view.VISIBLE);
                     } else {
@@ -247,7 +249,6 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario){
             if(usuario != null){
-                session = new Session(getApplicationContext());
                 session.setCorreo(usuario.getCorreo());
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("correoUsuarioActual", usuario.getCorreo());
