@@ -33,7 +33,7 @@ public class AdministrarInstrumentedTestUI {
     public ActivityScenarioRule<MainActivity> activityRule =
             new ActivityScenarioRule(MainActivity.class);
     @Test
-    public void agregarMaterial() throws InterruptedException {
+    public void agregarMaterialDracula() throws InterruptedException {
         Thread.sleep(5000);
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Agregar Material")).perform(click());
@@ -58,7 +58,7 @@ public class AdministrarInstrumentedTestUI {
     }
 
     @Test
-    public void eliminarMaterial() throws InterruptedException {
+    public void eliminarMaterialDracula() throws InterruptedException {
         Thread.sleep(5000);
         onView(withId(R.id.editTextTituloFrase)).perform(replaceText(TEST_STRING_TITULO));
         onView(withId(R.id.btnBuscar)).perform(click());
