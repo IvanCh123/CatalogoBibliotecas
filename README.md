@@ -69,6 +69,7 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 * **Requerimientos no funcionales que debe cumplir toda la aplicación web**
     * Api de Google Maps
     * Firebase
+    * Room
 * **Posibles interacciones con sistemas externos (bases de datos, APIs, servicios)**
 Interacción con base de datos para consultas sobre material de las bibliotecas e interacción con la API de Google Maps para ubicación de las distintas bibliotecas.
 
@@ -104,7 +105,6 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 ## Casos de prueba
 ### Caso 1
 
-
 |                      |     |
 | -------------------- | --- |
 | Nombre del Epic      | Administración Material |
@@ -112,26 +112,27 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 | Id de caso de prueba |    0 |
 | Descripción |    Agregar un material a la base de datos de la aplicación |
 | Versión |   1.0  |
-| Implementado? | No    |
+| Implementado? | Sí, este caso de prueba se encuentra implementado en la clase de prueba AgregarMatTest en la rama master del repositorio. |
 | Nivel |   Sistema  |
 | Tipo |   Caja Negra  |
-|Pre-requisitos|Tener una cuenta institucional.<br>El usuario ha iniciado sesión en la aplicación.|
-| Datos de prueba|Titulo: Drácula.<br>Autores: Bram Stoker.<br>Colección: Literaria.<br>Tipo de material: pdf.<br>Biblioteca: Monge. |
-| Escenario esperado | Se despliega ventana de retroalimentación indicando que se ha agregado material y se almacena en la base de datos, se realiza una redirección a la actividad principal.|
+|Pre-requisitos|No aplica porque la aplicación se inicia en la actividad principal|
+| Datos de prueba|Titulo: Drácula.<br>Autores: Bram Stoker.<br>Colección: Literaria.<br>Tipo de material:Libro.<br>Biblioteca: Carlos Monge. <br> Cantidad: 2 <br> Año: 2019|
+| Escenario esperado | Se despliega ventana de retroalimentación indicando que se ha agregado material y se almacena en la base de datos, se realiza una redirección a la actividad principal, para buscar el material agregado y corroborar que está presente.|
 
 ### Pasos a seguir
 
 
 | #   | Instrucción | Resultado Esperado |
 | --- | ----------- | ------------------ |
-|1|Iniciar sesión en la aplicación|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)|
-|   2  |        Dirigirse al ícono de agregar material (+) y presionarlo.     |        Se redirige a la actividad de agregar material. En donde se despliega un formulario.            |
-|   3  |       Rellenar el campo de título escribiendo Drácula, rellenar el campo de autores escribiendo Bram Stoker, seleccionar la opción literaria en el campo de coleccion, en el campo de tipo de material escribir pdf y en el campo de biblioteca seleccionar Monge.      |                 Se muestran los campos del formulario con la información ingresada.|
+|   1  |        Dirigirse al menú de agregar material  y presionarlo.     |        Se redirige a la actividad de agregar material. En donde se despliega un formulario.            |
+|   2 |       Rellenar el campo de título escribiendo Drácula, rellenar el campo de autores escribiendo Bram Stoker, seleccionar la opción literaria en el campo de coleccion,rellenar el campo de cantidad con 2,rellenar el campo año con 2019, en el campo de tipo de material escribir pdf y en el campo de biblioteca seleccionar Monge.      |                 Se muestran los campos del formulario con la información ingresada.|
 |   4  |           Presionar el botón de agregar material  |             Se muestra una ventana emergente indicando que se ha agregado el material exitosamente y se guarda en la base de datos |
+|   5 |   Se escribe el título en el área de búsqueda y se determina que el material está en la lista de resultados. |Que el material se encuentre en la lista.
 
 
 
 ### Caso 2
+
 |  |       |
 | -------- | ----------- |
 |Nombre del Epic|Administración Material|
@@ -139,10 +140,10 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |ID del caso de prueba|1|
 |Descripción|Modificar un material dentro de la aplicación|
 |Versión|1.0|
-|Implementado?|No|
+|Implementado?|Sí, este caso de prueba se encuentra implementado en la clase de prueba EditarMatTest en la rama master del repositorio.|
 |Nivel|Sistema|
 |Tipo|Caja Negra|
-|Pre-requisitos|Tener una cuenta institucional.<br>El usuario ha iniciado sesión en la aplicación.<br>El material debe de existir en la aplicación.|
+|Pre-requisitos|No aplica, la aplicación se inicia en la actividad de detalles de un material |
 |Datos de prueba|Búsqueda: Don Quijote.<br>Modificación de la colección literaria a General.|
 |Escenario esperado|Aparece un mensaje indicando que el material se ha modificado exitosamente.|
 
@@ -150,13 +151,11 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 
 |#|Instrucción|Resultado esperado|
 |--------|-----|---|
-|1|Iniciar sesión en la aplicación|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador)|
-|2|Realizar una búsqueda del material que se desea modificar en este caso Don Quijote. |Se despliega una lista con los resultados de la búsqueda.|
-|3|Seleccionar el material que se desea modificar|Se despliega una pantalla de detalles con la información del material|
-|4|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción editar.|Se despliega una pantalla que indica si se desea modificar el material.|
-|5|Se selecciona si se desea modificar|Se despliega una pantalla de modificación de la información del material.|
-|6|Seleccionar el campo de colección y cambiar la colección a General|Se muestra el campo con la información modificada.|
-|7|Presionar el botón de guardar.|Se muestra un mensaje indicando que se ha modificado exitosamente el material y se guarda el cambio en la base de datos.|
+|1|Realizar una búsqueda del material que se desea modificar en este caso Don Quijote. |Se despliega una lista con los resultados de la búsqueda.|
+|2|Seleccionar el material que se desea modificar|Se despliega una pantalla de detalles con la información del material|
+|3|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción editar.|Se despliega una pantalla que indica si se desea modificar el material.|
+|5|Seleccionar el campo de colección y cambiar la colección a General|Se muestra el campo con la información modificada.|
+|6|Presionar el botón de guardar.|Se muestra un mensaje indicando que se ha modificado exitosamente el material y se guarda el cambio en la base de datos.|
 
 ### Caso 3
 
@@ -167,22 +166,23 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |ID del caso de prueba|2|
 |Descripción|Eliminar un material dentro de la aplicación|
 |Versión|1.0|
-|Implementado|No|
+|Implementado|Sí, este caso de prueba se encuentra implementado en la clase de prueba EliminarMatTest en la rama master del repositorio.|
 |Nivel|Sistema|
 |Tipo|Caja Negra|
-|Pre-requisitos|Tener una cuenta institucional.<br>El usuario ha iniciado sesión en la aplicación.<br>El material debe de existir en la aplicación.|
+|Pre-requisitos|<br>El material debe de existir en la aplicación.|
 |Datos de prueba|Búsqueda: Drácula.|
-|Escenario esperado|Aparece un mensaje indicando que el material se ha eliminado exitosamente y se redirige a la actividad principal.|
+|Escenario esperado|Aparece un mensaje indicando que el material se ha eliminado exitosamente y se redirige a la actividad principal, desde donde al buscar el elemento este no aparece en el listado de resultados.|
 
 ### Pasos a seguir
 
 |#|Instrucción|Resultado esperado|
 |--------|-----|---|
-|1|Iniciar sesión en la aplicación|Los credenciales del usuario son aceptados y se redirige a la pantalla principal (Buscador).|
-|2|Realizar una búsqueda del material que se desea eliminar en este caso Drácula. |Se despliega una lista con los resultados de la búsqueda.|
-|3|Seleccionar el material que se desea eliminar|Se despliega una pantalla de detalles con la información del material.|
-|4|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción eliminar.|Se despliega una ventana emergente indicando si se desea eliminar el material|
-|5|Presionar Ok|Se redirige a la pantalla principal y se muestra el toast indicando que se ha eliminado el material.|
+|1|Realizar una búsqueda del material que se desea eliminar en este caso Drácula. |Se despliega una lista con los resultados de la búsqueda.|
+|2|Seleccionar el material que se desea eliminar|Se despliega una pantalla de detalles con la información del material.|
+|3|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción eliminar.|Se despliega una ventana emergente indicando si se desea eliminar el material|
+|4|Presionar Ok|Se redirige a la pantalla principal y se muestra el toast indicando que se ha eliminado el material.|
+|5|Se digita el titulo del material eliminado|Se realiza una busqueda para determinar que el material se ha eliminado|
+|6|Se despliega la lista de resultados|Se procede a determinar que un dato no se encuentra presente|
 
 
 
