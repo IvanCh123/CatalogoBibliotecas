@@ -115,7 +115,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 | Implementado? | Sí, este caso de prueba se encuentra implementado en la clase de prueba AgregarMatTest en la rama master del repositorio. |
 | Nivel |   Sistema  |
 | Tipo |   Caja Negra  |
-|Pre-requisitos|No aplica porque la aplicación se inicia en la actividad principal|
+|Pre-requisitos|Debe estar conectado a internet por Wifi|
 | Datos de prueba|Titulo: Drácula.<br>Autores: Bram Stoker.<br>Colección: Literaria.<br>Tipo de material:Libro.<br>Biblioteca: Carlos Monge. <br> Cantidad: 2 <br> Año: 2019|
 | Escenario esperado | Se despliega ventana de retroalimentación indicando que se ha agregado material y se almacena en la base de datos, se realiza una redirección a la actividad principal, para buscar el material agregado y corroborar que está presente.|
 
@@ -143,7 +143,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |Implementado?|Sí, este caso de prueba se encuentra implementado en la clase de prueba EditarMatTest en la rama master del repositorio.|
 |Nivel|Sistema|
 |Tipo|Caja Negra|
-|Pre-requisitos|No aplica, la aplicación se inicia en la actividad de detalles de un material |
+|Pre-requisitos|<br>Debe estar conectado a internet por Wifi<br>La aplicación se inicia en la actividad de detalles de un material |
 |Datos de prueba|Búsqueda: Don Quijote.<br>Modificación de la colección literaria a General.|
 |Escenario esperado|Aparece un mensaje indicando que el material se ha modificado exitosamente.|
 
@@ -169,7 +169,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |Implementado|Sí, este caso de prueba se encuentra implementado en la clase de prueba EliminarMatTest en la rama master del repositorio.|
 |Nivel|Sistema|
 |Tipo|Caja Negra|
-|Pre-requisitos|<br>El material debe de existir en la aplicación.|
+|Pre-requisitos|<br>Debe estar conectado a internet por Wifi<br>El material debe de existir en la aplicación.|
 |Datos de prueba|Búsqueda: Drácula.|
 |Escenario esperado|Aparece un mensaje indicando que el material se ha eliminado exitosamente y se redirige a la actividad principal, desde donde al buscar el elemento este no aparece en el listado de resultados.|
 
