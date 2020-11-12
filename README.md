@@ -4,7 +4,7 @@
 
 ## Catálogo de Bibliotecas UCR (CATBI)
 
-## Versión 1.3
+## Versión 1.4
 
 
 ---
@@ -12,7 +12,7 @@
 ## Introducción
 Este documento presenta una descripción general de la aplicación móvil a desarrollar para el catálogo del sistema de bibliotecas de la Universidad de Costa Rica.  
 En el siguiente link se encuentra el catálogo en su versión web: http://aleph.sibdi.ucr.ac.cr/F. 
-Por otra parte se exponen aspectos visuales de la aplicación mediante prototipos para tener una idea clara de cómo se podría ver la aplicación al finalizar el primer sprint. 
+Por otra parte se exponen aspectos visuales de la aplicación mediante prototipos para tener una idea clara de cómo se podría ver la aplicación al finalizar cada uno de los sprints. 
 Además se especifican aspectos técnicos como el diseño de la base de datos, frameworks a utilizar, herramientas y estrategias de versionamiento.
 
 ## Listado de Equipos y miembros de Equipos
@@ -75,13 +75,11 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 
 ## Prototipos de la aplicación
 ![Acceso a Usuarios](./img/Prototipos/AccesoUsuarios.PNG)
-
 ![Perfil de Usuarios](./img/Prototipos/PerfilUsuarios.PNG)
 ![Pantalla Principal](./img/Prototipos/PantallaPrincipal.png)
 ![Busqueda Usuarios](./img/Prototipos/BusquedaUsuarios.png)
 ![Resultados Usuarios](./img/Prototipos/ListaUsuarios.png)
 ![Resultados Reservaciones](./img/Prototipos/ListaReservaciones.png)
-
 ![Resultados Búsqueda](./img/Prototipos/ResultadosBusqueda.png)
 ![Agregar Material](./img/Prototipos/AgregarMaterial.PNG)
 ![Información adicional de un resultado y reserva](./img/Prototipos/DetallesAdicionalesYReserva.PNG)
