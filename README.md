@@ -78,6 +78,10 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 
 ![Perfil de Usuarios](./img/Prototipos/PerfilUsuarios.PNG)
 ![Pantalla Principal](./img/Prototipos/PantallaPrincipal.png)
+![Busqueda Usuarios](./img/Prototipos/BusquedaUsuarios.png)
+![Resultados Usuarios](./img/Prototipos/ListaUsuarios.png)
+![Resultados Reservaciones](./img/Prototipos/ListaReservaciones.png)
+
 ![Resultados Búsqueda](./img/Prototipos/ResultadosBusqueda.png)
 ![Agregar Material](./img/Prototipos/AgregarMaterial.PNG)
 ![Información adicional de un resultado y reserva](./img/Prototipos/DetallesAdicionalesYReserva.PNG)
