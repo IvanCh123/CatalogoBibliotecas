@@ -54,12 +54,12 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 | Sprint 3 |   |
 | -------- |----------------|
 | Codigo   |   Nombre  |
-| CNQ-71    |            [Agregar material](http://10.1.4.22:8080/browse/CNQ-71)|
-| CNQ-72    |          [Modificación de material](http://10.1.4.22:8080/browse/CNQ-72)          |
-| CNQ-73    |         [Eliminación de material](http://10.1.4.22:8080/browse/CNQ-73)         |
-| CNQ-79    |            [Notificación límite de reserva](http://10.1.4.22:8080/browse/CNQ-79) |
-| CNQ-80    | [Corrección pantalla de reservas](http://10.1.4.22:8080/browse/CNQ-80) |
-| CNQ-81    | [Sincronización base de datos](http://10.1.4.22:8080/browse/CNQ-81) |
+| CNQ-79    |            [Notificación Límite de reserva](http://10.1.4.22:8080/browse/CNQ-79)|
+| CNQ-70    |          [Diferenciar usuarios administradores de usuarios normales](http://10.1.4.22:8080/browse/CNQ-70)          |
+| CNQ-114    |         [Cerrar sesión en la aplicación](http://10.1.4.22:8080/browse/CNQ-114)         |
+| CNQ-115    |            [Eliminar reservaciones](http://10.1.4.22:8080/browse/CNQ-115) |
+| CNQ-116    | [Recordar el inicio sesión.](http://10.1.4.22:8080/browse/CNQ-11) |
+
 
 
 
@@ -200,6 +200,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
     * Versión del SDK: API 21 Android 5.0 Lollipop.
     * API de Google versión 17.0.
     * Firebase para base de datos en tiempo real. Versión utilizada en android 17.0.
+    * Room versión 2.2.5
 * **Repositorio de código y estrategia de branches**
     * Link al Repositorio: https://bitbucket.org/lyonv/ecci_ci0161_ii2020_g01_t03.git/src
     * Al clonar el proyecto para correrlo se debe abrir la carpeta src.
@@ -216,9 +217,9 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 
 * **Definición de listo**
     Para que una historia se considere como lista tiene que estar en master, ser validada por los miembros del equipo y cumplir con los siguientes criterios de aceptación correspondientes a cada una de las historias de usuario:
-    * CNQ-71 Agregar material: Al entrar a la aplicación tengo un espacio para agregar material, este me permite insertar material en la base de datos de la bibliotecas.
-    * CNQ-72 Modificación de material: La aplicación me permite modificar los datos de materiales ingresados a la base de datos de las bibliotecas. 
-    * CNQ-73 Eliminación de material:La aplicación me permite eliminar material ingresado a la base de datos de bibliotecas 
-    * CNQ-79 Notificación límite de reserva: La aplicación me notifica cuantos días me quedan de una reservación. 
-    * CNQ-80 Corrección pantalla de reservas: Corregir las pantallas de reserva para distribuir mejor los elementos.
-    * CNQ-81 Sincronización de Bases de datos:  Si la aplicación no tiene internet, esta debe permitir ver la última versión de la base de datos de las bibliotecas.
+     * CNQ-70 Notificación límite de reserva: La aplicación me notifica cuantos días me quedan de una reservación.
+    * CNQ-72 Diferenciar usuarios administradores de usuarios normales: Los usuarios administradores al entrar tiene como funcionalidades exclusivas el administrar material y eliminar reservas.
+    * CNQ-114 Cerrar Sesión en la Aplicación: El usuario tiene una opción de finalizar la sesión y salir de la aplicación.
+    * CNQ-115 Eliminar Reservaciones: Que la aplicación tenga una opción de eliminar reservaciones para usuarios administradores.
+    * CNQ-116 Recordar inicio de sesión: Que la aplicación mantenga la sesión iniciada del usuario siempre, a menos de que el usuario cierre sesión.
+    
