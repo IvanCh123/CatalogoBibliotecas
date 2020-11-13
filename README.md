@@ -1,6 +1,6 @@
 # Universidad de Costa Rica
 
-## Conceptualización Sprint 3
+## Conceptualización Sprint 4
 
 ## Catálogo de Bibliotecas UCR (CATBI)
 
