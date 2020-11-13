@@ -10,13 +10,15 @@ public class Usuario {
     private String correo;
     private String nombre;
     private String contraseña;
+    private String rango;
 
     public Usuario() {}
 
-    public Usuario(String correo, String nombre, String contraseña) {
+    public Usuario(String correo, String nombre, String contraseña, String rango) {
         this.correo = correo;
         this.nombre = nombre;
         this.contraseña = contraseña;
+        this.rango = rango;
     }
 
     public String getCorreo() {
@@ -41,5 +43,13 @@ public class Usuario {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    public String getRango() {
+        return rango;
+    }
+
+    public void setRango(String rango) {
+        this.rango = rango;
     }
 }

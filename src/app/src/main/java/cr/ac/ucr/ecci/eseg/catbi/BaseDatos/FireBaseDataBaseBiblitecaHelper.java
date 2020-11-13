@@ -235,7 +235,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                     if(ds.child("correo").getValue().equals(correoP)){
                         String nombreUsuarioFromDB = ds.child("nombre").getValue(String.class);
                         String correoFromDB = ds.child("correo").getValue(String.class);
-                        usuario = new Usuario(correoFromDB, nombreUsuarioFromDB, null);
+                        usuario = new Usuario(correoFromDB, nombreUsuarioFromDB, null,null);
                         userDataStatus.DataIsLoaded(usuario);
                         break;
                     }
