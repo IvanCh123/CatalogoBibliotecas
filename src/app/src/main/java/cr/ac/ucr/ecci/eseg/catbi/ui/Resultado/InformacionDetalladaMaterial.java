@@ -74,6 +74,7 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Acá debería de ir la lógica de comprobar si el usuario es administrador o no
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.opciones_material, menu);
         return true;

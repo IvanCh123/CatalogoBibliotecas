@@ -99,8 +99,9 @@ public class BusquedaFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
-        inflater.inflate(R.menu.add_material, menu);
-        super.onCreateOptionsMenu(menu,inflater);
+        // Acá debería de ir a la lógica de comprobación de si el usuario es administrador o no.
+        //inflater.inflate(R.menu.add_material, menu);
+       // super.onCreateOptionsMenu(menu,inflater);
 
     }
 
