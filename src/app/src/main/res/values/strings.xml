@@ -33,5 +33,9 @@
     <string name="boton_actualizar">Actualizar</string>
     <string name="boton_cancelar">Cancelar</string>
     <string name="hint_todas">Todas</string>
+    <string name="titulo_busc_user">Buscar usuario para cancelacion de reserva</string>
+    <string name="texto_busc_user">Ingrese el nombre del usuario</string>
+    <string name="btn_busc_user">Buscar usuario</string>
+
 
 </resources>
