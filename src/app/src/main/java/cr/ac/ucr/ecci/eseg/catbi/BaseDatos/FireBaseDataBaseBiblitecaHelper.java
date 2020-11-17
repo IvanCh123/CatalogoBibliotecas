@@ -249,6 +249,28 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
+    public void readUsuariosLista(final AllUsuariosDataStatus userDataStatus, final String nombreUser){
+        referenciaUsuarios.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaUsuarios.clear();
+                for(DataSnapshot keyNode: dataSnapshot.getChildren()){
+                    if(keyNode.child("nombre").getValue().equals(nombreUser)){
+
+                    }
+                    Usuario usuario = keyNode.getValue(Usuario.class);
+                    listaUsuarios.add(usuario);
+                }
+                userDataStatus.DataIsLoaded(listaUsuarios);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     public void readReservas(final ReservaDataStatus reservaDataStatus, final String correoP){
         referenciaReserva.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
