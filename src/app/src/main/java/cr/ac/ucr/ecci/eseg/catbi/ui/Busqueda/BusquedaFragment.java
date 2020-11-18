@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProviders;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.AgregarMaterial;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.BorrarReservas;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
 
 public class BusquedaFragment extends Fragment {
@@ -121,7 +122,7 @@ public class BusquedaFragment extends Fragment {
     }
 
     private void irActAgregarMat(){
-        Intent intent= new Intent(getActivity(), AgregarMaterial.class);
+        Intent intent= new Intent(getActivity(), BorrarReservas.class);
         startActivity(intent);
     }
 
