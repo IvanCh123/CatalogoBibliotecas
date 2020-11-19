@@ -57,10 +57,12 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="68dp"
         android:text="Seleccionar todo"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewEliminarReserva"
         app:layout_constraintEnd_toStartOf="@+id/deselect_all"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/perfil_correo_txt" />
+        app:layout_constraintTop_toBottomOf="@+id/perfil_correo_txt"
+        app:layout_constraintVertical_bias="0.012" />
 
     <Button
         android:id="@+id/deselect_all"
@@ -74,10 +76,10 @@
         app:layout_constraintTop_toBottomOf="@+id/perfil_correo"
         app:layout_constraintVertical_bias="0.026" />
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ListView
         android:id="@+id/recyclerViewEliminarReserva"
-        android:layout_width="378dp"
-        android:layout_height="353dp"
+        android:layout_width="364dp"
+        android:layout_height="289dp"
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,6 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi.BaseDatos;
 
 import android.content.Context;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 
@@ -274,6 +275,7 @@ public class FireBaseDataBaseBiblitecaHelper {
             }
         });
     }
+
 
     private void realizarFiltradoConColeccion(Material material, String[] filtro, List<Material> listaMaterial) {
         String titulo = StringUtils.stripAccents(material.getTitulo()).toLowerCase();

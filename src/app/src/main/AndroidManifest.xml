@@ -46,6 +46,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.Administrar.AgregarMaterial" />
+        <activity android:name=".ui.Administrar.BorrarReservas" />
     </application>
 
 </manifest>
