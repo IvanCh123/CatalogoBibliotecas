@@ -211,10 +211,11 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
          * administracion-material 
          * reservacion-material 
     * Las de funcionalidad son:
-         * agregar_material
-         * modificar-material
+         * usuarios-administradores
+         * eliminar-reservaciones
          * eliminar-material
-         * sincronizacion-base-datos
+         * notificaciones-reserva
+         * cerrar-sesion
     * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
 
 * **Definición de listo**
