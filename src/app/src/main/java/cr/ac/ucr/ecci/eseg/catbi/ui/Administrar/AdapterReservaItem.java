@@ -12,72 +12,81 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import cr.ac.ucr.ecci.eseg.catbi.R;
 
-public class AdapterReservaItem extends ArrayAdapter<ReservaFila> {
+public class AdapterReservaItem extends ArrayAdapter<ReservaFila> /*implements View.OnClickListener*/{
     private LayoutInflater layoutInflater;
 
-    public AdapterReservaItem(Context context, List<ReservaFila> objects)
-    {
+    public AdapterReservaItem(Context context, List<ReservaFila> objects) {
         super(context, 0, objects);
         layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
-        // holder pattern
+    public View getView(int position, View convertView, ViewGroup parent) {
         Holder holder = null;
-        if (convertView == null)
-        {
+        if (convertView == null) {
             holder = new Holder();
-
             convertView = layoutInflater.inflate(R.layout.reservacion_eliminar_list_element, null);
-            holder.setTextViewTitle((TextView) convertView.findViewById(R.id.libro_reserva));
-            holder.setTextViewSubtitle((TextView) convertView.findViewById(R.id.dias_rest_reserv_view));
+            holder.setTextViewMaterial((TextView) convertView.findViewById(R.id.libro_reserva));
+            holder.setTextViewFecha((TextView) convertView.findViewById(R.id.dias_rest_reserv_view));
             convertView.setTag(holder);
         }
-        else
-        {
+        else {
             holder = (Holder) convertView.getTag();
         }
 
         ReservaFila row = getItem(position);
-        holder.getTextViewTitle().setText(row.getReservacion().getTituloMaterial());
-        holder.getTextViewSubtitle().setText(row.getReservacion().getFechaLimite());
+        holder.getTextViewMaterial().setText(row.getReservacion().getTituloMaterial());
+        holder.getTextViewFecha().setText(row.getReservacion().getFechaLimite());
+/*
+        holder.getCheckBox().setTag(position);
+        holder.getCheckBox().setChecked(row.isCheck());
+        holder.getCheckBox().setOnClickListener(this);*/
+
         return convertView;
     }
 
-    static class Holder
-    {
-        TextView textViewTitle;
-        TextView textViewSubtitle;
+    /*@Override
+    public void onClick(View v) {
+
+        CheckBox checkBox = (CheckBox) v;
+        int position = (Integer) v.getTag();
+        getItem(position).setCheck(checkBox.isChecked());
+        Toast.makeText(getContext(), "Se a seleccionado un item", Toast.LENGTH_SHORT).show();
+    }*/
+
+    static class Holder {
+        TextView textViewMaterial;
+        TextView textViewFecha;
         CheckBox checkBox;
 
-        public TextView getTextViewTitle()
+        public TextView getTextViewMaterial()
         {
-            return textViewTitle;
+            return textViewMaterial;
         }
 
-        public void setTextViewTitle(TextView textViewTitle)
+        public void setTextViewMaterial(TextView textViewMaterial)
         {
-            this.textViewTitle = textViewTitle;
+            this.textViewMaterial = textViewMaterial;
         }
 
-        public TextView getTextViewSubtitle()
+        public TextView getTextViewFecha()
         {
-            return textViewSubtitle;
+            return textViewFecha;
         }
 
-        public void setTextViewSubtitle(TextView textViewSubtitle)
+        public void setTextViewFecha(TextView textViewFecha)
         {
-            this.textViewSubtitle = textViewSubtitle;
+            this.textViewFecha = textViewFecha;
         }
         public CheckBox getCheckBox()
         {
             return checkBox;
         }
+
         public void setCheckBox(CheckBox checkBox)
         {
             this.checkBox = checkBox;

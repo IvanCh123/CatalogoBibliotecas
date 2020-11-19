@@ -3,10 +3,12 @@ package cr.ac.ucr.ecci.eseg.catbi.ui.Administrar;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,17 +25,28 @@ public class BorrarReservas extends AppCompatActivity {
     private ListView mRecyclerView;
     private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBiblitecaHelper;
     private String correo;
+    private String nombre;
+    final List<ReservaFila> lista= new ArrayList<ReservaFila>();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eliminar_reservas);
         correo="josue.valverde@ucr.ac.cr";//Cambiar por lo que que viene de afuera
+        nombre="Josué Valverde Sánchez";
         final Button seleccionar=(Button)findViewById(R.id.select_all);
         final Button deseleccionar=(Button)findViewById(R.id.deselect_all);
+        final TextView nombreUser =(TextView)findViewById(R.id.libro_reserva);
+        final TextView correoUser =(TextView)findViewById(R.id.dias_rest_reserv_view);
+        final Button eliminarSelec =(Button)findViewById(R.id.aceptar_eliminar);
+
+
+
         mRecyclerView=(ListView)findViewById(R.id.recyclerViewEliminarReserva);
         mFireBaseDataBaseBiblitecaHelper = new FireBaseDataBaseBiblitecaHelper();
-        final List<ReservaFila> lista= new ArrayList<ReservaFila>();
 
+        nombreUser.setText(nombre);
+        correoUser.setText(correo);
         new FireBaseDataBaseBiblitecaHelper().readReservas(new FireBaseDataBaseBiblitecaHelper.ReservaDataStatus() {
             @Override
             public void DataIsLoaded(List<Reservacion> reservacion, List<String> keys) {
@@ -57,6 +70,13 @@ public class BorrarReservas extends AppCompatActivity {
             }
         });
 
+        eliminarSelec.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eliminarItemsSelec();
+            }
+        });
+
         deseleccionar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,10 +87,26 @@ public class BorrarReservas extends AppCompatActivity {
     }
 
     private void seleccionarTodo(){
-
+        for(int i = 0;i<lista.size();i++){
+                lista.get(i).setCheck(true);
+        }
     }
 
     private void deseleccionarTodo(){
+        for(int i = 0;i<lista.size();i++){
+            lista.get(i).setCheck(false);
+        }
+    }
 
+    private void eliminarItemsSelec(){
+        boolean t=false;
+        for(int i = 0;i<lista.size();i++){
+            t= lista.get(i).isCheck();
+            if(t){
+                Log.v("verT","True");
+            } else{
+                Log.v("verT","False");
+            }
+        }
     }
 }
