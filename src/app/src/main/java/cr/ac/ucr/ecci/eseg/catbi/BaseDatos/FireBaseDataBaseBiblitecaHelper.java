@@ -78,6 +78,10 @@ public class FireBaseDataBaseBiblitecaHelper {
     }
 
 
+    public interface UsuariosStatus{
+        void DataIsLoaded(List<Usuario> usuario,List<String> keys);
+    }
+
     public interface ReservaDataStatus{
         void DataIsLoaded(List<Reservacion> reservacion, List<String> keys);
     }
@@ -249,19 +253,20 @@ public class FireBaseDataBaseBiblitecaHelper {
         });
     }
 
-    public void readUsuariosLista(final AllUsuariosDataStatus userDataStatus, final String nombreUser){
+    public void searchUsuarios(final UsuariosStatus dataStatus, final String userName){
         referenciaUsuarios.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaUsuarios.clear();
+                List<String> keys = new ArrayList<>();
                 for(DataSnapshot keyNode: dataSnapshot.getChildren()){
-                    if(keyNode.child("nombre").getValue().equals(nombreUser)){
-
-                    }
                     Usuario usuario = keyNode.getValue(Usuario.class);
-                    listaUsuarios.add(usuario);
+                    if(filtroUsuarios(usuario,userName)){
+                        listaUsuarios.add(usuario);
+                        keys.add(keyNode.getKey());
+                    }
                 }
-                userDataStatus.DataIsLoaded(listaUsuarios);
+                dataStatus.DataIsLoaded(listaUsuarios,keys);
             }
 
             @Override
@@ -269,6 +274,20 @@ public class FireBaseDataBaseBiblitecaHelper {
 
             }
         });
+    }
+
+    private boolean filtroUsuarios(Usuario usuario,String userName){
+        boolean simil=false;
+        String n1=usuario.getNombre().toLowerCase();
+        userName=userName.toLowerCase();
+        if(n1.contains(userName)){
+            simil=true;
+        }else{
+            if(StringUtils.getLevenshteinDistance(n1,userName)!=-1){
+                simil=true;
+            }
+        }
+        return simil;
     }
 
     public void readReservas(final ReservaDataStatus reservaDataStatus, final String correoP){

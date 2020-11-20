@@ -42,7 +42,7 @@ public class UbicacionFragment extends Fragment {
             new FireBaseDataBaseBiblitecaHelper().readBibliotecas(new FireBaseDataBaseBiblitecaHelper.DataStatus() {
                 @Override
                 public void dataLoaded(List<Biblioteca> listaBibliotecas, List<String> keys) {
-                    Log.d("Tq", String.valueOf(listaBibliotecas.size()));
+                    //Log.d("Tq", String.valueOf(listaBibliotecas.size()));
                     new RecycleViewBibliotecaConfig().setConfig(BibliotecaConfig, contexto, listaBibliotecas, keys,getActivity());
                 }
             });
