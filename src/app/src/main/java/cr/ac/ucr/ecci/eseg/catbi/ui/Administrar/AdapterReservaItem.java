@@ -16,7 +16,7 @@ import android.widget.Toast;
 
 import cr.ac.ucr.ecci.eseg.catbi.R;
 
-public class AdapterReservaItem extends ArrayAdapter<ReservaFila> /*implements View.OnClickListener*/{
+public class AdapterReservaItem extends ArrayAdapter<ReservaFila> implements View.OnClickListener{
     private LayoutInflater layoutInflater;
 
     public AdapterReservaItem(Context context, List<ReservaFila> objects) {
@@ -32,6 +32,7 @@ public class AdapterReservaItem extends ArrayAdapter<ReservaFila> /*implements V
             convertView = layoutInflater.inflate(R.layout.reservacion_eliminar_list_element, null);
             holder.setTextViewMaterial((TextView) convertView.findViewById(R.id.libro_reserva));
             holder.setTextViewFecha((TextView) convertView.findViewById(R.id.dias_rest_reserv_view));
+            holder.setCheckBox((CheckBox)convertView.findViewById(R.id.title_reserv_view));
             convertView.setTag(holder);
         }
         else {
@@ -41,22 +42,23 @@ public class AdapterReservaItem extends ArrayAdapter<ReservaFila> /*implements V
         ReservaFila row = getItem(position);
         holder.getTextViewMaterial().setText(row.getReservacion().getTituloMaterial());
         holder.getTextViewFecha().setText(row.getReservacion().getFechaLimite());
-/*
+
         holder.getCheckBox().setTag(position);
         holder.getCheckBox().setChecked(row.isCheck());
-        holder.getCheckBox().setOnClickListener(this);*/
+        holder.getCheckBox().setOnClickListener(this);
 
         return convertView;
     }
 
-    /*@Override
+    @Override
     public void onClick(View v) {
 
         CheckBox checkBox = (CheckBox) v;
         int position = (Integer) v.getTag();
         getItem(position).setCheck(checkBox.isChecked());
+        //setCheckBox(checkBox.isChecked());
         Toast.makeText(getContext(), "Se a seleccionado un item", Toast.LENGTH_SHORT).show();
-    }*/
+    }
 
     static class Holder {
         TextView textViewMaterial;

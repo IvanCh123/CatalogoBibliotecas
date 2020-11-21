@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,11 +35,11 @@ public class BorrarReservas extends AppCompatActivity {
         setContentView(R.layout.activity_eliminar_reservas);
         correo="josue.valverde@ucr.ac.cr";//Cambiar por lo que que viene de afuera
         nombre="Josué Valverde Sánchez";
-        final Button seleccionar=(Button)findViewById(R.id.select_all);
-        final Button deseleccionar=(Button)findViewById(R.id.deselect_all);
-        final TextView nombreUser =(TextView)findViewById(R.id.libro_reserva);
-        final TextView correoUser =(TextView)findViewById(R.id.dias_rest_reserv_view);
-        final Button eliminarSelec =(Button)findViewById(R.id.aceptar_eliminar);
+        Button seleccionar=(Button)findViewById(R.id.select_all);
+        Button deseleccionar=(Button)findViewById(R.id.deselect_all);
+        TextView nombreUser =(TextView)findViewById(R.id.nombre_perfil);
+        TextView correoUser =(TextView)findViewById(R.id.perfil_correo);
+        Button eliminarSelec =(Button)findViewById(R.id.aceptar_eliminar);
 
 
 
@@ -87,12 +88,14 @@ public class BorrarReservas extends AppCompatActivity {
     }
 
     private void seleccionarTodo(){
+        Toast.makeText(getApplicationContext(), "Se a seleccionado todos los items", Toast.LENGTH_SHORT).show();
         for(int i = 0;i<lista.size();i++){
                 lista.get(i).setCheck(true);
         }
     }
 
     private void deseleccionarTodo(){
+        Toast.makeText(getApplicationContext(), "Se a deseleccionado todos los items", Toast.LENGTH_SHORT).show();
         for(int i = 0;i<lista.size();i++){
             lista.get(i).setCheck(false);
         }
