@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar barraProgreso;
     private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBiblitecaHelper;
     private AppDataBase dbLocal;
-    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,8 +88,6 @@ public class LoginActivity extends AppCompatActivity {
         btnInicioSesion = findViewById(R.id.btnInicioSesion);
         barraProgreso = findViewById(R.id.progressBar);
         barraProgreso.setVisibility(View.INVISIBLE);
-        session = new Session(getApplicationContext());
-
         btnInicioSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +108,11 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onStart(){
+        super.onStart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         barraProgreso.setVisibility(View.INVISIBLE);
@@ -127,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("correoUsuarioActual", correo);
+                        Session session = new Session(getApplicationContext());
                         session.setCorreo(correo);
                         startActivity(intent);
                         barraProgreso.setVisibility(view.VISIBLE);
@@ -249,6 +252,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario){
             if(usuario != null){
+                Session session = new Session(getApplicationContext());
                 session.setCorreo(usuario.getCorreo());
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.putExtra("correoUsuarioActual", usuario.getCorreo());
