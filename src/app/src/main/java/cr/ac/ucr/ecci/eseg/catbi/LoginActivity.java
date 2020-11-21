@@ -127,12 +127,10 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("correoUsuarioActual", correo);
                         Session session = new Session(getApplicationContext());
                         session.setCorreo(correo);
-                        startActivity(intent);
                         barraProgreso.setVisibility(view.VISIBLE);
+                        irActividadPrincipal();
                     } else {
                         Toast.makeText(LoginActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
                     }
@@ -149,6 +147,12 @@ public class LoginActivity extends AppCompatActivity {
             Usuario usuario = new Usuario();
             new leerUsuario().execute(correo, password);
         }
+
+    }
+    public void irActividadPrincipal(){
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
 
     }
 
@@ -254,11 +258,8 @@ public class LoginActivity extends AppCompatActivity {
             if(usuario != null){
                 Session session = new Session(getApplicationContext());
                 session.setCorreo(usuario.getCorreo());
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("correoUsuarioActual", usuario.getCorreo());
-                startActivity(intent);
                 barraProgreso.setVisibility(View.VISIBLE);
-
+                irActividadPrincipal();
             }else{
                 Toast.makeText(LoginActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
             }
