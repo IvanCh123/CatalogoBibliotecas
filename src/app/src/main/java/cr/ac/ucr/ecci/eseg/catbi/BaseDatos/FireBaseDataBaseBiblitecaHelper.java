@@ -1,6 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi.BaseDatos;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.ReservaFila;
 
 public class FireBaseDataBaseBiblitecaHelper {
     private FirebaseDatabase database;
@@ -263,6 +265,7 @@ public class FireBaseDataBaseBiblitecaHelper {
                         //Reservacion reserva = new Reservacion(tituloMaterialFromDB,fechaLimiteFromDB);
                         keys.add(ds.getKey());
                         Reservacion reserva = ds.getValue(Reservacion.class);
+                        reserva.setReservacionID(ds.getKey());
                         listaReservaciones.add(reserva);
                     }
                 }
@@ -423,5 +426,33 @@ public class FireBaseDataBaseBiblitecaHelper {
         }catch (Exception e){
             return false;
         }
+    }
+
+    public boolean eliminarReservas(List<ReservaFila> l){
+        boolean eliminar=false;
+        for(int i=0;i<l.size();i++){
+            if(l.get(i).isCheck()){
+                final String idM=l.get(i).getReservacion().getMaterialID();
+                String idR=l.get(i).getReservacion().getReservacionID();
+                String cant="" ;
+                referenciaMaterial.child(idM).child("cantidad").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot)
+                    {
+                        String cant = dataSnapshot.getValue().toString();
+                        int c=Integer.parseInt(cant)+1;
+                        referenciaMaterial.child(idM).child("cantidad").setValue(String.valueOf(c));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                referenciaReserva.child(idR).removeValue();
+//Log.v("feee",l.get(i).getReservacion().getReservacionID());
+            }
+        }
+        return eliminar;
     }
 }

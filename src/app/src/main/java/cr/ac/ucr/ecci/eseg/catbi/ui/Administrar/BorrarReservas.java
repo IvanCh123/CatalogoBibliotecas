@@ -2,6 +2,7 @@ package cr.ac.ucr.ecci.eseg.catbi.ui.Administrar;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,7 @@ import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.RecyclerViewReservaciones_Config;
 
@@ -28,6 +30,7 @@ public class BorrarReservas extends AppCompatActivity {
     private String correo;
     private String nombre;
     final List<ReservaFila> lista= new ArrayList<ReservaFila>();
+    AdapterReservaItem adapterReservaItem;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -62,6 +65,7 @@ public class BorrarReservas extends AppCompatActivity {
         /*lista.add(new ReservaFila("ALgo1","12",false,"1144"));
         lista.add(new ReservaFila("ALgo2","16",false,"134"));
         lista.add(new ReservaFila("ALgo3","15",false,"1678jhg44"));*/
+        //adapterReservaItem=;
         mRecyclerView.setAdapter(new AdapterReservaItem(this,lista));
 
         seleccionar.setOnClickListener(new View.OnClickListener() {
@@ -91,7 +95,9 @@ public class BorrarReservas extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), "Se a seleccionado todos los items", Toast.LENGTH_SHORT).show();
         for(int i = 0;i<lista.size();i++){
                 lista.get(i).setCheck(true);
+
         }
+        mRecyclerView.setAdapter(new AdapterReservaItem(this,lista));
     }
 
     private void deseleccionarTodo(){
@@ -99,6 +105,7 @@ public class BorrarReservas extends AppCompatActivity {
         for(int i = 0;i<lista.size();i++){
             lista.get(i).setCheck(false);
         }
+        mRecyclerView.setAdapter(new AdapterReservaItem(this,lista));
     }
 
     private void eliminarItemsSelec(){
@@ -111,5 +118,8 @@ public class BorrarReservas extends AppCompatActivity {
                 Log.v("verT","False");
             }
         }
+        new FireBaseDataBaseBiblitecaHelper().eliminarReservas(lista);
+        startActivity(new Intent(this, MainActivity.class));
     }
+
 }
