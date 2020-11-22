@@ -24,4 +24,12 @@ public class Session {
     public void removeSession(){
         prefs.edit().putString("correoUsuarioActual", "").commit();
     }
+
+    public void setAlarmaActiva(){
+        prefs.edit().putBoolean("alarmaActiva",true);
+    }
+
+    public void removeAlarmaActiva(){
+        prefs.edit().putBoolean("alarmaActiva",false);
+    }
 }
