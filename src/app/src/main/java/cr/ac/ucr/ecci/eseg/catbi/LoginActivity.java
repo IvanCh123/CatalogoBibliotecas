@@ -137,8 +137,8 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("correoUsuarioActual", correo);
                         session.setCorreo(correo);
 
-                        NotificacionReciever notificacionReciever = new NotificacionReciever();
-                        notificacionReciever.generarNotificacion(getApplicationContext(),correo);
+                        NotificacionReciever notificacion = new NotificacionReciever();
+                        notificacion.generarNotificacion(getApplicationContext(),correo);
 
                         generarRecordatorioDiario(correo);
 
@@ -156,8 +156,8 @@ public class LoginActivity extends AppCompatActivity {
     public void generarRecordatorioDiario(String correo){
         Calendar calendar  = Calendar.getInstance();
 
-        calendar.set(Calendar.HOUR_OF_DAY,5);
-        calendar.set(Calendar.MINUTE,40);
+        calendar.set(Calendar.HOUR_OF_DAY,13);
+        calendar.set(Calendar.MINUTE,30);
 
         Intent intent = new Intent(getApplicationContext(), NotificacionReciever.class);
         intent.putExtra("correo", correo);
