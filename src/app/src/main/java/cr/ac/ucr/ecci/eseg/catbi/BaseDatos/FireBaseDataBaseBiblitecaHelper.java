@@ -282,11 +282,11 @@ public class FireBaseDataBaseBiblitecaHelper {
         userName=userName.toLowerCase();
         if(n1.contains(userName)){
             simil=true;
-        }else{
+        }/*else{
             if(StringUtils.getLevenshteinDistance(n1,userName)!=-1){
                 simil=true;
             }
-        }
+        }*/
         return simil;
     }
 
