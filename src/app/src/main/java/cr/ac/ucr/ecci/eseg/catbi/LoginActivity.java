@@ -25,9 +25,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.AppDataBase;
@@ -46,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressBar barraProgreso;
     private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBiblitecaHelper;
     private AppDataBase dbLocal;
-    private Session session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +95,6 @@ public class LoginActivity extends AppCompatActivity {
         btnInicioSesion = findViewById(R.id.btnInicioSesion);
         barraProgreso = findViewById(R.id.progressBar);
         barraProgreso.setVisibility(View.INVISIBLE);
-        session = new Session(getApplicationContext());
 
         btnInicioSesion.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,6 +116,20 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onStart(){
+        super.onStart();
+        checkSession();
+    }
+
+    public void checkSession(){
+        Session session = new Session(getApplicationContext());
+        String correo = session.getCorreo();
+        if(!correo.equals("")){
+            irActividadPrincipal();
+        }
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         barraProgreso.setVisibility(View.INVISIBLE);
@@ -133,8 +145,7 @@ public class LoginActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("correoUsuarioActual", correo);
+                        Session session = new Session(getApplicationContext());
                         session.setCorreo(correo);
 
                         NotificacionReciever notificacion = new NotificacionReciever();
@@ -142,8 +153,8 @@ public class LoginActivity extends AppCompatActivity {
 
                         generarRecordatorioDiario(correo);
 
-                        startActivity(intent);
                         barraProgreso.setVisibility(view.VISIBLE);
+                        irActividadPrincipal();
                     } else {
                         Toast.makeText(LoginActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
                     }
@@ -177,6 +188,12 @@ public class LoginActivity extends AppCompatActivity {
             Usuario usuario = new Usuario();
             new leerUsuario().execute(correo, password);
         }
+
+    }
+    public void irActividadPrincipal(){
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
 
     }
 
@@ -280,12 +297,10 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Usuario usuario){
             if(usuario != null){
+                Session session = new Session(getApplicationContext());
                 session.setCorreo(usuario.getCorreo());
-                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                intent.putExtra("correoUsuarioActual", usuario.getCorreo());
-                startActivity(intent);
                 barraProgreso.setVisibility(View.VISIBLE);
-
+                irActividadPrincipal();
             }else{
                 Toast.makeText(LoginActivity.this, "Credenciales inválidas", Toast.LENGTH_SHORT).show();
             }
