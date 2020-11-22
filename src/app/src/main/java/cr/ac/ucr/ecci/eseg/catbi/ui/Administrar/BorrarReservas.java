@@ -22,6 +22,8 @@ import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Alert.EliminarDialogAlert;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Alert.EliminarReservaDialogAlert;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.RecyclerViewReservaciones_Config;
 
 public class BorrarReservas extends AppCompatActivity {
@@ -109,17 +111,9 @@ public class BorrarReservas extends AppCompatActivity {
     }
 
     private void eliminarItemsSelec(){
-        boolean t=false;
-        for(int i = 0;i<lista.size();i++){
-            t= lista.get(i).isCheck();
-            if(t){
-                Log.v("verT","True");
-            } else{
-                Log.v("verT","False");
-            }
-        }
-        new FireBaseDataBaseBiblitecaHelper().eliminarReservas(lista);
-        startActivity(new Intent(this, MainActivity.class));
+        EliminarReservaDialogAlert eliminarReservaDialogAlert = new EliminarReservaDialogAlert(lista);
+
+        eliminarReservaDialogAlert.show(getSupportFragmentManager(), "Confirmar");
     }
 
 }

@@ -429,7 +429,7 @@ public class FireBaseDataBaseBiblitecaHelper {
     }
 
     public boolean eliminarReservas(List<ReservaFila> l){
-        boolean eliminar=false;
+        boolean eliminar=true;
         for(int i=0;i<l.size();i++){
             if(l.get(i).isCheck()){
                 final String idM=l.get(i).getReservacion().getMaterialID();
@@ -449,8 +449,13 @@ public class FireBaseDataBaseBiblitecaHelper {
 
                     }
                 });
-                referenciaReserva.child(idR).removeValue();
-//Log.v("feee",l.get(i).getReservacion().getReservacionID());
+                try {
+                    referenciaReserva.child(idR).removeValue();
+                }catch (Exception e){
+                    eliminar=false;
+                }
+
+
             }
         }
         return eliminar;
