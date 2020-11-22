@@ -89,10 +89,13 @@ public class RecycleViewUserConfig {
                 public void onClick(View v) {
 
                     String name = listaUsuario.get(position).getNombre();
-                    //Intent intent1 = new Intent(contexto,BibliotecaUbicacion.class);//BibliotecaUbicacion.class
-                    //intent1.putExtra("name", name);
-//                    contexto.startActivity(intent1);
-                    Toast.makeText(v.getContext(), "Nombre Seleccionado: "+name, Toast.LENGTH_LONG).show();
+                    String mail = listaUsuario.get(position).getCorreo();
+                    Intent intent1 = new Intent(contexto,BorrarReservas.class);//BibliotecaUbicacion.class
+                    intent1.putExtra("nombreUser", name);
+                    intent1.putExtra("mailUser", mail);
+                    intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    contexto.startActivity(intent1);
+                    //Toast.makeText(v.getContext(), "Nombre Seleccionado: "+name, Toast.LENGTH_LONG).show();
                     if (!hayConexionAInternet()) {
                         Toast.makeText(v.getContext(), "El dispositivo no tiene internet las funcionalidades del mapa son limitadas", Toast.LENGTH_LONG).show();
                     }

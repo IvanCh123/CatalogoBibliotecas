@@ -15,6 +15,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,13 +35,15 @@ public class BorrarReservas extends AppCompatActivity {
     private String nombre;
     final List<ReservaFila> lista= new ArrayList<ReservaFila>();
     AdapterReservaItem adapterReservaItem;
+    public final static String USER_NAME ="nombreUser";
+    public final static String USER_MAIL ="mailUser";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_eliminar_reservas);
-        correo="josue.valverde@ucr.ac.cr";//Cambiar por lo que que viene de afuera
-        nombre="Josué Valverde Sánchez";
+        correo=getFiltroEmail();//"josue.valverde@ucr.ac.cr";//Cambiar por lo que que viene de afuera
+        nombre=getFiltroNombre();//"Josué Valverde Sánchez";
         Button seleccionar=(Button)findViewById(R.id.select_all);
         Button deseleccionar=(Button)findViewById(R.id.deselect_all);
         TextView nombreUser =(TextView)findViewById(R.id.nombre_perfil);
@@ -114,6 +118,18 @@ public class BorrarReservas extends AppCompatActivity {
         EliminarReservaDialogAlert eliminarReservaDialogAlert = new EliminarReservaDialogAlert(lista);
 
         eliminarReservaDialogAlert.show(getSupportFragmentManager(), "Confirmar");
+    }
+
+    private String getFiltroNombre() {
+        Intent intent = getIntent();
+        String userName = intent.getStringExtra(USER_NAME).toLowerCase();
+        return userName;
+    }
+
+    private String getFiltroEmail() {
+        Intent intent = getIntent();
+        String userMail = intent.getStringExtra(USER_MAIL).toLowerCase();
+        return userMail;
     }
 
 }
