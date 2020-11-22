@@ -20,4 +20,8 @@ public class Session {
         String correo = prefs.getString("correoUsuarioActual","");
         return correo;
     }
+
+    public void removeSession(){
+        prefs.edit().putString("correoUsuarioActual", "").commit();
+    }
 }
