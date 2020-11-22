@@ -128,11 +128,7 @@ public class LoginActivity extends AppCompatActivity {
         String correo = session.getCorreo();
         if(!correo.equals("")){
 
-            Intent intent = new Intent(getApplicationContext(), NotificacionReciever.class);
-            boolean alarmUp = (PendingIntent.getBroadcast(getApplicationContext(), 100, intent,
-                    PendingIntent.FLAG_NO_CREATE) != null);
-
-            if (alarmUp) {
+            if (!session.getAlarmaActiva()) {
                 NotificacionReciever notificacion = new NotificacionReciever();
                 notificacion.generarNotificacion(getApplicationContext(), correo);
 
