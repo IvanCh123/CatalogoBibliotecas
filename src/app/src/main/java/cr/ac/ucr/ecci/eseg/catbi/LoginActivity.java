@@ -127,7 +127,6 @@ public class LoginActivity extends AppCompatActivity {
         Session session = new Session(getApplicationContext());
         String correo = session.getCorreo();
         if(!correo.equals("")){
-
             if (!session.getAlarmaActiva()) {
                 NotificacionReciever notificacion = new NotificacionReciever();
                 notificacion.generarNotificacion(getApplicationContext(), correo);
@@ -157,6 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                         Session session = new Session(getApplicationContext());
                         session.setCorreo(correo);
                         session.setAlarmaActiva();
+
                         NotificacionReciever notificacion = new NotificacionReciever();
                         notificacion.generarNotificacion(getApplicationContext(),correo);
 

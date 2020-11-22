@@ -31,10 +31,10 @@ public class Session {
     }
 
     public void setAlarmaActiva(){
-        prefs.edit().putBoolean("alarmaActiva",true);
+        prefs.edit().putBoolean("alarmaActiva",true).commit();
     }
 
-    public boolean getAlarmaActiva(){
+    public Boolean getAlarmaActiva(){
         return prefs.getBoolean("alarmaActiva", false);
     }
 
@@ -44,6 +44,6 @@ public class Session {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
         alarmManager.cancel(pendingIntent);
 
-        prefs.edit().putBoolean("alarmaActiva",false);
+        prefs.edit().putBoolean("alarmaActiva",false).commit();
     }
 }
