@@ -1,9 +1,14 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Perfil;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -24,12 +29,16 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ReservacionParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.UsuarioParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.LoginActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.AgregarMaterial;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
 
 
 import android.content.Context;
+import android.widget.Toast;
 
 public class PerfilFragment extends Fragment {
 
@@ -56,7 +65,7 @@ public class PerfilFragment extends Fragment {
         perfilViewModel =
                 ViewModelProviders.of(this).get(PerfilViewModel.class);
         final View root = inflater.inflate(R.layout.fragment_perfil, container, false);
-
+        setHasOptionsMenu(true);
         nombreUsuario =  (TextView) root.findViewById(R.id.txtNombre);
         correoUsuario = (TextView) root.findViewById(R.id.txtCorreo);
         mRecyclerView = (RecyclerView) root.findViewById(R.id.reservacionesRecyclerView);
@@ -126,6 +135,26 @@ public class PerfilFragment extends Fragment {
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         return isConnected;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_perfil, menu);
+        PerfilFragment.super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.cerrar_sesion) {
+            Intent intent= new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            //Toast.makeText(getContext(), "La sesión se ha cerrado exitosamente",Toast.LENGTH_LONG).show();
+            return true;
+        }else{
+            Log.v("g","y");
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
