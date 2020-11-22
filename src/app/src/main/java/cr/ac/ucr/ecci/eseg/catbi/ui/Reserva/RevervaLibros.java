@@ -52,9 +52,9 @@ public class RevervaLibros extends AppCompatActivity {
                 public void onClick(View v) {
                      reserva[0] = agregarReserva("15",id,titulo);
                      if(reserva[0]){
-                         String titulo = "Confirmación de reserva";
+                         String tituloNotificacion = "Confirmación de reserva";
                          String mensaje = "'"+titulo+"' se ha reservado exitosamente.";
-                         notificacion.notificarReserva(getApplicationContext(), titulo, mensaje);
+                         notificacion.notificarReserva(getApplicationContext(), tituloNotificacion, mensaje);
                      }else {
                          String titulo = "Error en la reserva";
                          String mensaje = "Ha habido una falla en la reserva.";

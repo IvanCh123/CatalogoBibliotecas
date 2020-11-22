@@ -138,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
                         session.setCorreo(correo);
 
                         NotificacionReciever notificacionReciever = new NotificacionReciever();
-                        notificacionReciever.generarNotifiacion(getApplicationContext(),correo);
+                        notificacionReciever.generarNotificacion(getApplicationContext(),correo);
 
                         generarRecordatorioDiario(correo);
 
@@ -157,15 +157,14 @@ public class LoginActivity extends AppCompatActivity {
         Calendar calendar  = Calendar.getInstance();
 
         calendar.set(Calendar.HOUR_OF_DAY,5);
-        calendar.set(Calendar.MINUTE,07);
-        calendar.set(Calendar.SECOND,20);
+        calendar.set(Calendar.MINUTE,40);
 
         Intent intent = new Intent(getApplicationContext(), NotificacionReciever.class);
         intent.putExtra("correo", correo);
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
 

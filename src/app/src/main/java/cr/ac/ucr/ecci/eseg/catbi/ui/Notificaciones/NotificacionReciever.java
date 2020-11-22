@@ -30,11 +30,11 @@ public class NotificacionReciever extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String correoActual = intent.getStringExtra("correo");
 
-        generarNotifiacion(context, correoActual);
+        generarNotificacion(context, correoActual);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void generarNotifiacion(Context context, String correo){
+    public void generarNotificacion(Context context, String correo){
         recuperarReservaciones(context, correo);
 
         Reservacion reservacionMasProxima = getReservacionMasProxima(getListaReservaciones());
@@ -57,26 +57,22 @@ public class NotificacionReciever extends BroadcastReceiver {
     public void notificarReserva(Context context, String titulo, String message){
         createNotificationChannel(context);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(
-                context, CHANNEL_ID
-        )
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(
+                Context.NOTIFICATION_SERVICE
+        );
+
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setContentIntent(pendingIntent)
                 .setSmallIcon(R.drawable.ic_message)
                 .setContentTitle(titulo)
                 .setContentText(message)
                 .setAutoCancel(true);
 
-        Intent intent = new Intent(context, MainActivity.class);
-
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.putExtra("message", message);
-
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        builder.setContentIntent(pendingIntent);
-
-        NotificationManager notificationManager = (NotificationManager) context.getSystemService(
-                Context.NOTIFICATION_SERVICE
-        );
         notificationManager.notify(100, builder.build());
     }
 
