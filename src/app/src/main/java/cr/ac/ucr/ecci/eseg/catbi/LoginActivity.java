@@ -1,14 +1,18 @@
 package cr.ac.ucr.ecci.eseg.catbi;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +25,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
@@ -30,6 +36,7 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.NotificacionReciever;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -122,12 +129,19 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Por favor digite un correo y una contraseña", Toast.LENGTH_SHORT).show();
         } else {
             mAuth.signInWithEmailAndPassword(correo, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("correoUsuarioActual", correo);
                         session.setCorreo(correo);
+
+                        NotificacionReciever notificacion = new NotificacionReciever();
+                        notificacion.generarNotificacion(getApplicationContext(),correo);
+
+                        generarRecordatorioDiario(correo);
+
                         startActivity(intent);
                         barraProgreso.setVisibility(view.VISIBLE);
                     } else {
@@ -138,6 +152,23 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
+    public void generarRecordatorioDiario(String correo){
+        Calendar calendar  = Calendar.getInstance();
+
+        calendar.set(Calendar.HOUR_OF_DAY,13);
+        calendar.set(Calendar.MINUTE,30);
+
+        Intent intent = new Intent(getApplicationContext(), NotificacionReciever.class);
+        intent.putExtra("correo", correo);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+    }
+
+
 
     public void autenticarUsuariosLocal(String correo, String password) {
         if (correo.isEmpty() || password.isEmpty()) {
