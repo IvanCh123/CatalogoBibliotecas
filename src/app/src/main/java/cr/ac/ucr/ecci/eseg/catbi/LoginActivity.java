@@ -21,15 +21,20 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.AppDataBase;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ReservacionParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.Notificacion;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.RecyclerViewReservaciones_Config;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -128,6 +133,9 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.putExtra("correoUsuarioActual", correo);
                         session.setCorreo(correo);
+
+                        notificarSobreReservas(correo);
+
                         startActivity(intent);
                         barraProgreso.setVisibility(view.VISIBLE);
                     } else {
@@ -137,6 +145,25 @@ public class LoginActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    public void notificarSobreReservas(String correoUsuarioActual){
+        DataBaseHelperRoom dbLocalHelper = new DataBaseHelperRoom(getApplicationContext());
+        final Notificacion notificacion = new Notificacion();
+        List<Reservacion> listaReservaciones = new ArrayList<>();
+        ReservacionParametroAsyncTask parametroAsyncTask = new ReservacionParametroAsyncTask(correoUsuarioActual, new ReservacionParametroAsyncTask.ReservacionDataStatus() {
+            @Override
+            public void DataIsLoaded(List<Reservacion> reservaciones) {
+                int tamanoLista = reservaciones.size();
+                List<String> keys = new ArrayList<>();
+
+                for(int i =0; i < tamanoLista; i++){
+                    keys.add(String.valueOf(i));
+                }
+                notificacion.notificarLimiteReservas(reservaciones, keys);
+            }
+        });
+        dbLocalHelper.readReservacion(parametroAsyncTask);
     }
 
     public void autenticarUsuariosLocal(String correo, String password) {
