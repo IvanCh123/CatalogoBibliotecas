@@ -1,5 +1,6 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Perfil;
 
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -28,9 +29,11 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ReservacionParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.UsuarioParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.LoginActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.AgregarMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
 
 
@@ -144,7 +147,9 @@ public class PerfilFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.cerrar_sesion) {
-            Toast.makeText(getContext(), "Cerrar Sesion",Toast.LENGTH_LONG).show();
+            Intent intent= new Intent(getActivity(), LoginActivity.class);
+            startActivity(intent);
+            //Toast.makeText(getContext(), "La sesión se ha cerrado exitosamente",Toast.LENGTH_LONG).show();
             return true;
         }else{
             Log.v("g","y");
