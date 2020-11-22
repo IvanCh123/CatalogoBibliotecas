@@ -27,7 +27,7 @@ import androidx.lifecycle.ViewModelProviders;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.AgregarMaterial;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.BorrarReservas;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.BuscarUsuarios;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Resultado.ResultadosBusquedaActivity;
 
 public class BusquedaFragment extends Fragment {
@@ -115,6 +115,15 @@ public class BusquedaFragment extends Fragment {
                 Toast.makeText(getContext(), "El dispositivo no tiene conexión a internet, no se permite agregar material.",Toast.LENGTH_LONG).show();
             }
             return true;
+        }
+        if (id == R.id.buscar_usuario) {
+            if (hayConexionAInternet()){
+                Log.v("gooooool","e");
+                irActBuscUser();
+            }else{
+                Toast.makeText(getContext(), "El dispositivo no tiene conexión a internet, no se permite agregar material.",Toast.LENGTH_LONG).show();
+            }
+            return true;
         }else{
             Log.v("g","y");
         }
@@ -122,7 +131,12 @@ public class BusquedaFragment extends Fragment {
     }
 
     private void irActAgregarMat(){
-        Intent intent= new Intent(getActivity(), BorrarReservas.class);
+        Intent intent= new Intent(getActivity(), AgregarMaterial.class);
+        startActivity(intent);
+    }
+
+    private void irActBuscUser(){
+        Intent intent= new Intent(getActivity(), BuscarUsuarios.class);
         startActivity(intent);
     }
 

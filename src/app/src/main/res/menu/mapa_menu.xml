@@ -6,7 +6,7 @@
             android:title="Marcador de Biblioteca"
             android:visible="true"/>
         <item
-            android:id="@+id/action_2"
+            android:id="@+id/buscar_usuario"
             android:title="Activar el Zoom, Compás y Loc."
             android:visible="true"/>
         <item

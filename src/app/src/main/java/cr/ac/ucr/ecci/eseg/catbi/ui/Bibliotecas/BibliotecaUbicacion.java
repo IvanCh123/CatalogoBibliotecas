@@ -1,18 +1,15 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Bibliotecas;
 
-import androidx.fragment.app.FragmentActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -102,7 +99,7 @@ public class BibliotecaUbicacion extends AppCompatActivity  implements
         if (id == R.id.action_1) {
             marcadorBiblioteca();
             return true;
-        } else if (id == R.id.action_2) {
+        } else if (id == R.id.buscar_usuario) {
             mostrarZoom();
             return true;
         } else if (id == R.id.action_3) {
