@@ -53,13 +53,11 @@ public class RevervaLibros extends AppCompatActivity {
                 public void onClick(View v) {
                      reserva[0] = agregarReserva("15",id,titulo);
                      if(reserva[0]){
-                         String mensaje = "Reserva se ha realizado exitosamente";
-                         Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
-                         notificacion.notificarReserva(getApplicationContext(), mensaje);
+                         String mensaje = "'"+titulo+"' se ha reservado exitosamente.";
+                         notificacion.notificarReserva(getApplicationContext(), mensaje, true);
                      }else {
-                         String mensaje = "Ha habido una falla en la reserva";
-                         Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
-                         notificacion.notificarReserva(getApplicationContext(), mensaje);
+                         String mensaje = "Ha habido una falla en la reserva.";
+                         notificacion.notificarReserva(getApplicationContext(), mensaje, false);
                      }
                     retornar();
                 }

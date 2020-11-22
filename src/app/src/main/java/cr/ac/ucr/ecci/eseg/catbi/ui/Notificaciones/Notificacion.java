@@ -16,14 +16,22 @@ import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.PerfilFragment;
 public class Notificacion {
     public static final String CHANNEL_ID = "ESEG-CATBI";
 
-    public void notificarReserva(Context context, String message){
+    public void notificarReserva(Context context, String message, boolean reservaExitosa){
+        String titulo;
+
+        if(reservaExitosa)
+            titulo = "Confirmación de reserva";
+        else
+            titulo = "Error en la reserva";
+
+
         createNotificationChannel(context);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                 context, CHANNEL_ID
         )
                 .setSmallIcon(R.drawable.ic_message)
-                .setContentTitle("Confirmación de reserva")
+                .setContentTitle(titulo)
                 .setContentText(message)
                 .setAutoCancel(true);
 
