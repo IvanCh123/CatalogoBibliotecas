@@ -115,8 +115,21 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-    
 
+    @Override
+    public void onStart(){
+        super.onStart();
+        checkSession();
+    }
+
+    public void checkSession(){
+        Session session = new Session(getApplicationContext());
+        String correo = session.getCorreo();
+        if(!correo.equals("")){
+            irActividadPrincipal();
+        }
+    }
+    
     @Override
     protected void onResume() {
         super.onResume();
