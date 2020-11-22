@@ -115,16 +115,29 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onStart(){
         super.onStart();
         checkSession();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void checkSession(){
         Session session = new Session(getApplicationContext());
         String correo = session.getCorreo();
         if(!correo.equals("")){
+
+            Intent intent = new Intent(getApplicationContext(), NotificacionReciever.class);
+            boolean alarmUp = (PendingIntent.getBroadcast(getApplicationContext(), 100, intent,
+                    PendingIntent.FLAG_NO_CREATE) != null);
+
+            if (alarmUp) {
+                NotificacionReciever notificacion = new NotificacionReciever();
+                notificacion.generarNotificacion(getApplicationContext(), correo);
+
+                generarRecordatorioDiario(correo);
+            }
             irActividadPrincipal();
         }
     }
