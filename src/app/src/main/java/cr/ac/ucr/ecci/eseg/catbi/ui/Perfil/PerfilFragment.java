@@ -147,9 +147,9 @@ public class PerfilFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.cerrar_sesion) {
+            session.removeSession();
             Intent intent= new Intent(getActivity(), LoginActivity.class);
             startActivity(intent);
-            //Toast.makeText(getContext(), "La sesión se ha cerrado exitosamente",Toast.LENGTH_LONG).show();
             return true;
         }else{
             Log.v("g","y");
