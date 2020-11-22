@@ -68,30 +68,47 @@ public class Notificacion {
         }
     }
 
-    public void notificarLimiteReservas(List<Reservacion> reservaciones, List<String> keys) {
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void notificarLimiteReservas(Context context, List<Reservacion> reservaciones) {
+        Reservacion reservacionMasProxima = getReservacionMasProxima(reservaciones);
+        String titulo;
+        String mensaje;
+        if(reservacionMasProxima != null){
+            int diasRestantes = getDiasRestantes(reservacionMasProxima.getFechaLimite());
 
+            titulo = "Recordatorio de vencimiento";
+            mensaje = "El material '"+reservacionMasProxima.getTituloMaterial()+"' vence en "+diasRestantes+" dias";
+        }else{
+            titulo = "Estás al día!";
+            mensaje = "No tienes ninguna reserva proxima a vencer";
+        }
+
+        notificarReserva(context, titulo, mensaje);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     public Reservacion getReservacionMasProxima(List<Reservacion> reservaciones){
         Date fecha = new Date();
-        int indexDelMenor = 0;
+        Reservacion reservacionMasProxima = new Reservacion();
 
-        int diasAnterior = -1;
-        int diasActuales = -1;
+        int diasActuales = 0;
+        int menorActual = 0;
 
         for (int i = 0; i < reservaciones.size(); i++){
             diasActuales = getDiasRestantes(reservaciones.get(i).getFechaLimite());
-            if(i > 0){
-                diasAnterior = getDiasRestantes(reservaciones.get(i - 1).getFechaLimite());
-            }
 
-            if(diasActuales < diasAnterior){
-                indexDelMenor = i;
+            if(diasActuales != 0){
+                if(diasActuales < menorActual || (diasActuales != 0 && menorActual == 0)){
+                    menorActual = diasActuales;
+                    reservacionMasProxima = reservaciones.get(i);
+                }
+            }else if (i == 0){
+                menorActual = diasActuales;
+                reservacionMasProxima = reservaciones.get(i);
             }
         }
 
-        return null;
+        return (menorActual != 0) ? reservacionMasProxima : null;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

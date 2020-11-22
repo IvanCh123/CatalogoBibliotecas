@@ -1,6 +1,7 @@
 package cr.ac.ucr.ecci.eseg.catbi;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
@@ -9,6 +10,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -150,8 +152,8 @@ public class LoginActivity extends AppCompatActivity {
     public void notificarSobreReservas(String correoUsuarioActual){
         DataBaseHelperRoom dbLocalHelper = new DataBaseHelperRoom(getApplicationContext());
         final Notificacion notificacion = new Notificacion();
-        List<Reservacion> listaReservaciones = new ArrayList<>();
         ReservacionParametroAsyncTask parametroAsyncTask = new ReservacionParametroAsyncTask(correoUsuarioActual, new ReservacionParametroAsyncTask.ReservacionDataStatus() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void DataIsLoaded(List<Reservacion> reservaciones) {
                 int tamanoLista = reservaciones.size();
@@ -160,7 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                 for(int i =0; i < tamanoLista; i++){
                     keys.add(String.valueOf(i));
                 }
-                notificacion.notificarLimiteReservas(reservaciones, keys);
+                notificacion.notificarLimiteReservas(getApplicationContext(), reservaciones);
             }
         });
         dbLocalHelper.readReservacion(parametroAsyncTask);
