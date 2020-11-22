@@ -149,6 +149,7 @@ public class PerfilFragment extends Fragment {
         if (id == R.id.cerrar_sesion) {
             session.removeSession();
             Intent intent= new Intent(getActivity(), LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             return true;
         }else{
