@@ -11,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
-import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.Notificacion;
 
 public class RevervaLibros extends AppCompatActivity {
     private String biblio;
@@ -21,17 +21,19 @@ public class RevervaLibros extends AppCompatActivity {
     private String id;
     private String user;
     private String cant;
-
+    private Notificacion notificacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        notificacion = new Notificacion();
         Intent intent=getIntent();
         biblio=intent.getStringExtra("biblio");
         titulo=intent.getStringExtra("titulo");
         id=intent.getStringExtra("id");
         user=intent.getStringExtra("user");
         cant=intent.getStringExtra("cant");
+
         final boolean[] reserva = new boolean[1];
 
         boolean v=validadorPrestamo(cant);
@@ -51,9 +53,13 @@ public class RevervaLibros extends AppCompatActivity {
                 public void onClick(View v) {
                      reserva[0] = agregarReserva("15",id,titulo);
                      if(reserva[0]){
-                         Toast.makeText(getApplicationContext(), "Reserva se ha realizado exitosamente" , Toast.LENGTH_SHORT).show();
+                         String mensaje = "Reserva se ha realizado exitosamente";
+                         Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+                         notificacion.notificarReserva(getApplicationContext(), mensaje);
                      }else {
-                         Toast.makeText(getApplicationContext(), "Ha habido una falla en la reserva" , Toast.LENGTH_SHORT).show();
+                         String mensaje = "Ha habido una falla en la reserva";
+                         Toast.makeText(getApplicationContext(), mensaje, Toast.LENGTH_SHORT).show();
+                         notificacion.notificarReserva(getApplicationContext(), mensaje);
                      }
                     retornar();
                 }
@@ -72,8 +78,6 @@ public class RevervaLibros extends AppCompatActivity {
                 }
             });
         }
-
-
     }
 
     private boolean validadorPrestamo(String cant){
