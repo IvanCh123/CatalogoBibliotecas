@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +12,7 @@ import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.Notificacion;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.NotificacionReciever;
 
 public class RevervaLibros extends AppCompatActivity {
     private String biblio;
@@ -21,12 +20,12 @@ public class RevervaLibros extends AppCompatActivity {
     private String id;
     private String user;
     private String cant;
-    private Notificacion notificacion;
+    private NotificacionReciever notificacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        notificacion = new Notificacion();
+        notificacion = new NotificacionReciever();
         Intent intent=getIntent();
         biblio=intent.getStringExtra("biblio");
         titulo=intent.getStringExtra("titulo");

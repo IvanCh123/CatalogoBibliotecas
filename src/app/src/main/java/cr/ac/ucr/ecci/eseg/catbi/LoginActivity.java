@@ -5,6 +5,8 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -24,19 +26,17 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.AppDataBase;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Biblioteca;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
-import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ReservacionParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.Notificacion;
-import cr.ac.ucr.ecci.eseg.catbi.ui.Perfil.RecyclerViewReservaciones_Config;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.NotificacionReciever;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -129,6 +129,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(LoginActivity.this, "Por favor digite un correo y una contraseña", Toast.LENGTH_SHORT).show();
         } else {
             mAuth.signInWithEmailAndPassword(correo, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
@@ -136,7 +137,10 @@ public class LoginActivity extends AppCompatActivity {
                         intent.putExtra("correoUsuarioActual", correo);
                         session.setCorreo(correo);
 
-                        notificarSobreReservas(correo);
+                        NotificacionReciever notificacionReciever = new NotificacionReciever();
+                        notificacionReciever.generarNotifiacion(getApplicationContext(),correo);
+
+                        generarRecordatorioDiario(correo);
 
                         startActivity(intent);
                         barraProgreso.setVisibility(view.VISIBLE);
@@ -149,24 +153,23 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void notificarSobreReservas(String correoUsuarioActual){
-        DataBaseHelperRoom dbLocalHelper = new DataBaseHelperRoom(getApplicationContext());
-        final Notificacion notificacion = new Notificacion();
-        ReservacionParametroAsyncTask parametroAsyncTask = new ReservacionParametroAsyncTask(correoUsuarioActual, new ReservacionParametroAsyncTask.ReservacionDataStatus() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void DataIsLoaded(List<Reservacion> reservaciones) {
-                int tamanoLista = reservaciones.size();
-                List<String> keys = new ArrayList<>();
+    public void generarRecordatorioDiario(String correo){
+        Calendar calendar  = Calendar.getInstance();
 
-                for(int i =0; i < tamanoLista; i++){
-                    keys.add(String.valueOf(i));
-                }
-                notificacion.notificarLimiteReservas(getApplicationContext(), reservaciones);
-            }
-        });
-        dbLocalHelper.readReservacion(parametroAsyncTask);
+        calendar.set(Calendar.HOUR_OF_DAY,5);
+        calendar.set(Calendar.MINUTE,07);
+        calendar.set(Calendar.SECOND,20);
+
+        Intent intent = new Intent(getApplicationContext(), NotificacionReciever.class);
+        intent.putExtra("correo", correo);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
     }
+
+
 
     public void autenticarUsuariosLocal(String correo, String password) {
         if (correo.isEmpty() || password.isEmpty()) {

@@ -3,30 +3,56 @@ package cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ReservacionParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 
-public class Notificacion {
+public class NotificacionReciever extends BroadcastReceiver {
     public static final String CHANNEL_ID = "ESEG-CATBI";
+    private List<Reservacion> listaReservaciones;
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String correoActual = intent.getStringExtra("correo");
+
+        generarNotifiacion(context, correoActual);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public void generarNotifiacion(Context context, String correo){
+        recuperarReservaciones(context, correo);
+
+        Reservacion reservacionMasProxima = getReservacionMasProxima(getListaReservaciones());
+        String titulo;
+        String mensaje;
+
+        if(reservacionMasProxima != null){
+            int diasRestantes = getDiasRestantes(reservacionMasProxima.getFechaLimite());
+
+            titulo = "Recordatorio de vencimiento";
+            mensaje = "El material '"+reservacionMasProxima.getTituloMaterial()+"' vence en "+diasRestantes+" dias";
+        }else{
+            titulo = "Estás al día!";
+            mensaje = "No tienes ninguna reserva proxima a vencer";
+        }
+
+        notificarReserva(context, titulo, mensaje);
+    }
 
     public void notificarReserva(Context context, String titulo, String message){
         createNotificationChannel(context);
@@ -44,14 +70,14 @@ public class Notificacion {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra("message", message);
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         builder.setContentIntent(pendingIntent);
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(
                 Context.NOTIFICATION_SERVICE
         );
-        notificationManager.notify(0, builder.build());
+        notificationManager.notify(100, builder.build());
     }
 
     public void createNotificationChannel(Context context) {
@@ -69,26 +95,7 @@ public class Notificacion {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void notificarLimiteReservas(Context context, List<Reservacion> reservaciones) {
-        Reservacion reservacionMasProxima = getReservacionMasProxima(reservaciones);
-        String titulo;
-        String mensaje;
-        if(reservacionMasProxima != null){
-            int diasRestantes = getDiasRestantes(reservacionMasProxima.getFechaLimite());
-
-            titulo = "Recordatorio de vencimiento";
-            mensaje = "El material '"+reservacionMasProxima.getTituloMaterial()+"' vence en "+diasRestantes+" dias";
-        }else{
-            titulo = "Estás al día!";
-            mensaje = "No tienes ninguna reserva proxima a vencer";
-        }
-
-        notificarReserva(context, titulo, mensaje);
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public Reservacion getReservacionMasProxima(List<Reservacion> reservaciones){
-        Date fecha = new Date();
         Reservacion reservacionMasProxima = new Reservacion();
 
         int diasActuales = 0;
@@ -119,5 +126,28 @@ public class Notificacion {
         int noOfDaysBetween = (int) ChronoUnit.DAYS.between(fechaActual, fechaLimite);
 
         return  noOfDaysBetween > 0 ? noOfDaysBetween : 0;
+    }
+
+    public void recuperarReservaciones(Context context, String correoActual){
+        final boolean[] termino = {false};
+        DataBaseHelperRoom dbLocalHelper = new DataBaseHelperRoom(context);
+        ReservacionParametroAsyncTask parametroAsyncTask = new ReservacionParametroAsyncTask(correoActual, new ReservacionParametroAsyncTask.ReservacionDataStatus() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void DataIsLoaded(List<Reservacion> reservaciones) {
+                setReservaciones(reservaciones);
+                termino[0] = true;
+            }
+        });
+        dbLocalHelper.readReservacion(parametroAsyncTask);
+        while(!termino[0]){}
+    }
+
+    public void setReservaciones(List<Reservacion> reservaciones){
+        this.listaReservaciones = reservaciones;
+    }
+
+    public List<Reservacion> getListaReservaciones(){
+        return this.listaReservaciones;
     }
 }
