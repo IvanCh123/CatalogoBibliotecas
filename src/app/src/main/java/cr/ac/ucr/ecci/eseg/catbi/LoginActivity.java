@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Session session = new Session(getApplicationContext());
                         session.setCorreo(correo);
-
+                        session.setAlarmaActiva();
                         NotificacionReciever notificacion = new NotificacionReciever();
                         notificacion.generarNotificacion(getApplicationContext(),correo);
 
