@@ -69,6 +69,7 @@ public class NotificacionReciever extends BroadcastReceiver {
         );
 
         Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra("perfil","perfil");
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
