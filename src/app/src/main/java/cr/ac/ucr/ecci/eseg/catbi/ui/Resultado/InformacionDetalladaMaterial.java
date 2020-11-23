@@ -19,17 +19,24 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
 import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.UsuarioParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.EditarActivity;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Alert.ConfirmarReservaDialogAlert;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Alert.EliminarDialogAlert;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Material;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
 
 public class InformacionDetalladaMaterial extends AppCompatActivity {
     private static final String TAG = "InformacionDetalladaMaterial";
-    private Button btnReserva;
+    private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBiblitecaHelper;
+    private DataBaseHelperRoom dbLocalHelper;
+    private Session session;
     private Material materialActual = new Material();
 
     @SuppressLint("LongLogTag")
@@ -41,7 +48,7 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
 
         materialActual = (Material) getIntent().getSerializableExtra("materialClickeado");
         setMaterial(materialActual);
-
+        session = new Session(getApplicationContext());
         final Button btnReserva= (Button) findViewById(R.id.button_reserva);
         btnReserva.setOnClickListener(new View.OnClickListener() {
             String id=materialActual.getMaterialID();
@@ -73,9 +80,39 @@ public class InformacionDetalladaMaterial extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.opciones_material, menu);
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        String correoUsuarioActual = session.getCorreo();
+        if (hayConexionAInternet()){
+            mFireBaseDataBaseBiblitecaHelper = new FireBaseDataBaseBiblitecaHelper();
+            mFireBaseDataBaseBiblitecaHelper.readUsuarios(new FireBaseDataBaseBiblitecaHelper.UsuariosDataStatus() {
+                @Override
+                public void DataIsLoaded(Usuario usuarioP) {
+                    // Acá debería de ir a la lógica de comprobación de si el usuario es administrador o no.
+                    if(usuarioP.getRango().equals("administrador")) {
+                        MenuInflater inflater = getMenuInflater();
+                        inflater.inflate(R.menu.opciones_material, menu);
+                    }
+                }
+            }, correoUsuarioActual);
+        }else {
+            dbLocalHelper = new DataBaseHelperRoom(getApplicationContext());
+            // Para recuperar los datos del usuario
+            UsuarioParametroAsyncTask usuarioParametroAsyncTask = new UsuarioParametroAsyncTask(correoUsuarioActual, new UsuarioParametroAsyncTask.UsuarioDataStatus() {
+                @Override
+                public void DataIsLoaded(final Usuario usuario) {
+                    InformacionDetalladaMaterial.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(usuario.getRango().equals("administrador")) {
+                                MenuInflater inflater = getMenuInflater();
+                                inflater.inflate(R.menu.opciones_material, menu);
+                            }
+                        }
+                    });
+                }
+            });
+            dbLocalHelper.readUsuario(usuarioParametroAsyncTask);
+        }
         return true;
     }
 

@@ -8,6 +8,7 @@
          location permissions for the "MyLocation" functionality.
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.SET_ALARM"/>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -28,7 +29,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.Administrar.EditarActivity"></activity>
+        <activity android:name=".ui.Administrar.EditarActivity" />
         <activity android:name=".MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -44,10 +45,10 @@
 
         <activity
             android:name=".ui.Bibliotecas.BibliotecaUbicacion"
-            android:label="@string/title_activity_biblioteca_ubicacion"></activity>
-        <activity android:name=".ui.Resultado.ResultadosBusquedaActivity"></activity>
-        <activity android:name=".ui.Resultado.InformacionDetalladaMaterial"></activity>
-        <activity android:name=".ui.Reserva.RevervaLibros"></activity>
+            android:label="@string/title_activity_biblioteca_ubicacion" />
+        <activity android:name=".ui.Resultado.ResultadosBusquedaActivity" />
+        <activity android:name=".ui.Resultado.InformacionDetalladaMaterial" />
+        <activity android:name=".ui.Reserva.RevervaLibros" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/app_name">
@@ -61,6 +62,8 @@
         <activity android:name=".ui.Administrar.BuscarUsuarios" />
         <activity android:name=".ui.Administrar.ListarUsuarios"/>
         <activity android:name=".ui.Administrar.BorrarReservas" />
+
+        <receiver android:name=".ui.Notificaciones.NotificacionReciever"/>
     </application>
 
 </manifest>

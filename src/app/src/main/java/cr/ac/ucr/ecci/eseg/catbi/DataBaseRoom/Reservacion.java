@@ -5,6 +5,7 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Reservacion {
@@ -77,5 +78,4 @@ public class Reservacion {
     public void setReservacionID( String reservacionID) {
         this.reservacionID = reservacionID;
     }
-
 }

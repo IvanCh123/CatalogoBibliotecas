@@ -104,32 +104,32 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 * Estado actual de la base de datos
 ![](./img/ArtefactosBasesDatos/BDActual.PNG)
  
-## Casos de prueba
+## Casos de prueba Sprint 4
 ### Caso 1
 
 |                      |     |
 | -------------------- | --- |
 | Nombre del Epic      | Administración Material |
-| Id de la Historia    | CNQ - 71  Agregar Material |
+| Id de la Historia    | CNQ - 116  Diferenciar usuarios administradores de usuarios normales |
 | Id de caso de prueba |    0 |
-| Descripción |    Agregar un material a la base de datos de la aplicación |
+| Descripción |    Verificar que un usuario administrador tenga la opción de agregar materiales |
 | Versión |   1.0  |
-| Implementado? | Sí, este caso de prueba se encuentra implementado en la clase de prueba AgregarMatTest en la rama master del repositorio. |
+| Implementado? | Sí, este caso de prueba se encuentra implementado en la clase de prueba UsuarioAdministradorTest en la rama master del repositorio. |
 | Nivel |   Sistema  |
 | Tipo |   Caja Negra  |
-|Pre-requisitos|Debe estar conectado a internet por Wifi|
-| Datos de prueba|Titulo: Drácula.<br>Autores: Bram Stoker.<br>Colección: Literaria.<br>Tipo de material:Libro.<br>Biblioteca: Carlos Monge. <br> Cantidad: 2 <br> Año: 2019|
-| Escenario esperado | Se despliega ventana de retroalimentación indicando que se ha agregado material y se almacena en la base de datos, se realiza una redirección a la actividad principal, para buscar el material agregado y corroborar que está presente.|
+|Pre-requisitos|Debe estar conectado a internet por Wifi y tener una cuenta de usuario administrador en la aplicación|
+| Datos de prueba|Correo electrónico: sebastian.otarola@ucr.ac.cr Contraseña: seguridad|
+| Escenario esperado | Al ser un usuario administrador, se espera que tenga acceso al menú de agregar material y pueda accesar a la actividad de agrear material.|
 
 ### Pasos a seguir
 
 
 | #   | Instrucción | Resultado Esperado |
 | --- | ----------- | ------------------ |
-|   1  |        Dirigirse al menú de agregar material  y presionarlo.     |        Se redirige a la actividad de agregar material. En donde se despliega un formulario.            |
-|   2 |       Rellenar el campo de título escribiendo Drácula, rellenar el campo de autores escribiendo Bram Stoker, seleccionar la opción literaria en el campo de coleccion,rellenar el campo de cantidad con 2,rellenar el campo año con 2019, en el campo de tipo de material escribir pdf y en el campo de biblioteca seleccionar Monge.      |                 Se muestran los campos del formulario con la información ingresada.|
-|   4  |           Presionar el botón de agregar material  |             Se muestra una ventana emergente indicando que se ha agregado el material exitosamente y se guarda en la base de datos |
-|   5 |   Se escribe el título en el área de búsqueda y se determina que el material está en la lista de resultados. |Que el material se encuentre en la lista.
+|   1  |        Iniciar la aplicación      |    Se inicia la aplicación en la actividad de login           |
+|   2 |       Rellenar el campo de correo electrónico con sebastian.otarola@ucr.ac.cr y el campo de contraseña con seguridad      |                 Se permite el acceso y se muestra la pantalla principal.|
+|   3 |           Dirigirse al menú en la esquina superior derecha y presionarlo  |             Se muestra el menú y las opciones dentro de este |
+|   4 |   Presionar la opción de agregar material |Que el usuario administrador pueda accesar a la pantalla de agregar material
 
 
 
@@ -211,10 +211,12 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
          * administracion-material 
          * reservacion-material 
     * Las de funcionalidad son:
-         * agregar_material
-         * modificar-material
+         * usuarios-administradores
+         * eliminar-reservaciones
          * eliminar-material
-         * sincronizacion-base-datos
+         * notificaciones-reserva
+         * cerrar-sesion
+         * recordar-sesion
     * Estrategia de merge: Estando en una rama de funcionalidad sería primero asegurarse que no hay ningún cambio haciendo pull. Después hacer merge de la rama módulo a la rama de funcionalidad, resolver los conflictos si se presentaran y después hacer merge de la rama de funcionalidad a la rama de módulo. El mismo proceso se haría para hacer merge de la rama módulo a la rama master.
 
 * **Definición de listo**

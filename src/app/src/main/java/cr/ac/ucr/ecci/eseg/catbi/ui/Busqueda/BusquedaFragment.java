@@ -24,6 +24,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import cr.ac.ucr.ecci.eseg.catbi.BaseDatos.FireBaseDataBaseBiblitecaHelper;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
+import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.UsuarioParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.AgregarMaterial;
@@ -38,6 +43,9 @@ public class BusquedaFragment extends Fragment {
     public final static String MESSAGE_KEY ="palabraKey";
     public final static String CAMPO_KEY ="campoBusquedaKey";
     public final static String COLECCION_KEY ="coleccionKey";
+    private FireBaseDataBaseBiblitecaHelper mFireBaseDataBaseBiblitecaHelper;
+    private DataBaseHelperRoom dbLocalHelper;
+    private Session session;
     private View root = null;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -48,7 +56,7 @@ public class BusquedaFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-
+        session = new Session(getContext());
         final EditText editTextTituloFrase =  (EditText) root.findViewById(R.id.editTextTituloFrase);
         final TextView txtCampoBusqueda = (TextView) root.findViewById(R.id.menuBusqueda_textView);
         final TextView txtColeccion = (TextView) root.findViewById(R.id.menuColeccion_textView);
@@ -99,10 +107,39 @@ public class BusquedaFragment extends Fragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
-        inflater.inflate(R.menu.add_material, menu);
-        super.onCreateOptionsMenu(menu,inflater);
-
+    public void onCreateOptionsMenu(final Menu menu, final MenuInflater inflater) {
+        String correoUsuarioActual = session.getCorreo();
+        if (hayConexionAInternet()){
+            mFireBaseDataBaseBiblitecaHelper = new FireBaseDataBaseBiblitecaHelper();
+            mFireBaseDataBaseBiblitecaHelper.readUsuarios(new FireBaseDataBaseBiblitecaHelper.UsuariosDataStatus() {
+                @Override
+                public void DataIsLoaded(Usuario usuarioP) {
+                    // Acá debería de ir a la lógica de comprobación de si el usuario es administrador o no.
+                    if(usuarioP.getRango().equals("administrador")) {
+                        inflater.inflate(R.menu.add_material, menu);
+                        BusquedaFragment.super.onCreateOptionsMenu(menu, inflater);
+                    }
+                }
+            }, correoUsuarioActual);
+        }else {
+            dbLocalHelper = new DataBaseHelperRoom(getContext());
+            // Para recuperar los datos del usuario
+            UsuarioParametroAsyncTask usuarioParametroAsyncTask = new UsuarioParametroAsyncTask(correoUsuarioActual, new UsuarioParametroAsyncTask.UsuarioDataStatus() {
+                @Override
+                public void DataIsLoaded(final Usuario usuario) {
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if(usuario.getRango().equals("administrador")) {
+                                inflater.inflate(R.menu.add_material, menu);
+                                BusquedaFragment.super.onCreateOptionsMenu(menu, inflater);
+                            }
+                        }
+                    });
+                }
+            });
+            dbLocalHelper.readUsuario(usuarioParametroAsyncTask);
+        }
     }
 
     @Override
