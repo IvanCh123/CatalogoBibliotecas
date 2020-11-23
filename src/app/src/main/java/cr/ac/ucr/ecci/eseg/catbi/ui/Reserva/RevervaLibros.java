@@ -54,11 +54,11 @@ public class RevervaLibros extends AppCompatActivity {
                      if(reserva[0]){
                          String tituloNotificacion = "Confirmación de reserva";
                          String mensaje = "'"+titulo+"' se ha reservado exitosamente.";
-                         notificacion.notificarReserva(getApplicationContext(), tituloNotificacion, mensaje);
+                         notificacion.notificarReserva(102, getApplicationContext(), tituloNotificacion, mensaje);
                      }else {
                          String titulo = "Error en la reserva";
                          String mensaje = "Ha habido una falla en la reserva.";
-                         notificacion.notificarReserva(getApplicationContext(), titulo, mensaje);
+                         notificacion.notificarReserva(102, getApplicationContext(), titulo, mensaje);
                      }
                     retornar();
                 }

@@ -25,6 +25,7 @@ import cr.ac.ucr.ecci.eseg.catbi.R;
 public class NotificacionReciever extends BroadcastReceiver {
     public static final String CHANNEL_ID = "ESEG-CATBI";
     private List<Reservacion> listaReservaciones;
+    private boolean reservasTardias = false;
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -38,23 +39,29 @@ public class NotificacionReciever extends BroadcastReceiver {
         recuperarReservaciones(context, correo);
 
         Reservacion reservacionMasProxima = getReservacionMasProxima(getListaReservaciones());
-        String titulo;
-        String mensaje;
+        String titulo = "";
+        String mensaje = "";
+
+        if (reservasTardias){
+            titulo = "Alerta de reservas vencidas";
+            mensaje = "Existen una o más reservas vencidas.";
+            notificarReserva(101, context, titulo, mensaje);
+        }
 
         if(reservacionMasProxima != null){
             int diasRestantes = getDiasRestantes(reservacionMasProxima.getFechaLimite());
 
             titulo = "Recordatorio de vencimiento";
             mensaje = "El material '"+reservacionMasProxima.getTituloMaterial()+"' vence en "+diasRestantes+" dias";
-        }else{
+        }else if(!reservasTardias){
             titulo = "Estás al día!";
             mensaje = "No tienes ninguna reserva proxima a vencer";
         }
 
-        notificarReserva(context, titulo, mensaje);
+        notificarReserva(100, context, titulo, mensaje);
     }
 
-    public void notificarReserva(Context context, String titulo, String message){
+    public void notificarReserva(int id, Context context, String titulo, String message){
         createNotificationChannel(context);
 
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(
@@ -71,9 +78,11 @@ public class NotificacionReciever extends BroadcastReceiver {
                 .setSmallIcon(R.drawable.ic_message)
                 .setContentTitle(titulo)
                 .setContentText(message)
+                .setStyle(new NotificationCompat.BigTextStyle()
+                        .bigText(message))
                 .setAutoCancel(true);
 
-        notificationManager.notify(100, builder.build());
+        notificationManager.notify(id, builder.build());
     }
 
     public void createNotificationChannel(Context context) {
@@ -120,6 +129,9 @@ public class NotificacionReciever extends BroadcastReceiver {
         fechaActual.format(DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         LocalDate fechaLimite = LocalDate.parse(fecha,DateTimeFormatter.ofPattern("MM/dd/yyyy"));
         int noOfDaysBetween = (int) ChronoUnit.DAYS.between(fechaActual, fechaLimite);
+
+        if(noOfDaysBetween < 0)
+            reservasTardias = true;
 
         return  noOfDaysBetween > 0 ? noOfDaysBetween : 0;
     }
