@@ -117,7 +117,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 | Implementado? | Sí, este caso de prueba se encuentra implementado en la clase de prueba UsuarioAdministradorTest en la rama master del repositorio. |
 | Nivel |   Sistema  |
 | Tipo |   Caja Negra  |
-|Pre-requisitos|Debe estar conectado a internet por Wifi y tener una cuenta de usuario administrador en la aplicación|
+|Pre-requisitos|Debe estar conectado a internet, tener una cuenta de usuario administrador en la aplicación y no haber iniciado sesión en la aplicación.|
 | Datos de prueba|Correo electrónico: sebastian.otarola@ucr.ac.cr Contraseña: seguridad|
 | Escenario esperado | Al ser un usuario administrador, se espera que tenga acceso al menú de agregar material y pueda accesar a la actividad de agrear material.|
 
@@ -126,7 +126,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 
 | #   | Instrucción | Resultado Esperado |
 | --- | ----------- | ------------------ |
-|   1  |        Iniciar la aplicación      |    Se inicia la aplicación en la actividad de login           |
+|   1  |        Iniciar la aplicación y asegurarse de no haber iniciado sesión en la aplicación    |    Se inicia la aplicación en la actividad de login           |
 |   2 |       Rellenar el campo de correo electrónico con sebastian.otarola@ucr.ac.cr y el campo de contraseña con seguridad      |                 Se permite el acceso y se muestra la pantalla principal.|
 |   3 |           Dirigirse al menú en la esquina superior derecha y presionarlo  |             Se muestra el menú y las opciones dentro de este |
 |   4 |   Presionar la opción de agregar material |Que el usuario administrador pueda accesar a la pantalla de agregar material
