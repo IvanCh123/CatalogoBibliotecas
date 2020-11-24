@@ -283,8 +283,8 @@ public class FireBaseDataBaseBiblitecaHelper {
 
     private boolean filtroUsuarios(Usuario usuario,String userName){
         boolean simil=false;
-        String n1=usuario.getNombre().toLowerCase();
-        userName=userName.toLowerCase();
+        String n1= StringUtils.stripAccents(usuario.getNombre()).toLowerCase();
+        userName= userName.toLowerCase();
         if(n1.contains(userName)){
             simil=true;
         }/*else{
