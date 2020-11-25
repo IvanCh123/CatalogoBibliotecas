@@ -110,7 +110,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |                      |     |
 | -------------------- | --- |
 | Nombre del Epic      | Administración Material |
-| Id de la Historia    | CNQ - 116  Diferenciar usuarios administradores de usuarios normales |
+| Id de la Historia    | CNQ - 70  Diferenciar usuarios administradores de usuarios normales |
 | Id de caso de prueba |    0 |
 | Descripción |    Verificar que un usuario administrador tenga la opción de agregar materiales |
 | Versión |   1.0  |
@@ -136,62 +136,35 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 
 |  |       |
 | -------- | ----------- |
-|Nombre del Epic|Administración Material|
-|ID de la historia|CNQ 72 Modificación Material|
+|Nombre del Epic|Reservación Material|
+|ID de la historia|CNQ 92 Notificación Límite de reserva|
 |ID del caso de prueba|1|
-|Descripción|Modificar un material dentro de la aplicación|
+|Descripción|Notificar al usuario después de realizar una reserva|
 |Versión|1.0|
-|Implementado?|Sí, este caso de prueba se encuentra implementado en la clase de prueba EditarMatTest en la rama master del repositorio.|
+|Implementado?|Sí, este caso de prueba se encuentra implementado en la clase de prueba NotificarReservaTest en la rama master del repositorio.|
 |Nivel|Sistema|
 |Tipo|Caja Negra|
-|Pre-requisitos|<br>Debe estar conectado a internet por Wifi<br>La aplicación se inicia en la actividad de detalles de un material |
-|Datos de prueba|Búsqueda: Don Quijote.<br>Modificación de la colección literaria a General.|
-|Escenario esperado|Aparece un mensaje indicando que el material se ha modificado exitosamente.|
+|Pre-requisitos|Debe estar conectado a internet por Wifi<br>La aplicación se inicia en la actividad de detalles de un material |
+|Datos de prueba|Búsqueda: Pruebas Notificacion.|
+|Escenario esperado|Aparece una notificación nativa de teléfono indicando que la reservación fue exitosa.|
 
 ### Pasos a seguir
 
 |#|Instrucción|Resultado esperado|
 |--------|-----|---|
-|1|Realizar una búsqueda del material que se desea modificar en este caso Don Quijote. |Se despliega una lista con los resultados de la búsqueda.|
+|1|Realizar una búsqueda del material que se desea modificar en este caso Pruebas Notificacion. |Se despliega una lista con los resultados de la búsqueda.|
 |2|Seleccionar el material que se desea modificar|Se despliega una pantalla de detalles con la información del material|
-|3|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción editar.|Se despliega una pantalla que indica si se desea modificar el material.|
-|5|Seleccionar el campo de colección y cambiar la colección a General|Se muestra el campo con la información modificada.|
-|6|Presionar el botón de guardar.|Se muestra un mensaje indicando que se ha modificado exitosamente el material y se guarda el cambio en la base de datos.|
+|3|Seleccionar el botón de Reservar que se encuentra en la parte inferior.|Se despliega un cuadro de texto alerta que indica si se desea reservar el material.|
+|5|Seleccionar la opción que dice Si|Se redirige a la pantalla se Reserva Exitosa.|
+|6|Seleccionar el botón de Aceptar.|Se redirige a la pantalla principal y el teléfono recibe una notificación indicando que la reserva fue exitosa.|
 
 ### Caso 3
-
-|  |       |
-| -------- | ----------- |
-|Nombre del Epic|Administración Material|
-|ID de la historia|CNQ 73 Eliminación Material|
-|ID del caso de prueba|2|
-|Descripción|Eliminar un material dentro de la aplicación|
-|Versión|1.0|
-|Implementado|Sí, este caso de prueba se encuentra implementado en la clase de prueba EliminarMatTest en la rama master del repositorio.|
-|Nivel|Sistema|
-|Tipo|Caja Negra|
-|Pre-requisitos|<br>Debe estar conectado a internet por Wifi<br>El material debe de existir en la aplicación.|
-|Datos de prueba|Búsqueda: Drácula.|
-|Escenario esperado|Aparece un mensaje indicando que el material se ha eliminado exitosamente y se redirige a la actividad principal, desde donde al buscar el elemento este no aparece en el listado de resultados.|
-
-### Pasos a seguir
-
-|#|Instrucción|Resultado esperado|
-|--------|-----|---|
-|1|Realizar una búsqueda del material que se desea eliminar en este caso Drácula. |Se despliega una lista con los resultados de la búsqueda.|
-|2|Seleccionar el material que se desea eliminar|Se despliega una pantalla de detalles con la información del material.|
-|3|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción eliminar.|Se despliega una ventana emergente indicando si se desea eliminar el material|
-|4|Presionar Ok|Se redirige a la pantalla principal y se muestra el toast indicando que se ha eliminado el material.|
-|5|Se digita el titulo del material eliminado|Se realiza una busqueda para determinar que el material se ha eliminado|
-|6|Se despliega la lista de resultados|Se procede a determinar que un dato no se encuentra presente|
-
-### Caso 4
 
 |                      |     |
 | -------------------- | --- |
 | Nombre del Epic      | Administración Reservas |
 | Id de la Historia    | CNQ-115  Eliminar una determinada reserva |
-| Id de caso de prueba |    4 |
+| Id de caso de prueba |    2 |
 | Descripción |    Verificar que una reserva de un usuario a sido eliminada de la base de datos|
 | Versión |   1.0  |
 | Implementado? | --- |
@@ -213,6 +186,33 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |   4 |   Se confirma la confirmacion de eliminacion de reservas | Se elimina reserva seleccionada
 |   5  |            Se comprueba que la reserva a sido eliminada              |      Se muestra listado de reservar con la ausencia de la reserva eliminada      |
 
+
+### Caso 4
+
+|  |       |
+| -------- | ----------- |
+|Nombre del Epic|Administración Material|
+|ID de la historia|CNQ 73 Eliminación Material|
+|ID del caso de prueba|3|
+|Descripción|Eliminar un material dentro de la aplicación|
+|Versión|1.0|
+|Implementado|Sí, este caso de prueba se encuentra implementado en la clase de prueba EliminarMatTest en la rama master del repositorio.|
+|Nivel|Sistema|
+|Tipo|Caja Negra|
+|Pre-requisitos|<br>Debe estar conectado a internet por Wifi<br>El material debe de existir en la aplicación.|
+|Datos de prueba|Búsqueda: Drácula.|
+|Escenario esperado|Aparece un mensaje indicando que el material se ha eliminado exitosamente y se redirige a la actividad principal, desde donde al buscar el elemento este no aparece en el listado de resultados.|
+
+### Pasos a seguir
+
+|#|Instrucción|Resultado esperado|
+|--------|-----|---|
+|1|Realizar una búsqueda del material que se desea eliminar en este caso Drácula. |Se despliega una lista con los resultados de la búsqueda.|
+|2|Seleccionar el material que se desea eliminar|Se despliega una pantalla de detalles con la información del material.|
+|3|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción eliminar.|Se despliega una ventana emergente indicando si se desea eliminar el material|
+|4|Presionar Ok|Se redirige a la pantalla principal y se muestra el toast indicando que se ha eliminado el material.|
+|5|Se digita el titulo del material eliminado|Se realiza una busqueda para determinar que el material se ha eliminado|
+|6|Se despliega la lista de resultados|Se procede a determinar que un dato no se encuentra presente|
 
 ## Decisiones Técnicas
 * **Metodologías utilizadas y procesos definidos**
@@ -252,4 +252,3 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
     * CNQ-114 Cerrar Sesión en la Aplicación: El usuario tiene una opción de finalizar la sesión y salir de la aplicación.
     * CNQ-115 Eliminar Reservaciones: Que la aplicación tenga una opción de eliminar reservaciones para usuarios administradores.
     * CNQ-116 Recordar inicio de sesión: Que la aplicación mantenga la sesión iniciada del usuario siempre, a menos de que el usuario cierre sesión.
-    
