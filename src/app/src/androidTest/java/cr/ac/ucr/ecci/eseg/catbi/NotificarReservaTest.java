@@ -58,14 +58,6 @@ public class NotificarReservaTest {
         onView(withId(R.id.buttonAccpReser)).perform(click());
         Thread.sleep(3000);
 
-       eliminarReservaDelTest();
-    }
-
-    private void eliminarReservaDelTest() {
-        db = new FireBaseDataBaseBiblitecaHelper();
-        Reservacion reservacion = new Reservacion(CORREO,"","2020201124174240-0600CaP",TEST_STRING_TITULO,"0");
-        List<ReservaFila> lista = new ArrayList<>();
-        lista.add(new ReservaFila(true, reservacion));
-        db.eliminarReservas(lista);
+        Thread.sleep(5000);
     }
 }
