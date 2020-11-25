@@ -37,6 +37,7 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Session;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.NotificacionReciever;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.Notificaciones;
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -125,13 +126,13 @@ public class LoginActivity extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     public void checkSession(){
         Session session = new Session(getApplicationContext());
-        String correo = session.getCorreo();
+        final String correo = session.getCorreo();
         if(!correo.equals("")){
             if (!session.getAlarmaActiva()) {
-                NotificacionReciever notificacion = new NotificacionReciever();
-                notificacion.generarNotificacion(getApplicationContext(), correo);
+                Notificaciones notificacion = new Notificaciones();
 
-                generarRecordatorioDiario(correo);
+                notificacion.generarNotificacion(getApplicationContext(), correo);
+                notificacion.generarRecordatorioDiario(getApplicationContext(), correo);
             }
             irActividadPrincipal();
         }
@@ -157,10 +158,10 @@ public class LoginActivity extends AppCompatActivity {
                         session.setCorreo(correo);
                         session.setAlarmaActiva();
 
-                        NotificacionReciever notificacion = new NotificacionReciever();
+                        Notificaciones notificacion = new Notificaciones();
                         notificacion.generarNotificacion(getApplicationContext(),correo);
 
-                        generarRecordatorioDiario(correo);
+                        notificacion.generarRecordatorioDiario(getApplicationContext(), correo);
 
                         barraProgreso.setVisibility(view.VISIBLE);
                         irActividadPrincipal();
@@ -172,23 +173,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
-
-    public void generarRecordatorioDiario(String correo){
-        Calendar calendar  = Calendar.getInstance();
-
-        calendar.set(Calendar.HOUR_OF_DAY,13);
-        calendar.set(Calendar.MINUTE,30);
-
-        Intent intent = new Intent(getApplicationContext(), NotificacionReciever.class);
-        intent.putExtra("correo", correo);
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 100, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
-        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
-    }
-
-
 
     public void autenticarUsuariosLocal(String correo, String password) {
         if (correo.isEmpty() || password.isEmpty()) {

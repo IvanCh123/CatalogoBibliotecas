@@ -1,5 +1,6 @@
 package cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones;
 
+import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -14,6 +15,7 @@ import androidx.core.app.NotificationCompat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
 import java.util.List;
 
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.DataBaseHelperRoom;
@@ -22,43 +24,53 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.ReservacionParametroAsyncTask;
 import cr.ac.ucr.ecci.eseg.catbi.MainActivity;
 import cr.ac.ucr.ecci.eseg.catbi.R;
 
+import static android.content.Context.ALARM_SERVICE;
+
 public class NotificacionReciever extends BroadcastReceiver {
     public static final String CHANNEL_ID = "ESEG-CATBI";
     private List<Reservacion> listaReservaciones;
     private boolean reservasTardias = false;
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(final Context context, Intent intent) {
         String correoActual = intent.getStringExtra("correo");
 
         generarNotificacion(context, correoActual);
+
     }
-
     @RequiresApi(api = Build.VERSION_CODES.O)
-    public void generarNotificacion(Context context, String correo){
-        recuperarReservaciones(context, correo);
+    public void generarNotificacion(final Context context, final String correo){
+        Thread thread = new Thread(){
+            @Override
+            public void run() {
+                recuperarReservaciones(context, correo);
 
-        Reservacion reservacionMasProxima = getReservacionMasProxima(getListaReservaciones());
-        String titulo = "";
-        String mensaje = "";
+                Reservacion reservacionMasProxima = getReservacionMasProxima(getListaReservaciones());
+                String titulo = "";
+                String mensaje = "";
 
-        if (reservasTardias){
-            titulo = "Alerta de reservas vencidas";
-            mensaje = "Existen una o más reservas vencidas.";
-            notificarReserva(101, context, titulo, mensaje);
-        }
+                if (reservasTardias){
+                    titulo = "Alerta de reservas vencidas";
+                    mensaje = "Existen una o más reservas vencidas.";
+                    notificarReserva(101, context, titulo, mensaje);
+                }
 
-        if(reservacionMasProxima != null){
-            int diasRestantes = getDiasRestantes(reservacionMasProxima.getFechaLimite());
+                if(reservacionMasProxima != null){
+                    int diasRestantes = getDiasRestantes(reservacionMasProxima.getFechaLimite());
 
-            titulo = "Recordatorio de vencimiento";
-            mensaje = "El material '"+reservacionMasProxima.getTituloMaterial()+"' vence en "+diasRestantes+" dias";
-        }else if(!reservasTardias){
-            titulo = "Estás al día!";
-            mensaje = "No tienes ninguna reserva proxima a vencer";
-        }
+                    titulo = "Recordatorio de vencimiento";
+                    mensaje = "El material '"+reservacionMasProxima.getTituloMaterial()+"' vence en "+diasRestantes+" dias";
+                }else if(!reservasTardias){
+                    titulo = "Estás al día!";
+                    mensaje = "No tienes ninguna reserva proxima a vencer";
+                }
 
-        notificarReserva(100, context, titulo, mensaje);
+                notificarReserva(100, context, titulo, mensaje);
+            }
+        };
+
+        thread.start();
     }
 
     public void notificarReserva(int id, Context context, String titulo, String message){
