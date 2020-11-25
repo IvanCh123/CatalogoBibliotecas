@@ -8,8 +8,9 @@
 
     <TextView
         android:id="@+id/email_user_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="78dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:text="TextView"
         android:textStyle="bold"
@@ -21,9 +22,9 @@
 
     <TextView
         android:id="@+id/nombre_user_textView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="4dp"
+        android:layout_width="158dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="8dp"
         android:text="TextView"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
