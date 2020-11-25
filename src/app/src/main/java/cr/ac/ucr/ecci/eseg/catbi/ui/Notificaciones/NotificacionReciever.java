@@ -61,12 +61,12 @@ public class NotificacionReciever extends BroadcastReceiver {
 
                     titulo = "Recordatorio de vencimiento";
                     mensaje = "El material '"+reservacionMasProxima.getTituloMaterial()+"' vence en "+diasRestantes+" dias";
+                    notificarReserva(100, context, titulo, mensaje);
                 }else if(!reservasTardias){
                     titulo = "Estás al día!";
                     mensaje = "No tienes ninguna reserva proxima a vencer";
+                    notificarReserva(100, context, titulo, mensaje);
                 }
-
-                notificarReserva(100, context, titulo, mensaje);
             }
         };
 
