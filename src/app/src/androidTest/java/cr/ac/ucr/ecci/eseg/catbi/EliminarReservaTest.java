@@ -6,6 +6,8 @@ import org.hamcrest.Matchers;
 import org.junit.Rule;
 import org.junit.Test;
 
+import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.ReservaFila;
+
 import static androidx.test.espresso.Espresso.onData;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
@@ -24,10 +26,10 @@ public class EliminarReservaTest {
     public static final String TEST_STRING_MATERIAL="Cocori";
     @Rule
     public ActivityScenarioRule<MainActivity> activityRule =
-            new ActivityScenarioRule(MainActivity.class);
+            new ActivityScenarioRule(LoginActivity.class);
     @Test
     public void EliminarReserva() throws InterruptedException {
-        Thread.sleep(15000);
+        Thread.sleep(30000);
         openActionBarOverflowOrOptionsMenu(getInstrumentation().getTargetContext());
         onView(withText("Eliminar reserva")).perform(click());
         Thread.sleep(5000);
@@ -36,19 +38,18 @@ public class EliminarReservaTest {
         Thread.sleep(5000);
         onView(withText(TEST_STRING_MAIL)).perform(click());
         Thread.sleep(5000);
-        //onData(withText(TEST_STRING_MATERIAL)).onChildView(withClassName(Matchers.containsString("CheckBox"))).perform(click());
-        /*onData(withItemContent("item: 60"))
-                .atPosition(4)
-                .onChildView(withClassName(Matchers.containsString("CheckBox")))
-                .perform(click());*/
-       // onData(withText(TEST_STRING_MATERIAL)).atPosition(2).onChildView(withClassName(Matchers.containsString("CheckBox"))).perform(click());
-        //onView(withId(R.id.recyclerViewEliminarReserva)).check(matches(isDisplayed()));
-        //onData(withId(R.id.recyclerViewEliminarReserva)).inAdapterView(with).atPosition(0).perform(click());
         onView(withId(R.id.select_all)).perform(click());
+        //onView(withText("Cocori"));
+        //onView(withId(R.id.recyclerViewEliminarReserva)).check(matches(withText("Cocori")));
+        //onData().inAdapterView(withId(R.id.recyclerViewEliminarReserva)).check(matches(isDisplayed()));
+               /* instanceOf(ReservaFila.class))
+                .atPosition(i)
+                .perform(click());*/
         Thread.sleep(10000);
         onView(withId(R.id.aceptar_eliminar)).perform(click());
         onView(withId(android.R.id.button1)).perform(click());
         Thread.sleep(5000);
         //onView(withId(R.id.editTextTituloFrase)).perform(replaceText(TEST_STRING_TITULO));
     }
+
 }
