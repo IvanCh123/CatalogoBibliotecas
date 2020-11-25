@@ -27,16 +27,17 @@ public class RecyclerViewReservaciones_Config {
 
     public void setConfig(final RecyclerView recyclerView, final Context context, final List<Reservacion> reservaciones, final List<String> keys, Activity activity){
         mContext = context;
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mReservacionAdapter = new RecyclerViewReservaciones_Config.ReservacionesAdapter(reservaciones, keys);
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-                recyclerView.setAdapter(mReservacionAdapter);
+        if(activity != null){
+            activity.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mReservacionAdapter = new RecyclerViewReservaciones_Config.ReservacionesAdapter(reservaciones, keys);
+                    recyclerView.setLayoutManager(new LinearLayoutManager(context));
+                    recyclerView.setAdapter(mReservacionAdapter);
 
-            }
-        });
-
+                }
+            });
+        }
     }
     class ReservacionItemView extends RecyclerView.ViewHolder{
         private TextView mTitulo;

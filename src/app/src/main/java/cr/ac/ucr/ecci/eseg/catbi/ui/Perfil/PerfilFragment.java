@@ -35,6 +35,7 @@ import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Usuario;
 import cr.ac.ucr.ecci.eseg.catbi.DataBaseRoom.Reservacion;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Administrar.AgregarMaterial;
 import cr.ac.ucr.ecci.eseg.catbi.ui.Busqueda.BusquedaFragment;
+import cr.ac.ucr.ecci.eseg.catbi.ui.Notificaciones.Notificaciones;
 
 
 import android.content.Context;
@@ -149,6 +150,10 @@ public class PerfilFragment extends Fragment {
         if (id == R.id.cerrar_sesion) {
             session.removeSession();
             session.removeAlarmaActiva(getContext());
+
+            Notificaciones notificaciones = new Notificaciones();
+            notificaciones.cancelarRecordatorio();
+
             Intent intent= new Intent(getActivity(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
