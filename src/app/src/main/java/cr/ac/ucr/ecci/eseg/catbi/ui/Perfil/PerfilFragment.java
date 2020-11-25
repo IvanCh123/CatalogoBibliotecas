@@ -151,9 +151,6 @@ public class PerfilFragment extends Fragment {
             session.removeSession();
             session.removeAlarmaActiva(getContext());
 
-            Notificaciones notificaciones = new Notificaciones();
-            notificaciones.cancelarRecordatorio();
-
             Intent intent= new Intent(getActivity(), LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
