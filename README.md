@@ -164,7 +164,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 | -------------------- | --- |
 | Nombre del Epic      | Administración Reservas |
 | Id de la Historia    | CNQ-115  Eliminar una determinada reserva |
-| Id de caso de prueba |    4 |
+| Id de caso de prueba |    2 |
 | Descripción |    Verificar que una reserva de un usuario a sido eliminada de la base de datos|
 | Versión |   1.0  |
 | Implementado? | --- |
@@ -193,7 +193,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 | -------- | ----------- |
 |Nombre del Epic|Administración Material|
 |ID de la historia|CNQ 73 Eliminación Material|
-|ID del caso de prueba|2|
+|ID del caso de prueba|3|
 |Descripción|Eliminar un material dentro de la aplicación|
 |Versión|1.0|
 |Implementado|Sí, este caso de prueba se encuentra implementado en la clase de prueba EliminarMatTest en la rama master del repositorio.|
