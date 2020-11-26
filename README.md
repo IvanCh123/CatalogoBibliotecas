@@ -171,7 +171,7 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 | Nivel |   Sistema  |
 | Tipo |   Caja Negra  |
 |Pre-requisitos|Debe estar conectado a internet, tener una cuenta de usuario administrador en la aplicación, se debe haber iniciado sesión en la aplicación, se debe buscar un usuario existente y eliminar una reserva existente existente.|
-| Datos de prueba|Nombre de usuario:"Estudiante" Correo de usuario:"estudiante@ucr.ac.cr" Titulo de material:"Cocori"|
+| Datos de prueba|Nombre de usuario:"Estudiante" Correo de usuario:"estudiante@ucr.ac.cr" |
 | Escenario esperado | Al ser un usuario administrador, se espera que tenga acceso al menú de agregar material y pueda accesar a la actividad de eliminar reserva.|
 
 ### Pasos a seguir
@@ -182,10 +182,9 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 |   1  |	Se inicia la aplicacio en la pantalla inicial  |    Se tiene acceso al menu de eliminacion de reserva           |
 |   1  |	se accede al menu de administracion y se selecciona eliminar reserva  |    Se dirige al buscador de usuarios          |
 |   2 |       Se agrega el nombre de usuario y se oprime el boton buscar usuario   |       Se realiza una busqueda y se presenta la lista de usuarios con un nombre similar a los criterios de busqueda         |
-|   3 |        Se selecciona la reserva que se desea eliminar  y se presiona eliminar reservas boton de reservas selecionadas  |          Se obtiene mensaje de confirmacion de eliminacion |
+|   3 |        Se selecciona todas las reservas  y se presiona eliminar reservas boton de reservas selecionadas  |          Se obtiene mensaje de confirmacion de eliminacion |
 |   4 |   Se confirma la confirmacion de eliminacion de reservas | Se elimina reserva seleccionada
-|   5  |            Se comprueba que la reserva a sido eliminada              |      Se muestra listado de reservar con la ausencia de la reserva eliminada      |
-
+|   5  |            Se comprueba que las reservas de un usuario ha sido eliminadas              |      Se muestra listado de reservar con la ausencia de la reserva eliminada      |
 
 ### Caso 4
 
