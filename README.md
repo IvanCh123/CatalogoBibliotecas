@@ -188,30 +188,30 @@ Interacción con base de datos para consultas sobre material de las bibliotecas 
 
 ### Caso 4
 
-|  |       |
-| -------- | ----------- |
-|Nombre del Epic|Administración Material|
-|ID de la historia|CNQ 73 Eliminación Material|
-|ID del caso de prueba|3|
-|Descripción|Eliminar un material dentro de la aplicación|
-|Versión|1.0|
-|Implementado|Sí, este caso de prueba se encuentra implementado en la clase de prueba EliminarMatTest en la rama master del repositorio.|
-|Nivel|Sistema|
-|Tipo|Caja Negra|
-|Pre-requisitos|<br>Debe estar conectado a internet por Wifi<br>El material debe de existir en la aplicación.|
-|Datos de prueba|Búsqueda: Drácula.|
-|Escenario esperado|Aparece un mensaje indicando que el material se ha eliminado exitosamente y se redirige a la actividad principal, desde donde al buscar el elemento este no aparece en el listado de resultados.|
+|                      |     |
+| -------------------- | --- |
+| Nombre del Epic      | Reservación Material |
+| Id de la Historia    | CNQ - 114 Cerrar Sesión en la Aplicación |
+| Id de caso de prueba |    3 |
+| Descripción |    Verificar que un usuario pueda cerrar su sesión de manera exitosa |
+| Versión |   1.0  |
+| Implementado? | Sí, este caso de prueba se encuentra implementado en la clase de prueba CerrarSesionTest en la rama master del repositorio. |
+| Nivel |   Sistema  |
+| Tipo |   Caja Negra  |
+|Pre-requisitos| No haber iniciado sesión en la aplicación.|
+| Datos de prueba|Correo electrónico: gerald.bermudez@ucr.ac.cr Contraseña: seguridad|
+| Escenario esperado | Se espera que el usuario tenga acceso al menú de cerrar sesión en el perfil y pueda cerrar la sesión activa de manera exitosa.|
 
 ### Pasos a seguir
 
-|#|Instrucción|Resultado esperado|
-|--------|-----|---|
-|1|Realizar una búsqueda del material que se desea eliminar en este caso Drácula. |Se despliega una lista con los resultados de la búsqueda.|
-|2|Seleccionar el material que se desea eliminar|Se despliega una pantalla de detalles con la información del material.|
-|3|Presionar los tres puntos ubicados en la esquina superior derecha y seleccionar la opción eliminar.|Se despliega una ventana emergente indicando si se desea eliminar el material|
-|4|Presionar Ok|Se redirige a la pantalla principal y se muestra el toast indicando que se ha eliminado el material.|
-|5|Se digita el titulo del material eliminado|Se realiza una busqueda para determinar que el material se ha eliminado|
-|6|Se despliega la lista de resultados|Se procede a determinar que un dato no se encuentra presente|
+
+| #   | Instrucción | Resultado Esperado |
+| --- | ----------- | ------------------ |
+|   1  |        Iniciar la aplicación y asegurarse de no haber iniciado sesión en la aplicación.    |    Se inicia la aplicación en la actividad de login.           |
+|   2 |       Rellenar el campo de correo electrónico con gerald.bermudez@ucr.ac.cr y el campo de contraseña con seguridad.      |                 Se permite el acceso y se muestra la pantalla principal.|
+|   3 |           Dirigirse al menú de abajo y presionar el botón del perfil.  |             Se muestra el perfil del usuario. |
+|   4 |           Dirigirse al menú en la esquina superior derecha y presionarlo.  |             Se muestra el menú y las opciones dentro de este. |
+|   5 |   Presionar la opción de cerrar sesión. | Que se cierre la sesión activa del usuario y se muestre la pantalla del login.
 
 ## Decisiones Técnicas
 * **Metodologías utilizadas y procesos definidos**
