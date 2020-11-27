@@ -51,7 +51,7 @@ Por la problemática antes mencionada se propone realizar una aplicación móvil
 * **Requerimientos funcionales**
 
 
-| Sprint 3 |   |
+| Sprint 4 |   |
 | -------- |----------------|
 | Codigo   |   Nombre  |
 | CNQ-79    |            [Notificación Límite de reserva](http://10.1.4.22:8080/browse/CNQ-79)|
